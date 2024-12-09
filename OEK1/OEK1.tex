@@ -1,0 +1,386 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-3cm}Ökonomische Grundlagen}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\section{Einheit 1 - 07.10.2024 - Überblick}
+	Die VO teilt sich in vier grobe Teile:
+	\begin{itemize}
+		\item{VWL Grundlagen}
+		\item{BWL Grundlagen}
+		\item{Grundlagen des Rechnungswesens}
+		\item{Grundlagen des Steuerrechts}
+	\end{itemize}
+	Volkswirtschaftslehre bezeichnet die Gesamtheit aller Betriebe innerhalb eines Marktes bzw. Staates und wie diese miteinander interagieren. Die Betriebswirtschaftslehre fokusiert sich dabei auf einen einzigen Betrieb und dessen Operation. Innerhalb des Betriebs gibt es weiter das Rechnungswesen, welches wiederum in externes und internes Rechnungswesen gegliedert. Externes Rechnungswesen ist dabei unter anderem das Steuerrecht und andere nötige Abgaben. Internes Steuerrecht ist hingegen die Berechnung interner Kennzahlen. \\
+	\subsection{Volkswirtschaftslehre Einführung}
+	Teilgebiete der VWL sind:
+	\begin{itemize}
+		\item{Mikroökonomie}
+		\item{Makroökonomie}
+	\end{itemize}
+	Oft wird mit Makroökonomie schon die VWL verstanden und mit Mikroökonomie die BWL, jedoch sind beide Teilgebiete der VWL. Mikroökonomie behandelt einzelne Märkte und die Analyse individueller Märkte. Das beinhaltet die Entwicklung der Preise von Rohstoffen wie Strom, Bier Rohöl oder anderem. Solche Rohstoffe werden oft mit Future Contracts abgewickelt. Diese sind keine Wertpapiere. Future Contracts geben beiden Parteien (Verkäufern/Käufern) gewisse Planungssicherheit. Als Verkäufer kann man sicherstellen, dass eine Ressource in der Zukunft für ihre Waren den erwarteten Preis erhalten und als Käufer kann man sicherstellen, dass man einen Rohstoff zu einem erwarteten Preis erhält, selbst wenn man ihn etwas in der Zukunft benötigt. \\
+	Mikorökonomie bezeichnet auch die Interaktion zwischen Einheiten um Märkte oder Branchen zu bilden. Branchen werden in spezifische Codes eingeteilt, was eine gewisse Zugehörigkeit beschreibt. \\
+	Weiters sind Themen wie Angebot und Nachfrage allgegenwärtig. \\
+	Makroökonomie beschreibt dabei gesamtwirtschaftliche Ausrichtungen. Wie sehen beispielsweise Wachstumsraten, Zinsen oder Arbeitslosigkeit von gesamten Staaten aus? Doch auch Makroökonomische Analysen sind Mikroökonomisch relevant: So ist der Gütermarkt, der Finanzmarkt und der Arbeitsmarkt wichtig in sowohl Makro- als auch Mikrökonomie. \\
+	\subsubsection{Die Rationalitätenfalle (Konkurrenzparadoxon)}
+	Die Rationalitätenfalle besagt, dass Einzelwirtschaftliche Entscheidungen zu einem gesamtwirtschaftlichen Ergebnis führen kann. Beispiel ist, dass ein Ladenbesitzer die Öffnungszeit erhöht um den Umsatz zu erhöhen. Das setzt natürlich voraus, dass keine Ladenschlussgesetze dies verbieten. Während kurzfristig der Umsatz steigen mag da man als einziger offen hat, werden bald alle länger offen sein und dadurch den Vorteil verringern. Die Kaufkraft der Kunden erhöht sich jedoch nicht und so führt es über eine längere Zeit zu keiner nennenswerten Erhöhung der Umsätze. 
+	Auf der anderen Seite besteht das Spar-Paradoxon, in welchem Haushalte in großem Maß Vermögen sparen. Da damit die Ausgaben verringert werden, sinken die Einnahmen der Unternehmen was zu Entlassungen und langfristig zu einem geringeren Vermögen der Haushalte führt. Aus diesem Grund ist auch eine Deflation relativ gefährlich, da durch den Umstand, dass Geld mit der Zeit mehr wert wird, Haushalte dieses eher nicht ausgeben.
+	\subsubsection{Unsichtbare Hand des Marktes}
+	In einem Markt entscheidet der Markt selbst über dessen Preise. Ein Symbol dieses Marktes ist der Aktienmarkt. Im Aktienmarkt können Aktien frei gehandelt werden, dazu muss man jedoch eine Lizenz besitezn i.e. eine Privatperson benötigt einen Mittelmann um an der Börse handeln zu können. Der Preis von Aktien wird automatisch anhand eines Programms festgelegt, zum Beispiel ist das in Frankfurt das Xetra Handelssystem. Transaktionen für eine Aktie werden täglich mehrmals abgewickelt, bei oft gehandelten Aktien bis zu 10 mal pro Sekunden. Diese Transaktionen werden in einem Orderbuch mit verschiedenen Orderarten festgehalten:
+	\begin{itemize}
+		\item{Buy Order}
+		\begin{itemize}
+			\item{Ein Auftrag eine Aktie zu einem gewissen Preis oder dem niedrigst möglichen Preis zu kaufen.}
+		\end{itemize}
+		\item{Sell Order}
+		\begin{itemize}
+			\item{Ein Auftrag eine Aktie zu einem gewissen Preis oder dem höchst möglichen Preis zu verkaufen.}
+		\end{itemize}
+	\end{itemize}
+	Diese Orders werden dann zu jedem Preis nach Verkauf und Ankauf sortiert. Die Buchführer addieren dann für einen Preis vom höchsten zum niedrigsten Ankaufspreis und beim Verkaufspreis vom niedrigsten zum höchsten. Danach wird der Preis mit dem höchstem Umsatz (Bestes Verhältnis von Kauf/Verkauf) als Kurs gewählt. Dieser Preis wird im besten Fall 10 mal pro Sekunde aktualisiert um immer den Preis mit dem höchsten Umsatz als Leitkurs anzugeben. \\
+	Der Markt wird durch das Angebot und die Nachfrage reguliert und dieser hält sich stets in der Waage. Da eine Ressource keinen objektiven Marktwert hat ist es der Markt, welcher diesem einen Wert zuteilt. \\
+	Der Großteil aller Staaten weltweit sind eine Marktwirtschaft und handeln deshalb nach marktrechtlichen Normen. Einzig Nordkorea wird als Planwirtschaft gesehen, also hat der Staat große Macht in der Entscheidung, welche Produkte produziert werden. Dadurch gibt es zwar weniger Auswahl, eventuell gibt es nur ein Produkt pro Kategorie.
+	\begin{itemize}
+		\item{Kompetetiver Markt}
+		\begin{itemize}
+			\item{In einem kompetetiven Markt kann keine einzelner Käufer oder Verkäufer den Preis beeinflussen. (Der Ölmarkt ist bspw. wegen der OPEC kein kompetetiver Markt.)}
+		\end{itemize}
+		\item{Marktdefinition}
+		\begin{itemize}
+			\item{}
+		\end{itemize}
+		\item{Arbitrage}
+		\begin{itemize}
+			\item{Gewinn, erlangt durch günstigen Kauf und teurerem Verkauf.}
+		\end{itemize}
+		\item{Nominaler Preis}
+		\begin{itemize}
+			\item{Der absolute Preis in Euro}
+		\end{itemize}
+		\item{Realer Preis}
+		\begin{itemize}
+			\item{Der Preis verglichen mit z.B. dem Verbraucherpreisindex.}
+		\end{itemize}
+	\end{itemize}
+	Ein vollkommenes Substitutionsgut ist eine Ware, welche ohne Nachteile komplett durch eine andere ersetzt werden kann. Bspw. kann eine Schinkenpizza auch durch eine Salamipizza ersetzt werden und sie wird trotzdem den gleichen Zweck einnehmen. \\
+	Ein vollkommenes Komplementärgut ist hingegen eine Ware, dessen Nachfrage abhängig von einer anderen ist. Zum Beispiel kann die Nachfrage nach linken Schuhen nicht steigen wenn es nicht auch ein Angebot von rechten Schuhen gibt.
+	\section{Einheit 2 - 08.10.2024 - VWL Teil 2}
+	\subsection{Makroökonomische Kennzahlen}
+	\subsubsection{Ausgewählte Variablen}
+	Das Bruttoinlandsprodukt ist die Wirtschaftsleistung der gesamten Volkswirtschaft. Es entspricht der Summer aller Beiträge aller Wirtschaftsbreiche zuzüglich Gütersteuern abzüglich Subventionen.\\
+	Der Anteil der Arbeitslosenquote ist der Anteil der arbeitssuchenden Arbeitnehmer einer Volkswirtschaft an den gesmaten Erwerbspersonen (Beschäftigte + Arbeitslose). Es gibt keine einheitliche Definition der Definition. So zählen manche Staaten Arbeitslose in Ausbildung nicht als solche, andere jedoch schon. \\
+	Die Inflationsrate ist die Zunahme des durchschnittlichen Preisniveaus der Güter. Die Inflation wird durch einen Warenkorb angezeigt, welcher jedoch oft Sachen wie Mieten und Sozialversicherung nicht beinhaltet. \\
+	\section{Einheit 3 - 14.10.2024 - Betriebswirtschaftslehre}
+	Die BWL konzentriert sich auf einzelne Betriebe. Ziel eines Betriebes ist, so effizient wie möglich zu Wirtschaften. Da Waren stets begrenzt sind, muss man mit den gegebenen Waren einen höchstmöglichen Nutzen erzielen. Nach dem Ökonomischen Prinzip gibt es das:
+	\begin{itemize}
+		\item{Maximumprinzip}
+		\begin{itemize}
+			\item{Mit einem gegebenen Aufwand einen möglichst hohen Ertrag zu erzielen}
+		\end{itemize}
+		\item{Minimumprinzip}
+		\begin{itemize}
+			\item{Einen möglichst geringen Aufwand aufbringen um einen gewissen Ertrag zu erzielen.}
+		\end{itemize}
+		\item{generelles Extremumprinzip}
+		\begin{itemize}
+			\item{Das möglichst günstige Verhältnis zwischen Aufwand und Ertrag.}
+		\end{itemize}
+	\end{itemize}
+	Unternehmen stellen sich die Frage, ob ihr Handeln ökonomisch sinnvoll ist. Gleichzeitig ist jedoch auch relevant, ob das Handeln ethisch vertretbar ist. Diese können oft einen Interessenskonflikt auslösen. Firmen, stellen ethisch vertretbares Handeln oft hinter ökonomisches Handeln wie das Ansiedeln von Fabriken in Fernost um schwächere Umweltauflagen auszunutzen und dadurch Kosten zu sparen. \\
+	\subsection{Was ist ein Unternehmen?}
+	Ein Unternehmen ist der rechtlich-finanzielle Rahmen von einem oder mehreren Betrieben. Gutenberg weist in einer Marktwirtschaft auch aus, dass dieses in ihrem Wirtschaftsplan unabhängig sein muss, nach ausreichendem Gewinn streben soll und unabhängig sein sollte. \\
+	Eine Firma ist ein juristischer Begriff und bezeichnet den Namen unter dem ein Unternehmer sein Geschäft betreibt. \\
+	Das Ziel eines Unternehmens ist die optimale Versorgung der Gemeinschaft mit Gütern oder Dienstleistungen, wobei es auch nach maximalem Gewinn strebt. Dies kann wiederum zu einem Interessenskonflikt führen, da der maximale Gewinn eventuell nicht zur optimalen Versorgung führt. Jedoch ist maximale Gewinn relativ und beschreibt den größtmöglichen Gewinn innerhalb der Rahmenbedingungen. \\
+	Bei der Zielbildung in einem Unternehmen sollte man sicherstellen, dass diese SMART sind:
+	\begin{itemize}
+		\item{Spezifisch}
+		\item{Messbar}
+		\item{Ambitioniert}
+		\item{Realistisch}
+		\item{Terminisiert}
+	\end{itemize}
+	\section{Einheit 3 - 05.11.2024 - BWL}
+	Unternehmen sind stets in Rechtsformen geteilt. Ein Unternehmer ist, laut Unternehmergesetzbuch \begin{itemize}
+		\item{kraft Betreibens}
+		\begin{itemize}
+			\item{Ein Unternehmer, welcher ein Unternehmen tätigt, gilt als Unternehmer.}
+		\end{itemize}
+		\item{kraft Rechtsform}
+		\begin{itemize}
+			\item{Ein Unternehmer, welcher in einer }
+		\end{itemize}
+		\item{kraft Eintragung}
+		\begin{itemize}
+			\item{Jemand, welcher im Firmenbuch eingetragen ist handelt als Unternehmer, selbst wenn er dies bestreitet. (Scheinunternehmen)}
+		\end{itemize}
+		\item{kraft eigenen Verhaltens}
+		\begin{itemize}
+			\item{Selbst wenn ein Unternehmer nicht im Firmenbuch eingetragen ist, aber den Anschein vermittelt einer zu sein, wird er als Unternehme behandelt.}
+		\end{itemize}
+	\end{itemize}
+	Rechtsformen:
+	Rechtsformen unterteilen sich in drei große Gruppen:
+	\begin{itemize}
+		\item{Einzelunternehmen}
+		\begin{itemize}
+			\item{Ein Einzelunternehmen ist extrem einfach einzutragen und es gibt keine Gewinnteilung. Jedoch haftet man als Einzelunternehmen vollständig mit seinem Privatvermögen, also gibt es keinen Unterschied zwischen Betriebs- und Privatvermögen.}
+		\end{itemize}
+		\item{Personengesellschaft}
+		\begin{itemize}
+			\item{Hat keine eigene Rechtspersönlichkeit, also treten alle Personen als Gesellschafter auf.}
+			\begin{itemize}
+				\item{Gesellschaft des Bürgerlichen Rechts - }
+				\item{Offene Gesellschaft - }
+				\item{Kommanditgesellschaft - In einer KG gibt es Komplementäre oder Kommanditisten. Komplementäre haften unbeschränkt, Kommanditisten jedoch nur mit ihrer Einlage.}
+			\end{itemize}
+		\end{itemize}
+		\item{Kapitalgesellschaften}
+		\begin{itemize}
+			\item{Sind eigenständige Rechtspersönlichkeiten, sind also vor Gericht haftbar. Dadurch sind Unternehmer selbst nicht haftbar. Eine Kapitalgesellschaft handelt durch Organe (Geschäftsführer, etc) und muss Buch führen.}
+			\item{Aktiengesellschaft}
+			\begin{itemize}
+				\item{Eine AG hat drei Organe:}
+				\item{Bei der Hauptversammlung treffen sich alle Aktionäre und bestimmen den Aufsichtsrat sowie die Gewinnausschüttung.}
+				\item{Der Aufsichtsrat bestellt den Vorstand und kontrolliert die AG.}
+				\item{Vorstand leitet die AG}
+				\item{Mindestkapital von 70.000€.}
+				\item{Leitung und Eigenkapital werden getrennt, also sollten die Anteilnehmer keine Führungspositionen besitzen}
+			\end{itemize}
+			\item{Gesellschaft mit beschränkter Haftung (GmbH)}
+			\begin{itemize}
+				\item{Benötigt eine Mindesteinlage von 35.000€ wobei die Hälfte davon eine Bareinlage sein muss.}
+				\item{Die Gesellschaft haftet gegenüber dritten mit dem gesamten Vermögen, schützt dadurch jedoch die Kapitalgeber.}
+				\item{Es findet eine Gesellschaftsversammlung statt, in welcher }
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	Somit regelt eine Rechtsform:
+	\begin{itemize}
+		\item{Die Haftung, welche den Risikoträger bestimmt.}
+		\item{Die Gewinnverteilung, welche mit der Haftung verbunden ist.}
+		\item{Die Geschäftsführung, welche durch die Organisationsstruktur bestimmt wird.}
+		\item{Die Finanzierung, welche den Zugang zu Krediten und kapitalmärkten bestimmt.}
+		\item{Die Kosten, welche durch die Gründung und die Organisationsstruktur bestimmt wird.}
+		\item{Steuern -> Eventuell Doppelbesteuerung. Eine Kapitalgesellschaft zahlt fixe 24\% Körperschaftssteuer. Wenn ein Gesellschafter jedoch Vermögen aus der Gesellschaft entnehmen will, muss er erneut 27,5\% Kapitalertragssteuer (KeSt) dafür bezahlen. Aus diesem Grund}
+	\end{itemize}
+	\subsection{Wertschöpfungskette}
+	In der Wertschöpfungskette unterteilt man zwischen Kernfunktionen und Hauptgeschäftsprozesse. Kernfunktionen sind die Funktionen eines Unternehmens, welche eine Wertschöpfung erzeugen. Zusätzlich gibt es noch die Supportfunktionen, welche zwar nicht die Wertschöpfung erzeugen, jedoch trotzdem unterlässlich für die Funktion des Unternehmens sind. Zum Beispiel mag die Informatik nicht eine Kernfunktion eines Unternehmens sein, es muss jedoch trotzdem eine Abteilung geben, welche die PCs und IT Systeme wartet. \\
+	Bei der Analyse eines Marktes muss man verschiedene Levels an Marktpotenzial berücksichtigen:
+	\begin{itemize}
+		\item{Die Makrtkapazität ohne Berücksichtigung der Kaufkraft sieht sich die gesamte Bevölkerung an, jedoch nicht ob diese es sich theoretisch überhaupt leisten könnte}
+		\item{Das Marktpotential berücksichtigt die Kaufkraft.}
+		\item{Das Marktvolumen schränkt dabei erneut den Bevölkerungsanteil auf alle ein, welche es können und sich das Produkt kaufen würden.}
+		\item{Der Marktanteil ist der Anteil des Marktvolumens, welcher das Produkt tatsächlich gekauft hat.}
+	\end{itemize}
+	\section{Einheit 4 - 12.11.2024 - Externes Rechnungswesen}
+	Innerhalb eines Betriebs ist es oft vonnöten Buch zu führen. Dabei findet meist das System der doppelten Buchführung Anwendung. Diese wurde 1494 von Luca Pacioli in Venedig entwickelt um die Einnahmen und Ausgaben seines Ordens aufzuzeichnen. Dieses System wurde mit der Zeit verfeinert, findet jedoch in großen Teilen immer noch Anwendung. \\
+	Der Produktionsprozess eines Unternehmens teilt sich in drei Teile:
+	\begin{itemize}
+		\item{Beschaffungsmarkt}
+		\begin{itemize}
+			\item{Inkludiert Güter, Personal, Finanzen oder Dienstleistungen. Diese benötigen meist Geld.}
+		\end{itemize}
+		\item{Betrieb}
+		\begin{itemize}
+			\item{Die Verarbeitung der beschafften Resourcen zu Waren.}
+		\end{itemize}
+		\item{Absatzmarkt}
+		\begin{itemize}
+			\item{Der Markt zum Verkauf der produzierten Güter des Unternehmens.}
+		\end{itemize}
+	\end{itemize}
+	Diese führen zu einerseits einem Güterstrom, als auch einem Geldstrom. Der Geldstrom ist relativ einfach zu bewerten, da er die Einkommen der verkauften Produkte repräsentiert. Bei dem Güterstrom fällt das etwas schwerer, da man zu jedem Zeitpunkt den Gegenwert seiner Güter wissen muss. Das inkludiert nicht nur Resourcen zur Verarbeitung, sondern auch Geräte oder Immobilien. \\
+	Zur Ermittlung des Wertes der Güter gibt es das externe und interne Rechnungswesen. Diese unterschieden zwischen Finanzbuchhaltung und Kostenrechnung sowie Planungsrechnung.
+	Die Finanzbuchhaltung dient dem internen Rechnungswesen und die Kostenrechnung sowie Planungsrechnung dem externen Rechnungswesen.
+	Die externe Buchführung dient zur Offenlegung der eigenen Finanzen gegenüber anderen Parteien. Dabei können viele Parteien Interesse an den Finanzen der Firma haben:
+	\begin{itemize}
+		\item{Geldgeber um zu entscheiden ob sie mehr Geld geben wollen.}
+		\item{Kunden um zu entscheiden ob sie das Produkt kaufen wollen. (Gewährleistung, Garantie, etc.)}
+		\item{Der Staat zur Festlegung der Steuerlast.}
+		\item{Arbeitnehmer um zu wissen wie sicher ihr Job ist.}
+	\end{itemize}
+	Das externe Rechnungswesen hat vier große Elemente wobei auch zwischen den Pflichten von Unternehmen und Kapitalgesellschaften unterschieden wird:
+	\begin{itemize}
+		\item{Pflichten aller Unternehmer:}
+		\begin{itemize}
+			\item{Buchführung - Verwaltung der Firmenfinanzen}
+			\item{Inventur - Abzählung des gesamten Inventars des Unternehmens}
+			\item{Jahresabschluss - Alle Daten werden in diesem verdichtet. Muss offengelegt werden}
+			\begin{itemize}
+				\item{Dieser inkludiert die Bilanz sowie Gewinn und Verlust des Unternehmens.}
+			\end{itemize}
+		\end{itemize}
+		\item{Pflichten von Kapitalgesellschaften:}
+		\begin{itemize}
+			\item{Lagebericht - Schildert die Umstände des Unternehmens, welches diese jedoch auch zu ihrem Gunsten beeinflussen kann.}
+			\item{Innerhalb des Jahresabschlusses müssen Kapitalgesellschaften auch einen Anhang anführen.}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Abschreibung}
+	Abschreibung beschreibt den Versuch die Wertminderung von Resourcen mit der Zeit abzugleichen. Dazu werden über einen gewissen Zeitraum die ursprünglichen Kosten als Aufwand jährlich angegeben und mindern so den Gewinn.
+	\subsection{Internes Rechnungswesen}
+	Internes Rechnungswesen ist im Gegensatz zum externen Rechnungswesen nicht öffentlich einsehbar. Das hat den Grund, dass gewisse Kennzahlen geheim bleiben sollten. Das interne Rechnungswesen wird benötigt um die interne Kostensituation laufend zu überprüfen. Das kann aus externer Sicht mehrere Gründe haben:
+	\begin{itemize}
+		\item{Für die Angebotsausweitung.}
+		\begin{itemize}
+			\item{Lohnt es sich zu expandieren?}
+		\end{itemize}
+		\item{}
+	\end{itemize}
+	Aus interner Sicht kann da auch mehrere Gründe haben:
+	\begin{itemize}
+		\item{Um die Genauigkeit und Schnelligkeit der Kalkulationen zu verbessern}
+	\end{itemize}
+	Das interne Rechnungswesen ist nicht vorgegeben, weshalb es auch keine rechtlichen Vorgaben hat. Dadurch ist das System des internen Rechnungswesens im Ermessen des Unternehmens. Jedoch sollte es nach formalen Kriterien aufgebaut werden:
+	\begin{itemize}
+		\item{Wirtschaftlichkeit}
+		\item{Relevanz}
+		\item{Schnelligkeit vor Genauigkeit}
+		\item{Häufigkeit}
+		\item{Flexibilität}
+		\item{Zeitliche und sprachliche Entsprechung}
+		\item{Integrationsfähigkeit}
+	\end{itemize}
+	Es gibt auch inhaltiliche Kriterien:
+	\begin{itemize}
+		\item{Jede Position darf nur ein Mal vorkommen}
+	\end{itemize}
+	Bei der Implementation muss man überlegen, ob diese Rechnung den Kostenstellen oder den Kostenträgern zugeordnet werden?
+	Welchem Grundprinzip soll die Kostenrechnung folgen?
+	Soll ein Vollkosten oder ein Teilkostensystem implementiert werden?
+	Nach welchem Intervall soll es veröffentlicht werden? (Monatlich, Wöchentlich)
+	Kostenverechnung folgt drei Grundprinzipien:
+	\begin{itemize}
+		\item{Verursacherprinzip}
+		\begin{itemize}
+			\item{Kosten werden dem zugerechnet, welcher sie verursacht hat.}
+		\end{itemize}
+		\item{Durschnittsprinzip}
+		\begin{itemize}
+			\item{Kosten werden im Durchschnitt allen Kostenträgern zugeordnet.}
+		\end{itemize}
+	\end{itemize}
+
+	Verrechnende Kosten können nach Deyhle drei Dimensionen folgen:
+	\begin{itemize}
+		\item{Kosten}
+		\begin{itemize}
+			\item{Fixe Kosten}
+			\begin{itemize}
+				\item{Kosten welche anfallen, ob etwas produziert wird, oder nicht. Also z.B. Miete.}
+			\end{itemize}
+			\item{Variable Kosten}
+			\begin{itemize}
+				\item{Wie viel kostet es das Produkt zu produzieren?}
+			\end{itemize}
+		\end{itemize}
+		\item{Zeitspanne}
+		\begin{itemize}
+			\item{Kurzfristig wenn es im Schnitt weniger als einen Monat zurechenbar ist.}
+			\item{Langfristig wenn es im Schnitt länger als einem Jahr zurechenbar ist.}
+		\end{itemize}
+		\item{Einzelkosten oder Gemeinkosten}
+		\begin{itemize}
+			\item{Sind die Kosten einzeln zurechenbar oder sind diese nicht direkt zuteilbar?}
+			\item{Direkt zurechenbare Kosten sind der direkte Aufwand für ein einzelnes Produkt, wie zum Beispiel den Materialien.}
+			\item{Nicht direkt zuteilbare Kosten entstehen zur generellen Erhaltung von Maschinen, welche nicht nur von einem Produkt konsumiert werden.}
+		\end{itemize}
+	\end{itemize}
+	\section{Steuerrecht}
+	Steuern sind Abgaben an das öffentliche Gemeinwesen. Dabei sind Steuern die mit Abstand wichtigsten Einnahmequellen von Bund, Ländern und Gemeinden, welche bis zu 80\% ausmachen kann. Nahezu jeder ist mit Steuern konfrontiert, von Mehrwertsteuer bis Körperschaftssteuer. Es gibt vier große Arten von öffentlichen Abgaben: Steuern, Zölle, Gebühren und Beiträge. 
+	\begin{itemize}
+		\item{Steuern sind Abgaben auf gewisse Produkte und Leistungen. Dabei gibt es keinen unmittelbaren Gegenwert.}
+		\item{Zölle werden bei der Einfuhr von Waren erhoben und dienen dazu globale Unterschiede von Warenkosten auszugleichen.}
+		\item{Gebühren fallen für tatsächlich in Anspruch genommene individuell zurechenbare Leistungen an. Das kann für die Gebühr zum Ausstellen eines Reisepasses oder der Eintragung in das Grundbuch sein.}
+		\item{Beiträge sind zwangsweise Geldleistungen, die von jenen zu Errichten sind, welche an der Erhaltung einer öffentlichen Einrichtung interessiert sind. Das geht von Beiträgen zur Wirtschaftskammer bis zu Studienbeiträgen. Solche Beiträge können als Entgelt zur Inanspruchname der Leistung verstanden werden.}
+	\end{itemize}
+	\subsection{Bemessungsgrundlage}
+	Die Bemessungsgrundlage (BGL) dient zur Berechnung der Steuerlast. Als Basis wird meistens das Einkommen verwendet, es kann jedoch auch die Leistung eines PkW verwendet werden. \\
+	In der BGL gibt es in der Regel einen Freibetrag, für welchen man keine Steuer bezahlen muss (In Österreich etwa 11800€). Darüber gibt es einen Freibetrag, für welchen man auch noch keine Steuern zahlen muss. Jegliches Einkommen darüber ist von Steuerlast betroffen, kann jedoch durch Freibeträge verringert werden. \\
+	Eine Steuerschuld besteht grundsätzlich wenn 'der Tatebestand verwirklicht wird'. Ein Unternehmen ist dadurch zum Beispiel nicht Mehrwertsteuerpflichtig sondern der Endkunde. \\
+	Steuern sind in der Regel einen Monat nach Gültigwerden der Steuerpflicht fällig. Dabei kann jedoch ein Ansuchen auf Stundung gestellt werden, welche, mit Begründung, oft gewährt wird. \\
+	\subsubsection{Steuervermeidung}
+	Abgaben wie Steuern können vermieden werden, dazu müsste man jedoch unter dem Freibetrag liegen. Das Gesetz sieht keine Strafe für Steuervermeidung vor.
+	\subsection{Arten von Steuern}
+	\subsubsection{Einkommensteuer}
+	Die Einkommensteuer (ESt) besteuert das Einkommen natürlicher Personen und ist die aufkommensmäßig wichtigste Steuer. Das inkludiert die Lohnsteuer, die Kapitalertragsteuer und die Immobilienertragsteuer. Einkommensteuer wird auf das gesamte Einkommen, welches eine Person in einem Jahr erwirtschaftet hat. Um die BGL zu berechnen muss man zwischen Einnahmen, Einkünften und Einkommen unterscheiden. \\
+	Eine Einkunft ist ein Ertrag aus einem der sieben Einkunftsarten, wobei das Einkommen die Kombination aller Einkünfte ist. \\
+	Die sieben EInkunftsarten sind:
+	\begin{itemize}
+			\item{Haupteinkunftsarten}
+			\begin{itemize}
+				\item{Einkünfte aus Land- und Forstwirtschaft}
+				\begin{itemize}
+					\item{Einkünfte als z.B. Bauer oder Förster.}
+				\end{itemize}
+				\item{Einkünfte aus selbständiger Arbeit}
+				\item{Einkünfte aus Gewerbebetrieb}
+				\begin{itemize}
+					\item{Jegliche selbstständige Einkünfte, welche nicht unter die anderen genannten Einkunftsarten fallen. Dabei muss die Tätigkeit jedoch selbständig (Arbeit unter eigener Verantwortung) und nachhaltig (langandauernd und mit Wiederholabsicht)}
+					\item{Der Betrieb muss auch eine Gewinnerzielungsabsicht besitzen. Wenn eine Gewinnabsicht besteht, jedoch kein Gewinn erzielt wird, muss jedes Jahr geprüft werden, ob es sich nicht um "Liebhaberei" handelt. In diesem Fall muss man auf Gewinne keine Steuern zahlen, kann jedoch Verluste auch nicht abziehen.}
+				\end{itemize}
+				\item{Einkünfte aus nicht-selbständiger Arbeit}
+				\begin{itemize}
+					\item{Einkünfte als Angestellter in einem Betrieb oder Unternehmen. Bei Selbstständigkeit mit nur einem Kunden muss argumentiert werden, warum man trotzdem selbständig ist und keine Scheinselbständigkeit besteht.}
+				\end{itemize}
+			\end{itemize}
+			\item{Nebeneinkunftsarten}
+			\begin{itemize}
+				\item{Einkünfte aus Kapitalvermögen}
+				\begin{itemize}
+					\item{Einkünfte aus Aktiengeschäften und Zinsen sowie Gewinnausschüttungen}
+					\item{Seit 2007 separat, sofort versteuert. (Ansuchen auf Befreiung der separaten Besteuerung ist möglich.)}
+				\end{itemize}
+				\item{Einkünfte aus Vermietung und Verpachtung}
+				\begin{itemize}
+					\item{Einkünfte aus vermieteten oder verpachteten Grundstücken und Immobilien}
+				\end{itemize}
+				\item{Sonstige Einkünfte}
+				\begin{itemize}
+					\item{Spekulationsgeschäfte und bestimmte Leistungen und Funktionsgebühren}
+				\end{itemize}
+			\end{itemize}
+			\item{Liebhaberei}
+			\begin{itemize}
+				\item{Tätigkeiten die zwar grundsätzlich ESt-pflichtig sind, jedoch auf Dauer keinen Gewinn bringen, können vom Finanzamt als Liebhaberei gesehen werden. Dadurch muss man auf etwaigen Gewinn zwar keine Steuern zahlen, kann Verluste jedoch auch nicht gegenrechnen. Zusätzlich darf man keinen Vorsteuerabzug mehr}
+			\end{itemize}
+	\end{itemize}
+	Mit Ausnahme der Einkünfte aus Kapitalvermögen und Sonstige Einkünfte, kann ein Verlust in einem der Einkunftsarten mit den Gewinnen einer anderen Einkunftsart ausgeglichen werden um so die Steuerlast zu vermindern. \\
+	Zusätzlich, wenn man zwischen Haupteinkunftsarten und Nebeneinkunftsarten unterscheidet, ist der größte Unterschied, dass man auf Nebeneinkunftsarten keine Sozialversicherung bezahlt. \\
+	Jegliche Einnahmen welche nicht in eine der genannten Einkunftsarten fällt, sind nach ESt nicht steuerpflichtig. Das inkludiert Finderlohn oder Erbschaften. \\
+	Bei einem Umsatz von mehr als 1.000.000€ muss eine erweiterte Buchführung verwendet werden. Zusätzlich muss man, falls man in zwei aufeinanderfolgenden Jahren mehr als 700.000€ Umsatz erwirtschaftet ab dem dritten Jahr auch eine erweiterte Buchführung beginnen.
+	\subsubsection{Umsatzsteuer}
+	Die Umsatzsteuer (Früher Mehrwertsteuer) ist eine Steuer welche größtenteils den Endkunden betrifft. Im Falle eines Unternehmens, können diese die Umsatzsteuer stets als Vorsteuer gegen ihre Steuerlast geltend machen.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

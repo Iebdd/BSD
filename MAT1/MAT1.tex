@@ -1,0 +1,1077 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{fancyvrb}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{nicefrac}
+\usepackage{graphicx}
+\usepackage{float}
+\DefineShortVerb{\Ħ}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\renewcommand\theadalign{tl}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\setstretch{1.30}
+\setlength{\parindent}{0pt}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\M}{\mathbb{M}}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Mathematik für Informatik 1}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\newpage
+	\section{Logik}
+	\subsection{Aussagen}
+	\subsubsection{Aussageformen}
+	Eine Aussage ist ein Satz von dem man eindeutig entscheiden kann wie war er ist. \\
+	Eine Aussageform ist hingegen ein Satz mit mindestens einer Variable, wodurch der Wahrheitsgehalt der Aussage nicht eindeutig ist. Ersetzt man in einer Aussage eine Konstante (Ein Wort) durch eine Variable (x), wird diese zu einer Aussageform oder zu einer Aussagefunktion a(x).
+	\begin{itemize}
+		\item{Wenn man sich zum Beispiel diese Aussagen ansieht:}
+		\begin{itemize}
+			\item{Graz ist die Hauptstadt von Österreich $\to$ Falsch}
+			\item{Wien ist die Hauptstadt von Österreich $\to$ Wahr}
+		\end{itemize}
+		\item{Hier kann man Graz und Wien durch \textit{x} ersetzen um dieses in eine Aussagenform zu verwandeln: \textit{x} ist die Hauptstadt von Österreich}
+		\item{a(Graz) $\to$ Falsch}
+		\item{a(Wien) $\to$ Wahr}
+	\end{itemize}
+	\subsubsection{Verknüpfung von Aussagen}
+	Man kann Aussagen auch mit und / oder verknüpfen.
+	\begin{itemize}
+		\item{UND Verknüpfung oder Konjunktion ($a \land\  b$) ist nur wahr wenn beide verknüpften Elemente Wahr sind.}
+		\item{ODER Verknüpfung oder Disjunktion ($a \lor\  b$) ist Wahr sobald eines der beiden Elemente Wahr ist. Sie ist nur Falsch, wenn beide der Aussagen Falsch sind.}
+		\item{ENTWEDER ... ODER (XOR) oder Kontravenz ($a \veebar\  b$) ist genau dann wahr, wenn entweder a oder b wahr sind, aber nicht gleichzeitig. Somit ist sie gleich wie die ODER Verknüpfung, wobei sie nicht wahr ist, wenn beide Wahr sind.}
+		\item{VERNEINUNG oder Negation ($\neg  a$) kehrt den Gehalt einer Aussage um. So ist ein Element das Wahr ist, danach Falsch.}
+	\end{itemize}
+	\subsubsection{Wahrheitstabellen}
+	Man kann diese Aussagen auch anhand einer Tabelle festlegen: \\ \\ 
+	\begin{tabular}{| c | c | c | c | c | c | c |}
+		\toprule
+		a & b & $a \land\ $  b & a$ \lor\ $  b & $a \veebar\  b$ & $\neg a$ & $\neg b$ \\ \midrule
+		0 & 0 & \textbf{0} & \textbf{0} & \textbf{0} & \textbf{1} & \textbf{1} \\ \hline
+		0 & 1 & \textbf{0} & \textbf{1} & \textbf{1} & \textbf{1} & \textbf{0} \\ \hline
+		1 & 0 & \textbf{0} & \textbf{1} & \textbf{1} & \textbf{0} & \textbf{1} \\ \hline
+		1 & 1 & \textbf{1} & \textbf{1} & \textbf{0} & \textbf{0} & \textbf{0} \\
+		\bottomrule
+	\end{tabular}
+	\subsubsection{Beispiel}
+	Verneinen Sie folgende Aussageformen:
+	\begin{enumerate}
+		\item{$a(x): x^2 + 3 > 21 $\to$ \neg a(x):x^2+3 \leq\ 21$}
+		\item{$b(x): x^2 + x = 8 $\to$ \neg b(x): x^2+x \neq 8$}
+		\item{$\neg c(x): 4x \geq\ 5 $\to$ c(x): 4x < 5$}
+	\end{enumerate}
+
+	\subsection{Quantoren}
+	\subsubsection{All Quantor}
+	Eine All-Aussage setzt voraus, dass gegeben für eine Aussageform a(x), alle \textit{x} aus einer bestimmten Menge wahr sind. \\
+	Kurzschreibweise - All Quantor: \\
+	$\forall x:a(x)$ \\
+	Beispiel:\\
+	Aussageform a(x) = x ist die Hauptstadt Österreichs. \\
+	Diese Behauptung ist dann wahr, wenn für alle \textit{x} a(x) wahr ist. \\
+	Widerlegung: Ein \textit{x} existiert für welches a(x) nicht gilt.
+	\subsubsection{Existenz Quantor}
+	Eine Existenzaussage ist dann wahr, wenn zumindest eines von einer Menge aus \textit{x} wahr ist. \\
+	Kurzschreibweise:
+	$\exists x:a(x)$ \\
+	Beispiel:\\
+	Aussageform a(x) = x ist die Hauptstadt von Österreich \\
+	Wahrheitsbeweis: Ein x ist zu finden für welches a(x) wahr ist. \\
+	Widerlegung: Für alle \textit{x} in der Menge beweisen, dass a(x) nicht wahr ist.
+	\subsubsection{Verneinung}
+	Durch die Verneinung werden die Quantoren negiert: \\
+	Aus einer All-Aussage wird eine Existenzaussage und aus einer Existenzaussage wird eine All-Aussage. \\
+
+	Beispiel einer All-Aussagennegierung: \\
+	$\neg(\forall x:a(x)) = \exists x:\neg(a(x))$ \\
+	a(x) = x ist die Hauptstadt Österreichs. \\
+	Bei Verneinung der All-Aussage von a(x) wird 'Alle x sind Hauptstädte Österreichs' zu 'Es existiert zumindest eine Hauptstadt Österreichs in x'. \\
+	Beispiel einer Existenzaussage: \\
+	$\neg (\exists x:a(x)) = \forall x:\neg (a(x))$
+	Bei Verneinung der Existenzaussage wird aus 'Es existiert ein \textit{x} in der Menge, welche die Hauptstadt Österreichs ist.' zu 'Es existiert kein \textit{x} welches die Haupstadt Österreichs ist.'
+	\subsubsection{Beispiel}
+	\begin{enumerate}
+		\item{Zu jedem Schloss passt ein Schlüssel $\to$ Es gibt mindestens ein Schloss zu dem kein Schlüssel passt.}
+		\item{Es gibt einen Studierenden, der Java nicht kann $\to$ Alle Studierenden können Java.}
+		\item{Für alle \textit{x} gilt: \textit{f}(x)\neq 0 $\to$ Es existiert ein x für das gilt: \textit{f}(x) = 0}
+		\item{$\forall \textit{x}:10x+4\geq\ 10 \to \exists \textit{x}:10x + 4 \geq\ 10$}
+		\item{$\exists \textit{x}: 12 = 2x^2+3x \to \forall \textit{x}:12 \neq\ 2x^2+3x$}
+	\end{enumerate}
+	\subsubsection{Implikation}
+	Bei der Implikation folgt aus einer Aussage eine andere. Wenn a dann b oder a impliziert b.\\
+	Kurzschreibweise: \\
+	$a \implies b$ \\
+	\textbf{Diese Aussage ist nur falsch wenn a wahr und b falsch ist.} \\
+	Beispiel: \\
+	a(x) = x ist die Hauptstadt von Österreich \\
+	b(x) = x ist in Österreich \\
+	$a \implies\ b$: Wenn x die Hauptstadt von Österreich ist, muss diese in Österreich liegen. \\
+	a = Wien ist die Hauptstadt von Österreich \\
+	b = Graz ist die Hauptstadt der Steiermark \\
+	$a \implies\ b$ ist Wahr, nicht weil es eine logische Verbindung gibt, sondern weil beide Wahr sind. \\
+	a = Wien ist die Hauptstadt Österreichs \\
+	b = Graz ist die Hauptstadt Österreichs \\
+	$a \implies\ b$ ist Falsch, da a wahr, aber b falsch ist. \\
+	Die Logik des genannten Satzes ist in diesem Fall irrelevant. Eine Implikation ist nur dann falsch, wenn a wahr und b falsch ist.
+	\paragraphlb{Verneinung}
+	Eine Implikation ist auch wahr, wenn beide Aussagen, welche zu einer Wahren Implikation führen, negiert werden. \\
+	$a \implies\ b$ - Wahr \\
+	$\neg a\implies\ \neg b$ - Wahr
+	\subsubsection{Äquivalenz}
+	Eine Äquivalenz besteht in nur zwei Fällen. Eine Äquivalenz ausgeschrieben ist \textbf{genau wenn ... dann}. Eine Äquivalenz ist Wahr wenn beide Teile den gleichen Wahrheitswert besitzen. Also ist es wahr wenn a und b Wahr sind, aber auch Wahr wenn a und b Falsch sind. \\
+	Kurzform: \\
+	$a \iff\ b$
+
+	Wahrheitstabellen: \\
+	\begin{tabular}{| c | c | c | c |}
+		\toprule
+		a & b & $a \implies\ b$ & $a \iff\ b$ \\ \midrule
+		0 & 0 & 1 & 1 \\ \hline
+		0 & 1 & 0 & 0 \\ \hline
+		1 & 0 & 1 & 0 \\ \hline
+		1 & 1 & 1 & 1 \\
+		\bottomrule
+	\end{tabular} \\ \\
+	Wahrheitstabelle von $\neg (\neg a \lor\ \neg b)$ \\
+	\begin{tabular}{| c | c | c | c | c | c |}
+		\toprule
+		a & b & $\neg a$ & $\neg b$ & $\neg a \lor\ \neg b$ & $\neg $\\ \midrule
+		0 & 0 & 1 & 1 & 1 & 0 \\ \hline
+		0 & 1 & 1 & 0 & 1 & 0 \\ \hline
+		1 & 0 & 0 & 1 & 1 & 0 \\ \hline
+		1 & 1 & 0 & 0 & 0 & 1 \\
+		\bottomrule
+	\end{tabular} \\ \\
+	Diese Tabelle zeigt, dass das De Morgan'sche Gesetz zutrifft. Durch die Negation von $\neg a\lor\neg b$ erhält man $a\land b$.
+	\subsubsection{Tautologie}
+	Eine Tautologie ist eine allgemeingültige Aussage. Logisch gesehen ist sie somit in jedem Fall wahr. Ein Beispiel wäre 'Wenn es regnet, dann regnet es.' \\
+	Mathematisches Beispiel: \\
+	$\neg (a \land \neg a)$ Diese Formel ist immer wahr, da a und nicht a nie wahr sind, aber negiert immer wahr ist. \\
+	Beispiel: \\
+	Ist $ (X \implies\ 1) \implies\ (0 \implies\ Y)$ eine Tautologie? \\
+	\begin{tabular}{| c | c | c | c | c |}
+		\toprule
+		X & Y & $X \implies\ 1$ &$ 0 \implies\ Y$ & $\implies$ \\ \midrule
+		0 & 0 & 1 & 1 & 1 \\ \hline
+		0 & 1 & 1 & 1 & 1 \\ \hline
+		1 & 0 & 1 & 1 & 1 \\ \hline
+		1 & 1 & 1 & 1 & 1 \\
+		\bottomrule
+	\end{tabular}
+	\subsubsection{Kontradiktion}
+	Eine Kontradiktion ist immer Falsch, da die beiden Aussagen in einem Widerspruch zueinander stehen. \\
+	Beispiel: \\
+	$a \land\ \neg a$
+	Die Erde ist rund und die Erde ist nicht rund. \\
+
+	Ist folgende Formel eine Tautologie, Kontradiktione oder keines von Beiden: \\
+	$((a \implies\ b) \land\ (b \implies\ c)) \implies\ (a \implies\ c)$ \\ \\
+	\begin{tabular}{| l | l | l | l | l | l | l | l |}
+		\toprule
+		a & b & c & $a \implies\ b$ & $ b \implies\ c $ & \lor\ & $a \implies\ c$ & $\implies\ $ \\ \midrule
+		0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 \\ \hline
+		0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 \\ \hline
+		0 & 1 & 0 & 1 & 0 & 0 & 1 & 1 \\ \hline
+		0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \hline
+		1 & 0 & 0 & 0 & 1 & 0 & 0 & 1 \\ \hline
+		1 & 0 & 1 & 0 & 1 & 0 & 1 & 1 \\ \hline
+		1 & 1 & 0 & 1 & 0 & 0 & 0 & 1 \\ \hline
+		1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ 
+		\bottomrule
+	\end{tabular}
+	Dieser Ausdruck ist somit eine Tautologie.
+	\section{Mengenlehre}
+	Eine Menge ist eine Zusammenfassung von Objekten, welche gemeinsame Eigenschaften haben. Ein Beispiel sind die Zahlen von 1 bis unendlich. Wichtig ist dabei, dass die Objekte wohl unterscheidbar sind, also darf es keine zwei selben Zahlen innerhalb einer Menge geben. \\
+	Das Element \textit{x} wird als wohl unterscheidbares Objekt dargestellt.
+	\subsection{Beschreibung von Mengen}
+	Mengen werden üblicherweise mit Großbuchstaben bezeichnet: \textit{A, B, M}. Die geschwungenen Klammern \{\} werden auch Mengenklammern genannt und bezeichnen eine Menge. \\
+	Die beiden Verfahren zur Beschreibung einer Menge sind: \\
+	$M=\{x_1,x_2,x_3\}$ $\to$ Aufzählendes Verfahren \\
+	$M=\{x \in A$|x hat bestimme Menge\} \\
+	Beispiele sind: \\
+	$M=\{0,1,2,3,4,5,6,7\}$ $\to$ Die Menge der Zahlen von 0 bis 7 \\
+	$M=\{x\in \Z | -2 > x > 2\}$ Die Menge aller ganzen Zahlen zwischen -2 und 2\\
+	$M=\{x\in \Z | -1 \leq x < 7\}$
+	\subsubsection{Teil und Nicht Teil}
+	Das Symbol $\in$ beschreibt, dass das Objekt ein Element der Menge ist. \\
+	Hingegen beschreibt das Symbol $\notin$ dass, das Objekt nicht Teil der Menge ist.
+	\subsubsection{Mächtigkeit}
+	Die Mächtigkeit einer Menge beschreibt die Anzahl der Elemente einer Menge. \\
+	Schreibweise: $|M|$ (Kardinalzahl) \\
+	Beispiele: \\
+	$M=\{0,1,2,3,4,5\}, |M| = 7$ \\
+	$|\N|$ $\to$ "abzählbar unendlich" \\
+	$|\R|$ $\to$ "nicht abzählbar"
+	\subsubsection{Abzählbarkeit}
+	Abzählbar und nicht abzählbar bedeutet, dass man jede einzelne Ziffer nicht abzählen kann. Bei Ganzen Zahlen ist das möglich, bei reellen Zahlen jedoch nicht.
+	\subsubsection{Gleichmächtigkeit}
+	Zwei Mengen heißen gleichmächtig, wenn jedem Objekt einer Menge einer anderen Menge zugerodnet werden kann. \textbf{Wenn diese also die gleiche Anzahl an Elementen besitzen, sind sie gleichmächtig. Dies ist unabhängig des Werts der Elemente.} \\
+	Schreibweise: $|A| = |B|$
+	\subsubsection{Gleichheit}
+	Zwei Mengen sind gleich, wenn diese nicht nur die gleiche Anzahl an Elementen hat, sondern diese auch die gleichen sind: \\
+	$x\in \iff x \in B$ \\
+	Schreibweise: $A = B$ \\
+	Also gilt: $A = B \iff x \in \Z$\land $x \in B$\\
+	Beispiele: \\
+	$M_1 = \{0, 1, 2, 3\}, M_2 = \{0, 1, 2, 3\}; M_2 = M_1$
+	\subsection{Beziehungen zwischen Mengen}
+	\subsubsection{Teilmenge}
+	Eine Menge A heißt Teilmenge von B, wenn gilt: \\
+	$x\in A \implies x \in B$ \\
+	Jedes Element von A ist also auch ein Element von B. \\
+	Schreibweise: $A \subseteq B$\\
+	Gesetzesmäßigkeit: Für alle Mengen $\M$ gilt, dass die leere Menge eine Teilmenge von $\M$ ist: $\forall \M:\{\}\subset M$ \\
+	Weiters gilt: $\forall M:M\subset M$. Das bedeutet M ist eine Teilmenge von sicht selbst. \\
+	Beispiel: \\
+	$M_1 = \{2,3\}, M_2 = \{0, 1, 2, 3\}: M_1 \subseteq M_2, M_1 \subseteq \N, M_1 \subset \{\}, M_2 \subseteq M_1$
+	\subsubsection{Echte Teilmenge}
+	Echte Teilmengen sind Teilmengen von Mengen, wenn diese eine Teilmenge einer anderen Menge sind, diese Menge jedoch nicht die gleiche Menge ist: $A \subset B \land A \neq B$ \\
+	Schreibweise: $A \subset B$
+	\subsubsection{Potenzmenge}
+	Eine Potenzmenge ist die Menge aller möglichen Teilmengen einer Menge: \\
+	P(A) = \{T|T$\subseteq A$\} \\
+	Gesetzmäßigkeit: Wenn $|A| = n$, so hat $P(A) = 2^n$ Elemente (Teilmengen) \\
+	Beispiel: \\
+	$A = \{1, 2\}$\\
+	$P(A) = \{\{\}, \{1\}, \{2\}, \{1, 2\}\}$\\
+	$A \subseteq P(A)$
+	Das bedeutet die Potenzmenge bildet eine Menge von Mengen. Diese Menge ist wiederum eine Teilmenge von A.
+	\subsection{Venn-Diagramme}
+	Ein Venn-Diagramm wird verwendet um das Verhältnis von Mengen besser darstellen zu können.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{Bilder/venn.png}
+	\caption{Darstellung eines Venn Diagramms}
+	\end{figure}
+	\subsection{Beziehungen zwischen Mengen}
+	Um die Beziehung zwischen Mengen darzustellen gibt es mehrere Operationen. Diese sind:
+	\subsubsection{Durchschnittsmenge - \texorpdfstring{$\cap$}{}}
+	Die Durchschnittsmenge ist die Menge, welche nur in beiden der Mengen vorkommt: $A \cap B = \{x|x \in A \land x \in B \}$ \\
+	\begin{center}
+	\includegraphics[scale=0.5]{Bilder/durchschnitt.png}
+	\end{center}
+	\subsubsection{Vereinigungsmenge - \texorpdfstring{$\cup$}{}}
+	Die Vereinigungsmenge ist die Menge beider Mengen: $A \cup B = \{x|x \in A \lor x \in B \}$ \\
+	\begin{center}
+	\includegraphics[scale=0.5]{Bilder/vereinigung.png}
+	\end{center}
+	\subsubsection{Komplementärmenge - \texorpdfstring{$'$}{}}
+	Die Komplementärmenge ist die Menge, welche zwar in der Grundmenge M existiert, jedoch nicht in der Menge A: \\
+	$A' = \{x|x \in M \land x \notin A \}$ \\
+	\begin{center}
+	\includegraphics[scale=0.5]{Bilder/komplementär.png}
+	\end{center}
+	\subsubsection{Differenzmenge - \textbackslash }
+	Die Differenzmenge ist die Menge aller Elemente, welche zwar in A enthalten sind, aber nicht in B: A \textbackslash B = $\{x|x \in A \land x \notin B\}$ \\
+	\begin{center}
+	\includegraphics[scale=0.5]{Bilder/differenz.png} \\
+	\end{center}
+	Zusätzlich gilt, dass wenn B eine Teilmenge von A, so ist A ohne B die Komplementärmenge von B in A: $B \subseteq A:A $\textbackslash$ B = B'$\\
+	So kann eine Komplementärmenge angeben, ob sie eine Komplementärmenge einer anderen Menge ist. Wenn nichts angegeben ist, bezieht sich das auf die Grundmenge M.
+	\subsection{Mengenoperationen}
+	\subsubsection{Disjunkt}	
+	Zwei Mengen sind Disjunkt wenn diese keine gemeinsamen Objekte beinhalten: $A \cap B = \{\}$
+	\subsubsection{Kartesisches Produkt}
+	Das kartesische Produkt (A kreuz B) ist die Produktmenge aller geordneten Paare zweier Mengen A und B: $A x B = \{(a, b)|a \in A \land b \in B\}$\\
+	Gesetzmäßigkeit: $A \times B \neq B \times A$ $\to$ Das Kreuzprodukt von A und B ist nicht gleich dem Kreuzprodukt von B und A (Kann aber sein.) \\
+	Beispiel: \\
+	$\{1,2\}\times\{3,4\} = \{(1,3),(1,4),(2,3),(2,4)\}$ \\
+	Also wird jedes Element einer Menge einmal mit jedem Element in der anderen Menge verknüpft.
+	\subsubsection{n-faches Produkt}
+	Das n-fache Produkt ist einer Erweiterung vom Kartesischen Produkt. Zuvor wurden nur zwei Mengen miteinander verknüpft und jetzt werden n Mengen miteinander verknüpft: $A_1\times A_2 \times A_3 \times ...\times A_n = \{(a_1, a_2, a_3,...,a_n)|a_1 \in A_1, a_2 \in A_2, a_3 \in A_3,...,a_n \in A_n\}$ \\
+	Das n-fache Produkt einer Menge A schreibt man: $A\times A\times A\times...\times A = A^n$
+	\subsubsection{Zugehörigkeitstafeln}
+	Zugehörigkeitstafeln sehen sehr ähnlich zu Wahrheitstabellen aus, zeigen jedoch keine Werte an, sondern geben an, ob ein Element in einer Menge enthalten ist. Bei 1 ist das Element enthalten ($\in$) und bei 0 ist das Element nicht enthalten ($\notin$):\\
+	\begin{tabular}{cccccc}
+		\toprule
+		A & B & A \cap B & A \cup B & A \\ B & B \\ A \\ \midrule
+		0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+		0 & 1 & 0 & 1 & 0 & 1 \\ \hline
+		1 & 0 & 0 & 1 & 1 & 0 \\ \hline
+		1 & 1 & 1 & 1 & 0 & 0 \\
+		\bottomrule
+	\end{tabular}
+	\subsubsection{Rechengesetze für Mengen}
+	\begin{itemize}
+		\item{Kommutativgesetz}
+		\begin{itemize}
+			\item{Die Reihenfolge der Mengen spielt zwischen zwei Operatoren keine Rolle.}
+			\item{A \cup B = B \cup A}
+		\end{itemize}
+		\item{Assoziativgesetz}
+		\begin{itemize}
+			\item{Wenn die Verbindungen die gleichen sind, kann man die Klammern verschieben oder auslassen.}
+			\item{(A\cap B)\cap C = A\cap (B\cap C)}
+			\item{(A\cup B)\cup C = A\cup (B\cap C)}
+		\end{itemize}
+		\item{Distributivgesetz}
+		\begin{itemize}
+			\item{Man kann eine Menge in eine andere verbundene Menge multiplizieren, muss dabei jedoch die Verbindungen umkehren (\cup zu \cap und umgekehrt)}
+			\item{A\cup (B\cap C)=(A\cup B) \cap (A\cup C)}
+			\item{A\cap (B\cup C)=(A\cap B) \cup (A\cap C)}
+		\end{itemize}
+		\item{Idempotenz}
+		\begin{itemize}
+			\item{Eine Vereinigung oder Differenz von sich selbst, ergibt die Menge.}
+			\item{A\cap A = A\cup A = A}
+		\end{itemize}
+		\item{Identität}
+		\begin{itemize}
+			\item{Die Differenz einer Menge mit der leeren Menge ergibt die leere Menge}
+			\item{(A\cap \{\})=\{\}}
+			\item{Die Vereinigung einer Menge mit der leeren Menge ergibt die Menge.}
+			\item{(A\cup \{\})=A}
+		\end{itemize}
+		\item{De Morgan'sche Regeln - 1}
+		\begin{itemize}
+			\item{Die Umkehrung eines Ausdrucks kehrt alle Mengen sowie die Verbindung um (\cup zu \cap und umgekehrt)}
+			\item{(A\cap B)'=A'\cup B'}
+			\item{(A\cup B)'=A'\cap B'}
+		\end{itemize}
+		\item{De Morgan'sche Regeln - 2}
+		\begin{itemize}
+			\item{Das Distributivgesetz funktioniert auch bei der Schnittmenge}
+			\item{A\textbackslash (B\cap C)=(A\textbackslash B)\cup (A\textbackslash C)}
+			\item{A\textbackslash (B\cup C)=(A\textbackslash B)\cap (A\textbackslash C)}
+		\end{itemize}
+		\item{Weitere Rechengesetze}
+		\begin{itemize}
+			\item{}
+		\end{itemize}
+	\end{itemize}
+	\section{Zahlenmengen}
+	Zahlenmengen geben die Menge einer spezifischen Zahlenmenge an. Natürliche Zahlen stellen, beispielsweise, nur ganze positive Zahlen dar. Jede dieser Mengen enthält die vorherige Menge komplett.
+	\subsection{Natürliche Zahlen - \texorpdfstring{$\N$}{}}
+	Die natürlichen Zahlen sind die kleinste Menge und beinhalten nur die ganzen positiven Zahlen. Eine Erweiterung dessen ist $\N_0$, was auch die Null beinhaltet. Die Natürlichen Zahlen sind eine unendliche Menge, wodurch es keine größte Zahl gibt. Daher gibt es zu jeder natürlichen Zahl eine größere Zahl. Jedoch sind sie nach unten begrenzt und somit sind entweder 1 oder 0 die kleinsten Zahlen. Natürliche Zahlen sind geordnet, also gibt es zu jeder Zahl einen eindeutigen Nachfolger. \\
+	In den natürlichen Zahlen sind Addition und Miltiplikation uneingeschränkt möglich, also kann man zwei Zahlen aus den natürlichen Zahlen nehmen, diese addieren oder multiplizieren und bekommt stets eine weitere natürliche zahl.
+	\subsection{Ganzen Zahlen - \texorpdfstring{$\Z$}{}}
+	Die ganzen Zahlen sind alle natürlichen Zahlen inklusive der negativen Zahlen. Die Menge ist wieder unbeschränkt, jedoch nach oben und nach unten, also geht die Menge von negativ unendlich bis positiv unendlich. \\
+	Ganze Zahlen haben nun zwei eindeutige Nachbarn, jeweils eine größere und eine kleinere Zahl. Bei den natürlichen Zahlen gab es nur eine eindeutige größere Zahl. \\
+	Die Ordnungsrelation der ganzen Zahlen besagt, dass $\forall m, n \in \Z : m<n \iff -m > -n$, also sind, wenn eine Zahl größer ist als die andere, die negativen Äquivalente davon auch größer als die andere. \\
+	Hier sind nun Division, Addition und Multiplikation uneingeschränkt möglich, also kann man jede ganze Zahl von jeder anderen Zahl addieren, multiplizieren oder subtrahieren und erhält eine weitere ganze Zahl.
+	\subsection{Rationale Zahlen - \texorpdfstring{$\Q$}{}}
+	Zur Verwendung von Division benötigt man die rationalen Zahlen. Diese sind definiert als alle möglichen Brüche $\frac{p}{q}$, wobei$p,q \in \Z und q \neq 0$. Hier kann man alle Grundrechnungsarten verwenden.
+	\subsubsection{Rechenregeln rationaler Zahlen}
+	\begin{itemize}
+		\item{Gleichheit:}
+		\begin{itemize}
+			\item{$\frac{p_1}{q_1}$ = $\frac{p_2}{q_2} \iff p_1q_2 = p_2q_1$}
+		\end{itemize}
+		\item{Addition}
+		\begin{itemize}
+			\item{$\frac{p_1}{q1}$ + $\frac{p_2}{q2}$ = $\frac{p_1q_2+p_2q_1}{q_1q_2}$}
+		\end{itemize}
+		\item{Potenzen}
+		\begin{itemize}
+			\item{$a^n = a*a*a*a*...*a$}
+			\item{Bei negativen Potenzen, wenn $a \neq 0: a^{-n} = \frac{1}{a^n}$}
+		\end{itemize}
+	\end{itemize}
+	Wenn man einen rationalen Exponenten hat, muss die Basis größer gleich 0 sein, also ist die Rechnung $-2^1,7$ nicht definiert. Gleichzeitig muss die Basis größer als 0 sein, wenn der Exponent einen rationale negative Zahl ist.
+	\subsubsection{Beweis}
+	Dass nicht alle Zahlen mithilfe von rationalen Zahlen dargestellt werden können, kann man mithilfe eines indirekten Beweises belegen. \hyperref[sec:Mathematische Beweise]{\underline{Siehe Beweise}} \\ 
+	Der Satz von Euklid besagt, dass es keine rationale Zahl gibt, mit der man $\sqrt{2}$ darstellen kann. Das wird mittels eines indirekten Beweises bewiesen. Dabei wird durch Widerspruch der Verneinung bewiesen, dass die Aussage falsch ist. Also behauptet man zuerst, dass die Annahme falsch ist und beweist danach, dass das zu einem Widerspruch führt. \\
+	Die Aussage ist, dass es keine rationale Zahl zur Darstellung von $\sqrt{2}$ gibt: $(\frac{p}{q})^2 = 2$. Dabei dürfen p und q nicht beide gerade Zahlen sein, sonst könnte man sie so weit kürzen, dass diese keine geraden Zahlen mehr sind. \\
+	$\frac{p^2}{q^2} = 2$ $\to$ Klammer auflösen |$q^2$ \\
+	$p^2 = 2q^2$ $\to$ p ist gerade, da das Quadrat durch 2 teilbar ist. Daher ist eine Zahl durch 2 teilbar, wenn das Quadrat durch 2 teilbar ist. \\
+	Aus diesem Grund kann man angeben, dass $p = 2*p_0$ und wenn man dies quadriert erhält man $p^2 = 4*p_0^2$. Aus diesem Grund kann man angeben, dass $4*p_0^2 = 2q^2$. \\
+	Wenn man dies nun kürzt erhält man: $2p_0^2 = q^2$. Da wir wissen, dass p gerade ist, weil das Quadrat durch $q^2$ durch 2 teilbar ist, müssen wir nun annehmen, dass q auch gerade ist, da nun impliziert wird, dass beide Zahlen gerade sind. Jedoch wurde Anfangs definiert, dass beide Zahlen nicht gerade sein dürfen. Das ist ein Widerspruch und beweist, dass die ursprüngliche Aussage nicht wahr sein kann $\to$ q.e.d.
+	\subsection{Reelle Zahlen - \texorpdfstring{$\R$}{}}
+	Reelle Zahlen beinhalten alle Zahlen, jedoch auch irrationale Zahlen, welche unendliche, nicht periodische Dezimalbrüche haben. Diese Zahlen haben eine sich nicht feststellbare wiederholende Ziffernfolge. \\ 
+	Beispiele für reelle Zahlen sind: \\
+	$\sqrt{2}=1,41421356$ \\
+	$Eulersche Zahl\ e=2,718281828$ \\
+	$Kreiszahl\ \pi = 3,14159$
+	\subsubsection{Intervalle}
+	Intervalle sind eine andere Art der Mengenangabe: \\
+	$[a,b] = \{x\in \R | a \leq x \leq b\}$ - Abgeschlossenes Intervall $\to$ Ein Intervall von a bis b, inklusive a und b \\
+	$(a,b] = \{x \in \R | a < x \leq b \}$ - Halboffenes Intervall von a $\to$ Ein Intervall von a bis b, ohne a \\
+	$[a,b) = \{x\in \R | a \leq x < b \}$ - Halboffenes Intervall von b $\to$ Ein Intervall von a bis b, ohne b \\
+	$(a,b) = \{x \in \R | a < x < b \}$ - Geschlossenes Intervall - Ein Intervall von a bis b ohne a oder b \\
+	Intervalle haben immer eine unendliche Mächtigkeit, da diese immer Teil der reellen Zahlen sind.
+	\subsubsection{Schranken}
+	Schranken beschränken die Größe einer Menge. Die kleinste obere Schranke nennt man \textbf{Supremum}. Wenn dieses Teil der Menge ist, wird es \textbf{Maximum} genannt.\\
+	Das gleiche gilt für die unteren Schranken wobei man diese \textbf{Infimum} nennt. Wenn es Teil der Menge ist, nennt man sie \textbf{Minimum}. \\
+	Dabei gilt jedoch, dass falls die Schranke nicht Teil der Menge ist, ist das Maximum und Minimum nicht definiert, da man dann stets eine weitere Kommastelle hinzufügen kann.
+	\subsection{Komplexe Zahlen - \texorpdfstring{$\mathbb{C}$}{}}
+	Komplexe Zahlen erweitern reelle Zahlen um eine imaginäre Einheit \textit{i}. Diese Zahlen haben den Sonderfall, dass die imaginäre Einheit $i^2$ gleich -1 ergibt. Dadurch ergibt sich auch, dass \textit{i} die Wurzel von -1 hat. Jede imaginäre Zahl hat somit einen Realteil und Imaginärteil. Komplexe Zahlen werden in der Elektrotechnik und der Signalverarbeitung verwendet.
+	\section{Summen und Produkte}
+	\subsection{Summen}
+	Summen geben eine kontinuierliche Summierung einer Reihe an. \\
+	$\sum_k=1^na_k = a_1+a_2+a_3+...+a_n$ - Wobei k die Laufvariable ist, welche stets erhöht wird. 1 ist der Startwert oder die untere Grenze. n stellt den Endwert oder die obere Grenze dar. $a_k$ beschreibt dabei die Funktion, welche summiert wird. \\
+	Summenrechenregeln sind:
+	\begin{itemize}
+		\item{$\sum_{k=0}^{n}(a_k+b_k)=\sum_{k=0}^{n}a_k+\sum_{k=0}^{n}b_k$}
+		\begin{itemize}
+			\item{Man kann, wenn eine Addition innerhalb einer Summe vorhanden ist, diese in zwei separate Summen aufspalten.}
+		\end{itemize}
+		\item{$\sum_{k=0}^{n}c*a_k=c*\sum_k=0^na_k$}
+		\begin{itemize}
+			\item{Man kann, wenn eine Multiplikation innerhalb einer Summer vorhanden ist, die Multiplikation vor das Summensymbol stellen und sie so aufteilen.}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Produkte}
+	Das selbe Prinzip existiert auch bei kontinuierlicher Multiplikation: \\
+	$\prod_{k=1}^{n} a_k = a_1 * a_2 * a_3 * ... * a_n$ Wobei die gleichen Parameter wie bei der Summe bestehen.
+	\section{Mathematische Beweise}
+	\label{sec:Mathematische Beweise}
+	Da die Mathematik grundsätzlich aus Aussagen und Sätzen besteht, müssen diese auch bewiesen werden. Es gibt mehrere Beweisführungsarten:
+	\subsection{Direkter Beweis}
+	Der direkte Beweis stützt seine Aussage auf eine bereits bewiesene wahre Aussage. $v_1 \implies v_2 \implies ... \implies a$ ist wahr. \\
+	Ein Beispiel ist der Beweis, dass das Quadrat jeder geraden natürlichen Zahl auch gerade ist. Dabei beginnt man den Beweis indem man Definitionen am Anfang und Ende auflöst um danach die Lücken zu schließen:
+	\begin{enumerate}
+		\item{Behauptung: Wenn $x$ eine natürliche gerade Zahl ist, dann gilt: $x = 2y$}
+		\item{Erster Schritt wäre, davon das Quadrat zu bilden: $x^2 = (2y)^2 = 4y^2$}
+		\item{$x^2 = 4y^2 $\to$ 2(2y^2) $\to$ 2z$}
+		\item{Ende: $x^2 = 2z$}
+	\end{enumerate}
+	Ein weiteres Beispiel ist der Beweis, dass a+b halbe, stets mehr oder gleich viel ist, als die Wurzel von a mal b: \\
+	\begin{enumerate}
+		\item{$a,b \in\R; a \geq 0, b\geq 0: \frac{a+b}{2} \geq \sqrt{a*b}$}
+		\item{Behauptung: $\frac{a+b}{2} \geq \sqrt{a*b}$}
+		\item{Beweis: $(a-b)^2 \geq 0$ $\to$ Zweite binomische Formel.}
+		\item{$(a^2-2ab+b^2)\geq 0$ $\to$ Quadrat auflösen}
+		\item{$(a^2+2ab+b^2)\geq 4ab $\to$ 4ab$ addieren um die erste binomische Formel zu formen.}
+		\item{$(a+b)^2 \geq 4ab$ $\to$ Erste binomische Formel generieren.}
+		\item{$\frac{(a+b)^2}{4} \geq ab$ $\to$ Durch 4 dividieren}
+		\item{$\sqrt{\frac{(a+b)^2{4}}\geq \sqrt{ab}}$ $\to$ Wurzel ziehen}
+		\item{$\frac{a+b}{\sqrt{4}}\geq \sqrt{ab}$ $\to$ Wurzel beider Teile ziehen}
+		\item{$\frac{a+b}{2}\geq \sqrt{ab}$}
+	\end{enumerate}
+	\subsection{Indirekter Beweis}
+	Der indirekte Beweis behauptet stattdessen, dass die falsche Behauptung wahr ist, um danach zu beweisen, dass dessen Widerspruch bedeutet, dass die Behauptung wahr ist. \\
+	Beispiel: Keine ganze Zahl ist gerade und ungerade zugleich. \\
+	Die Verneinung dieser Behauptung ist, dass ein \textit{x} existiert, welches gerade und ungerade zugleich ist. \\
+	\begin{itemize}
+		\item{Wenn \textit{x} gerade ist, gibt es eine Zahl \textit{a}, sodass $x=2a$}
+		\item{Wenn \textit{x} ungerade ist, gibt es eine Zahl \textit{b}, sodass $x=2b+1$}
+	\end{itemize}
+	Da \textit{x} gerade und ungerade zugleich ist, sind beide dieser Behauptungen wahr und man kann diese gleichsetzen: \\
+	$2a = 2b + 1$ \\
+	Dividiert man beide Seiten durch 2, so ergibt sich $a = b + \frac{1}{2}$ und bei weiterer Umformung $ a - b = \frac{1}{2}$\\
+	Da a und b ganze Zahlen sind, sollte die Subtraktion dessen zu einer weiteren ganzen Zahl und nicht zu einer rationalen Zahl führen.
+	\paragraphlb{Beispiel:}
+	Vorraussetzungen: \\
+	$a,b \in\R, a\geq0, b\geq0$ \\
+	$(a-b)^2\geq 0\ \forall a,b\in\R$ \\
+	Behauptung: $\frac{a+b}{2} \geq \sqrt{a*b}$
+	\begin{enumerate}
+		\item{Verneinung der Behauptung: $\frac{a+b}{2} < \sqrt{a*b}$}
+		\item{$a+b < 2*\sqrt{a*b}$ $\to$ Multiplikation mit 2}
+		\item{$(a+b)^2 < 4*ab$ $\to$ Quadrierung}
+		\item{$a^2+2ab+b^2<4ab$ $\to$ Erste binomische Formel}
+		\item{$a^2-2ab+b^2 < 0$ $\to$ -4ab}
+		\item{$(a-b)^2 < 0$ $\to$ Zweite Binomische Formel}
+		\item{Da festgehalten wurde, dass $(a-b)^2$ stets größer oder gleich als null ist, haben wir einen Widerspruch.}
+	\end{enumerate}
+	\subsection{Gegenbeispiele:}
+	Bei Gegenbeispielen muss man keine Beweisführung aufbauen sondern lediglich mit Gegenbeispielen beweisen, dass die Aussage falsch ist. Das ist möglich in Fällen, in welchen ein Beispiel, welches der Regel nicht entspricht, dieses widerlegt.
+	\paragraphlb{Beispiel:}
+	Behauptung: $3x+7<12$ gilt für alle $x\in\N_0$. \\
+	Beweis: \\
+	x = 0 $\to$ $3*0+7<12$ $\to$ Wahr \\
+	x = 1 $\to$ $3*1+7<12$ $\to$ Wahr \\
+	x = 2 $\to$ $3*2+7<12$ $\to$ Falsch \\
+	Deshalb gilt die Ungleichung nicht für alle $x\in \N_0$
+	\subsection{Vollständige Induktion}
+	Bei der vollständigen Induktion wird bewiesen, dass eine Aussage für alle natürlichen Zahlen wahr ist. Da man es nie manuell für alle natürlichen Zahlen beweisen kann, muss man stattdessen beweisen, dass es für eine Zahl gilt und auch für dessen Nachfolger.
+	\paragraphlb{Beispiel:}
+	Zeigen Sie, dass $3^{2n+4}-2^{n-1}$ durch 7 teilbar ist. Dabei muss man zuerst den Anfang definieren, welcher normalerweise die kleinste mögliche Zahl ist: \\
+	\begin{enumerate}
+		\item{Anfang: $n_0=1: 3^{2*1+4}-2^{1-1}=728$\to$ 7*104$}
+		\item{Vorraussetzung: $n\in\N: 3^{2n+4}-2^{n-1}=7*p, p\in\N$. p nimmt hierbei das Ergebnis ein, welches durch 7 teilbar ist.}
+		\item{Behauptung: $3^{2(n+1)+4}-2^{(n+1)-1} = 7*m, m\in\N$. Da der nächste Wert ein anderer sein wird, nimmt das Ergebnis auch eine neue Variable an.}
+		\item{Beweis: $3^{2(n+1)+4}-2^{(n+1)-1}$}
+		\item{$3^{2n+2+4}-2{n}\ $\to$ 3^{2n+4+2}-2^n$}
+		\item{$3^{2n+4}*3^2-2^n$}
+		\item{$3^{2n+4}*9-2^n$}
+		\item{Nebenrechnung: Umformung der Vorraussetzung: $3^{2n+4}-2^{n-1} = 7p $\to$ 3^{2n+4} = 7p+2^{n-1}$. Da dieser Term der gleiche wie der in der Beweislage ist, kann man diesen ersetzen.}
+		\item{$(7p+2^{n-1})*9-2^n$}
+		\item{$7*9p+9*2^{n-1}-2^n$ $\to$ Herausmultiplizieren}
+		\item{$7*9p+(9-2)*2^{n-1}$ $\to$ $2^{n-1}$ herausheben da $2^{n-1}*2^1 = 2^n$}
+		\item{$7*9p + 7*2^{n-1}$}
+		\item{$7(9p+2^{n-1})$ $\to$ Herausheben von 7, da es Teil von beiden Werten ist.}
+		\item{Da sowohl p als auch n Teil der natürlichen Zahlen sind, bedeutet das, dass dieser Term gleichbedeutend mit $7*m$ ist.}
+	\end{enumerate}
+	\paragraphlb{$\sum^n_{k=1}{k}=\frac{n(n+1)}{2}$}
+	Zeigen Sie, dass die Summer aller natürlichen Zahlen $\sum^n_{k=1}{k}$ gleich $\frac{n(n+1)}{2}$ ist. \\
+	1. Induktionsanfang: n=1 $\sum^{1}_{k=1}{k} = 1$ $\to$ $\frac{1(1+1)}{2} = 1$ \\
+	Grundlegend wurde festgestellt, dass für das kleinstmögliche n (In diesem Fall 1) die Aussage wahr ist. \\
+	2. Induktionsvorraussetzung: $n\in \N:\sum^{n}_{k=1}{k}=\frac{n(n+1)}{2}$ \\
+	3. Behauptung: $\sum^{n+1}_{k=1}{k}=\frac{(n+1)((n+1)+1)}{2}=\frac{(n+1)(n+2)}{2}=\frac{n^2+3n+2}{2}$ \\
+	Nun wurde jedes n durch ein ein n+1 ersetzt und vereinfacht. \\
+	4. Beweis: $\sum^{n+1}_{k=1}{k}=\sum^{n}_{k=1}{k}$ $\to$ Wir stützen uns auf die frühere Summe, müssen diese jedoch um 1 erhöhen: \\
+	$\sum^{n+1}_{k=1}{k}=\sum^{n}_{k=1}{k+(n+1)}$ $\to$ Also muss, um die Formel gleichzusetzen jeweils das n um 1 erhöht hinzugefügt werden. \\
+	Jetzt kann man erneut die anfängliche Behauptung aufstellen: $\sum^{n}_{k=1}{k+(n+1)} = \frac{n(n+1)}{2}+(n+1)$ \\
+	Nun sollte das n+1 des rechten Terms in den Bruch integriert werden. Dazu muss man, da der Bruch durch 2 geteilt wird, diesen auch mit 2 multiplizieren $\to$ $\frac{n(n+1)+2(n+1)}{2}=\frac{n^2+n+2n+2}{2}=\frac{n^2+3n+2}{2}$
+	\paragraphlb{$\sum^{n}_{i=1}{\frac{1}{(3i-2)(ei+1)}}=\frac{n}{3n+1}$}
+	1. Anfang: n=1 $\sum^{n}_{i=1}{\frac{1}{(3i-2)(ei+1)}}=\frac{1}{3*1-2}{3*1+1}=\nicefrac{1}{4}$ - $\frac{1}{3*1+1}=\nicefrac{1}{4}$ \\
+	2. Vorraussetzung: $n\in\N:\sum^{n}_{i=1}{\frac{1}{(3i-2)(3i+1)}}=\frac{n}{3n+1}$ \\
+	3. Behauptung: $\sum^{n+1}_{i=1}{\frac{1}{(3i-2)(3i+1)}}=\frac{n+1}{3(n+1)+1}=\frac{n+1}{3n+4}$ \\
+	4. Beweis: $\sum^{n+1}_{i=1}{\frac{1}{(3i-2)(3i+1)}}=\sum^{n}_{i=1}{\frac{1}{(3i-2)(3i+1)}}+\frac{1}{(3(n+1)-2)(3(n+1)+1)}$ $\to$ Da der Term innerhalb der Summe steht, muss man den gesamten Term duplizieren um ihn so mit dem linken Term gleichzusetzen. \\
+	$\sum^{n}_{i=1}{\frac{1}{3i-2)(3i+1)}}+\frac{1}{(3n+3-2)(3n+3+1)} = \frac{n}{3n+1}+\frac{1}{(3n+1)(3n+4)} = \frac{n(3n+4)+1}{(3n+1)(3n+4)}=\frac{3n^2+4n+1}{(3n+1)(3n+4)}$\\
+	Da in dem rechten Term der Behauptung unter dem Bruch ein 3n+4 steht, sollte man versuchen es dorthin zu vereinfachen. Dazu muss man jedoch die Polynomfunktion auflösen. Dafür gibt es drei Strategien:
+	\begin{itemize}
+		\item{Polynomdivision - Verringerung des Polynoms um einen Faktor}
+		\item{Polynomfaktorisierung - Linerafaktorzerlegung durch Einfügen der kleinen Formel.}
+		\begin{itemize}
+			\item{$3n^2+4n+1 = 0$ $\to$ $n_{1,2}=\frac{-b\pm\sqrt{b^2-4ac}}{2a} = \frac{-4\pm\sqrt{4^2-4*3}}{2*3} = \frac{-4\pm2}{6} $\to$ n_1 = -1/n_2 $\to$ \nicefrac{1}{3}$}
+			\item{Man kann die Ergebnise dieser Formel anders darstellen um sie auszurechnen: $(n-n_1)(n-n_2)...(n-n_n)$}
+			\item{Also kann man das Ergebnis so aufschreiben: $3*(n+\nicefrac{1}{3})(n+1)=(3n+1)(n+1)$}
+		\end{itemize}
+		\item{Intuition - Ungefähr abschätzen in welche Faktoren es zu zerlegen ist un diese verwenden.}
+	\end{itemize}
+	Da man hoffentlich (3n+1) kürzen kann, um den gewünschten Bruch zu erreichen, kann man den ersten Term nun verwenden $\to$ $\frac{3n^2+4n+1}{(3n+1)}=\frac{(3n+1)(n+1)}{(3n+1)(3n+4)}$ $\to$ Man ersetzt das Ergebnis der Polynomfunktion durch das Ergebnis und erhält so eine kürzbare Formel $\to$ = $\frac{n+1}{3n+4}$
+	\paragraphlb{$2^n > n^2$ für alle $n \geq 5$}
+	1. Anfang: n=5: $2^5=32 > 5^2 = 25$ \\
+	2. Vorraussetzung: $n\in\N, n\geq 5:2^n>n^2$\\
+	3. Behauptung: $2^{n+1} > (n+1)^2=(n+1)(n+1) = n^2+2n+1$ \\
+	4. Beweis: $2^{n+1} = 2^n * 2^1 > n^2*2$ $\to$ Man will diese Formel nun der Behauptung gleichsetzen. Da es sich jedoch um eine Ungleichung handelt, muss man diese Verändern. Da wir eine Ungleichung haben, in welcher der rechte Term kleiner ist als der linke, bedeutet das, dass man jeweils den linken Term vergrößern oder den rechten Term verkleinern, ohne die Gültigkeit der Gleichung zu gefährden. \\
+	Da wir durch Einsetzen wissen, dass der Term zu groß ist, verkleinern wir den rechten Term um ihn hoffentlich anzupassen $\to$ $> n^2 + n^2 = n^2+n*n$. \\
+	Eines dieser ns kann man nun durch einen Wert ersetzen $\to$ $n^2+3*n = n^2+2n+n$ $\to$ Da man auch noch eine 1 benötigt, kann man für eines der ns jetzt noch durch 1 ersetzen um zu der gesuchten Formel zu kommen $\to$ $n^2+2n+1$ \\
+	Dieser Rechenvorgang ist möglich, weil man den Wert des kleineren Teils der Ungleichung beliebig verkleinern und den größeren Teil der Ungleichung beliebig vergrößern kann und die Ungleichung behält trotzdem ihre Gültigkeit. Man sollte jedoch bedenken, dass dieser Vorgang nur möglich ist, solange der ersetzte Wert kleiner oder gleich groß, als der kleinstmögliche Wert von n ist.
+	\paragraphlb{$2^n > n^3$ für alle $n \geq 10$}
+	1. Anfang: n=10 $2^10 = 1024 > 10^3 = 1000$ $\to$ Korrekt \\
+	2. Vorraussetzung: $n\in\N, n\geq10:2^n>n^3$ \\
+	3. Behauptung: $2^n+1>(n+1)^3 = (n+1)(n+1)(n+1)=n^3+3n^2+3n+1$ \\
+	4. Beweis: $2^{n+1}=2^n*2 > n^3*2$ $\to$ $n^3 + n^3 = n^3 + n*n^2$ $\to$ Man benötigt einige Terme um den richtigen zu konstruieren. Aus diesem Grund sollte man den Term n durch einen Wert, welcher garantiert kleiner als n ist, ersetzen (Also kleiner oder gleich 10) $\to$ $> n^3 +10n^2 = n^3+3n^2+3n^2+4n^2$ $\to$ $n^3+3n^2+3n*n+4n^2$ $\to$ $n^3+3n^2+3n+1$ $\to$ Im letzten Fall kann man den Term $4n^2$ durch 1 ersetzen, da, wenn n größer oder gleich 10 ist, ist es definitiv größer als 1.
+	\section{Teilbarkeit und Primzahlen}
+	Eine Zahl gilt als teilbar, wenn eine natürliche Zahl \textit{b} und eine andere natürliche Zahl \textit{a} durch $a=n*b$ darstellbar ist. Das kann man auch als $a|b$ darstellen. \\
+	Grundsätzlich ist jede Zahl durch 1 und sich selbst teilbar. Ein Teiler \textbf{ist immer positiv.} \\
+	Wenn man also die Zahl 15 nimmt, kann man dies durch $1*15 = 15$ und $15 = 3*5$ darstellbar. Dadurch sind die Teiler von 15, 1, 3, 5 und 15. Dasselbe gilt auch falls 15 negativ ist, also sind die Teiler von -15 auch 1, 3, 5 und 15.
+	\subsection{Primzahlen}
+	Eine Zahl ist eine Primzahl, wenn sie größer als 1 ist und nur durch 1 und sicht selbst teilbar ist. Zum Beispiel sind 2, 3, 5 und 7 Primzahlen. 4 ist hierbei keine Primzahl, da sie durch $2*2$ darstellbar ist.
+	\subsubsection{Primfaktorzerlegung}
+	Jede Zahl ist entweder eine Primzahl oder lässt sich als Produkt von Primzahlen darstellen. Diese Faktoren sind außer in der Reihenfolge eindeutig. Dabei nennt man diese Sequenz an Faktoren \textbf{Primfaktoren.} Beispiele von Primfaktorzerlegung sind:\\
+	$4=2*2$ \\
+	$30=2*3*5$ \\
+	Der Weg zur Ermittlung der Primfaktoren ist, eine Zahl durch jede Primzahl aufsteigend zu dividieren:\\
+	\begin{tabular}{ c | c }
+	 	30 & 2 \\
+	 	15 & 3 \\
+	 	5 & 5 \\
+	 	1 & 1 \\
+	 \end{tabular}  \\
+	 Hier wird zuerst durch 2 dividiert, das Ergebnis durch 3 geteilt und dessen Ergebnis wieder durch 5 geteilt. Da 1 keine Primzahl ist, wird es ausgelassen. Somit sind die Primfaktoren von 30, 2, 3 und 5.
+	 \subsection{Größter gemeinsamer Teiler (ggT)}
+	 Der größte gemeinsame Teiler zweier Zahlen ist der größte Wert, welcher durch beide Zahlen teilbar ist. Man kann den ggT ermitteln, indem man die Primfaktorzerlegung bei beiden Zahlen anwendet und den größten Primfaktor wählt.
+	 \subsection{Kleinstes gemeinsames Vielfaches (kgV)}
+	 Das kleinste gemeinsame Vielfache zweier Zahlen ist die kleinste Ganzzahl, welche mit zwei Zahlen multipliziert werden könnnen. Diese erhält man, indem man wiederum die Primfaktorzerlegung anwendet und jeden Primfaktor, welcher mindestens einmal vorkommt miteinander multipliziert.
+	 \subsection{Teilerfremde Zahlen}
+	 Zwei Zahlen gelten als teilerfremd, wenn sie keinen gemeinsamen Primfaktor haben. Man kann dies wiederum ermitteln indem man bei beiden Zahlen eine Primfaktorzerlegung anwendet und überprüft, ob sie mindestens einen Primfaktor gemeinsam haben.
+	 \subsection{Division mit Rest}
+	 Wenn zwei Zahlen nicht teilbar sind, dann bleibt ein Rest. Dies wird definiert durch $a=q*m+r mit 0\geq m$. Also stellt es eine Multiplikation mit einem hinzugefügten Wert dar. Die mathematischen Schreibweisen sind: \\
+	 $17\ mod\ 5$ und $17\ div\ 5$. div ist hierbei die Ganzzahldivision und hinterlässt keinen Rest.
+	 \subsubsection{Modulo bei negativen Zahlen}
+	 Laut Definition darf der Rest nicht kleiner als 0 sein. Falls a kleiner als 0 ist muss man m zum negativen Rest hinzuaddieren. Wenn man also $-17\ div\ 5=-3, -2\ Rest$ erhält, muss man 5 erneut zu dem Rest addieren, $-2+5=3$. Da dies jedoch zu einer inkorrekten Formel $-17=-3*5+3$ führen würde, muss man das Ergebnis um 1 erhöhen (bzw. verringern) $\to$ $-17=-4*5+3$. \\
+	 \section{Relationen}
+	 Relationen helfen die Beziehung zwischen zwei Objekten oder Mengen zu beschreiben. Diese können Personen, Gegenstände, Zahlen aber auch allgemeine Objekte sein. Eine mögliche Relation ist kleiner-als (<). Wenn man diese für natürliche Zahlen definiert, gibt es Zahlenpaare welche der Relation genügen. Zum Beispiel (2, 8) (Da 2 kleiner ist als 8). Jedoch gibt es auch Paare, welche nicht genügen wie (10, 3) (Da 10 größer ist als 3). \\
+	 Bei einer Relation kann man auch zwei Mengen in relation stellen. Wenn man zum Beispiel eine Menge von Städen (Berlin, Wien, Bern) und die Menge aller Länder Europas nimmt, wobei die Relation \verb|Stadt liegt in Land| besteht, dann gibt es genau drei Paare, da jede Stadt nur in einem Land sein kann. \\
+	 Eine Relation ist also eine Menge aus geordneten Paaren: $(x,y)\in\R\iff xRy$, auch geschrieben als a\sim b. Dabei gilt zusätzlich, dass eine Relation einer Menge, auch eine Teilmenge dessen kartesischen Produkts ist: $A\times A, R \subseteq A\times A$. \\
+	 Ein Unterschied zur mathematischen Funktion ist, dass ein Element aus einer Menge mehrmals aber auch gar nicht in einer Relation vorkommen kann. In einer Funktion kann ein x beispielsweise nur ein y haben. \\
+	 Wenn man zum Beispiel eine Menge aus Städten und Bundesländern hat, kann es passieren, dass zwei Städte im selben Bundesland liegen, aber auch, dass die Stadt in keinem der Bundesländer der Menge liegt.
+	 \subsection{Umkehrrelation}
+	 Die inverse Relation oder Umkehrrelation einer Relation $R$ schreibt man $R^{-1}$. Dabei wird die Reihenfolge aller geordneten Paare gebildet: $R=\{(1,5),(1,4),(1,3)\}$ und $R^{-1}=\{(5,1),(4,1),(3,1)\}$. Diese Umkehrung ist bei Zahlen relativ simpel. Falls die Relation jedoch eine Aussage wie \textit{A ist Kind von B} ist, dann ist die Umkehrrelation \textit{A ist Elternteil von B}. \\
+	 Beispiel: Kehren sie folgende Relation um:
+	 $R=\{(a,c),(b,a),(b,b),(b,c),(d,d)\}\ $\to$ R^{-1} = \{(c,a),(a,b),(b,b),(c,b),(d,d)\}$ \\
+	 \subsection{Verknüpfung von Relationen}
+	 Man kann aus Relationen auch neue Relationen bilden: $R\subseteq A\times B$ und $S\subseteq B\times C$. Die Verbindung zweier Relationen nennt man Verknüpfung. Eine solche Verknüpfung schreibt man $S°R$, was "S nach R" genannt wird. Dabei werden die Bezeichnungen der Mengen vertauscht. Also wird bei der Verknüpfung der Relationen R und S danach S°R geschrieben. Solche Verknüpfungen sind dadurch auch nicht kommutativ also gilt $S°R \neq R°S$. Ein Beispiel einer Verknüpfung sind die Relationen "ist-Mutter-von" und "ist-verheiratet-mit". Die Verknüpfung dieser Relationen würde danach "ist-Schwiegermutter-von" lauten. \\
+	 Ein weiteres Beispiel sind die Mengen: $A=\{1,2,3\}, B=\{a,b,c\}, C=\{x,y,z\}$. Die Relationen dieser Mengen sind: $R=\{(1,a),(2,b),(3,c)\}$ und $S=\{(a,x),(a,y),(b,z)\}$ $\to$ $S°R=\{(1,x),(1,y),(2,z)\}$ wobei es für (3,c) kein Paar gibt. Also wird stets ein Element aus beiden Relationen genommen. Dabei muss der linke Wert der ersten Relation mit der rechten der zweiten Relation übereinstimmen, oder umgekehrt. $\to$ $(a,c)$ und $(c,a)$ $\to$ $(a,a)$ 
+	 \subsection{Eigenschaften von Relationen}
+	 Relationen haben mehrere Eigenschaften:
+	 \begin{itemize}
+	 	\item{Reflexiv - $xRx$}
+	 	\begin{itemize}
+	 		\item{$\forall x\in A:(x,x)\in R$ $\to$ Für alle x der natürlichen Zahlen gilt, dass sie  in Relation zu sich selbst stehen.}
+	 		\item{Eine Relation ist genau dann relfexiv wenn alle Paare in Relation zu sich selbst stehen. Dabei könenn auch andere Paare vorkommen, solange jedes der Elemente innerhalb der Relation in Relation zu sich selbst steht.}
+	 	\end{itemize}
+	 	\item{Irreflexiv - $\neg (xRx)$}
+	 	\begin{itemize}
+	 		\item{$\forall x\in A:(x,x)\notin R$ $\to$ Für alle x der natürlichen Zahlen gilt, dass keines der Elemente in Relation zu sich selbst stehen.}
+	 		\item{Eine Relation ist dann irreflexiv wenn keines der Paare in Relation zu sich selbst stehen.}
+	 	\end{itemize}
+	 	\item{Identitätsrelation}
+	 	\begin{itemize}
+	 		\item{$I_A=\{(a,a)|a\in A\}$ $\to$ Eine striktere Reflexivität. Eine Relation ist eine Identitsärelation wenn alle Elemente der Relation nur in Relation zu sich selbst stehen. Dadurch ist eine Identitätsrelation auch gleichzeitig reflexiv.}
+	 	\end{itemize}
+	 \end{itemize}
+	 Wenn man also die Menge $A=\{1,2,3\}$ mit der Relation R auf A hat: \\
+	 $R=\{(1,3),(2,2),(3,2),(1,1),(3,3)\}$ $\to$ Reflexiv: Jedes der Mengenelemente hat eine Relation mit sich selbst.\\
+	 $R=\{(1,2),(1,3),(2,1)\}$ $\to$ Irreflexiv: Keines der Mengenelemente hat eine Relation mit sich selbst.\\
+	 $R=\{(1,3),(2,3),(3,3)\}$ $\to$ Weder noch: Eines der Mengenelemente hat eine Relation mit sich selbst, aber nicht alle.\\
+	 \begin{itemize}
+	 	\item{Symmetrisch - $xRy \implies yRx$}
+	 	\begin{itemize}
+	 		\item{$\forall x,y\in A:(x,y)\in R \implies (y,x)\in R$ $\to$ Es muss von jedem Paar auch ein gespiegeltes Paar vorkommen.}
+	 	\end{itemize}
+	 	\item{Asymmetrisch - $xRy \implies \neg (yRx)$}
+	 	\begin{itemize}
+	 		\item{$\forall x,y\in A:(x,y)\in R \implies\ (y,x) \notin R$ $\to$ Keines der Paare darf eine Spiegelung eines anderen Paares sein. Es kann dadurch kein Paar geben, welches in Relation zu sich selbst stehen z.B. (1,1)}
+	 	\end{itemize}
+	 	\item{Antisymmetrisch - $xRy \land yRx \implies x = y$}
+	 	\begin{itemize}
+	 		\item{$\forall x,y\in A:(x,y)\in R \land (y,x)\in R \implies\ x = y$ $\to$ Alle gespiegelten Paare haben die gleichen Werte. Sobald eines der Paare gespiegelt und ungleich ist, ist es nicht antisymmetrisch.}
+	 	\end{itemize}
+	 	\item{Relationen $\to$ Asymmetrisch/Antisymmetrisch}
+		\begin{itemize}
+	 		\item{Der Unterschied zwischen asymmetrisch und antisymmetrisch ist die asymmetrische Relation R: $R^{-1} \cap R = \{\}$ $\to$ Eine Relation ist asymmetrisch wenn die Umkehrrelation geschnitten mit der Relation R die leere Menge bildet.}
+	 		\item{Antisymmetrische Relation R: $R^{-1} \cap R \subseteq I_A$(Identitätsrelation) $\to$ Eine Relation ist antisymmetrisch wenn man die Umkehrrelation mit der Relation R schneidet und dadurch eine Identitätsrelation erhält.}
+	 		\item{$asymmetrisch \implies\ antisymmetrisch$ $\to$ Jede asymmetrische Relation ist auch gleichzeitig antisymmetrisch (aber nicht umgekehrt)}
+		\end{itemize}
+	 \end{itemize}
+	 Wenn man also wieder die Menge $A=\{1,2,3\}$ mit der Relation R auf A hat: \\
+	 $R=\{(1,1),(1,2),(2,1),(3,3)\}$ $\to$ Symmetrisch: Alle Paare haben ein gespiegeltes Gegenstück. \\
+	 $R=\{(1,2),(1,3),(2,3)\}$ $\to$ asymmetrisch und antisymmetrisch: Keines der Paare hat ein gespiegeltes Gegenstück wodurch auch alle gespiegelten Paare ein Gegenstück haben.
+	 \begin{itemize}
+	 	\item{Transitiv - $xRy \land yRz \implies xRz$}
+	 	\begin{itemize}
+	 		\item{$\forall x,y,z\in A:(x,y)\in R \land (y,z)\in R \implies\ (x,z) \in R$ $\to$ Wenn es ein Paar (x,y) und ein anderes Paar (y,z) gibt, dann muss es auch ein (x,z) Paar geben.}
+	 	\end{itemize}
+	 \end{itemize}
+	 Beispiele: \\
+	 4b): $A=\{a,b,c\}$ $\to$ Bildet eine reflexive, nicht symmetrische und nicht transitive Relation. \\
+	 $R=\{(a,a),(b,b),(c,c),(c,b),(b,a)\}$ $\to$ Es ist reflexiv, weil es (a,a) bis (c,c) enthält. Es ist nicht mehr symmetrisch weil es (c,b) aber nicht (b,c) enthält. Es ist nicht transitiv, weil es (c,b) und (b,a) aber nicht (c,a) enthält. \\ \\
+	 4c): $A=\{a,b,c\}$ $\to$ Bildet eine nicht reflexive, symmetrische und nicht transitive Relation. \\
+	 $R=\{(a,b),(b,a)\}$ $\to$ Es ist nicht reflexiv, weil es (a,a) bis (c,c) nicht enthält. Es ist symmetrisch weil es zu (a,b) ein (b,a) gibt. Es ist nicht transitiv, weil für (a,b) und (b,a) ein (a,a) folgen müsste. (Da das (a,b) das x und y einnehmen und das (b,a) das y und z.) \\
+
+	 Beispiel: \\
+	 a+3b ist ein Vielfaches von 4 $\to$ R ist symmetrisch, weil b+3a ein Vielfaches von 4 ist. Diese Behauptung gilt es nun zu beweisen: \\
+	 Vorraussetzung: $a+3b=4n$ \\
+	 Behauptung: $b+3a=4m$ \\
+	 Beweis: $b+3a=3a+9b-8b$ $\to$ Da in der Vorraussetzung 3b steht, muss man versuchen, auch hier auf ein vielfaches von 3b zu kommen. \\
+	 $=3a+9b-8$ $\to$ Die Terme werden mit 3 multipliziert, und ein -8b hinzugefügt, damit das Vielfache von 3b erhalten bleibt. \\
+	 $=3(a+3b)-8b$ $\to$ 3 wird aus dem Term herausgezogen \\
+	 $=3(4n)-8b$ $\to$ Da a+3b laut der Vorraussetzung 4n ist, kann man diese Terme austauschen. \\
+	 $=4*3n-8b$ $\to$ Die 3 wird in die Klammer multipliziert \\
+	 $=4(3n-2b)$ $\to$ 4 wird  aus dem Term herausgezogen. Da laut Definition n eine ganze und b eine natürliche Zahl sind, kann man annehmen, dass (3n-2b) eine ganze Zahl ist, was die Vorraussetzung erfüllt.
+	 \subsection{Äquivalenzrelation}
+	 Eine Relation R auf einer Menge A ist eine Äquivalenzrelation, wenn sie sowohl \textbf{reflexiv} als auch \textbf{symmetrisch} und \textbf{transitiv} ist. Ein Beispiel einer solchen Äquivalenzrelation ist die Relation \verb|a ist gleich groß wie b|. \\
+	 \subsubsection{Äquivalenzklassen}
+	 Eine Äquivalenzklasse von a ist die Menge [a] = $\{x\in A|aRx\}$. Eine Äquivalenzklasse ist die Menge aller Elemente die in einer Äquivalenzrelation in Relation zu sich selbst stehen. Also würde man in einer Äquivalenzrelation, in welcher alle Menschen mit der gleicehn Körpergröße in Relation stehen, jede spezifische Größe eine Äquivalenzklasse bilden. Dadurch sind einzelne Äquivalenzklassen disjunkt zueinander. Die Vereinigung aller Äquivalenzklassen ist wiederum die Menge.
+	 \subsection{Partition}
+	 Eine Partition einer Menge ist die Aufteilung in disjunkte Teilmengne deren Vereinigung wieder A ergibt. Äquivalenzrelationen bieten auch durch Äquivalenzklassen eine Partition von A. \\
+	 Wenn man also alle Partitionen von \{1, 2, 3\} finden will, muss man zuerst die Menge der Partitionen bestimmen. Diese Relation hat 5 Partitionen: \{1, 2, 3\}, \{\{1\},\{2, 3\}\}, \{\{2\}, \{1, 3\}\}, \{\{3\}, \{1, 2\}\},
+	 \section{Funktionen}
+	 Im Gegensatz zu Relationen, kann man bei Funktionen für einen \textit{x} Wert nur einen \textit{y} Wert haben. Bei Relationen kann es für einen \textit{x} Wert mehrere \textit{y} Werte geben. \\
+	 Die Definition einer Funktion ist, dass die Funktion \textit{f} von einer Menge D jedem Element $x\in D$ \textbf{genau ein Element} $f(x)\in M$ zuordnet. Die formale Definition ist: $f:D \rightarrow M, x \rightarrow f(x)$. \\
+	 Dabei ist f(x) das Bild oder der Funktionswert von x, D der Definitionsbereich oder Domain von \textit{f}, M der Wertebereich und $f(D)=\{f(x)|x\in D\}$ als die Bildmenge. Der Wertebereich und die Bildmenge können die selben sein, müssen jedoch nicht.
+	 Der Definitionsbereich ist die Menge der x Werte, welche von der Funktion behandelt werden. $\to$ $D=\{x_0, x_1, x_2\}$ \\
+	 Der Wertebereich ist die Menge der möglichen Werte. Dabei müssen nicht alle Werte getroffen werden und manche Werte können mehrmals getroffen werden. $\to$ $M=\{y_0,y_1,y_2,y_3\}$ \\
+	 Die Bildmenge ist die Menge der tatsächlich in der Funktion getroffenen Werte. $\to$ $B=\{y_1, y_3\}$ \\
+	 Beispiel: Abbildung $f:\N \rightarrow \N, f(n)=n^2$ $\to$ Die Funktion orndet jeder natürlichen Zahl ihr Quadrat zu. \\
+	 Der Definitionsbereich sind die natürlichen Zahlen $D=\N$ und der Wertebereich sind auch die natürlichen Zahlen $M=\N$. Die Bildmenge hat jedoch nur einen Bruchteil der natürlichen Werte: $f(D)=\{1,4,9,16,...\}$. \\
+	 Der ASCII Code ist eine Funktion, da sie jeder Zahl ein Zeichen zuordnet, wobei jeder Zahl genau ein Zeichen zugeordnet wird. \\
+	 Die Angabe der Stattsbürgerschaft ist hingegen eine Relation, da jede Person mehrere Staatsbürgerschaften gleichzeitig hat.
+	 \subsection{Eigenschaften}
+	 Funktionen besitzen einige Eigenschaften:
+	 \begin{itemize}
+	 	\item{Injektiv}
+	 	\begin{itemize}
+	 		\item{$f(x1) = f(x2) \implies x1 = x2$ oder wenn $x1 \ne x2 \implies f(x1)\ne f(x2)$ $\to$ Eine Funktion gilt als injektiv, wenn es keine zwei unterschiedlichen x Werte gibt, welche zu dem gleichen y Wert zeigen.}
+	 	\end{itemize}
+	 	\item{Surjektiv}
+	 	\begin{itemize}
+	 		\item{$f(D) = M$ $\to$ Jedes Element von M ist das Bild eines Elements aus D}
+	 	\end{itemize}
+	 	\item{Bijektiv}
+	 	\begin{itemize}
+	 		\item{Eine Funktion, welche gleichzeitig injektiv, als auch surjektiv ist, gilt als bijektiv.}
+	 	\end{itemize}
+	 \end{itemize}
+	 \subsection{Verknüpfungen}
+	 Man kann Funktionen verknüpfen, vorrausgesetzt sie haben den selben Definitionsbereich D. Dann kann man diese addieren und subtrahieren sowie multiplizieren und dividieren. Bei der Division muss man jedoch aufpassen dass die Funktion im Divisor nie 0 ergeben kann.
+	 \begin{itemize}
+	 	\item{$f(x) = 2x^2, g(x)=4x+3$}
+	 	\item{Addition}
+	 	\begin{itemize}
+	 		\item{$(f+g)(x)=2x^2+4x+3$}
+	 	\end{itemize}
+	 	\item{Subtraktion}
+	 	\begin{itemize}
+	 		\item{$(f-g)(x)=2x^2-(4x+3)=2x^2-4x-3$}
+	 	\end{itemize}
+	 	\item{Multiplikation}
+	 	\begin{itemize}
+	 		\item{$(f*g)(x)=2x^2*(4x+3)=8x^3+6x^2$}
+	 	\end{itemize}
+	 	\item{Division}
+	 	\begin{itemize}
+	 		\item{$\frac{f}{g}(x)=\frac{2x^2}{4x+3}$}
+	 	\end{itemize}
+	 \end{itemize}
+	 Wenn der Wertebereich einer Funktion der Definitionsbereich einer anderen Funktion ist: $f:A \rightarrow B$ und $ g:B\rightarrow C$, dann kann man diese miteinander kombinieren: $g^\circ f:A\rightarrow C$ $\to$ $(g\circ f)(x) = g(f(x))$. \\
+	 Beispiel: \\
+	 $a(x)=2x-1, b(x)=\frac{1}{x^3}$ \\
+	 $(g^\circ f)(x)=g(f(x))=g(2x-1)=\frac{1}{(2x-1)^3}=\frac{1}{8x^3-12x^2+6x-1}$ \\ \\
+	 $f(x)=2^x, g(x)=x^2+2^{2x}$ \\
+	 $(g^\circ f)(x)=g(f(x))=g(2^x)=(2^x)^2+2^{2^1*(2^x)}=2^{2x}+2^{2^{x+1}}$ \\
+	 $(f^\circ g)(x)=f(g(x))=f(x^2+2^{2x})=2^{x^2+2^{2x}}$ \\
+	 \subsection{Umkehrfunktion}
+	 Die Umkehrfunktion ist, ähnlich zur Umkehrrelation, das Gegenteil zu einer normalen Funktion. Wenn eine Funktion also von x das y darstellt, würde dessen Umkehrfunktion stattdessen von y das x darstellen. \\
+	 Damit eine Funktion eine Umkehrfunktion haben kann, muss sie bijektiv sein. Der Grund dafür ist, dass bei einer surjektiven Funktion jeder Wert getroffen werden muss, da die Umkehrfunktion davon sonst nicht die Vorraussetzung, dass jedes x einem y Wert zugeordnet sein muss, erfüllen würde. Gleiches gilt bei der Injektivität, da dessen Umkehrfunktion sonst zwei x einem y zuordnen würden. \\
+	 Die Definition ist: $f^{-1}:M \rightarrow D,y \rightarrow f^{-1}(y)=x$. Zusätzlich gilt, dass wenn man eine Funktion mit dessen Umkehrfunktion verbindet: $f\circ $ \\
+	 Eine Umkehrfunktion bestimmt man mittels: \\
+	 $f(x)=x+1$ $\to$ x bestimmen \\
+	 $y=x+1$ \\
+	 $y-1=x$ $\to$ x und y vertauschen \\
+	 $y=x-1$ \\
+	 $f^{-1}(x)=x-1$ \\
+	 $(f^{-1}\circ f)(x)=f^{-1}(f(x))=f^{-1}(x+1)=x$ \\
+	 Beispiel: \\
+	 Bestimmen Sie die Umkehrfunktion $f^{-1}$ für folgende Funktionen f: \\
+	 a) $f(x)=4x+3$ \\
+	 $y=4x+4$ \\
+	 $4x=y-3$ \\
+	 $x=\frac{y-1}{4}$ \\
+	 $y=\frac{x-1}{4}$ $\to$ $f^{-1}(x)=\frac{x-1}{4}$ \\
+	Wenn eine Funktion \textbf{nicht} bijektiv ist (Zum Beispiel $f(x)=x^2$) bedeutet das auch, dass es davon keine Umkehrfunktion gibt. Es gibt jedoch Möglichkeiten diese bijektiv und dadurch umkehrbar zu machen. \\
+	Dafür muss man zuerst die Definitions- und Wertemenge finden: $D=\R, M=R^+_0$. Da man bei der Bildung der Umkehrfunktion hier eine Funktion erhalten würde, welche jeweils von zwei x auf ein y führen würde (Da das Quadrat einer negativen Zahl auch die Zahl liefert.). Dies kann man umgehen indem man den Definitionswert der Funktion so ändert, dass die Funktion bijektiv wird. Wenn man dieser Funktion $f(x)=x^2$ also den negativen und positiven reelen Zahlenbereich jeweils als Definitionsmenge angeben würde, könnte man davon die Umkehrfunktion berechnen: \\
+	1.Fall: $f(x)=x^2, D=\R^-, M=\R^+ \implies f^{-1}(x)=-\sqrt{x}, D=\R^+, M=\R^-$ \\
+	2.Fall: $f(x)=x^2, D=\R^{+}_{0}, M=\R^{+}_{0} \implies f^{-1}(x)=+\sqrt{x}, D=\R^+, M=\R^+$ \\
+	Also wird die Wertemenge und die Definitionsmenge vertauscht. Ein Funktion bildet von dem Definitionsbereich in den Wertebereich, während dessen Umkehrfunktion von dem Wertebereich der ursprünglichen Funktion in dessen Definitionsbereich bildet. (D$\to$M, M$\to$D)
+	\subsection{Monotonie}
+	Monotonie bei Funktionen beschreibt, ob Werte in einer Funktion fallen, steigen oder gleich bleiben:
+	\begin{itemize}
+		\item{streng monoton wachsend}
+		\begin{itemize}
+			\item{$x1 < x2 \implies f(x1) < f(x2)$ für alle $x1, x2\in D$ $\to$ Wenn jeder x Wert, welcher größer ist als der vorherige, auch zu einem größeren y Wert führt, ist dieser streng monoton wachsend, und steigt immer an (Fällt nie und bleibt nie gleich)}
+		\end{itemize}
+		\item{streng monoton fallend}
+		\begin{itemize}
+			\item{$x1 > x2 \implies f(x1)>f(x2)$ für alle $x1,x2\in D$ $\to$ Gleich wie streng monoton wachsend, dabei ist jedoch jeder Wert kleiner und die Funktion fällt stets (Und wächst nie, oder bleibt nie gleich.)}
+		\end{itemize}
+		\item{Wenn die < und > dieser Definitionen durch $\leq$ und $\geq$ ersetzt werden, dann ist sie nicht \textbf{streng} wachsend/fallend. Diese Funktionen würde man dadurch als \textbf{monoton wachsend} oder \textbf{fallend} bezeichnen.}
+	\end{itemize}
+	\subsection{Spezielle Funktionen}
+	Manche Funktionen haben spezielle Eigenschaften:
+	\subsubsection{Polynomfunktion}
+	$p(x)=a_0+a_1x+a_2x^2+...+a_nx^n$ mit $a_j \in \R$ nennt man eine Polynom vom Grad n.\\
+	Ein Beispiel dafür ist: $f(x)=2x+1$, dieser ist ein Polynom ersten Grades, da die erste Potenz in x vorliegt. \\
+	$g(x)=\frac{1}{2}x^2-3x+2$ ist ein Polynom zweiten Grades (Weil $x^2$). \\
+	$h(x)=x^3$ stellt ein Polynom dritten Grades dar. Es ist trotzdem eine Polynomfunktion, da es der Formel gleicht, a jedoch 0 ist. \subsubsection{Potenzfunktion}
+	Eine Potenzfunktion ist eine Funktion wo x in der Basis der Potenz steckt: $f(x)=x^n$ mit $n\in \N$ $\to$ Potenzfunktion vom Grad n. \\
+	Für Potenzfunktionen gilt stets, dass diese streng monoton wachsend sind. 
+	\subsubsection{Exponentialsfunktion}
+	Ähnlich zur Potenzfunktion, hierbei ist x jedoch nicht in der Basis sondern im Exponenten: $f(x)=a^x$ mit $a>0$ mit $a\ne 1$ \\
+	Wenn a zwischen 0 und 1 ist, ist dieses streng monoton fallen (Da Exponenten kleiner 1 zu kleineren Zahlen führen) und wenn a größer als 1 ist, ist die Funktion streng monoton wachsend. \\
+	Spezialfall: $f(x)=e^x, f^{-1}(x)=log_e(x) = ln\ x$. Die Umkehrfunktion der eulerschen Zahl ist der natürliche logarithmus. Die eulersche Zahl ist eine konstante, welche über den limes bestimmt werden kann.
+	\subsection{Nullstellenbestimmung}
+	Bei der Nullstellenbestimmung gilt es herauszufinden, an welchen Stellen eine Funktion den Wert 0 annimmt: $f(x)=0$. Nullstellen eines polynoms zweiten Grades kann man mittels der kleinen (pq) oder großen(abc) Formel verwenden: $x^2+px+q=0 $\to$ x_{1,2}=-\frac{p}{2} \pm \sqrt{\frac{p^2}{4}-q}$ bzw. $ax^2+bx+c=0 $\to$ x_{1,2}=\frac{-b \pm \sqrt{b^2 -4ac}}{2a}$
+	\subsection{Polynomdivision}
+	Diese Formeln kann man verwenden, wenn die Polynomfunktion nur vom zweiten Grad ist. Für höhere Polynome werden stattdessen mit einer Polynomdivision gelöst. Das Verfahren ist dabei wie die 'Division von Zahlen mit Rest', dabei hat man jedoch statt Zahlen zwei Polynome und erhält somit die Nullstellen. Die Form ist: $\frac{p(x)}{q(x)}$. Der Vorgang ist:
+	\begin{itemize}
+		\item{Summanden mit der höchsten Potenz beider Funktionen dividieren}
+		\item{Ergebnis mit dem rechten Polynom multiplizieren}
+		\item{Dieses Polynom vom linken Polynom abziehen. (Achtung: Bei einem negativen Wert gleicht das einer Addition.)}
+		\item{Größtes Polynom des neuen Terms wieder mit dem größten Polynom des rechten Terms dividieren.}
+		\item{Wiederholen bis kein Rest bleibt oder keine weitere Division möglich ist. (Wenn der Exponent des rechten Terms größer ist als der des linken.)}
+	\end{itemize}
+	\newpage
+	Beispiel: \\
+	$\frac{4x^5-3x^4+2x^3+x^2-1}{x^2+1}$ $\to$ Polynome nebeneinander anschreiben. \\
+	\begin{tabular}{lllllllllllllll}
+		( & $\textcolor{red}{4x^5}$ & $-3x^4$ & $+2x^3$ & $+x^2$ & $+0x^1$ & $-1$ & ):( & $\textcolor{red}{x^2}$ & $+1$ & )= & $\textcolor{red}{4x^3}$ & \verb|-> Durch|& \verb|größte|& \verb|Polynome teilen|  \\ \midrule
+		$-$(& $4x^5$ & $+0x^4$ & $+4x^3$ & ) &&& \verb|->| & \verb|Mit| & \verb|jedem| & \verb|Wert| & \verb|im| & \verb|rechten| & \verb|Term| & \verb|multiplizieren.| \\
+		& \cancel{$4x^5$} & $-3x^4$ & $-2x^3$ & $+x^2$ &&&&&&\verb|->|&\verb|Durch|&\verb|linken|&\verb|Term|& \verb|subtrahieren| \\ \hline
+		( && \textcolor{red}{$-3x^4$} & $-2x^3$ & $+x^2$ & $+0x^1$ & $-1$ & ):( & \textcolor{red}{$x^2$} & $+1$ & )= & $4x^3$ & \textcolor{red}{$-3x^2$} & \verb|->| & \verb|Wiederholen| \\
+		& $-$( & $-3x^4$ & $+0x^3$ & $-3x^2$ & ) &&&&&&&&& \\
+		&& \cancel{$-3x^2$} & $-2x^3$ & $+4x^2$ & $+0x^1$ & $-1$ &&&&&&&& \\ \hline
+		( &&& $\textcolor{red}{-2x^3}$ & $+4x^2$ & $+0x^1$ & $-1$ & ):( & $\textcolor{red}{x^2}$ & $+1$ & )= & $4x^3$ & $-3x^2$ & $\textcolor{red}{-2x}$ & \\
+		&& $-($ & $-2x^3$ & $+0x^2$ & $-2x^1$ & $+0$ & ) &&&&&&& \\
+		&&& \cancel{$-2x^3$} & $+4x^2$ & $+2x^1$ & $-1$ &&&&&&&& \\ \hline
+		( &&&& $\textcolor{red}{+4x^2}$ & $+2x^1$ & $-1$ & ):( & $\textcolor{red}{x^2}$ & $+1$ & )= & $4x^3$ & $-3x^2$ & $-2x$ & $\textcolor{red}{+4}$ \\
+		&&&$-($& $+4x^2$ & $+0x^1$ & $+4$ & ) \\
+		&&&& \cancel{$+4x^2$} & $+2x$ & $-5$ && Rest\\ \midrule
+		( & $4x^5$ & $-3x^4$ & $+2x^3$ & $+x^2$ & $-1$ & ):( & $x^2$ & $+1$ & )= & $4x^3$ & $-3x^2$ & $-2x$ & $+4$ & +$\frac{2x-5}{x^2+1}$ \\ \bottomrule
+	\end{tabular} \\ \\
+	Da bei der Division ein Rest verblieben ist, wird dieser als Bruch an das Ende des Polynoms geschrieben.
+	\section{Folgen}
+	Eine Folge ist eigentlich eine Funktion in welcher Natürliche Zahlen die Reellen Zahlen abbilden: $a:\N \rightarrow\R, n \rightarrow a_n$, welche man auch als $a_1, a_2, a_3,...$ schreiben kann. \\
+	Das $a_n$ nennt man ein Glied in der Folge und $n$ den Index in der Folge. \\
+	Die Vorschrift zur Berechnung des n-ten Folgenglieds $a_n$ wird Bildungsgesetz genannt. \\
+	Ein explizites Bildungsgesetz berechnet ein Glied der Folge unabhängig anderer Glieder. \\
+	Ein rekursives Bildungsgesetz hingegen berechnet ein Glied der Folge immer mithilfe vorangehender Glieder.  \\
+	Eine Folge kann bei jeder natürlichen Zahl inklusive 0 beginnen. Meist ist der Startwert jedoch 0 oder 1. \\ 
+	Wenn der Startwert 0 ist, wird die Folge stattdessen mit $a:\N_0 \rightarrow\R, n \rightarrow a_n$ definiert. (Bildet natürliche Zahlen mit 0 auf die reellen Zahlen ab.) \\
+	Beispiel - Geben sie die ersten fünf Glieder folgender Folgen an: \\
+	a)\\
+	$a_n = n^2,\ n\in\N$ $\to$ Äquivalent zu $f(x)=x^2$, wobei x jedoch nur natürliche Zahlen annehmen kann.\\ 
+	Da jeder Wert der Folge unabhängig anderer Glieder berechnet wird, ist es ein explizites Bildungsgesetz. \\
+	\begin{tabular}{| l | l | l |}
+		\toprule
+		Folge & Formel & Ergebnis \\ \midrule
+		$a_1$ & --- & 1 \\
+		$a_2$ & $2^2$ & 4 \\
+		$a_3$ & $3^2$ & 9 \\
+		$a_4$ & $4^2$ & 16 \\
+		$a_5$ & $5^2$ & 25 \\
+		\bottomrule
+	\end{tabular}
+	$\to$ Ergibt die Folge 1, 4, 9, 16, 25. \vspace{2cm} \\ 
+	b) \\
+	$a_1=1, a_n=n+a_{n-1},\ n\in\N,\ n>1$ $\to$ Rekursives Bildungsgesetz da $a_{n-1}$ Teil des Bildungsgesetzes ist. Also wird das nächste Folgeglied durch Einbeziehen des Momentanen verwendet. \\
+	\begin{tabular}{| l | c | l | l |}
+		\toprule
+		Folge & Rekursive Formel & Formel & Ergebnis \\ \midrule
+		$a_1$ & --- & --- & 1 \\
+		$a_2$ & $2*a_{1}$ & $2*1$ & 2 \\
+		$a_3$ & $2*a_{2}$ & $3*2$ & 6 \\
+		$a_4$ & $2*a_{3}$ & $4*6$ & 24 \\
+		$a_5$ & $2*a_{4}$ & $5*24$ & 120 \\
+		\bottomrule
+	\end{tabular}
+	$\to$ Ergibt die Folge 1, 2, 6, 24, 120 \\ \\
+	Diese Folge kann man auch in expliziter Weise angeben angeben: $a_n=1*2*3*4*...*n = n!,\ N\in\N$ \\ \\
+	c) \\
+	$a_1=a_2=1,\ a_n=a_{n-1}+a_{n-2},\ n\in\N,\ n>2$ $\to$ Da jetzt die ersten beiden Glieder gegeben sind, muss man auch bei n=3 beginnen. \\
+	\begin{tabular}{| l | c | l | l |}
+		\toprule
+		Folge & Rekursive Formel & Formel & Ergebnis \\ \midrule
+		$a_1$ & --- & --- & 1 \\
+		$a_2$ & --- & --- & 1 \\
+		$a_3$ & $a_2+a_1$ & $1+1$ & 2 \\
+		$a_4$ & $a_3+a_2$ & $2+1$ & 3 \\
+		$a_5$ & $a_4+a_3$ & $2+3$ & 5 \\
+		\bottomrule
+	\end{tabular}
+	$\to$ Folge ergibt also 1, 1, 2, 3, 5. Dies ergibt die Fibonacci-Folge. \\ \\
+	Hierfür ist die explizite Angabe bedeutend komplexer, falls sie überhaupt existiert.
+	\subsection{Spezielle Folgen}
+	\subsubsection{Arithmetische Folge}
+	Eine Folge heißt \textbf{arithmetisch}, wenn zwischen zwei Folgegliederpaaren eine konstante Differenz besteht. Man kann diese enwteder rekursiv oder explizit angeben: $a_{n+1}=a_n+d$ / $a_n=a_1+(n - 1)*d$. Da die Differenz immer die gleiche ist, gilt: $a_2-a_1=a_3-a_2=a_4-a_3=...=d$. Ein Beispiel einer solchen Folge ist: 1, 3, 5, 7, 9, 11, 13, 15 $\to$ Die Differenz ist stets 2.
+	\subsubsection{Geometrische Folge}
+	Eine Folge heißt \textbf{geometrisch}, wenn das Verhältnis zwischen zwei Folgegliedern stets das gleiche ist. Man kann diese erneut entweder rekursiv oder explizit angeben: $a_{n+1}=a_n*q$ / $a_n=a_1*q^{n-1}$. Da das Verhältnis stets das selbe ist, gilt hier: $\frac{a_2}{a_1}=\frac{a_3}{a_2}=\frac{a_4}{a_3}=...=q$. Ein Beispiel einer solchen Folge ist 2, 4, 8, 16, 32. Wenn q kleiner als 1 ist, kann das eine Folge wie $1, \frac{1}{4}, \frac{1}{16}, \frac{1}{64}$ darstellen.
+	\subsubsection{Alternierende Folge}
+	Die alternierender Folge ist eine Folge, wo sich bei jedem Glied das Vorzeichen ändert: 2, -2, 2, -2, 2
+	\subsection{Teilfolge}
+	Eine Teilfolge ist eine Folge, welche Teil einer anderen Folge ist. Zum Beispiel ist die Folge \verb|1, 3, 5, 7, 9,...| als Folge der ungeraden natürlichen Zahlen eine Teilfolge der Folge \verb|1, 2, 3, 4, 5, 6, 7,...| aller natürlichen Zahlen.
+	\subsection{Beispiele - Folgen}
+	Finde Bildungsgesetze zu diesen Folgen:\\
+	a) \\
+	$1, \frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{16}$, ... $\to$ $a_1=1, a_n=a_{n-1}*\nicefrac{1}{2}=\frac{a_{n-1}}{2},\ n\in\N,\ n>1$ \\
+	\begin{tabular}{| c | c |}
+		\toprule
+		Rekursiv & Explizit \\ \midrule
+		$a_n=\frac{1}{2^{n-1}},\ n\in\N$ & $a_n=\frac{1}{2^{n-1}},\ n\in\N$ \\
+		& $a_n=\frac{1}{2^n},\ n\in\N_0$ \\
+		\bottomrule
+	\end{tabular} \\ \\
+	b) \\
+	$-2, 2, -2, 2, -2, 2, -2$, ... $\to$ $a_1=-2, a_n=a_{n-1}*(-1),\ n\in\N,\ n>1$ \\
+	\begin{tabular}{| c | c |}
+		\toprule
+		Rekursiv & Explizit \\ \midrule
+		$a_1=-2, a_n=a_{n-1}*(-1),\ n\in\N,\ n>1$ & $a_n=2*(-1)^n,\ n\in\N$ \\
+		\bottomrule
+	\end{tabular}
+	\subsection{Monotonie und Beschränktheit}
+	Gleich wie bei Funktionen können auch Folgen monotonisch sein.
+	\begin{itemize}
+		\item{streng monoton wachsend}
+		\begin{itemize}
+			\item{$\forall n:a_n<a_{n+1}$}
+			\item{Man kann dies überprüfen indem man:}
+			\begin{itemize}
+				\item{$a_n < a_{n+1}$}
+				\item{$a_n-a_{n+1}<0$}
+				\item{$\frac{a_n}{a_{n+1}}<1$ (Für $a_{n+1}>0)$}
+				\item{$\frac{a_n}{a_{n+1}}>1$ (Für $a_{n+1}<0)$}
+			\end{itemize}
+		\end{itemize}
+		\item{Das gleiche gilt bei streng monoton fallend, nur umgekehrt}
+		\begin{itemize}
+			\item{$\forall n:a_n>a_{n+1}$}
+			\item{Das kann man erneut überprüfen mit:}
+			\begin{itemize}
+				\item{$a_n > a_{n+1}$}
+				\item{$a_n-a_{n+1}>0$}
+				\item{$\frac{a_n}{a_{n+1}}>1$ (Für $a_{n+1}<0)$}
+				\item{$\frac{a_n}{a_{n+1}}<1$ (Für $a_{n+1}>0)$}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{}{Beispiele - Monotonie:}
+	Sind die Folgen (streng) monoton wachsend/fallend: \\
+	b) \\
+	\begin{tabular}{| c | c | c |}
+		\toprule
+		\multicolumn{3}{|c|}{$a_n=\frac{2n-5}{3n-1}$} \\ \hline
+		Folge & Formel & Ergebnis \\ \midrule
+		$a_1$ & $\frac{2-5}{3-1}$ & $\frac{-3}{2}$ \\
+		$a_2$ & $\frac{2*2-5}{3*2-1}$ & $\frac{-1}{5}$ \\
+		$a_3$ & $\frac{2*3-5}{3*3-1}$ & $\frac{1}{8}$ \\
+		$a_4$ & $\frac{2*4-5}{3*4-1}$ & $\frac{3}{11}$ \\
+		\bottomrule
+	\end{tabular}
+	$\to$ Vermutung: streng monoton wachsend. \\ \\
+	Nun muss man beweisen, dass $a_n<a_{n+1}$ $\to$ \\
+	$\frac{2n-5}{3n-1} < \frac{2*(n+1)-5}{3*(n+1)-1}$ $\to$ Kann man vereinfachen zu: $\frac{2n-5}{3n-1} < \frac{2n+2-5}{3n+3-1}$ $\to$ $\frac{2n-5}{3n-1} < \frac{2n-3}{3n+2}$ $\to$ Um die Klammern loszuwerden muss man nun beide Teile mit dem Nenner der anderen Seite multiplizieren. \\
+	$\frac{(2n-5)*(3n-1)*(3n+1)}{(3n-1)}<\frac{(2n-3)(3n-1)(3n+2)}{(3n+2}$ $\to$ Nun kann man bei beiden Seiten kürzen $\to$ 
+	$\frac{(2n-5)*(3n+1)*\cancel{(3n-1)}}{\cancel{(3n-1)}}<\frac{(2n-3)(3n-1)\cancel{(3n+2)}}{\cancel{(3n+2}}$ \\
+	$(2n-5)(3n+2)<(2n-3)(3n-1)$ $\to$ Vereinfachen zu $6n^2+4n-15n-10<6n^2-2n-9n+3$ weiter zu $-11n-10<-11n+3$ und schließlich zu $-10<+3$ $\to$ Wahre Aussage, daher bewiesen als streng monoton wachsend. \\
+	\paragraphlb{Fallunterscheidung}
+	Bei solchen Ungleichungen muss man jedoch beachten, dass das Ungleichheitszeichen sich bei einer Multiplikation mit einer negativen Zahl umkehrt $\to$ 5 > 3 |*(-1) $\to$ -5 < -3. Wenn man also bei solch einer Gleichung den Bruch entfernen will und deshalb mit dem Nenner multipliziert, muss man zuerst sicherstellen, dass dieser nicht negativ ist, da man sonst das Zeichen umkehren muss. Das kann man überprüfen indem man für n den kleinstmöglichen Wert einsetzt und nachsieht, ob das Ergebnis dann negativ wird. Dabei muss man dann zwischen drei Fällen unterscheiden:
+	\begin{itemize}
+		\item{Wenn einer der beiden Terme negativ ist, muss man das Zeichen umkehren.}
+		\item{Wenn beide Terme negativ sind, muss man nichts machen.}
+		\item{Wenn einer der Terme für mindestens ein n negativ ist, danach jedoch positiv wird, muss man eine Fallunterscheidung beginnen und jeweils einmal mit umgekehrtem und einmal mit nicht umgekehrtem Zeichen rechnen.}
+	\end{itemize}
+	c) \\
+	\begin{tabular}{| c | c | c |}
+		\toprule
+		\multicolumn{3}{|c|}{$a_n=\frac{3n-5}{3n-10}$} \\ \hline
+		Folge & Formel & Ergebnis \\ \midrule
+		$a_1$ & $\frac{3-5}{3-10}$ & $\frac{-2}{-7}=\frac{2}{7}$ \\
+		$a_2$ & $\frac{3*2-5}{3*2-10}$ & $\frac{1}{-4}$ \\
+		$a_3$ & $\frac{3*3-5}{3*3-10}$ & $\frac{4}{-1}=-4$ \\
+		$a_4$ & $\frac{3*4-5}{3*4-10}$ & $\frac{7}{2}$ \\
+		\bottomrule
+	\end{tabular}
+	$\to$ Folge ist weder monoton wachsend noch fallend, da $a_1 > a_2 \land a_3 < a_4$ \\
+	Weder wachsend noch fallend. \\
+	d) \\
+	\begin{tabular}{| c | c | c |}
+		\toprule
+		\multicolumn{3}{|c|}{$a_n=2n^2-6n+10$} \\ \hline
+		Folge & Formel & Ergebnis \\ \midrule
+		$a_1$ & $2-6+10$ & $6$ \\
+		$a_2$ & $2*2^2-6*2+10$ & $6$ \\
+		$a_3$ & $2*3^2-6*3+10$ & $10$ \\
+		$a_4$ & $2*4^2-6*4+10$ & $18$ \\
+		\bottomrule
+	\end{tabular}
+	$\to$ Vermutung: Monoton wachsend (Jedoch nicht streng, da zwei Mal 6 vorkommt) \\
+	Behauptung: $a_n\leq a_{n+1}$ \\
+	Zuerst ausmultiplizieren: $2n^2-6n+10\leq 2*(n+1)^2-6(n+1)+10$ $\to$ $2*(n^2+2n+1)-6n-6+10$ $\to$ $2n^2+4n+2-6n+4$ $\to$ $2n^2-2n+6$ \\
+	$2n^2-6n+10\leq 2n^2-2n+6$ $\to$ $2n^2$ kann gekürzt werden, das n kann jedoch nicht vollständig gekürzt werden. \\
+	$-6n+10\leq -2n+6$ $\to$ Mit 6 subtrahieren \\
+	$4\leq 4n$ $\to$ Division durch 4 \\
+	$1\leq n$ $\to$ Wahr, da n aus den natürlichen Zahlen ist und dadurch jedes n größer oder gleich als 1 ist.
+	\subsubsection{Beschränktheit}
+	Eine Folge ist beschränkt, wenn es eine reelle Zahl gibt, welche größer ist als alle Folgeglieder: $K\in\R$ für alle $n:\ a_n\leq K$ \\
+	Das gleiche gilt bei nach unten beschränkten Folgen: $k\in\R$, für alle $n:k\leq a_n$. \\
+	Eine Folge kann auch nur beschränkt sein, dann ist eine Folge zwischen diesen Werten beschränkt: $k,K\in\R$, für alle $n:k\leq a_n \leq K$
+	\subsection{Konvergenz}
+	Anders als die Beschränktheit, gilt eine Folge als konvergent gegen eine Zahl $a\in\R$, wenn es für jede noch so kleine Zahl $\epsilon > 0$ einen Folgeindex $n_0$ gibt, sodass alle Folgeglieder mit $n\geq n_0$ im Intervall $(a-\epsilon, a+\epsilon)$ liegen. Dabei schreibt man den Limes von $a_n$ für n gegen unendlich $\to$ $a_n\to a$ für $n \to \infty$. Dann spricht man davon, dass die Folge gegen a konvergiert, oder den Grenzwert a hat. Eine spezielle Konvergenz ist die Konvergenz gegen 0, wo man dann von einer Nullfolge spricht.
+	\subsubsection{Nullfolge}
+	Eine Nullfolge ist eine Folge mit dem Grenzwert 0: $\lim_{n\to\infty}\frac{1}{n}=0\ \to$ Da $\frac{1}{n}$, wenn man für n $\infty$ einsetzt dieses 0 wird.
+	\paragraphlb{Eigenschaften}
+	\begin{itemize}
+		\item{Der Grenzwert einer Folge ist eindeutig bestimmt, also gibt es jeweils nur einen Grenzwert.}
+		\item{Wenn eine Folge gegen einen Wert konvergiert, konvergiert auch dessen Teilfolge gegen 0.}
+		\item{Jede konvergierte Folge ist beschränkt, da jede Folge durch ihren Grenzwert beschränkt ist.}
+		\begin{itemize}
+			\item{Aus diesem Grund gilt auch konvergent $\implies$ beschränkt, jedoch nicht umgekehrt.}
+			\item{Also ist jede konvergente Folge beschränkt, aber nicht jede beschränkte Folge ist konvergent.}
+		\end{itemize}
+	\end{itemize}
+	Konvergente Folgen müssen einige Kriterien erfüllen:
+	\begin{itemize}
+		\item{Jede beschränkte und monoton wachsende bzw. fallende Folge konvergiert. Eine Folge die einen höchsten Wert hat und nur steigt oder fällt muss zwangsmäßig konvergieren, da sie sonst ja unendlich wäre.}
+		\item{Das Produkt einer beschränkten Folge und einer Nullfolge ist eine Nullfolge.}
+	\end{itemize}
+	\paragraphlb{Rechenregeln}
+	Es gibt auch einige Rechenregeln, wenn man zwei konvergente Folgen $a_n$ und $b_n$ mit den Grenzwerten a und b hat:
+	\begin{itemize}
+		\item{$c*a_n \pm b_n, a_n*b_n, \frac{a_n}{b_n}$}
+	\end{itemize}
+	\paragraphlb{Erkennen von Konvergenzen}
+	Folgen kann man auf Konvergenz überprüfen, indem man die Folge in Bausteine von konvergenten Folgen zerlegt: \\
+	$a_n=\frac{1}{n}+\frac{2}{n^2} \to$ \\
+	$\lim_{n\to\infty}(\frac{1}{n}+\frac{2}{n^2})=\lim_{n\to\infty}\frac{1}{n}+\lim_{n\to\infty}\frac{2}{n^2}=\lim_{n\to\infty}\frac{1}{n}+2*\lim_{n\to\infty}\frac{1}{n}*\lim_{n\to\infty}\frac{1}{n}=0+2*0*0=0\ \to$ Man nimmt jede der Folgenbausteine ($\frac{1}{n}$ und $\frac{2}{n^2}$) und setzt diese in eine Limesberechnung ein. Dabei versucht man konstanten herauszuheben (Wie 2). So will man jede der Teile entweder auf n oder auf $\frac{1}{n}$ reduzieren.
+	\subsection{Divergenz}
+	Wenn eine Folge nicht konvergiert, dann divergiert sie. Eine Folge heißt bestimmt divergent gegen unendlich, wenn alle Folgeglieder größer als 0 sind ($a_n>0$), und dessen Kehrwert $a_n^{-1}$ gegen 0 konvergiert. Dies wird auch durch einen limes ausgedrückt: $\lim_{n\to\infty}=\infty$. Dies gilt immer wenn eine Folge monoton wachsend und unbeschränkt ist. \\
+	Im Gegensatz dazu gibt es noch Folgen, welche bestimmt divergent gegen minus unendlich sind. Dabei gelten die gleichen Regeln wie bei bestimmt divergent gegen unendlich, nur mit vertauschten Zeichen: $a_n<0$ und dessen Kehrwert wieder gegen 0 geht. Dies gilt immer wenn eine Folge monoton fallen und unbeschränkt ist. \\
+	Man kann natürlich auch sagen, 'Es konvergiert gegen unendlich', anstatt 'bestimmt divergent gegen unendlich'. Das kann man jedoch nicht so sagen, da Konvergenz stets einen bestimmten Zahlenwert vorraussetzt.
+	\subsubsection{Rechenregeln für \texorpdfstring{$\infty$}{}}
+	\begin{itemize}
+		\item{$c\pm\infty=\pm\infty,\ (c\in\R)$ -> Eine Addition/Subtraktion zu unendlich ist immer noch unendlich}
+		\item{$\pm c*\infty=\pm\infty,\ (c>0)$ -> Ein positiver Wert mit unendlich multipliziert, ergibt immer noch unendlich}
+		\item{$\pm c*(-\infty)=\pm\infty,\ (c>0)$ -> Ein Wert multipliziert mit minus unendlich ergibt as Vorzeichen}
+		\item{$\frac{c}{\pm\infty}=0,\ $ -> Ein Wert geteilt durch unendlich ist 0}
+		\item{$\infty + \infty=\infty$ -> Unendlich plus unendlich ist wieder unendlich}
+		\item{$\-\infty-\infty = -\infty$ -> Unendlich minus unendlich ist immer noch unendlich}
+		\item{$\infty*\infty=\infty$ -> Unendlich multipliziert mit unendlich ist wieder unendlich}
+		\item{$-\infty*\infty=-\infty$ -> Unendlich multipliziert mit minus unendlich ist minus unendlich}
+		\item{$-\infty*(-\infty)=\infty$ -> Minus unendlich mal minus unendlich ist (plus) unendlich}
+	\end{itemize}
+	Manche Operationen sind jedoch nicht definiert:
+	\begin{itemize}
+		\item{$0*\infty$ -> Folgen müssen ggf. umgeformt werden.}
+		\item{$\infty-\infty$}
+		\item{$\frac{0}{0}$}
+		\item{$\frac{\infty}{\infty}$}
+	\end{itemize}
+	\paragraphlb{Beispiele:}
+	Konvergieren oder divergieren die Folgen: \\
+	a) $a_n=3\ \to$ Konvergiert und ist eine konstante Funktion. Der Grenzwert ist 3: $\lim_{n\to\infty}a_n=\lim_{n\to\infty}3=3$ \\
+	b) $a_n=\frac{1}{n}\ \to \lim_{n\to\infty}a_n=\lim_{n\to\infty}\frac{1}{n}=0$: Konvergent; Grenzwert 0; streng monoton fallend,
+	; beschränkt ($0\leq a_n\leq 1$); Nullfolge \\
+	c) $a_n=(\frac{1}{3})^n\ \to \lim_{n\to\infty}(\frac{1}{3})^n=0,\ $ Da die Basis kleiner als 1 ist ($\frac{1}{3}=0,3$), konvergiert sie gegen 0; Grenzwert: 0; Streng monoton fallend; beschränkt ($0\leq a_n\leq \frac{1}{3}$), Nullfolge \\
+	d) $a_n=(-1)^n\ \to -1, 1, -1, 1, -1, ... \to$ Folge hat keinen Grenzwert; Beschränkt ($-1\leq a_n \leq 1$); divergent (nicht bestimmt.) \\
+	e) $a_n=2^n\ \to \lim_{n\to\infty}2^n=\infty$, Basis größer als 1, weshalb sie gegen unendlich divergiert; streng monoton wachsend; nach oben unbeschränkt; bestimmt divergent gegen $\infty$ \\
+	f) $a_n=(-1)^n*2^n\ \to -2, 2^2, -2^3, 2^4$, kein Grenzwert, divergent (nicht bestimmt) \\
+	g) $a_n=(\frac{2}{3})^-n=(\frac{3}{2})^n,\ \to$ Da die Basis größer als 1 ist ($\frac{3}{2}=1.5$), divergiert es gegen unendlich; streng monoton wachsend; bestimmt divergent gegen unendlich. \\
+	h) $a_n=-n^2\ \to \lim_{n\to\infty}-n^2=-(\lim_{n\to\infty}n^2)=-(\lim_{n\to\infty}n*\lim_{n\to\infty}n)=-(\infty*\infty)=-\infty\ \to$ streng monoton fallend; bestimmt divergent gegen minus unedlich. \\
+	l) $a_n=\frac{2n^2}{n^2+n+1}\ \to$ Dies muss man umformen indem man den größten Nenner heraushebt) $\to\ \frac{n^2*2)}{n^2(1+\frac{1}{n}+\frac{1}{n^2}}\ \to$ Jetzt kann man die $n^2$ beider Seiten kürzen $\to$ \\
+	$\frac{2}{1+\frac{1}{n}+\frac{1}{n^2}}\ \to \lim_{n\to\infty}\frac{2}{1+\frac{1}{n}+\frac{1}{n^2}}=\frac{2}{1+0+0}=2\ \to$ Jetzt kann man auf jeden der einzelnen Werte in dem Bruch den Limes anwenden. Dadurch kann man bestimmen, dass die Folge gegen 2 konvergiert. Der Grenzwert ist 2
+
+	
+
+
+
+
+
+
+
+
+	 
+
+
+
+
+
+
+
+
+
+
+\end{document}
