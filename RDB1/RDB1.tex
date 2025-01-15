@@ -66,7 +66,7 @@
 	\subsection{Funktionale/Konzeptuelle Anforderungen}
 	Danach werden Anforderungen eingearbeitet. Dabei wird zwischen Konzeptionelle und Funktionale Anforderungen unterschieden. \\
 	Konzeptionelle Anforderungen sind rechtliche Vorgaben. Zum Beispiel dürfen nur Daten abgefragt werden, welche auch für das Programm relevant sind. \\
-	Funktionale Anforderungen hingegen sind die Vorgaben für die Verwendung des Programms. Wenn man ein rotes Kreuz in der Ecke klickt, muss sich das Fenster schließen. \\
+	Funktionale Anforderungen hingegen sind die Vorgaben für die Verwendung des Programms. Wenn man ein rotes Kreuz in der Ecke klickt, muss sich das Fenster schließen.
 	\subsection{Spezifikation von Transaktionen}
 	Nach der Festlegung der Funktionalen Vorraussetzungen, werden die Transaktionen spzifiziert, welche Calls sind nötig?
 	\subsection{Entity-Relationship Modell}
@@ -98,7 +98,7 @@
 	Mehrwertige Attribute und Abgeleitete Attribute können beliebig verschachtelt werden.
 	\subsubsection{Schlüsselattribute (Primary Key)}
 	Schlüsselattribute sind Attribute, welche eine Entität eindeutig definiert und diese zusammenfasst. Hauptvorraussetzung ist, dass das Schlüsselattribut einen eindeutigen Wert hat. Man muss dieses Schlüsselattribut jedoch nicht selbst definieren, sondern kann einen Wert nehmen, welcher extern garantiert einzigartig ist. Wenn man zum Beispiel die SVN kennt, weiß man, dass dieses eindeutig sein wird, da die ÖGK dies bereitstellt. \\
-	Schlüsselattribute können auch aus mehreren Teilen zusammengesetzt sein. Zum Beispiel die Projektnummer, das Jahr sowie der Projektleiter. Solange die Summe der Attribute sicher einzigartig ist, kann man es als Schlüsselattribut verwenden. \\
+	Schlüsselattribute können auch aus mehreren Teilen zusammengesetzt sein. Zum Beispiel die Projektnummer, das Jahr sowie der Projektleiter. Solange die Summe der Attribute sicher einzigartig ist, kann man es als Schlüsselattribut verwenden.
 	\subsubsection{ER-Diagramm}
 	In einem ER-Diagramm wird genau definiert, wie Attribute und Entitäten dargestellt werden, damit man die Relation der Attribute und Entitäten einfach sehen kann. \\
 	\begin{itemize}
@@ -109,7 +109,7 @@
 		\item{Ein abgeleiteter Datentyp hat einen strichlierten Rand.}
 	\end{itemize}
 	\subsubsection{Entitätsmenge}
-	Eine Entitätsmenge beschreibt die Menge aller Entitäten mit einem spezifischen Set an Attributen. Also würden alle Autos, welche durch Nummerntafel, Typ, Ausgabe, Baujahr und Farben definiert werden in einer Menge zusammengefasst. \\
+	Eine Entitätsmenge beschreibt die Menge aller Entitäten mit einem spezifischen Set an Attributen. Also würden alle Autos, welche durch Nummerntafel, Typ, Ausgabe, Baujahr und Farben definiert werden in einer Menge zusammengefasst.
 	\subsubsection{Bestimmun von Entitätstypen und Attributen}
 	Es gibt die Allgemeine Regel, eine Anforderungsanalyse, in ihre Entitäten und Attribute aufzuteilen, indem man Substantive zu Entitäten definiert und Substantive, welche eine Entität beschreiben, als Attribut. Der Beste Weg ist, alle Substantive fett hervorzuheben und diese zu analysieren.
 	\subsubsection{Bestimmung von Beziehungen}
@@ -164,7 +164,7 @@
 	Diese Eigenschaften können viel über eine Datenbank aussagen. So kann man zum Beispiel mit der Suche aufhören, wenn man alle gesuchten Werte in einer der Gruppen gefunden hat, wenn man weiß, dass sie Disjoint ist und sie so in keiner anderen Gruppe sein kann.
 	\section{Relationales Modell}
 	Ein relationes Modell ist ein logisches Konzept, welches auf Relationen basiert. Eine Relation ist hierbei ein mathematisches Konzept, welches auf Mengen basiert. Da Relationen ein mathematisch definiertes Konzept ist, bietet dieses eine formale Grundlage. Der SQL Standard basiert zwar auf dem formalen Modell, unterscheidet sich jedoch in einigen Punkten. \\
-	Die Grundlage des Modells basiert auf Überlegungen von Edward Codd von IBM in den 70er Jahren. Seine Idee war, dass Beziehungen zwischen Daten auf den Werten der Daten und nicht auf separat spezifizierten Verknüpfungen basieren sollten. Sich nur auf Wertbasierte Beziehungen zu stützen wurde zu diesem Zeitpunkt mit großer Skepsis angenommen. \\
+	Die Grundlage des Modells basiert auf Überlegungen von Edward Codd von IBM in den 70er Jahren. Seine Idee war, dass Beziehungen zwischen Daten auf den Werten der Daten und nicht auf separat spezifizierten Verknüpfungen basieren sollten. Sich nur auf Wertbasierte Beziehungen zu stützen wurde zu diesem Zeitpunkt mit großer Skepsis angenommen.
 	\subsection{Definition}
 	Das Schema des Modells basiert auf: sch(R)=[$A_1, A_2,...A_n$]\\
 	Dadurch ist die Reihenfolge der Reihen von großer Bedeutung, jedoch nicht die Reihenfolge der Spalten. \\
@@ -186,7 +186,7 @@
 	Schlüssel dienen zur eindeutigen Identifizierung der Elemente ine einer Datenbank. Dabei unterscheidet man zwischen dem Superschlüssel, dem Kandidatenschlüssel und dem Primärschlüssel. Diese sind jeweils Teilmengen voneinander, also ist ein Superschlüssel auch ein Kandidatenschlüssel und Primärschlüssel. \\
 	Der Superschlüssel kann eine Reihe eindeutig identifizieren. Ein Beispiel wären alle Spalten der Reihe, was jedoch nicht wirklich praktikabel ist. \\
 	Der Kandidatenschlüssel ist dabei die geringstmögliche Auslegung, welche trotzdem zu einer eindeutigen Identifizierung führt. \\
-	Aus den Kandidatenschlüssel muss man einen Primärschlüssel wählen. Dieser ist der grundlegende Referenzpunkt in der Tabelle. dadurch darf er jedoch auch nie Null sein, was normalerweise bei Einträgen der Fall ist.\\
+	Aus den Kandidatenschlüsseln muss man einen Primärschlüssel wählen. Dieser ist der grundlegende Referenzpunkt in der Tabelle. dadurch darf er jedoch auch nie Null sein, was normalerweise bei Einträgen der Fall ist.
 	\subsection{ER Schema zu Relationalem Modell}
 	Das bereits bekannte ER Schema muss natürlich in ein Modell übertragen werden, bevor es verwendet werden kann. \\
 	Dabei kann man einem groben Leitfaden folgen:
@@ -292,7 +292,7 @@
  		\bottomrule
  	\end{tabular}}
  	\subsubsection{Projektion: \texorpdfstring{$\pi$}{}}
- 	Während eine Selektion Spalten auwsählt, nimmt die Projektion stattdessen Reihen, verwirft dabei jedoch Duplikate. \\
+ 	Während eine Selektion Spalten auswählt, nimmt die Projektion stattdessen Reihen, verwirft dabei jedoch Duplikate. \\
  	Projektionsliste: Attribute von $R \rightarrow A_1, A_2, ..., A_K$ \\
  	$t\in \pi_{[A_1,...,A_k]}(R)\leftrightarrow \exists x(x\in E\land t=x[A_1,...,A_k])$ \\
  	$x[A_1, ..., A_k]$ bezeichnet ein neues Tupel, welches Werte für die entsprechenden Werte von x annimmt. \\
@@ -703,7 +703,7 @@
  			\item{Vorschau 2.S: Eine Datenbank kann von dem Betriebssystem oder direkt vom Datenbanksystem verwaltet werden.}
  		\end{itemize}
  	\end{itemize}
- 	SQL definiert eine gewisse Anzahl an Datentypen (Domänen), welche in jeder SQL Implementation vorhanden sind. \\
+ 	SQL definiert eine gewisse Anzahl an Datentypen (Domänen), welche in jeder SQL Implementation vorhanden sind.
  	\begin{itemize}
  		\item{char(n)}
  		\begin{itemize}
@@ -736,11 +736,11 @@
  		\end{itemize}
  	\end{itemize}
  	\paragraphlb{Kommandos}
- 	SQL DDL Kommandos kennt verschiedene Befehle zur Erstellung einer Datenbank:
+ 	SQL DDL Kommandos kennt einige Befehle zur Erstellung und Verwaltung einer Datenbank:
  	\begin{itemize}
  		\item{Create Table}
  		\begin{itemize}
- 			\item{Erstellt eine neue Tabelle. Dabei muss man}
+ 			\item{Erstellt eine neue Tabelle. Dabei muss man die Typen der Variablen während der Erstellung angeben. -> \verb|CREATE TABLE <Table Name> (<Attribute1> <DataType>, <Attribute2> <DataType>, ...)|}
  		\end{itemize}
  		\item{Integritätsbedingungen}
  		\begin{itemize}
@@ -805,7 +805,6 @@
   \includegraphics[scale=0.3]{Bilder/sql_union.png}
  	\caption{Verbindung von zwei SQL Queries}
  	\end{figure}
- 	
  	Gleich wie bei der relationalen Algebra, gibt es auch in SQL die Mengenoperationen. Diese sind \verb|union|, \verb|intersect| und \verb|except|. Da diese nun Mengenoperationen sind, werden Duplikate verworfen. Jedoch gibt es spezielle Operatoren, welche auch Duplikate auswählt. Die beiden verbundenen Mengen müssen wiederum \textit{Union Compatible} sein, setzen jedoch nicht mehr vorraus, dass die Attribute gleich heißen, sonder nur, dass sie den selben Typen haben. \\
  	Man muss jedoch beachten, dass bei solchen Operationen keine Namenskonflikte auftreten. Um diese zu vermeiden kann man eine Tabelle mit dem \verb|as| keyword umbenennen.
  	\subsubsection{null}
@@ -827,21 +826,201 @@
  	Wenn unknown Teil eines \verb|where| oder \verb|having| Prädikates ist, wird das als False behandelt. \\
  	\subsubsection{Ordnung}
  	Die Zeilen einer Tabelle sind standardmäßig nicht geordnet. Falls man das haben will, kann man das mit \verb|order by| verlangen. Wenn man nichts angibt wird es aufsteigend sortiert. Falls man es absteigend sortiert haben will, muss man \verb|desc| am Ende der Query angeben. Wenn man die aufsteigende Sortierung explizit angeben will, kann man natürlich auch \verb|asc| angeben.
-	  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	\subsection{Subqueries}
+	Da SQL geschlossen ist, können \verb|select| Anweisungen geschachtelt werden. Dabei bezeichnet Unteranfrage einen Ausdruck, welcher innerhalb einer anderen Anfrage geschachtelt ist. \\
+	In einem \verb|from| ist das die 'abgeleitete Tabelle', wodurch statt eines Tabellennamens eine SQL Anfrage gegeben sein kann. \\
+	In einem \verb|where| ist es eine Mengenoperation, wobei man es als Argument innerhalb des Blocks verwenden kann. \\
+	\begin{itemize}
+		\item{exists, not exists}
+		\item{in, not in}
+		\item{some}
+	\end{itemize}
+	\subsubsection{Exists}
+	Ist das Ergebnis der Subquery ungleich null: $exists(q) \iff q\ne \emptyset$ und $not\ exists(q) \iff q = \emptyset$. So kann man nachsehen, ob eine gewisse Menge überhaupt existiert, und nur dann eine Operation ausführt. \\
+	\verb|select KName from Kontoinhaber as KI where exists (select * from Leasingnehmer as LN where KI.KName = LN.KName)| \\
+	Beispiel: Definieren sie einen SQL Befehl, welcher den größten Wert in R mit einer geschachtelten Anfrage bestimmt (ohne Aggregationsfunktion.) \\
+	\verb|-> SELECT DISTINCT A FROM R AS R1 WHERE NOT EXISTS (SELECT * FROM R AS R2 WHERE R2.A > R1.A)| Vergleicht jeweils einen Wert aus der Teilanfrage mit der äußeren Anfrage und 
+	\subsubsection{In}
+	\verb|In| ist wahr, wenn es ein Ergebnistupel gibt, das gleich ist wie a. Es können auch 100 sein, es macht jedoch keinen Unterschied. Gleichzeitig ist \verb|not in| wahr, wenn nicht zumindest ein Tupel gleich ist. Es ist zu beachten, dass bei einer subquery falsche Tupel nur eingeschränkt vorkommen. \\
+	Zum Beispiel sind: \verb|SELECT A FROM R,S WHERE R.A = S.X| und \verb|SELECT A FROM R WHERE A IN (SELECT X FROM S)| \textbf{nicht} äquivalent, da der obere Ausdruck die Tabellen verbindet und so falsche Tupel erzeugt, welche danach eingegrenzt werden. Der untere hingegen vergleicht nur die Ergebnisse aus dem Subquery und schränkt somit nur weiter ein, anstatt zu kombinieren. \\
+	\verb|SELECT KName FROM Leasingnehmer WHERE KName IN (SELECT KName FROM Leasingnehmer)|
+	\subsubsection{some}
+	\verb|Some| setzt vorraus, dass zumindest ein Tupel der Bedingung entspricht. Dabei kann man die Vorraussetzung entsprechend anpassen, sodass man stattdessen abfragt, ob zumindest eines der Tupel größer als 5 ist. \verb|5 < some -> true|. \\
+	Man kann ein \verb|some| jedoch auch mit = abfragen, was dann überprüft ob zumindest einer der gesuchten Werte vorhanden ist. Umgekehrt überprüft $\ne$ ob zumindest ein Wert nicht dem gesuchten Wert entspricht. \\
+	\verb|SELECT DISTINCT KNr FROM Konten, Filiale WHERE Konten.Betrag > Filiale.Umsatz AND Filiale.Name = 'Filiale 1'| kann somit auch als \\ 
+	\verb|SELECT KNr FROM Konten WHERE Betrag > SOME (SELECT Umsatz FROM Filiale WHERE Name = 'Filiale 1')| angeschrieben werden. \\
+	\verb|= some| und \verb|in| sind ihrer Anwendung äquivalent. Da beide bei ihrer Überprüfung nachsehen, ob zumindest ein Element existiert, kann man sie auch gleich verwenden. Das Gegenteil \verb|<> some| und \verb|not in| führt jedoch \textbf{nicht} zum gleichen Ergebnis. \verb|not in| überprüft ob der gesuchte Wert im Datensatz existiert während \verb|<> some| überprüft ob \textbf{kein anderer} als der Wert existiert (Was sehr selten der Fall ist.)
+	\subsubsection{all}
+	\verb|all| hat eine ähnliche Funktion wie \verb|some|, dabei muss jedoch nicht nur ein, sondern jedes Element der Vorraussetzung entsprechen. Gleichzeitig existiert wieder ein \verb|= all| und $\ne$\verb| all|, wobei \verb|= all| überprüft, ob alle Werte dem gesuchten Wert entsprechen und $\ne$\verb| all| überprüft ob kein Wert dem gesuchten entsprechen. \\ \\
+	Man sollte beachten, dass \verb|(not) exists| statt jedem \verb|in|, \verb|any| oder \verb|all| Subquery verwendet werden kann. Einige SQL Implementationen konvertieren alle Befehle in \verb|exists| Befehle um.
+	\subsection{DML}
+	\subsubsection{Delete und Drop}
+	Mit \verb|delete| und \verb|drop| kann man Tabellen und Zeilen löschen. Der Unterschied ist, dass \verb|delete| Zeilen der Tabelle löscht, dabei jedoch das Schema behält. \verb|Drop| hingegen löscht \textbf{alles} inklusive Schemadefinition, Indizes, usw. der Tabelle. \\
+	\verb|DELETE FROM Konten WHERE FName = 'Filiale 1 -> Löscht alle Konten der Filiale 1| \\
+	\verb|DELETE FROM Kredite WHERE KNr NOT IN (SELECT KNr FROM Kreditnehmer) -> Löscht alle Kredite ohne Kreditnehmer| 
+	\subsubsection{Einfügen}
+	Mit \verb|insert| fügt man Tupel ein. Nicht angegebene Werte werden, falls möglich, mit null oder dem als default festgelegten Wert aufgefüllt. \\
+	\verb|INSERT INTO Kunden VALUES ('K-1234', 'Stettinger', 5000) -> Fügt neues Tupel zu Kunden hinzu.| \\
+	Hier wurde nur die Tabelle, jedoch nicht die Spalten angegeben, wodurch es von rechts nach links befüllt wird. Man kann auch die Spalten explizit angeben, falls man dazwischen einen Wert auslassen will: \\
+	\verb|INSERT INTO Kunden(Betrag, Name) VALUES ('5000, 'Stettinger)|
+	\subsubsection{Update}
+	Mit \verb|update| kann man bereits existierender Werte neu definieren. \\
+	\verb|UPDATE Konten SET Guthaben = Guthaben * 1,06 WHERE Guthaben > 10000| \\
+	\verb|                                         -> Erhöht das Guthaben aller Konten über 10000 um 6%|
+	\section{View}
+	Views werden verwendet um die Sicht von Benutzern einzuschränken. Das kann nützlich sein, wenn nicht alle Tabellen einer Datenbank einsehbar sein sollen. Man kann jedoch auch spezifizieren, dass nur Zugriff auf berechnete Tabellen ermöglicht werden und der Benutzer nicht weiß wie die Tabelle selbst aussieht. So kann man für spezifische Anwendungszwecke Views erstellen, welche danach für eine bestimmte Benutzergruppe ersichtlich wird. Indem man nur eine berechnete Tabelle zur Verfügung stellt, kann man die wahre Struktur der Datenbank verheimlichen, und so potentielle Angriffsflächen verringern. Zusätzlich dazu kann man in einem View abgeleitete anstatt der echten Werte angeben, und so eine komplett andere Tabelle zur Verfügung stellen. Ein bedeutend einfacherer Anwendungsfall ist, dass man in einer Tabelle, wenn sie angesehen wird, geheime Information nicht inkludiert wird. \\
+	Einen View erstellt man mittels \verb|CREATE VIEW <V(A1, A2)> AS <Anfrage>|, wobei V der Name der Sicht ist, <Anfrage> ein gültiger Ausdruck, welcher eine Anzahl an Spalten liefert und $A_i$, was eine Anzahl an Spalten zeigt. \\
+	Der Spaltenname kann optional sein, falls der Ausfrageausdruck eindeutig ist. Da V eine virtuelle Tabelle erstellt, kann man auch normale Anfragen darauf anwenden. Da die Tabelle nur virtuell existiert wird die Information als Metadaten in der Datenbank gespeichert. \\
+	\verb|CREATE VIEW Alle_Kunden AS (SELECT FName, KName FROM Kontoinhaber, Konten WHERE Kontoinhaber.KNr = Konten.KNr)|
+	\subsection{View Expansion}
+	Bei der Auswertung des Views wird der Name des Views durch den entsprechenden Anfrageausdruck ersetzt.
+	\subsection{Änderbarkeit}
+	Ein View kann verändert werden, vorrausgesetzt die Umkehrabbildung kann die Basistabelle wiederherstellen. Das kann geschehen wenn:
+	\begin{itemize}
+		\item{distinct}
+		\item{group by}
+		\item{having}
+		\item{SELECT enthält Spaltennamen mehrmals}
+		\item{FROM enthält mehrere Views oder Tabellen}
+	\end{itemize}
+	\subsection{Temporärer View}
+	Man kann auch temporäre Views erstellen, diese sind nur innerhalb des Anfrageausdrucks verfügbar. Einen temporären View definiert man mit \verb|with|.
+	\section{Data Control Language (DCL)}
+	SQL bietet zusätzlich noch eine Datenkontrollsprache, welche Zugriffsrechte einschränken kann. Das passiert mit den keywords \verb|grant| und \verb|revoke|. Zusätzlich kann man auch Festlegen wie viel CPU Zeit ein Benutzer jeweils bekommt.\\
+	Man kann Zugriffsrechte entweder direkt an Personen vergeben oder Rollen definieren und diese vergeben. Größere Firmen vergeben sehr selten Zugrifssrechte an Person, da es bedeutend effizienter ist diese zentral als Rollen zu verwalten. 
+	Man kann Zugriffsrechte auf verschiedenen Ebenen gewähren und entziehen.
+	[TODO]
+	System: tablespace
+	Schema: Cluster, Index, Trigger, Datenbank
+	Tabellen: create, alter, index, drop, select, delete, insert
+	\\
+	\subsection{grant}
+	Mit \verb|grant| gewährt man Zugriffsrechte. Dabei können Zugriffsrechte nur von Benutzern vergeben werden, die diese Rechte selbst besitzen. \\
+	\verb|GRANT <Liste von Zugriffsrechte> ON <Tabelle/View> TO <Liste von Benutzern>| \\
+	\verb|                             -> Gewährt Benutzern Rechte innerhalb der Tabelle|
+	\subsection{revoke}
+	Mit \verb|revoke| entzieht man Rechte wieder. Dabei muss man beachten, dass man auch nur Rechte entziehen kann, welche man selbst besitzt. Zusätzlich kann es passieren, dass ein Benutzer weiter Rechte nach dem Entzug besitzt, da er die Rechte bereits von einem anderen Benutzer erhalten hat. Mann kann mit dem keyword \verb|all| auch alle Zugriffsrechte eines Benutzers entziehen.
+	\verb|REVOKE <Liste von Zugriffsrechten> ON <Tabelle/View> TO <Liste von Benutzern>| \\
+	\verb|                             -> Entzieht Benutzern Rechte innerhalb der Tabelle|
+	\section{Datenbankzugriff}
+	Die Schnittstelle eines Programms zu der Datenbank erlaubt das direkte Ansprechen der Datenbank über eine Programmiersprache. Einige solche Systeme sind: Embedded SQL, ODBC oder JDBC. \\
+	Als Schnittstelle agiert hier ein Application Programming Interface (API). \\
+	In Java wird normalerweise der Java Database Connectivity (JDBC) verwendet, welcher von Sun Microsystems entwickelt wurde und nach deren Übernahme von Oracle weiterverwaltet wird.
+	\section{Richtlinien zum Datenbankentwurf}
+	Bei dem Entwurf einer relationalen Datenbank ist das Hauptziel stets ein gutes und effektives Schema. Es kann sehr komplex sein eine passende Gruppierung seiner Daten zu erstellen. Das Hauptproblem dabei besteht die Definition einer 'guten' Datenbank, da dies meist von dem speziellen Anwendungsfall abhängt. Zur Klassifizierung gibt es die Datenbanknormalformen.
+	\subsection{Anomalien}
+	Anomalien sind Probleme, welche als Konsequenz eines spezifischen Schemas entstehen. Zum Beispiel, wenn man das Schema Projekt(\underline{SVN, PNr}, h, AName, PName, POrt) ansieht.
+	\begin{itemize}
+		\item{Updateanomalie}
+		\begin{itemize}
+			\item{Wenn der Projektort geändert wird, muss er für jeden Angestellten im Projekt geändert werden.}
+		\end{itemize}
+		\item{Einfügeanomalie}
+		\begin{itemize}
+			\item{Ein Projekt kann nicht angelegt werden, wenn es keine Angestellten hat, da es Teil des Primärschlüssels ist.}
+		\end{itemize}
+		\item{Löschanomalie}
+		\begin{itemize}
+			\item{Wenn ein Projekt gelöscht wird, werden auch alle Angestellten, welche an dem Projekt arbeiten gelöscht.}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Richtlinien für guten Entwurf}
+	Es gibt vier Regeln um eine Datenbank so effektiv wie möglich zu gestalten:
+	\begin{enumerate}
+		\item{Jedes Tupel einer Relation sollte nur die Instanz einer Entität oder Beziehung darstellen.}
+		\item{Update-, Lösch-, und Einfügeanomalien sollten vermieden werden.}
+		\item{Relationen sollten so wenige NULL Werte wie möglich enthalten.}
+		\begin{itemize}
+			\item{Falls man relevante Daten hat, welche erst später eingefügt werden, sollte man diese in einer neuen Tabelle verpacken.}
+			\item{In der Regel, sollte man so wenige Tabellen wie möglich, aber so viele wie nötig erstellen.}
+		\end{itemize}
+		\item{Durch einen natürlichen JOIN von Relationen sollten keine falschen Tupel erzeugt werden.}
+	\end{enumerate}
+	\subsection{Funktionale Abhängigkeiten (FD)}
+	FDs werden zwischen Attributmengen einer Relatione gebildet. Y gilt als von X funktional abhängig wenn der Wert von X einen eindeutigen Wert von Y in der Relation vorgibt. Werte einer Tabelle sind beispielsweise voll funktional abhängig von dem Primärschlüssel. \\
+	FDs definieren also eine EInschränkung auf das Schema (Und damit alle Instanzen von R) \\
+	\verb|{SVN} -> {PNummer} -> SVN bestimmt Projektnummer| \\
+	Da FDs auf dem Schema definiert sind, müssen sie auch für alle Instanzen gelten. Aus diesem Grund wird statt \{A, B\} nur AB (oder A, B) geschrieben $\to$ AB $\to$ CDE statt \{A, B\} $\to$ \{C, D, E\}. \\
+	\begin{tabular}{| l | l | l |}
+		\toprule
+		X & Y & Z \\ \midrule
+		1 & 1 & 3 \\
+		2 & 1 & 1 \\
+		3 & 2 & 2 \\
+		4 & 1 & 1 \\
+		\bottomrule
+	\end{tabular} \\
+	In dieser Tabelle gilt $Z\ \to\ X$ nicht, da mit 1 jeweils 2 und 4 abgebildet werden, jedoch $Z\ \to\ Y$ sehr wohl, da mit 1 jeweils nur 1 abgebildet wird
+	\subsubsection{Superschlüssel und FD}
+	Es mag bereits aufgefallen sein, dass Super- und Kandidatenschlüssel in ihrer Funktion sehr ähnlcih zur Funktionalen Abhängigkeiten sind. Ein Superschlüssel ist dann gegeben, wenn $K\to sch(R)$, also jeder Wert des Superschlüssels jede Spalte eindeutig zuweisen kann.
+	\subsubsection{Armstrong-Axiome}
+	Für eine Menge F aus Abhängigkeiten kann man auch zusätzliche Abhängigkeiten herleiten, welche immer gelten, solange die Abhängigkeiten in F gelten:
+	\begin{itemize}
+		\item{Reflexivität: $Y \subseteq X \vdash X\to Y$}
+		\begin{itemize}
+			\item{Wenn Y eine Teilmenge von X ist, dann enthält X, Y. X enthält Y bedeutet dadurch, dass Y funktional abhängig von X ist.}
+		\end{itemize}
+		\item{Verstärkung: $X \to Y \vdash XZ \to\ YZ$}
+		\begin{itemize}
+			\item{Das Hinzufügen einer Menge verändert nicht deren Funktionale Abhängigkeit}
+		\end{itemize}
+		\item{Transitivität: $X\to\ Y, Y\to\ Z \vdash X\to\ Z$}
+		\begin{itemize}
+			\item{Wenn X Y bestimmt und Y Z bestimmt, dann bestimmt X auch Z.}
+		\end{itemize}
+	\end{itemize}
+	Diese Axiome sind korrekt und vollständig, also kann man alle anderen Regeln von diesen ableiten: \\
+	$X\to Y, X\to W, WY\to Z, \vdash X\to Z$ \verb|-> Kann man aus diesen Abhängigkeiten, diese herleiten?| \\ \\
+	$X\to Y\vdash XX\to XY=X\to XY$ \verb|Da man X -> Y zu XX -> XY verstärken kann, gilt auch X -> XY| \\
+	$X\to W, \vdash XY\to WY$ \verb|X -> W wird zu XY -> WY verstärkt.| \\
+	$X\to XY, XY\to WY \vdash X\to WY$ \verb|Da X -> XY und XY -> WY gilt, gilt auch X -> WY| \\
+	$X\to WY, WY\to Z \vdash X\to Z$ \verb|Da X -> WY und WY -> Z gilt auch X -> Z|
+	\subsubsection{Zusätzliche Inferenzregeln}
+	Diese zusätzlichen Regeln kann man aus den anderen herleiten:
+	\begin{enumerate}
+		\item{Dekomposition - $X\to\ YZ \vdash X\to Y, X\to Z$}
+		\begin{itemize}
+			\item{Wenn X YZ bestimmt, bestimmt X auch Y und Z separat.}
+		\end{itemize}
+		\item{Vereinigung - $X\to Y,\ X\to\ Z \vdash X \to\ YZ$}
+		\begin{itemize}
+			\item{Wenn X sowohl Y als auch Z bestimmt, bestimmt X auch YZ}
+		\end{itemize}
+		\item{Pseudotransitivität - $X\to\ Y, WY\to\ Z \vdash WX\to\ Z$}
+		\begin{itemize}
+			\item{Wenn X Y bestimmt und Y Teil einer anderen Abhängigkeit ist, sind diese austauschbar.}
+		\end{itemize}
+	\end{enumerate}
+	\subsubsection{Hülle}
+	Eine Hülle $F^+$ ist die Menge F von FDs die von F hergeleitet werden können. Eine Hülle H(F, X) einer Menge von Attributen X bezüglich F ist die Menge aller Attribute, welche von X funktional abhängig sind. \\
+	Hier werden die Armstrong Axiome relevant, da sowohl $F^+$ als auch H(F,X) durch Anwendung der Armstrong Axiome berechnet werden kann. \\
+	Diesen kann man als Pseudocode wiedergeben. Dabei ist der Input die Menge F von FDs mit der Attributmenge X. Als Output soll die Attributhülle von X bezüglich F ausgegeben werden:
+	\begin{verbatim}
+	H(F,X)
+	  Result:=X -> X bestimmt immer sich selbst
+	  while (Result changes) do
+	    foreach FD A -> B in F do -> Gehe alle potentiellen Funktionalen Abhängigkeiten durch
+	      if A (Teilmenge) Result then Result := Result (Union) B -> Wenn A Teilmenge des Ergebnises ist, 
+	  return Result                                                  füge es zur Endmenge hinzu
+	\end{verbatim}
+	Beispiel: \\
+	$R[A, B, C, D]$ mit der Menge $F=\{AB\to D, B\to A, C\to B\}$ \verb|-> Was ist die Attributhülle von C?|
+	\begin{verbatim}
+	Erster Durchlauf: Ist C FD? Ja weil C immer mit sich selbst funktional Abhängig ist
+	Zweiter Durchlauf: Ist B FD? Ja, weil C -> B -> Potentielle Menge hat sich geändert -> Neuer Durchlauf
+	Dritter Durchlauf: Ist A FD? Ja, weil B -> A
+	Vierter Durchlauf: Ist D FD? Ja, weil jetzt AB -> D
+	H(F,X)={C,B,A,D}
+	C-> ABCD
+	\end{verbatim}
+	Wenn man aus diesen FDs nun den besten Kandidatenschlüssel bestimmen will, sollte man sehen, welche rechts am seltensten vorkommt. Da C nie rechts steht, hat es auch das beste Potential für einen KS.
+	\paragraphlb{Äquivalenz und Überdeckung}
+	Zwei Mengen F und G sind genau dann äquivalent wenn:
+	\begin{itemize}
+		\item{Jede funktionale Abhängigkeit in F von G und in G von F hergleitet werden kann. (F ist eine Überdeckung von G / G ist eine Überdeckung von F)}
+	\end{itemize}
+	\paragraphlb{Äquivalenz und Membership}
+	Bei dem Membership überprüft man, ob $X\to\ Y$ in $F^+$ ist. Man kann bestimmen, ob eine FD in einer Hülle ist, indem man überprüft, ob diese in der Hülle ist. That's it. \\
+	Die Äquivalenz (Also das \verb|all| zum \verb|in|) zwischen F und G kann überprüft werden, indem jeweils überprüft wird, ob eine FD in beider Menge in der Hülle der anderen ist. \verb|-> Ist jede FD in F in G+? / Ist jede FD in G in F+?| \\
+	\verb|                                                              Wenn ja, sind sie äquivalent.|
 \end{document}

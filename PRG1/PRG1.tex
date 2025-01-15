@@ -6,6 +6,9 @@
 \usepackage{multicol}
 \usepackage{setspace}
 \usepackage{changepage}
+\usepackage{etoolbox}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{cprotect}
 \usepackage{graphicx}
@@ -24,6 +27,7 @@
 	\maketitle
 	\section{Einheit 1 - 01.10.2024}
 	\subsection{Warum Java?}
+	\preto{\@verbatim}{\topsep=0pt \partopsep=0pt }
 	Java ist eine objektorientierte Programmiersprache. Im Gegensatz dazu stehen funktionelle Sprachen. Ebenfalls ist sie plattformunabhängig. Durch die JRE läuft sie auf jeder Plattform gleich. Java wurde ursprünglich für Internetapplikationen designt, hat seitdem aber darüber hinaus Popularität erlangt. So verwenden Apps wie Acrobat Reader Java. Da Android auf Java basiert, ist es auch im Mobile Sektor viel verwendet. Java basiert auf drei Programmiersprachen: C++, Smalltalk, sowie Eiffel. Weltweit am Marktanteil gemessen, nimmt Java mit 15\% den zweiten Platz ein, wobei nur Python beliebter ist. \\
 	Warum würde man, mit Java beginnen, wenn Python doch die beliebteste ist? \\
 	Bei der besten Wahl der ersten Sprache scheiden sich die Geister. Wenn man mit Python beginnt, kann man zwar sehr schnell etwas entwickeln, jedoch ist es sehr schwer auf andere Sprachen umzusteigen, da diese einem sehr viel abnimmt. Andererseits hat man bei C bedeutend mehr Verantwortung aber auch Kontrolle wodurch der Einstieg schwer werden kann. Java nimmt die goldene Mitte der Abstraktion vs. Verantwortung ein. \\
@@ -117,6 +121,7 @@
 		\end{itemize}
 	\end{itemize}
 	\section{Einheit 2 - 09.10.2024 - Datentypen}
+	\label{sec:Datentypen}
 	Variablen sind symbolische Namen für Speicherstellen. Mit diesen erstellten Werten kann man in Folge eine Berechnung durchführen oder diese verändern. \\
 	Grundsätzlich müssen Variablen definiert werden, bevor sie verwendet werden. Dabei muss man der Variable einen Namen und einen Datentyp geben. \\
 	Ein Name kann in der Regel beliebig lange und aus Buchstaben und Ziffern bestehen, jedoch darf kein Buchstabe an erster Stelle stehen. Variablen dürfen auch nicht wie native Java Befehle wie main, if oder while genannt werden. Variablen in Java sind case-sensitive, also ist counter nicht gleich Counter. Der Inhalt einer Variable kann (Innerhalb des Datentyps) einen beliebigen Wert annehmen und dieser kann auch verändert werden. \\
@@ -378,7 +383,7 @@
 	Strings stellt eine Zeichenkette dar, welche eigentlich eine Sequenz an \verb|char| Charakteren. In Java sind Strings Objekte, müssen also als Objekt erstellt werden. Java stellt jedoch die String Klasse zur Verfügung weshalb man nicht zwangsläufig \verb|new| verwenden muss: \\
 	Es gibt zwei Möglichkeiten ein String Objekt zu erstellen. Entweder \verb|String s1 = "Hello world!";| wie andere Variablen oder \verb|String s2 = new String ("Hello world!");|. Die erste Methode ist hierbei eher zu verwenden, da sie ähnlicher zu einer traditionellen Variablendeklaration ist. \\
 	Da Strings Objekte sind, kann man diese auch nicht mit \verb|==| vergleichen. Sollte man das versuchen, würde das Programm eigentlich versuchen herauszufinden, ob die beiden String Objekte die gleichen sind (Welche sie meistens nicht sind). Dabei würde ein Objekt mit dem gleichen Inhalt, nicht zwangsmäßig das gleiche Objekt sein und somit \verb|false| zurückgeben. \\
-	Da Strings ein Objekt sind, haben diese auch Instanzmethoden, welche stattdessen zu verwenden sind. Ein Weg zwei Strings miteinander zu vergleichen ist die Instanzmethode \verb|.equals()|, welche verwendet werden kann um Strings effizient mitenander zu vergleichen. Beispiel:\\
+	Da Strings ein Objekt sind, haben diese auch Instanzmethoden, welche stattdessen zu verwenden sind. Ein Weg zwei Strings miteinander zu vergleichen ist die Instanzmethode \verb|.equals()|, welche verwendet werden kann um Strings effizient mitenander zu vergleichen. Beispiel:
 	\begin{verbatim}
 	       String s1 = "Hello world!";
 	       String s2 = "Hello world!";
@@ -433,7 +438,7 @@
 	Man kann jedoch ein Array auch zum gleichen Zeitpunkt deklarieren und initialisieren: \\ \verb|<dataType>[] <varName> = new <dataType>[<arraySize>]|.
 	Gleich wie bei Strings kann man auch auf Arrays mittels Index zugreifen, dabei muss man die Position auf welche man zugreifen will mittels eckiger Klammer angeben: \verb|myArray[5]| greift als beispielsweise auf das sechste Element des Arrays zu. (Da auch Arrays bei 0 beginnen.). \\
 	Da Arrays mehrere Daten in einer Variable vereinen können, gibt die Variable selbst nur den Speicherort der Werte an. Aus diesem Grund kann man Arrays auch nicht direkt vergleichen, weshalb es, gleich wie bei Strings, im Falle eines Vergleichs mit \verb|==| nur die Adressen der Objekte vergleicht. (Und höchstwahrscheinlich False erhält.) \\
-	\cprotect\subsubsection{\verb|java.util.Arrays|}
+	\cprotect\subsubsection{\texorpdfstring{\verb|java.util.Arrays|}{}}
 	Java hat eine Hilfsklasse um effizienter mit Arrays arbeiten zu können. Einige Methoden dieser Klasse sind:
 	\begin{itemize}
 		\item{\verb|sort|}
@@ -450,7 +455,7 @@
 	Arrays sind jedoch nicht auf eine einzige Dimension begrenzt. In der Theorie kann man ein Array mit MAX\_INT ($~{}$ 4,2 Milliarden) Dimensionen füllen, was aber höchstwahrscheinlich bald auf Speicherprobleme treffen würde. Ein praktisches Beispiel eines mehrdimensionalen Arrays ist zum Beispiel das Speichern von Messwerten verschiedener Sensoren. Dabei kann man jedem Sensor eine eigene Dimension zuweisen und kann diese so in einer einzigen Variable bündeln. \\
 	Mehrdimensionale Arrays existieren nicht separat zu normalen Arrays, vielmehr sind mehrdimensionale Arrays lediglich eine Variable welche aus Arrays von Arrays besteht. Mehrdimensionale Arrays kann man generieren indem man mehrere Klammern an den Variablentyp stellt. (Zusätzlich zu dem Ersten): \verb|int[][] twoDimArr| -> Generiert ein zweidimensionales Array namens twoDimArr. Wenn man auf Elemente in einem mehrdimensionalen Array zugreifen will, muss man wiederum mehrere Klammern als Index angeben. Dabei greift man stets nur über die letzte Klammer auf die Elemente in den Arrays zu, und alle Klammern davor dienen nur zur Definition des Arrays: \verb|twoDimArr[0][5]| -> Greift auf die erste Spalte und das sechste dort enthaltene Element zu. \\
 	Arrays werden auch sehr ähnlich zu normalen Arrays gespeichert. Während ein normales Array am Speicherort des Arrays nur einen Verweis auf die Reihe an Elementen im Speicher enthält, hat ein mehrdimensionales Array in der Variable einen Verweis auf ein Array aus Arrays, welche dann schließlich jeweils auf die Werte zeigen.  
-	\cprotect\subsection{\verb|foreach|}
+	\cprotect\subsection{\texorpdfstring{\verb|foreach|}{}}
 	Die \verb|foreach| Schleife ist eine erweiterte for Schleife, welche nicht das bekannte Format der drei Teile besitzt, sondern nur eine Iterationsvariable besitzt, welche über die Länge eines Arrays oder Strings läuft und dabei jedes Element hintereinander auswählt. Die Syntax hierfür ist: \verb|for(<datatype> <iterator> : <array>) {<code>}| wobei die Variable iterator, welche vom gleichen Datentypen als das Array sein sollte, Platzhalter für jedes Element im Array ist.
 	\subsection{Eingabenautomatisierung}
 	Ein Programm zu testen kann oft ein langwieriger Prozess sein. Ein einfacherer Weg ein Programm umfassend zu testen, ist test cases zu schreiben und diese automatisiert einzugeben. Dazu kann man ein Text File schreiben, wo alle Eingaben sequenziell mit line breaks getrennt angegeben sind. Um es dann verwenden zu können, muss man, wenn man das Programm in der command line ausführt mit dem kleiner Zeichen \verb|<| es als input für das Programm angeben: \verb|java prg.class < input1.in| 
@@ -587,7 +592,7 @@
 			\end{itemize}
 		\end{itemize}
 	\end{enumerate}
-	\cprotect\subsubsection{\verb|final|}
+	\cprotect\subsubsection{\texorpdfstring{\verb|final|}{}}
 	Das Schlüsselwort \verb|final| kann in verschiedenen Situationen verwendet werden:
 	\begin{itemize}
 	 	\item{Bei Variablen}
@@ -640,14 +645,14 @@
 	 }  \\scanner closes automatically
 	 \end{verbatim}
 	 Eine Variable welche in dieser Weise verwendet wird, muss das \verb|closeable| Interface implementieren.
-	 \cprotect\subsubsection{\verb|throws|}
+	 \cprotect\subsubsection{\texorpdfstring{\verb|throws|}{}}
 	 Dieses keyword wird bei Methoden angegeben um anzuzeigen, dass dieses eine spezifische Excpetion werfen können.
 	 \begin{verbatim}
 	 static void ExampleMethod (<Argumente>) throws ExampleException { -> throws kommt immer nach Angabe der Argumente
 	 	<Code> 	                                                          aber vor dem Programmcode selbst.
 	 }
 	 \end{verbatim}
-	 \cprotect\subsubsection{\verb|throw|} 
+	 \cprotect\subsubsection{\texorpdfstring{\verb|throw|}{}} 
 	 Wenn man eine exception manuell auslösen will, kann man das keyword \verb|throw| verwenden. Wenn die exception ungeprüft ist, kann man das einfach so machen. Falls die manuell ausgelöste exception jedoch geprüft ist, muss man diese in der Methode explizit behandeln (Mit einem \verb|try|/\verb|catch| Block, oder der Methode das keyword \verb|throws <Exception>| hinzufügen)
 	 \begin{verbatim}
 	  if (divisor == 0) {                                    -> Falls divisor gleich 0 ist
@@ -668,26 +673,26 @@
 	 \subsection{Files}
 	 Man kann in Java natürlich Dateien ein- und auslesen. Dafür gibt es mehrere Klassen, unter anderem die \verb|java.io| Klasse. Dateien werden mittels Datenströmen aus- und eingelesen und dann auf ein Ziel, meist die Konsole oder eine Datei oder ein Netzwerk, geschrieben. \\
 	 Bei Binären Daten kann man die Klassen \verb|java.io.InputStream| zum Lesen und \verb|java.io.OutputStream| zum Schreiben verwenden, während bei Zeichen \verb|java.io.FileReader| und \verb|java.io.FileWriter| verwendet werden kann. Binär beschreibt in diesem Fall jegliche Daten, welche nicht als Zeichen interpretiert werden können. Theoretisch kann man jedoch natürlich auch Textdateien im binären Modus öffnen.
-	 \cprotect\subsubsection{\verb|java.io.FileReader| }
+	 \cprotect\subsubsection{\texorpdfstring{\verb|java.io.FileReader|}{}}
 	 Wie erwähnt liest der \verb|FileReader| Textdateien. Dabei erstellt man ein neues Objekt dieser Art und übergibt an dessen Konstruktor den Pfad für die Datei die gelesen werden soll.
 	 \begin{verbatim}
 	  FileReader reader = new FileReader(filename);
 	 \end{verbatim} 
 	 Theoretisch könnte man so eine Datei Zeichen für Zeichen auslesen. Das ist jedoch eine relativ ineffiziente Operation, weshalb, wenn man große Mengen an Daten einlesen will, zusätzlich den \verb|java.io.BufferedReader| verwenden sollte. 
-	 \cprotect\subsubsection{\verb|java.io.BufferedReader|}
+	 \cprotect\subsubsection{\texorpdfstring{\verb|java.io.BufferedReader|}{}}
 	 \verb|java.io.BufferedReader| ist eine Klasse, welche man über den FileReader legen kann. Dabei gibt man das FileReader Objekt mit dem Pfad als Argument an den Buffered Reader weiter.
 	 \begin{verbatim}
 	  FileReader reader = new FileReader(filename);
 	  BufferedReader buffer = new BufferedReader(reader);
 	  \end{verbatim} 
 	  Dabei speichert der BufferedReader den input des Files temporär um es danach bei Bedarf auszugeben, sodass FileReader nur ein Mal das File auslesen muss. So kann man auf den BufferedReader zugreifen um so die Datei indirekt auszulesen. BufferedReader besitzt zusätzlich Helfermethoden um es effizienter auslesen zu können. Eine davon ist \verb|.nextLine()|, mit welcher man die nächste Zeile innerhalb des Puffers auslesen kann. Wenn man das Ende der Datei erreicht hat, gibt der Puffer danach \verb|null| zurück. Auf diese Weise kann man die Datei Zeile für Zeile auslesen und erhält sofort eine Meldung wenn das Ende erreicht wird.
-	  \cprotect\subsubsection{\verb|java.io.FileWriter|}
+	  \cprotect\subsubsection{\texorpdfstring{\verb|java.io.FileWriter|}{}}
 	  Der FileWriter funktioniert sehr ähnlich zum FileReader, schreibt jedoch auf die Datei anstatt sie zu lesen. 
 	  \begin{verbatim}
 	  	FileWriter writer = new FileWriter(filename);  
 	  \end{verbatim}  
 	  Der Zugriff auf die Datei ist jedoch auch in diesem Fall sehr rechenintensiv, weshalb auch hier eine Helferklasse, \\ \verb|java.io.BufferedWriter| existiert.
-	  \cprotect\subsubsection{\verb|java.io.BufferedWriter|}
+	  \cprotect\subsubsection{\texorpdfstring{\verb|java.io.BufferedWriter|}{}}
 	  Diese Klasse funktioniert auch ähnlich zum BufferedReader, sodass sie anstatt jedes Zeichen einzeln zu schreiben, stattdessen in regulären Intervallen die Datei schreibt. 
 	  \begin{verbatim}
 	  FileWriter writer = new FileWriter(filename);
@@ -719,16 +724,80 @@
 	  PrintStream printout = new PrintStream(output);       -> Übergibe diesen an einen PrintStream
 	  System.setOut(printOut);                              -> Setze diesen PrintStream als Out
 	  \end{verbatim}
-	      
-
-
-
-
-
-
-
-
-
+	  \subsection{Kommandozeilenparameter}
+	  Mit Kommandozeilenparametern (Command-line arguments) kann man beim Aufrufen eines Programms, diesem Information mitgeben:
+	  \begin{verbatim}
+	  java ExampleProgram These are arguments -> "These", "are" und "arguments" sind 
+	                                             jeweils ein Argument, welches mitgegeben wird.
+	  \end{verbatim}
+	  Diese übergebenen Parameter kann man dann im Programm einlesen und verwenden. Man kann in den meisten IDEs angeben, dass Parameter standardmäßig mitgegeben wird. \\
+	  Sinn solcher Parameter ist, dem Programm eine Information mitzuteilen. Zum Beispiel kann man dem Programm anweisen, dass man im Debug Modus laufen soll, wodurch mehr Ausgaben getätigt werden. Man kann jedoch auch einen Pfad als Parameter angeben, damit ein Programm aus einer Konfigurationsdatei gestartet werden kann und man nicht den Pfad in den Code selbst integrieren muss.
+	  \section{Bits und Bytes}
+	  Programme arbeiten grundlegend mit Bytes, welche stets eine gewisse Größe haben \hyperref[sec:Datentypen]{\underline{(Siehe Datentypen)}}. Dadurch kann eine Variable jeweils nur Werte einer bestimmten Größe halten. \\
+	  \subsection{Grundlage}
+	  Bits sind die kleinstmögliche Einheit mit der eine Computer arbeiten kann. Dabei kann dieser zwei Zustände annehmen, an oder aus. Bytes sind wiederum eine Ansammlung von jeweils 8 Bits. \\
+	  \subsection{Ganzzahlen}
+	  Ganzzahlen (Integer und Long) werden als Stellen einer Binärzahl interpretiert. \\
+	  Zum Beispiel kann man \verb|01011001| als 89 interpretieren, da die einzelnen Exponenten der Zahl aufsummiert werden. \\
+	  Negative Zahlen werden dabei im 2er Komplement dargestellt. Das Most Significant Bit (MSB) zeigt dabei, ob eine Zahl positiv oder negativ ist. (1 heißt negativ, 0 positiv). Das 2er-Komplement wird gebildet, indem man alle Bits einer Binärzahl invertiert (Alle 1 zu 0 und umgekehrt.) und danach 1 addiert. Der Vorteil dieser Schreibweise ist, dass wenn man zu einer so dargestellten negativen Zahl eine größere Zahl addiert, der negative Wert verschwindet, wodurch wieder eine positive Zahl entsteht. 
+	  \subsection{Oktalzahlen}
+	  Eine Oktalzahl ist, gleich wie das Binär- oder Dezimalsystem, ein Zahlensystem. Dabei ist die Basis 8 und kann die Ziffern 0 bis 7 beinhalten. Der Vorteil von Oktalzahlen ist, dass 3 Bits die gleiche Information wie eine Oktalzahl darstellen kann, wodurch man Bits in Gruppen von 3 angibt und so eine Bitzahl bedeutend verkürzt.
+	  \subsection{Hexadezimalzahl}
+	  Hexadezimalzahlen sind sehr ähnlich zu Oktalzahlen, haben jedoch die Basis 16 statt 8. Dadurch kann man Binärzahlen noch effizienter darzustellen, da man jeweils 4 Bits als eine Ziffer angeben kann.
+	  \subsection{Anwendung in Java}
+	  Diese Zahlentypen kann man natürlich auch in Java verwenden. Dabei muss man jedoch die Basis der Zahl explizit angeben.
+	  \begin{itemize}
+	  	\item{Binärzahlen werden beginnend mit \verb|0b| angegeben.}
+	  	\item{Oktalzahlen werden beginnend mit \verb|0| angegeben.}
+	  	\item{Hexadezimalzahlen werden beginnend mit \verb|0x| angegeben.}
+	  	\item{Jegliche andere Zahlen werden als Dezimalzahl interpretiert. Aus diesem Grund sollte man Dezimalzahlen jedoch nicht mit führenden Nullen schreiben.}
+	  \end{itemize}
+	  Zur Konvertierung zwischen den Zahlentypen hat Java einige Methoden zur Verfügung:
+	  \begin{verbatim}
+	  Integer.toBinaryString(intValue) -> Konvertiert einen Integer zu einer Binärzahl.
+	  Integer.toOctalString(intValue) -> Konvertiert einen Integer zu einer Oktalzahl.
+	  Integer.toHexString(intValue) -> Konvertiert einen Integer in eine Hexadezimalzahl.
+	  \end{verbatim}
+	  Zwischen diesen Systemen konvertiert man jeweils mit der Stellenwertkonversion. (Jedem Stellenwert wird die Basis mit der Stelle als Exponent zugewiesen und addiert.)
+	  \subsection{Überlauf/Unterlauf}
+	  Da ein Datentyp lediglich eine bestimmte Größe an Werten speichern kann, ist es ein Problem, wenn man eine größere oder kleinere Zahl darin speichern will, oder eine Addition/Subtraktion angibt, welche als Ergebnis eine größere oder kleinere Zahl hat. Dabei erkennt Java nicht ob eine Operation einen Over- oder Underflow verursachen würde.
+	  \begin{verbatim}
+	  int 2147483647 + 1 = -2147483648; -> Da der int bereits den höchstmöglichen Wert hat
+	                                       führt bereits ein weiterer Wert zu einem Overflow.
+	  \end{verbatim}
+	  Ein Weg diese Situation zu umgehen ist die \verb|Math.addExact()| Methode, welche bei einer arithmetischen Operation überprüft, ob ein Over- oder Underflow geschehen würde, und wirft eine Exception, falls dies der Fall ist.
+	  \subsection{Bit-Operatoren}
+	  Zusätzlich zu den normalen Operatoren (Siehe Operatoren), gibt es auch die Bitwise Operatoren. Das ist auch der Grund warum man bei der Verbindung zweier Werte bei einer Überprüfung zwei \&\& angeben muss. \\
+	  \begin{tabular}{| l | l | l |}
+	  	\toprule
+	  	Operator & Beschreibung & Beispiel \\ \midrule
+	  	\& & Bitweises UND & 0101 \& 0011 = 0001 \\ \hline
+	  	$\vert$ & Bitweises ODER & 0101 $\vert$ 0011 = 0111 \\ \hline
+	  	\textasciicircum & Bitweises XOR & 0101 \textasciicircum 0011 = 0110 \\ \hline
+	  	\textbackslash & Bitweise Negation & \textbackslash 0101 = 1010 \\ \hline
+	  	<< & Bit-Shift nach links & 00010110 << 2 = 01011000 \\ \hline
+	  	>> & Bit-Shift nach rechts & 00010110 >> 1 = 00001011 \\ \hline
+	  	\verb|>>>| & Bit-Shift nach rechts mit 0 auffüllen & 000101101 >>> 1 = 0000101101 \\
+ 	  	\bottomrule
+	  \end{tabular}
+	  Diese Operatoren kann man gleich wie normale Operatoren wiederum mit der Zuweisung kombinieren.
+	  \subsubsection{Flags}
+	  Der Nutzen von Bit Operatoren mag nicht sofort ersichtlich sein, jedoch kann man zum Beispiel eine Anzahl an Flags mit einer Variable angeben, welche danach einfach überprüft werden kann. Kombiniert mit dem Wissen, dass man mit \verb|0b| eine Binärzahl definieren kann, kann man so eine Variable wie einen byte definieren und dessen Bits 'zweckentfremden' um 8 separate Flags zu generieren. Diese flags kann man dann verwenden um verschiedene Zustände anzugeben, zum Beispiel ob etwas läuft oder nicht. Mit den Bitwise Operatoren kann man diese Flag Variable überprüfen ob die benötigten Zustände zutreffen indem man sie Binär Verundet.
+	  \subsection{Gleitkommazahlen}
+	  Gleitkommazahlen werden nicht wie Ganzzahlen in ihrer Reinform gespeichert. Stattdessen wird die Wissenschaftliche Notation verwendet. Dabei speichert die Variable jeweils das Vorzeichen, den Exponenten, sowie die Mantisse ab. Die Die Basis wird nicht gespeichert, da dieser immer 2 ist. Das Vorzeichen gibt dabei an, ob die Zahl negativ oder positiv ist, der Exponent um wie viele Stellen die Zahl verschoben werden muss sowie die Mantisse, welche die genaue Zahlenfolge angibt. 
+	  \subsubsection{Probleme mit Gleitkommazahlen}
+	  Da eine Gleitkommazahl Zahlen nur durch Binärexponenten dargestellt werden können, können exakte Zahlen nur sehr schwer getroffen werden. Zum Beispiel ist die Zahl 0,1 mit einer Gleitkommazahl nur annähernd mittels $\frac{1}{16} + \frac{1}{32}$
+	  \subsection{Effizienz von Java Programmen}
+	  Man kann ein Java Programm auf ihre Geschwindigkeit testen. Auf UNIX Systemen kann man mittels \verb|time| die Ausführzeit eines Programms ermitteln und diese dann miteinander vergleichen. So kann man auch die Laufzeit verschiedener Programmiersprachen vergleichen. Der gezeigte Vergleich war zwischen Java und PHP, wobei PHP jedoch eine interpretierte Sprache ist. \\
+	  \begin{tabular}{| l | l |}
+	  	\toprule
+	  	Java & PHP  \\ \midrule
+	  	0.707s & 15.084s \\ \hline
+	  	0.714s & 10.956s \\
+	  	\bottomrule
+	  \end{tabular}
+	  Bei diesem Programm sollte das Programm jeweils alle Zahlen von 1 bis 1.000.000.000 aufsummieren. Während Java dafür weniger als eine Sekunde benötigte, brauchte PHP mehr als 10 Mal so lange. Dabei sollte man jedoch beachten, dass PHP eine Sprache in der Webentwicklung ist und andere Anwendungsmöglichkeiten dafür gibt. \\
+	  Dabei sollte man aber beachten, dass es auch eine andere Möglichkeit gibt, diese Summe zu erhalten, nämlich die Gaußsche Summenformel \verb|(n+1)*n/2|. Während die summierende Schleife eine lineare Laufzeit hat (Für jedes extra n muss die Schleife ein Mal mehr laufen), hat diese Formel eine konstante Laufzeit (Das Programm benötigt die selbe Zeit, ob sie 5 oder eine Milliarde Stellen summiert). Die Wahl des richtigen Algorithmus ist extrem wichtig, da dieser die Laufzeit des Programms grundsätzlich beeinflussen kann.
 
 
 

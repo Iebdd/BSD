@@ -440,6 +440,109 @@
 	Linux verwendet ein System namens Buddy. Dabei versucht die Speicherverwaltung stets einen Block so passend wie möglich zu verteilen. Um dies zu erreichen spaltet das System den Speicher into Blöcke, welche jeweils Zweierpotenzen darstellen. Wenn das System also nur 1024KB zur Verfügung hat, und ein Prozess 100KB benötigt, spaltet das System Blöcke bis ein Block 128KB hat, da eine weitere Spaltung mit 64KB zu klein wäre. Dadurch wird in etwa stets der effektivste Block zugeteilt. \\
 	\subsubsection{Speicherüberlastung}
 	Da der Arbeitsspeicher nur eine begrenzte Größe hat, wird dessen Größe oft nicht ausreichen um alle möglichen Programmdaten zu halten. Um trotzdem alle Prozesse bearbeiten zu können, kann man mittels swapping den Speicher in der Festplatte und den Speicher im RAM auszutauschen. Dabei wird Speicher aus dem RAM auf die Festplatte ausgelagert und eingelagert. Dieser Prozess ist jedoch relativ ineffizient, da die Schreib- und Lesegeschwindigkeit im Vergleich zum RAM relativ begrenzt ist (~{}100MB/s).
+	\section{Virtueller Speicher}
+	Im realen Speicher gilt die Regel, dass ein Programm vollständig im Speicher vorhanden sein muss, bevor es ausgeführt werden kann. Es kann jedoch passieren, dass ein Programm zu groß ist, um komplett im Arbeitsspeicher Platz zu finden. Dabei wird virtueller Speicher relevant, welcher ermöglicht, dass ein Prozess nicht komplett geladen werden muss um trotzdem ausführbar zu sein. Im virtuellen Speicher wird jedem Prozess vorgespielt, dass der gesamte Arbeitsspeicher nur ihm zur Verfügung steht. Da die Verbindung zwischen dem Speicher, der einem Prozess zur Verfügung steht und dem echten Speicher, so schwächer ist, kann ein Programm auch in mehreren Teilen über den Arbeitsspeicher verteilt sein. Das ist auch eine Möglichkeit wie Systeme mit virtuelleme Speicher eine Speicherüberlastung umgehen können.
+	\subsection{Memory Management Unit (MMU)}
+	Um diese realen Adressen mit den virtuellen Adressen verbinden zu können, wird die MMU verwendet. Sie behält einen Index beider Adresswelten und übersetzt einen in das andere. Ist oft ein dezidierter Chip um hohe Geschwindigkeiten zu garantieren. Dieser Chip meldet auch Zugriffsverletzungen, wenn ein Prozess außerhalb seiner Zugriffsrechte agieren will.
+	\subsection{Abstraktion}
+	Bei einem virtuellen Speicherblock, wird jedem Prozess ein Adressraum zugewiesen. Jeder Prozess hat in seinem eigenen Adressraum vermeintlich unendlich viel Speicher zu Verfügung, welcher von dem Betriebssystem bei Bedarf stets erweitert wird. In modernen Betriebssystemen arbeitet kein Prozess mehr mit realen Adressen, sondern nur mehr mit virtuellen Adressen. Lediglich der Boot Runner beim Starten des Systems arbeitet noch mit realem Speicher. Da die virtuellen Adressen keine direkte Relation zu dem realen Speicher haben, kann sich ein Teil des Programms somit auch auf einem Sekundärspeicher befinden, welcher bei Bedarf von dem Betriebssystem in den Arbeitsspeicher geladen wird.
+	\subsubsection{Logische Adressraumbelegung}
+	Der Speicher wird in separate logische Adressräume geteilt, welche jeweils verschiedene Anwendungszwecke haben.
+	\begin{itemize}
+		\item{Text oder Code}
+		\begin{itemize}
+			\item{Beinhaltet den ausführbaren Programmcode}
+		\end{itemize}
+		\item{Daten}
+		\begin{itemize}
+			\item{Beinhaltet globale Variablen mit unbeschränkter GÜltigkeitsdauer}
+		\end{itemize}
+		\item{Heap}
+		\begin{itemize}
+			\item{Dynamisch zugeteilter Speicher (Objekte wie String Variablen)}
+		\end{itemize}
+		\item{Stack}
+		\begin{itemize}
+			\item{Auch dynamisch und beinhaltet lokale Daten mit beschränkter Gültigkeitsdauer. (Wie lokale Variablen)}
+		\end{itemize}
+	\end{itemize}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{Bilder/virtual.png}
+	\caption{Programmcode und ihr Aufenthaltsort}
+	\end{figure}
+	Es mag hier scheinen, als ob der gesamte Speicher eine Einheit bilden, er kann jedoch in unterschiedlichen Segmenten im Speicher existieren.
+	\subsection{Paging}
+	Virtueller Adressraum wird in Pages eingeteilt, welche jeweils die gleiche Größe haben. Jede Seite ist dabei ein aneinander grenzende Bereiche von Adressen eingeteilt. Die Größer einer solchen Page ist variabel und kann zwischen 512 Byte und 1GB liegen, ist jedoch typischerweise 4KB groß. Es ist jedoch wichtig, dass jede Seite innerhalb des Speichers die gleiche Größe hat. Eine virtuelle page wird dabei im physikalischen Raum in einer page frame gespeichert. Ein Prozess namens \textit{Demand Paging} ermöglicht hierbei, dass ein Prozess nicht komplett im Speicher vorhanden sein muss um ihn auszuführen. Der Ort der einzelnen Seiten wird dabei mittels Page Table festgehalten.
+	\subsubsection{Page Table}
+	Wird verwendet um eine Page zu einem Page Frame zu übertragen. Dabei hält die Page Table den Aufenthaltsort der Page im physischen Speicher, sowie dessen virtuelle Speicheradresse fest. \\
+	Dabei enthält jede Page Table stets:
+	\begin{itemize}
+		\item{Die Seitennummer}
+		\begin{itemize}
+			\item{Die virtuelle Adresse der Page}
+		\end{itemize}
+		\item{Eine Seitenrahmen Nummer}
+		\begin{itemize}
+			\item{Die physische Repräsentation der Page im Page Frame}
+		\end{itemize}
+		\item{Zustand der Seite (Present-Bit)}
+		\begin{itemize}
+			\item{Hält fest ob diese Page verwendet wird. \verb|0 -> Nicht vorhanden, 1 -> Vorhanden|}
+		\end{itemize}
+		\item{Zusatzinformation (Zetstempel für letzte Nutzung, Einlagerung, Ändern ...)}
+	\end{itemize}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{Bilder/pagetable.png}
+	\caption{Übersetzung der Page in einen Page Frame anhand der Page Table}
+	\end{figure}
+	Die physikalische Adresse besteht aus der Summe der Physical Frame Number und dem Offset innerhalb der Page
+	\subsubsection{Zugriffsszenarien}
+	Bei einer Zugriffsanfrage gibt es zwei mögliche Ausgänge:
+	\paragraphlb{Ein Prozess will auf Speicher zugreifen, der im physischen Speicher vorhanden ist.}
+	\begin{tabular}{| l | l | l |}
+		\toprule
+		Seite & Frame & Present-Bit \\ \midrule
+		1 & - & 0 \\ \hline
+		1 & 0 & 1 \\ \hline
+		2 & 3 & 1 \\ \hline
+		3 & - & 0 \\ \hline
+		4 & 2 & 1 \\ \hline
+		5 & - & 0 \\ \hline
+		6 & - & 0 \\
+		\bottomrule
+	\end{tabular} \\
+	Gegeben ist folgende Tabelle. Dabei sind sowohl VPN als auch PFV 4 Bit Zahlen. Zusätzlich gibt es im Arbeitsspeicher 4 Frames \verb|-> {0, 1, 2, 3}| \\
+	\textbf{\small{Übersetze die virtuelle Adresse in eine physische}} \\
+	a) \verb|0010 1110 -> Logische Adresse [VPN + Offset]| \\
+	Man muss die VPN Nummer links (0010) in Dezimal übersetzen (2) und die Seitennummer in der Tabelle mit der Frame Nummer (3) in Binär (0011) übersetzen. Der Offset ist in beiden Fällen gleich und bleibt bestehen. Der Offset ist hierbei die Zeilennummer innerhalb der Page (Also kann es innerhalb einer Page mehrere Offsets geben) \\
+	\verb|0011 1110 -> Physische Adresse [PFN + Offset]|
+	\paragraphlb{Ein Prozess will auf Speicher zugreifen, der \textbf{nicht} im physischen Speicher vorhanden ist.}
+	Wenn keine gültige Zuordnung besteht, tritt ein \verb|Page Fault| auf. Dabei wird die Übersetzung abgebrochen und stattdessen versucht die Page im physischen Speicher einzulagern. Die MMU nimmt so einen freien Page Frame und ordnet ihm der neuen Page zu.
+	\paragraphlb{Ein Prozess will auf Speicher zugreifen, der \textbf{nicht} im physischen Speicher vorhanden ist, es existiert jedoch kein freies Frame}
+	Wenn keine Frame verfügbare ist, muss eine sogenannte Opferseite gefunden werden. Das ist eine Page, welche in den Sekundärspeicher ausgelagert werden soll, um Platz für die neue Page zu schaffen. Dabei gibt es drei Strategien um ein Frame zur Auslagerung zu bestimmen:
+	\begin{itemize}
+		\item{First in - First Out (FIFO)}
+		\begin{itemize}
+			\item{Der schon am längsten im Hauptspeicher existierende Frame wird ausgelagert.}
+			\item{Kann problematisch sein, da der älteste Frame nicht unbedingt ein unbedeutender ist.}
+		\end{itemize}
+		\item{Least Recently Used (LRU)}
+		\begin{itemize}
+			\item{Die Seite die am längsten nicht genutzt wurde, wird ausgelagert}
+		\end{itemize}
+		\item{Second Chance}
+		\begin{itemize}
+			\item{Kombiniert die anderen zwei Verfahren und entfernt die älteste Seite, die nicht genutzt wurde.}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Translation Lookaside Buffer (TLB)}
+	Da die Umrechnung der virtuellen Adressen sehr schnell erfolgen muss, gibt es einen Cache zur Speicherung von oft verwendeten Adresspaaren. Das Nachsehen in dem TLB ist schneller als die Übersetzung des MMUs, da der Lookaside Buffer keine Berechnungen vornimmt um die Adressen zu ermitteln sondern nur die Referenz einer Adresse, auf eine andere speichert. Nur wenn im TLB kein passendes Paar zur Verfügung steht, wird die MMU zur Rate gezogen. Der Zugriff auf die TLB ist extrem schnell, da diese Paare in einer Hash Tabelle gespeichert werden, wodurch sie in nahezu konstanter Zeit gefunden werden können. Dabei agiert die Ursprungsadresse als Key, und die Zieladresse als Value (In Key:Value Paaren).
+
+
+	
+	
 
 
 
