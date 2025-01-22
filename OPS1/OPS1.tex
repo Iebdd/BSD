@@ -4,6 +4,7 @@
 \usepackage{makecell}
 \usepackage{array}
 \usepackage{multicol}
+\usepackage{wrapfig}
 \usepackage{setspace}
 \usepackage{changepage}
 \usepackage{booktabs}
@@ -539,9 +540,116 @@
 	\end{itemize}
 	\subsubsection{Translation Lookaside Buffer (TLB)}
 	Da die Umrechnung der virtuellen Adressen sehr schnell erfolgen muss, gibt es einen Cache zur Speicherung von oft verwendeten Adresspaaren. Das Nachsehen in dem TLB ist schneller als die Übersetzung des MMUs, da der Lookaside Buffer keine Berechnungen vornimmt um die Adressen zu ermitteln sondern nur die Referenz einer Adresse, auf eine andere speichert. Nur wenn im TLB kein passendes Paar zur Verfügung steht, wird die MMU zur Rate gezogen. Der Zugriff auf die TLB ist extrem schnell, da diese Paare in einer Hash Tabelle gespeichert werden, wodurch sie in nahezu konstanter Zeit gefunden werden können. Dabei agiert die Ursprungsadresse als Key, und die Zieladresse als Value (In Key:Value Paaren).
-
-
-	
+	\section{Dateiverwaltung}
+	Das Betriebssystem dient zur Abstraktion der Hardware eines Computers. Da Menschen eine hierarchische Aufteilung besser aufnehmen können, als eine lange Liste an Werten, hilft das Betriebssystem dabei Daten besser darzustellen, ohne, dass man darüber nachdenken muss, wie es eigentlich abgespeichert wird. \\
+	Bei der Dateiverwaltung geht es spezifisch um die Speicherung von Daten in persistentem Speicher, also solchem, welcher überdauert, selbst wenn kein Strom vorhanden ist. Da man diesen nicht unterhalten muss, kann man Gegenstände abspeichern welche man eventuell nur selten benötigt. Nachteil eines solchen Speichers ist natürlich, dass er langsamer als der Primärspeicher ist und zusätzlich nicht direkt von der CPU angesprochen werden kann. \\
+	Persistenter Speicher kann in einer Vielzahl von Formen vorkommen, von Lochkarten, über CDs bis Festplatten. SSDs sind dabei der Stand der Dinge und bieten eine veilfach höhere Schreib- und Leserate als bei einer regulären Festplatte. \\
+	\begin{itemize}
+		\item{CD}
+		\begin{itemize}
+			\item{Optischer Speicher, wobei Daten als Muster auf die Oberfläche eingebrannt werden. Ein Laser kann diese Daten danach wieder auslesen}
+		\end{itemize}
+		\item{Digitaler Speicher}
+		\begin{itemize}
+			\item{Flash Speicher, welcher nur asu digitalen Komponenten besteht und dadurch keine mechanischen Komponenten wie einen Lesekopf besitzen. Diese sind sehr schnell und robust, weisen jedoch meist eine begrenzte Anzahl an Schreibvorgängen auf.}
+		\end{itemize}
+		\item{Magnetischer Speicher}
+		\begin{itemize}
+			\item{Basiert auf der magnetisierung eines Mediums, wie einer Festplatte oder einer Diskette. Dabei wird eine dünne Schicht abhängig von der Information stellenweise magnetisiert. Ein Lesekopf beschreibt, liest und löscht dabei diese Einträge auf der sich drehenden Scheibe.}
+		\end{itemize}
+	\end{itemize}
+	\subsection{ROM}
+	Es gibt jedoch auch nicht beschreibbare Speicher. Diese Read Only Memory (ROM) Speicher sind in der Regel bereits beschrieben und 
+	\subsection{EEPROM}
+	\subsection{Dateisystem}
+	Das Betriebssystem speichert Daten persistent im Speicher ab und gibt es in geordneter Form aus, sodass es vom Auge einfacher verstanden werden kann. Zusätzlich bietet es auch eine einheitliche Sicht auf alle Festplattenmedien, wie HDDs, CDs oder Disketten und reguliert wer darauf zugreifen darf. Da es Daten erstellen kann, muss es auch in der Lage sein diese zu verändern und wieder zu löschen. \\
+	\subsection{Attribute}
+	Dateien besitzen zusätzliche Metainformation, welche nicht der inhalt selbst ist. Diese beschreiben zum Beispiel dessen Größe, Erstellungsdatum, Änderungsdatum etc.
+	\subsubsection{Name}
+	Jede Datei benötigt einen Namen. Betriebssysteme erlauben dabei manche Zeichen in einer Datei nicht, da diese bereits reserviert sind. Auch wenn sie zugelassen sind, sollte man es trotzdem vermeiden Umlaute oder Leerzeichen zu verwenden. Da Umlaute nicht in ASCII sind, kann dessen Verarbeitung von der Kodierung abhängen und dadurch eventuell fehlinterpertiert werden. \\
+	Betriebssysteme haben unterschiedliche Regeln zur Benennung, verlangen jedoch meistens eine Mindestanzahl an Zeichen und erlauben nicht mehr als 255 Zeichen. \\
+	Namen bestehen in der Regel aus zwei Teilen: Dem Namen und der Dateiendung. \\
+	In Windows ist die Dateiendung verpflichtend, da diese die Art der Datei beschreibt, während es bei UNIX-basierten Systemen durch die Magic Number gespeichert wird, weshalb es auch ohne Endung weiß, was es für eine Datei ist. Diese steht stets am Anfang der Datei und kennzeichnen die Art des Dateninhalts.\\
+	\subsection{Struktur}
+	Nahezu alle verbreiteten Systeme verwenden eine lineare Bitfolge als Struktur. Dabei existiert eine Bytefolge von einer bestimmten Größe und bietet dadurch die größtmögliche Flexibilität.
+	\subsection{Zugriff}
+	Ein Dateisystem kann auf zwei Arten auf die Daten zugreifen: Sequenziell oder Random/Direct Access. \\
+	Wenn der Zugriff sequenziell ist, muss die Länge des Speichers durchlaufen werden um ein spezifisches Element zu finden. Disketten und Kassetten basieren auch auf sequenziellem Speicher. \\
+	Als Gegenstück dessen gilt der Direct oder Random Access. Dabei kann jede Speicherzelle unabhängig von anderen Zellen in konstanter Laufzeit gelesen oder geschrieben werden. \\
+	Da die Art des Mediums (Kassette oder SSD) oft die Art des Zugriffs vorschreibt, muss ein BS beides beherrschen und in jedem Fall das richtige verwenden. \\
+	\subsection{Links}
+	Dateien sind nicht immer unabhängig voneinander. Man kann einen Verweis erstellen, welcher auf eine andere Datei zeigt. Diese Datei existiert nicht wirklich, sondern verweist nur auf dessen Ursprungsdatei. Dabei gibt es zwei Arten von Links: Hard und Symbolic Links. \\
+	Hard Links sind ein fester, statischer Verweis auf eine Datei. Die Besonderheit ist dabei, dass, wenn ein Hard Link auf eine Datei fest besteht und die Datei weiter mit dem Link geöffnet werden kann, selbst nachdem die Datei im Verzeichnis gelöscht worden ist. Erst wenn alle Hard Links gelöscht werden, wird auch die Datei gelöscht. \\
+	Im Gegensatz dazu stehen Symbolic Links, welche nur versuchen auf die Ursprungsdatei zu verweisen, wenn sie geöffnet wird, weshalb sie ins leere führt, wenn man die Originaldatei löscht und dann den Link öffnen will.
+	\subsection{Festplattenlayout}
+	Eine Festplatte ist in Partitionen unterteilt. Partitionen sind aufgespaltene Teile einer Festplatte, welche vom Betriebssystem als eigen Festplatte behandelt werden. Eine wird stets als aktiv gekennzeichnet, mit der das System hochfährt. \\
+	Der erste Sektor auf der Festplatte ist stets der Index der Festplatte (Entweder der MBR (Master Boot Record) oder die GPT (GUID Partition Table)). Danach folgt die Partitionstabelle, welche den Anfang und das Ende jeder Partition beschreibt. 
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{Bilder/partition.png}
+	\caption{Layout einer typischen Festplatte}
+	\end{figure}
+	Jede Partition hat seine eigene Verwaltung und kann deshalb auch unabhängig voneinander verwendet werden. Aus diesem Grund hat jede Partition auch Metainformation: \\
+	\begin{itemize}
+		\item{Boot Block}
+		\begin{itemize}
+			\item{Lädt das Betriebssystem, wenn der PC hochgefahren wird. Jede Partition besitzt einen Boot Block auch wenn sie nicht bootfähig ist.}
+		\end{itemize}
+		\item{Superblock}
+		\begin{itemize}
+			\item{Enthält Parameter des Dateisystems wie die Art des Dateisystems oder die Anzahl der Blöcke.}
+		\end{itemize}
+		\item{Freispeicherveraltung}
+		\begin{itemize}
+			\item{Speichert Information über freie Speicherblöcke}
+		\end{itemize}
+		\item{I-Nodes}
+		\begin{itemize}
+			\item{Speichert die Datenstrukturen sowie Verweise auf Speicherblöcke (Siehe Index Nodes[TODO LINK])}
+		\end{itemize}
+		\item{Wurzelverzeichnis}
+		\begin{itemize}
+			\item{[TODO]}
+		\end{itemize}
+		\item{Dateien und Verzeichnisse}
+		\begin{itemize}
+			\item{Die Daten und Ordner}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Belegungen}
+	Daten könenn auf zwei Weisen auf der Festplatte gespeichert werden: Mit Zusammenhängender oder Verteilter Belegung. 
+	\paragraphlb{Zusammenhängende Belegung}
+	Bei der Zusammenhängenden Belegung besteht jede Datei aus zusammenhängenden Mengen von Blöcken und wird nicht gespalten. Großer Vorteil dieser Strategie ist, dass sie sehr einfach in der Implementierung ist, da man nur den Anfangsblock sowie die Größe der Datei kennen muss um diese auszulesen. Zusätzlich kann jede Datei sehr einfach und schnell ausgelesen werden. \\
+	Nachteil dieser Strategie ist, dass es zwangsmäßig zur Fragmentierung führt. Da eine Datei nach dessen Erstellung eventuell vergrößert wird, muss man, abhängig von der Striktheit des Systems, so lange Blöcke verschieben, bis der neue Inhalt an das Ende des Ursprungsblock passt. Dies kann dazu führen, dass die Abspeicherung von Information extrem langsam ist, da das System große Mengen an Daten verschieben muss, um die neue Datei abzuspeichern. Heutzutage verwenden keine Systeme diese Strategie mehr. Die letzte war Apple DOS in 1978. \\
+	\begin{wrapfigure}{l}{0.4\textwidth}
+		\begin{center}
+		\includegraphics[scale=0.4]{Bilder/fat.png}
+		\caption{Beispiel einer Belegungstabelle}
+		\end{center}
+	\end{wrapfigure}
+	\paragraphlb{Belegungstabelle}
+	In der Belegungstabelle (Auf Englisch File Allocation Table (FAT)) werden Daten auch in Blöcken gespeichert, diese beinhalten jedoch zusätzlich die Speicheradresse des nächsten Blocks. Wenn der letzte Block gefunden wurde, ist dieser stattdessen mit -1 gefüllt. So kann man die Datei in Blöcke fragmentieren und kann Lücken unabhängig von der tatsächlichen Speicherung füllen. Das einzige was im Speicher festgehalten werden muss, ist die Speicherstelle des ersten Blocks. Dadurch ist zwar der Speicherzugriff etwas langsamer, es muss jedoch nicht defragmentiert werden um eine Datei abzuspeichern. Nachteil dieser Strategie ist jedoch, dass die gesamte Table im Speicher gehalten werden muss, welche bei größeren Dateien sehr groß werden kann. Frühe Windowsversionen verwendeten FAT (16/32) als Standarddateiensystem, wurden jedoch seitdem von anderen abgelöst. \\
+	\paragraphlb{Indexliste}
+	Eine Weiterführung dieser Table ist die Index List, welche für jede Datei eine eigene Liste erstellt. Problem dieser Strategie ist wiederum, dass einzelne Listen sehr lang werden können, wenn die Datei wächst. Da es jedoch meist nur sehr wenige Dateien mit sehr großem Speicherbedarf gibt, kann man dieses Problem auch anders lösen.
+	\paragraphlb{Index Nodes}
+	Die Index Nodes sind in der I-Nodes Sektion der Partition gespeichert und bieten Verweise auf Speicherblöcke. Besonders an diesen Blöcken ist, dass sie grundsätzlich nur eine geringe Menge an Verweisen zur Verfügung stellen, da das einen Großteil aller Dateien abdeckt. Nur wenn die Datei zu groß ist, werden zusätzliche Verweise hinzugefügt. Diese sind zuerst in einfache indirekte Verweise bis zu dreifach indirekten Verweisen unterteilt. Ein einfacher indirekter Beweise verweist auf einen Block von 128 Verweisen. Ein dreifach indirekter Verweis verweist dabei auf einen Block, welcher wiederum auf 128 Blöcke an Verweisen verweist, welche wiederum auf 128 Blöcke verweisen und diese verweisen erst auf die Daten selbst. Mit diesem System kann man die Größe der Index Nodes dynamisch anpassen, dabei jedoch immer noch eine Große Menge an Daten abspeichern. Vorteil davon ist, dass stets nur die relevanten I-Nodes im Speicher vorhanden sein müssen.
+	\subsection{Virtuelle Dateisysteme}
+	Da ein Betriebssystem oftmals viele verschiedene Dateisysteme gleichzeitig verwendet ist es praktisch, wenn diese abstrahiert werden. Virtuelle Dateisysteme bieten dabei die Schnittstelle zwischen Anfragen von außen und der echten Anfrage an das Dateisystem. So soll es dem Benutzer oder außenstehenden Softwareentwicklern egal sein, welches Dateisystem sie in der Realität ansprechen und können diese mit einem einheitlichen Set an Befehlen verwenden. POSIX bietet einen solchen Standard sodass man mit \verb|open| stets das gleiche vollbringt unabhängig von der Plattform. \\
+	\section{I/O}
+	Input/Output Geräte, wie eine Maus, eine CD oder ein Monitor werden auch als Peripheriegeräte bezeichnet. Da diese jedoch drastisch unterschiedliche Operationen haben können, müssen diese für das Betriebssystem standardisiert werden. \\
+	Hierbei wird wieder Abstraktion relevant. Ein Hersteller eines Geräts implementiert dabei einen Gerätetreiber, welcher mit dem Betriebssystem interagiert und standardisierte Operationen zur Verfügung stellt. \\
+	Das I/O-Subsystem ist dabei für die Speicherverwaltung bei Datenübertragung, Caching, dem Zwischenspeichern von Daten und Spooling, dem Überlappen von Eingabe- und Ausgabejobs. \\
+	\subsection{Block/Character Device}
+	Man unterscheidet zwischen Block und Characterdevices. Blockdevices sind nach Blöcken orientiert und speichert Informationen in festen Blöckgrößen (zwischen 512 und 65536 Byte). Dabei besitzt jeder Block eine eigene Adresse, welche angesprochen werden kann. Beispiele für Blockdevices sind Festplatten, CDs oder Blu-Rays. \\
+	Entegegen dem stehen Characterdevices, welche zeichenorientiert sind. Sie erzeugen und akzeptieren dabei Eingabenströme, welche nicht in Blöcke getrennt werden. Diese Ströme haben auch keine Adressen und man kann sie nicht durchsuchen. Beispiele sind die Tastatur oder die Maus. \\
+	Es gibt jedoch auch devices, welche keinem der beiden zugeordnet werden können wie touchscreens. \\
+	\subsection{Controller}
+	Controller dienen dazu, den Austausch mit dem Gerät zu vereinfachen. Dabei gibt es Hardware- und Softwarecontroller.
+	\subsubsection{Hardwarecontroller}
+	Ein festes Gerät von Hardware, welches ein Gerät betreiben kann. Diese Bausteine haben nur einen einzigen Zweck und sind deshalb auch nur sehr primitive Rechner. Solche Controller können meist mehrere Geräte gleichzeitig verwalten. \\
+	Daten können zwischen dem Controller und dem Betriebssystem auf zwei Arten ausgetauscht werden: Port-Mapped oder Memory-Mapped.\\
+	Bei Port-Mapped IO existiert ein eigener IO Adressraum, aus welchem für jeden Controller ein eigener Bereich zugewiesen wird. Dabei liest die CPU mit spezifischen Befehlen das Gerät aus. Diese wurden jedoch nur von älteren Intel Prozessoren verwendet. \\
+	[TODO Memory-Mapped IO]
 	
 
 
