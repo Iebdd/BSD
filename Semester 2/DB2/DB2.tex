@@ -7,6 +7,7 @@
 \usepackage{setspace}
 \usepackage{changepage}
 \usepackage{booktabs}
+\usepackage{cancel}
 \usepackage{graphicx}
 \usepackage[explicit]{titlesec}
 \usepackage{amsmath}
@@ -15,6 +16,7 @@
 \usepackage{float}
 \newcolumntype{?}{!{\vrule width 1pt}}
 \newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
 \renewcommand{\contentsname}{Inhaltsverzeichnis:}
 \renewcommand\theadalign{tl}
 \def\ojoin{\setbox0=\hbox{$\bowtie$}%
@@ -26,6 +28,8 @@
 \newcommand{\sjoin}{\ensuremath{\ltimes}}
 \setstretch{1.10}
 \setlength{\parindent}{0pt}
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
 
 \titleformat{\section}
   {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
@@ -156,7 +160,7 @@
 		\bottomrule
 	\end{tabular}
 	\subsection{Zweite Normalform / 2NF}
-	Die zweite Normalform wird erreicht, wenn jedes nicht-Schlüsselattribut voll funktional abhängig von allen Kandidatenschlüsseln ist. In anderen Worten darf es keine Spalte geben, welcher nicht durch den Kandidatenschlüssel eindeutig identifizierbar ist. Die mathematische Definition ist: $K \to\, A \iff K \to\, A \land \forall X \subset K:X \notto A$
+	Die zweite Normalform wird erreicht, wenn jedes nicht-Schlüsselattribut voll funktional abhängig von allen Kandidatenschlüsseln ist. In anderen Worten darf es keine Spalte geben, welcher nicht durch den Kandidatenschlüssel eindeutig identifizierbar ist. Die mathematische Definition ist: $K \to\, A \iff K \to\, A \land \forall X \subset K:X \not\to A$
 	Strategien sind erneut:
 	\begin{itemize}
 		\item{Für jeden Teilschlüssel eine neue Relation mit seinen abhängigen Attributen generieren.}
@@ -338,6 +342,79 @@
 	\end{itemize}
 	Heutzutage wird größtenteils die Free List Strategie verwendet da man so den geringsten Performanceverlust hat. \\
 	Speziell bei varchars, welche eine variable Größe haben können, ist eine flexible Datenlänge jedoch von Nutzen. [TODO Slide 40 - 48]
+	\section{Logische Anordnung}
+	Die logische Anordnung von Datensätzen in der Datenbank kann auch ein großer Faktor für dessen Zugriffszeit sein. Dabei gibt es in der Regel drei Ansätze zur Datenspeicherung: Sequentiell, Heap oder Hash.
+	\subsection{Sequentiell}
+	Die Datensätze sind in der sequentiellen Anordung nach ihrem Suchschlüssel geordnet. Der Suchschlüssel ist in der Regel der Primary Key. Diese Datensätze sind jeweils mit Pointern verkettet. Idealerweise sind diese Datensätze nicht nur logisch (nach den Pointern) sondern auch physisch (im Speicher selbst) sortiert gespeichert. Das hat den Grund, dass es schneller ist Datensätze auszulesen wenn diese hintereinander liegen. Solch eine sequentielle Anordnung ist jedoch nach einer Zeit nicht mehr zu 100\% durchführbar. Wenn man zum Beispiel ein Element löscht muss man viele Elemente neu anordnen um die gleiche Sortierung zu erhalten. Ein noch größeres Problem ergibt sich, wenn man neue Daten zwischen den alten einfügen will, der Block jedoch gefüllt ist. Dann muss die neue Datei in einen Overflow-Block verschoben werden, wodurch die physische Sortierung nicht mehr gegeben ist. Alternativ kann die Datenbank in ihrer Gesamtheit in einen neuen Block verschoben werden, das kann jedoch extrem aufwändig sein. \\
+	Eine sequentieller Speicherung kann so aussehen. Dabei ist zu beachten, dass der Verweis stets auf das nächste Element und im Fall des letzten Elements nirgends hin verweist: \\
+	\begin{tabular}{| l | l | l | l | l |}
+		\toprule
+		\# Datensatz & KontoNr & Filiale & Kontostand & Verweis \\ \midrule
+		record 0 & K-1234 & Graz & 450 & record 1 \\ \hline
+		record 1 & K-2345 & Wien & 750 & record 2 \\ \hline
+		record 2 & K-9022 & Salzburg & 248 & record 3 \\ \hline
+		record 3 & K-3748 & Graz & 876 & record 4 \\ \hline
+		record 4 & K-8473 & Linz & 230 & record 5 \\ \hline
+		record 5 & K-9876 & Klagenfurt & 345 & <leer> \\
+		\bottomrule
+	\end{tabular}
+	\subsubsection{Statisches Hashing}
+	Statisches Hashing ist eine spezielle Form der Dateiorganisation. Dabei werden die Datensätze in 'Buckets' gespeichert, welche danach eine konstante Zugriffszeit ermöglicht. Ein Bucket ist eine Speichereinheit welche aus mehreren Blöcken auf der Festplatte besteht und Datensätze mit bestimmten Suchschlüsseln beinhaltet. Die Schlüssel muss dabei jedoch nicht die selben sein. Das funktioniert, da eine Hashfunktion aus unterschiedlichen Inputs den gleichen Output generieren kann. Ein sehr einfaches Beispiel einer solchen Hashfunktion wäre Modulo. Da diese nur den Rest, jedoch nicht das Ergebnis speichert, kann es trotz unterschiedlicher Operation zum gleichen Rest kommen, welche dadurch gebündelt werden. \\
+	Das praktische an einer solchen Hashfunktion ist, dass das Hashing eine konstante Zeit benötigt und so unabhängig von der Position die gleiche Zeit benötigt. Bei sehr großen Datensätzen kann eine Hashfunktion etwas länger als konstante Zeit benötigen da der Algorithmus danach immer noch eine große Menge an Daten durchsuchen muss (Aber in keinster Weise die gesamte.) 	Idealerweise sollte eine Hashfunktion die gleiche Menge an Werten in alle Buckets verteilen und diese so zufällig wie möglich zuweisen. Also sollte bei 10 Buckets nicht einer die Hälfte aller Werte besitzen und auch nicht ab einem gewissen Wert einem dieser Buckets mehr zuweisen. \\
+	Die Performance einer Hashfunktion muss jedoch auch immer abwägen wie viel Rechenleistung pro Hash nötig ist, da der zwar konstante Wert trotzdem einen größeren Aufwand als nötig bedeuten kann.
+	\paragraphlb{Bucket Overflow}
+	Ein Bucket kann jedoch auch voll werden, in welchem Fall ein Bucket Overflow entsteht. Das kann mehrere Gründe haben: Entweder es gibt zu wenige Buckets oder es besteht eine ungleichmäßige Verteilung der Buckets. Während ein einfacher Weg wäre die Größe oder Menge der Buckets zu erhöhen, ist in der Regel eine ungleiche Verteilung der Grund für einen Overflow, weshalb man versuchen sollte einen anderen Algorithmus zu verwenden.
+	\subparagraphlb{Closed Addressing (Overflow Chaining)}
+	Ein Overflow kann jedoch nie komplett vermieden werden, weshalb man Overflow Chaining betreiben kann. Hierbei wird, falls ein Bucket einen Overflow erlebt, der letzte Wert durch einen Pointer auf einen neuen Pointer ersetzt, welcher wiederum neue Werte enthält. Dieser neue Bucket hat jedoch immer noch den gleichen Hashwert als der ursprüngliche Bucketm weshalb er als Closed Addressing bezeichnet wird.
+	\subparagraphlb{Open Addressing}
+	Alternativ dazu besteht das Open Addressing bei der die Menge der Buckets fix ist und bei einem Overflow wird dieser in einen anderen, bereits existierenden Bucket überführt. Diese Strategie findet jedoch in Datenbanken nur selten Anwendung da das Löschen von Einträgen sich als außerst schwierig gestaltet.
+	\paragraphlb{Beispiel:}
+	Ein Beispiel für statisches Hashing wäre die Organisation einer Relation mit dem Standort als String als Suchschlüssel. Dabei wird der Modulo 10 der Summe der numerischen Werte der Buchstaben als Bucket verwendet. So können gleichzeitig 10 Buckets existieren wodurch idealerweise nur ein zehntel der Datenbank durchsucht werden muss. Wenn der Suchschlüssel also \texttt{Linz} ist, muss man \texttt{l + i + n + z -> 12 + 9 + 14 + 26 = 61} rechnen, dieses Ergebnis durch 10 dividieren und dessen rest nehmen: \texttt{61 \% 10 = 1}. Also würde Linz in den Bucket Nummer 1 gehen.
+	\subsection{Dynamisches Hashing}
+	Eine Alternative zum statischen Hashing ist das dynamische Hashing. Der Umstand, dass es sich verändern kann hat einen wichtigen Vorteil, da die Größe einer Datenbank sich ständig verändert. Am Anfang eines Lebens einer Datenbank ist diese noch sehr klein und wird eventuell nie größer, die Veränderung wenn man viele Daten hat ist jedoch extrem aufwändig. Beim dynamischen Hashing kann man die Menge der Buckets dynamisch bestimmen. Dabei gibt es wiederum zwei Wege dies zu vollbringen: Das reguläre dynamische Hashing oder das erweiterbare Hashing, was eine spezielle Form des dynamischen Hashings darstellt.
+	\subsubsection{Erweiterbares Hashing}
+	Bei dem erweiterbaren Hashing berechnet die Funktion den Hashwert für eine sehr große Menge an Buckets. Man kann zum Beispiel eine 32-Bit Zahl verwenden um so 4 Milliarden Buckets zu definieren. Bei dem Hashing wird jedoch nur ein Teil des Hashwerts verwendet. So kann man nur den niederwertigsten oder höchstwertigsten Bit verwenden um den Bucket zu wählen. So kann man genau definieren welche Buckets Verwendung finden, man kann die Menge jedoch stets erhöhen. Bei der Abspeicherung wird anhand der Anforderungen ein Teil des Hashwerts verworfen und danach anhand einer Tabelle ein Bucket zugewiesen. Wenn nun jedoch ein Bucket voll ist, kann man diesen in zwei Teile spalten (Bucket Split). Danach werden die Inhalte neu gehasht und in die neuen Buckets verteilt. Was man hierbei jedoch beacthen muss, ist, dass die globale Tiefe (Die Tiefe der Verteilungstabelle) nie niedriger sein darf als die eines lokalen Buckets (Die Tiefe der Buckets selbst)\\
+	Wenn die Werte in der Datenbank sich verringern, können Buckets auch wieder verschmolzen werden. Dazu müssen zwei Buckets den gleichen um 1 verringerten Bitwert haben. (Also können zwei Buckets mit den Werten 11 und 01 verschmolzen werden, aber nicht zwei Buckets mit den Werten 11 und 10) Zusätzlich dürfen sich in beiden Buckets keine Werte mehr befinden. Danach kann man die Buckets verbinden und die Pointer neu verteilen. Wenn dieser verschmolzene Bucket als einziger noch die größere Tiefe hatte, kann man danach auch die globale Tiefe um eins verringern. \\
+	Der große Vorteil dieses Ansatzes ist, dass Datenabruf relativ günstig ist, da die Menge der Buckets stets eine akzeptable Größe haben. Man muss auch die Datenbank nie neu verteilen, da nur lokal neue Werte generiert werden müssen. Es kann jedoch passieren, dass viele Werte in einen Bucket gegeben werden, was die lokale Größe der Buckets negativ beeinflussen kann. Zusätzlich ist die Größe der Buckets statisch wodurch man selbst bei einer kleinen nötigen Vergrößerung diesen Bucket Split durchführen muss.
+	\paragraphlb{Beispiel:}
+	Wenn man also beispielweise 7 Werte hat (16, 4, 24, 6, 22, 10, 31) und die globale Tiefe 1 ist, wird nur das LSB für die Buckets herangezogen. Es wird angenommen, dass ein Bucket nur 3 Werte gleichzeitig aufnehmend kann. Die Bitwerte dieser Zahlen sind also (10000, 00100, 11000, 00110, 10110, 01010, 11111) und es gibt zwei Buckets, einen mit dem Wert 0 und einen mit dem Wert 1. Wir sehen, dass bereits die ersten 4 Werte zu einem Bucket Overflow führen. Aus diesem Grund wird die lokale Tiefe des Bucket 0 auf 2 erhöht. Da die globale Tiefe noch 1 ist, muss diese auch auf 2 erhöht werden. Aus diesem Grund hat die Tabelle nun 4 Möglichkeiten zur Verteilung: 00, 01, 10 und 11. Die drei Werte welche bereits in dem 0 Bucket waren müssen nun neu gehasht werden, wobei jeweils die letzten zwei Bit zur Evaluierung herangezogen werden. Da alle drei wiederum 00 als letzte Bits haben werden sie in den Bucket 00 gegeben. Das vierte Element hat jedoch den Wert 10 und kommt deshalb auch in den Bucket 10. Das selbe passiert mit den nächsten zwei Werten. Nur der siebte Wert 11111 hat eine 1 am Ende und kommt deshalb in einen anderen Bucket. Da die lokale Tiefe des 1 Buckets immer noch 1 ist, verweisen beide Buckets 11 und 01 auf den selben Bucket.
+	\subsubsection{Katalog}
+	Zusätzlich zur Speicherung der Daten selbst gibt es den Datenbankkatalog. Dieser speichert stets Metainformation der Datenbank wie den Namen der Relation, die Attribute und Typen jeder Relation sowie Integritätsbedingungen. Gleichzeitig verwaltet es auch die Berechtigungen der einzelnen Benutzer um zu kontrollieren wer die Datenbank verändern oder neue Rechte vergeben darf. Es gibt zusätzlich noch weitere Information wiie die Anzahl der Attribute sowie ein Cache für oft verwendete Werte. \\
+	Die physische Dateiorganisation wird auch hier gespeichert wie den Speicherform der Relation sowie deren phsysischer Speicherort und die Adresse im Speicher des ersten Blocks. \\
+	Der Katalog selbst hat auch ein spezielles Schema um diesen für effizienten Zugriff zu optimieren. So werden die Relationen, Attribute Benutzer sowie Index und View in einem speziellen Format abgespeichert: \texttt{RELATION-METADATA (\underline{relation\_name}, nr\_of\_attributers, storage\_organization, location)}
+	\section{Index}
+	Ein Index ermöglicht einen beschleunigten Zugriff auf eine Datenbank, änhlich zum Verzeichnis eines Buches. Eine Index Datei besteht in der Regel aus der Form des Indexeintrags, einem Schlüssel welcher zum Finden benötigt wird, sowie ein Pointer auf den Datensatz selbst. Es ist wichtig, dass ein Index stets kleiner sein muss, als die Datenbank selbst, da man sonst keinen Performancegewinn hat. \\
+	In einem Index können mehrere Arten von Anfragen geschehen: Eine Punktanfrage sucht anhand eines Primärschlüssels (z.B. \texttt{SVN=1988-2018}) und liefert so immer nur einen Eintrag. Eine Mehrpunktanfrage übergibt einen Wert, kann jedoch zu mehr als einem Rückgabeeintrag führen (z.B. \texttt{alle Personen die 1980 geboren worden sind}) und eine Bereichsanfrage efragt Einträge anhand eines Bereichs an Kriterien (z.B. \texttt{Personen die mehr als 100.000€ verdienen})
+	\subsection{Indextypen}
+	Indextypen unterscheidet man nach verschiedenen Kriterien:
+	\begin{itemize}
+		\item{Die Ordnung der Index Datei}
+		\begin{itemize}
+			\item{Clustering Index}
+			\item{Non-Clustering Index}
+		\end{itemize}
+		\item{Die Art der Indexeinträge}
+		\begin{itemize}
+			\item{Sparse Index}
+			\item{Dense Index}
+		\end{itemize}
+	\end{itemize}
+	Indextypen basieren auf einer Kombination dieser zwei Kriterien. Dabei sind jedoch einige Typen nicht möglich oder kommen nur selten vor. Ein Clustering Index ist zum Beispiel meistens sparse, während ein Non-Clustering Index \textit{immer} dense ist. \\
+	Wahr für alle Indextypen ist, dass Punktanfragen signifikant schneller bearbeitet werden können. Dieser Fakt ist weniger wahr für Mehrpunktanfragen und Bereichsanfragen. Ein Index erzeugt jedoch auch Mehrkosten da bei jeder Änderung der Datenbank der Index angepasst werden muss.
+	\subsubsection{Clustering Index}
+	Bei einem Clustering Index ist sowohl die Index, als auch die Daten Datei, in einer nach dem Suchschlüssel sequentiell geordneter Form. Das macht sowohl Punkt- als auch Mehrpunkt- und Bereichsanfragen sehr effizient und lässt einen guten Nicht-Squentiellen Zugriff zu. Großer Nachteil ist, dass man \textit{nur einen} Clustering Index pro Tabelle haben kann. Wenn man also einen Clustering Index auf eine Kontonummer hat, muss man für den Kontonamen einen Non-Clustering Index anfertigen. Wenn nur ein Clustering Index für eine Suche mit einem anderen Kriterium vorhanden ist, muss die gesamte Tabelle manuell durchsucht werden. Also sollte man einen Clustering Index für oft verwendete Werte verwenden und sonst Werte als Non-Clustering Index abspeichert.
+	\subsubsection{Non-Clustering Index}
+	Ein Non-Clustering Index ist in der Index Datei sequentiell geordnet, jedoch nicht bei den Daten selbst. So verweisen Pointer in dem Index zufällig auf Werte. Das macht Punktanfragen sehr schnell, da so nur einem Pointer gefolgt werden muss. Mehrpunkt und Bereichsanfragen können jedoch sehr rechenintensiv sein und besitzen nur eine gute Effizienz wenn sie kleine Teile der Datenbank abfragen. (Die Datenbank muss jedem Pointer einzeln folgen)
+	\paragraphlb{Primär- Sekundärindex}
+	In der Praxis unterscheidet man zwischen dem Primärindex und dem Sekundärindex. In der Regel bedeutet das nur, dass der Primärindex der Clustering Index ist und der Sekundärindex andere Non-Clustering Indexe sind.
+	\subsubsection{Sparse Index}
+	Ein Sparse Index hat einen Index Eintrag welcher auf mehrere Datensätze verweist. So kann man die Größe des Index verringern. Ein Sparse Index ist jedoch nur möglich wenn man einen Clustering Index hat, da ein Sparse Index nur funktioniert wenn der Verweis auf einen Eintrag sequentiell abarbeitbar ist. Ein Clustering Index kann jedoch auch Dense sein.
+	\subsubsection{Dense Index}
+	Im Dense Index hat jeder Index-Eintrag einen eindeutig zugewiesenen Ort in den Daten. Aus diesem Grund ist ein Dense Index bedeutend größer als ein Sparse Index, ist in der Regel jedoch kleiner als die Daten selbst da der Index ja nur die Pointer und nicht die Daten selbst beinhaltet. Aus diesem Grund muss ein Non-Clustering Index immer Dense sein. Ein Vorteil eines Dense Index ist, dass eventuell eine Datenbank gelesen werden kann, ohne dass direkt auf diese zugegriffen werden muss. Das nennt man dann einen 'Covering Index'. \\
+	\subsection{Duplikate im Index}
+	Wenn in einem Index Einträge doppelt vorhanden sind kann dessen Handhabung relativ schwer sein. Das ist vor allem im Falle von $B^+$ Baum Indexen der Fall ($B^+$ Bäume können anders als Binärbaume viele Kinder pro Knoten haben. (Siehe Datenstrukturen und Algorithmen)) \\
+	Man kann damit jedoch umgehen indem man Mehrere Indexeinträge einführt. Zusätzlich kann es ein Problem bei Buckets sein, da dann ein Eintrag im Index zu mehreren möglichen Bucketeinträgen führt. Schlißelich muss man den Suchschlüssel noch eindeutig machen. Dabei kann ein Tupel Identifier (TID) helfen um gleiche Datensätze eindeutig zu machen. Gleichzeitig kann man auch aus einer Kombination des TID und dem Bucket einen eindeutigen Key definieren. \\
+	In der Praxis werden jedoch doppelte Einträge als solche behandelt und diese auch zurückgegeben. Im Rahmen dieser Lehrveranstaltung wird jedoch angenommen, dass alle Datensätze immer eindeutig sind, da manche besprochenen Inhalte sonst nicht möglich sind.
 
 
 

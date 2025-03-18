@@ -7,6 +7,7 @@
 \usepackage{setspace}
 \usepackage{changepage}
 \usepackage{booktabs}
+\usepackage{multicol}
 \usepackage{wrapfig}
 \usepackage{cancel}
 \usepackage[explicit]{titlesec}
@@ -166,6 +167,7 @@
 	Es gibt vier elementare Datenstrukturen: Das Array (Lineares Feld), Linked List(Verkettete Liste), Stack (Keller- oder Stapelspeicher) und Queue (Warteschlange). Es gibt jedoch auch kombinierte Datenstrukturen wie zum Beispiel ein Array aus verketteten Listen. Also gibt es viele Arrays, welche jeweils auf das nächste Array zeigen. Diesen Vorgang nennt man auch nesting.
 	\subsubsection{Array}
 	Ein Array ist in der Lage mehrere Elemente des gleichen Basistyps abzuspeichern. Zugriff auf einzelne Elemente ist mittels des Index möglich. Das Array ist eine statische Datenstruktur, dessen Größe kann also nur ein Mal definiert werden und muss erneut generiert werden um dessen Größe zu erhöhen. Anders als andere Datenstrukture stehen die Daten eines Arrays stets nebeneinander. \\
+	Die Zugriffszeiten für ein Array sind: \\
 	\begin{tabular}{| l | l | l |}
 		\toprule
 		Operation & Laufzeit & Erklärung \\ \midrule
@@ -180,6 +182,7 @@
 	\subsubsection{Linked List}
 	Eine Linked List ist eine dynamische Datenstruktur in der jedes Element eine Referenz auf das nächste Element besitzt. Aus diesem Grund müssen die Daten nicht nebeneinander abgespeichert werden, sondern werden über die Pointer gefunden. Dadurch besteht auch keine Garantier, dass folgende Daten auch nebeneinander im Speicher liegen. \\
 	Es gibt zwei Arten von Linked Lists: Single-Linked (Einfach verkettete) und Double-Linked (Dopplet-verkettete) Lists. Einfach verkettet Listen haben die Referenz nur in eine Richtung, wodurch man nicht zurückgehen kann. \\
+	Die Zugriffszeiten für eine Linked List sind: \\
 	\begin{tabular}{| l | l | l |}
 		\toprule
 		Operation & Laufzeit & Erklärung \\ \midrule
@@ -191,8 +194,88 @@
 	\end{tabular} \\
 	Double-Linked Lists besitzen ihre Referenz in beide Richtungen, wodurch man entweder nach vorne oder nach hinten gehen kann. Dadurch besitzt die Liste einen Head und einen Tail (Am Anfang und am Ende), wodurch an beide Enden ein Element angefügt werden kann. Dabei muss man jedoch beachten, dass die Pointer stets die richtigen Elemente als Ziel besitzen. \\
 	Eine spezielle Art der Linked-List ist die Circular-List, in welche das letzte Element wiederum auf das erste zeigt, wodurch sie kein Ende besitzt. \\
-	Eine Linked_list ist sehr effektiv, wenn man nicht weiß, wie viele Elemente man haben wird, da dynamisch weitere hinzugefügt werden können. Bei der dynamischen Speicherverwaltung ist es auch nützlich, da man so die Menge an leeren und besetzten Elementen stets anpassen kann. \\
+	Eine Linked List ist sehr effektiv, wenn man nicht weiß, wie viele Elemente man haben wird, da dynamisch weitere hinzugefügt werden können. Bei der dynamischen Speicherverwaltung ist es auch nützlich, da man so die Menge an leeren und besetzten Elementen stets anpassen kann. \\
 	In Java existiert eine LinkedList collection, welche eine Double-Linked List implementiert.
+	\subsubsection{Stacks}
+	Ein Stack (Auf Deutsch Stapel) ist eine dynamische Datenstruktur, bei welcher nur das oberste Element manipuliert werden kann. So kann man nur ganz oben ein Element hinzufügen (Push) und nur das oberste Element jeweils entfernen (Pop). Zusätzlich kann man mittels \texttt{peek} auch den Wert des obersten Elements auslesen ohne es zu entfernen. Dieses Prinzip nennt man auch LIFO, Last-In First-Out. \\
+	Ein Weg einen solchen Stack zu implementieren ist mit einem Arrax, welches danach die Elemente sequentiell abspeichert. Dabei muss man jedoch beachten, dass ein Array stets eine statische Größe hat, ein Stack jedoch eigentlich eine dynamische Datenstruktur sein sollte. Nun könnte man jedes Mal, wenn die Maximalgröße erreicht wurde, die Größe des Arrays um 1 erhöhen, das ist jedoch eine sehr ineffiziente Operation da Arrays mit O(n) verschoben werden. Ein besserer Weg dies umzusetzen ist das sogenannte \texttt{Repeated Doubling}, wobei jedes Mal, wenn man die Maximalgröße erreicht hat, das Array in seiner Größe verdoppelt, wodurch das Array stets zwischen 50 und 75\% gefüllt ist. \\
+	Ein besserer Weg zur Implementation ist die Linked List, da hierbei Elemente dynamisch aneinandergereiht werden. Und da man stets nur das erste Element braucht, ist auch die schlechtere Suchzeit der Linked List nicht relevant. \\
+	Anwendungen des LIFO Prinzips wird für die Evaluierung von Semantik bei Programmiersprachen angewandt. Ebenfalls kann man Undo/Redo Operationen bei Programmen mittels Stack realisieren, da man so die letzten Operationen einfach auf den Stack legt. Um diese zurückgesetzten Operationen wieder zu revidieren kann man einen zweiten Stack machen, welcher Undo Operationen speichert. \\
+	Bei einem Programmablauf gibt es auch den Call Stack, welcher die Reihenfolge von Methodenaufrufen abspeichert. \\
+	Die Zugriffszeiten für einen Stack sind sind: \\
+	\begin{tabular}{| l | l | l |}
+		\toprule
+		Operation & Laufzeit & Erklärung \\ \midrule
+		Zugriff auf i-tes Element & O(n) [O($n^2$)] & \makecell[l]{Ein Element zu finden ist O(n) man muss jedoch eventuell Elemente \\ zurücklegen,  weshalb es O($n^2$) sein könnte} \\ \hline
+		Suchen & O(n) [O($n^2$)] & Gleich wie bei dem Zugriff. Mit O(n) oder O($n^2$) \\ \hline
+		Einfügen/Löschen des Kopfes & O(1) [O(n)] & Abhängig davon ob man das erste oder ein anderes Element anspricht \\ \hline
+		Speicherbedarf & O(n) & Ein Element braucht genau eine Einheit an Speicher \\
+		\bottomrule
+	\end{tabular} \\
+	\paragraphlb{Postfix}
+	Ein weiterer wichtiger Anwendungszweck für Stacks ist die Evaluierung von Postfixoperationen. Normalerweise verwenden Menschen Infixoperationen, welche normale Mathematikausdrücke sind: \texttt{(3+7)*(5-1)+2}. Es heißt Infix, da die Operatoren zwischen den Zahlen stehen. Diese Rechnung kann man jedoch auch in Postfix anschreiben: \texttt{3 7 + 5 1 - * 2 +}. Was zuerst etwas unübersichtlich aussehen mag kann mit einem Stack sehr einfach von links nach rechts evaluiert werden. So wird stets zuerst der linkeste Wert eingelesen und auf den Stack gelegt. Wenn eine zahl eingelesen wird, wird sie auf den Stack gepusht. Wenn ein Operator eingelesen wird, wird dieser auf die obersten zwei Elemente des Stacks angewandt und zurück auf den Stack gelegt. \\
+	Audruck: \texttt{2 4 1 + * 3 - = 2*(4+1)-3} \\
+	\begin{tabular}{| l | l | l | l | l |}
+		\toprule
+		Input &Stackinhalt&&& \\ \midrule
+		2 & 2 &&& \\ \hline
+		4 & 2 & 4 && \\ \hline
+		1 & 2 & 4 & 1 \\ \hline
+		+ & 2 & 5 && \\ \hline
+		* & 10 &&& \\ \hline
+		3 & 10 & 3 && \\ \hline
+		- & 7 &&& \\
+		\bottomrule
+	\end{tabular} \\
+	\paragraphlb{Stacks in Java}
+	Java implementiert auch Stacks, jedoch sollte man nicht die eingebaute Klasse \texttt{Stack} verwenden, da diese auf der Vector Klasse basiert. Stattdessen sollte man die Klasse \texttt{ArrayDeque} verwenden, da diese ein besseres Interface für eine Stackimplementation anbietet.
+	\subsubsection{Queue}
+	Eine weitere Datenstruktur ist die Queue, oder die Warteschlange. Hierbei wird zwar auch jedes Element ganz oben hinzugefügt, Elemente können jedoch nur von unten entfernt werden. Dies basiert auf dem FIFO (First-In First-Out) Prinzip. Eine Queue kann wiederum als Array oder als Linked List implementiert werden, wobei eine Linked List jedoch wiederum die effizientere Implementation darstellt. \\
+	Queues werden vielfach angewandt, wenn man eine spezifische Reihenfolge für die Abarbeitung von Vorgängen benötigt. Wenn ein Server keine Kapazitäten verfügbar hat, kann er neue Anfragen in eine Ready Queue setzen und so neue Anfragen anhand ihrer Eingansgzeit verarbeiten. \\
+	Eine alternative Implementation einer Queue ist die Priority Queue bei der man jedem Teilnehmer eine Priorität geben kann und so eventuell ein Element bevorzugten Zugang bekommt, obwohl dieser nicht an erster Stelle steht. \\
+	Die Zugriffszeiten für einen Stack sind: \\
+	\begin{tabular}{| l | l | l |}
+		\toprule
+		Operation & Laufzeit & Erklärung \\ \midrule
+		Zugriff auf i-tes Element & O(n) & \makecell[l]{Jedes Element kann direkt wieder am Ende hinzugefügt werden, \\ also immer O(n)} \\ \hline
+		Suchen & O(n) & Gleich wie bei Elementzugriff \\ \hline
+		Einfügen/Löschen des Kopfes & O(1) [O(n)] & Entweder wieder erstes Element oder das n-te \\ \hline
+		Speicherbedarf & O(n) & Ein Element braucht genau eine Einheit an Speicher \\
+		\bottomrule
+	\end{tabular} \\
+
+	\subsection{Double Ended Queue (Deque)}
+	Das bereits erwähnte \texttt{ArrayDeque} ist eine Implementation einer Double-Ended Queue, weshalb man von beiden Seiten ein Element hinzufügen oder entfernen kann, wobei die Pointer der Elemente auch in beide Richtung gehen. Somit ist das Hinzufügen und Entfernen, egal ob man eine Queue oder einen Stack implementiert, konstant.
+	\newpage
+	\section{Bäume}
+	Bäume sehen in der Informatik etwas anders aus als man sich von echten Bäumen erwarten würde. Diese Art von Bäumen existieren jedoch auch außerhalb der IT wie zum Beispiel ein Stammbaum. Dabei entspringen von einer Quelle (Im Familienstammbaum der letzte Vorfahre) jeweils weitere Äste, von welchen wiederum weitere Äste entspringen. Auf diese Weise wird auch das Document Object Modle (DOM) in HTML (Siehe Web Technologies and Usability) generiert. Andere Anwendungen sind Web Crawler, welche das Internet anhand von Links auf Websiten durchforsten. Jeder aufgerufene Link auf einer Website ist eine Ebene unter dem Ursprung. Auch soziale Netzwerke können mit einem Baum dargestellt werden, da Benutzer stets untereinander verbunden sind. Auf die gleiche Weise funktioniert auch ein Network Broadcast wodurch jeder im gleichen Netzwerk (Der gleichen Hierarchie im Baum) die Nachricht erhält. \\
+	Bisher waren alle beschriebenen Datenstrukturen lineare Datenstrukturen, wodurch diese eine intrinsische Reihenfolge hatten. So kann man an einem Ende beginnen und durchläuft am Ende jedes Element. Graphen und Bäume sind Nicht-Lineare Datenstrukturen wodurch bei einem Durchlauf nicht jedes Element erfasst werden muss. So kann ein Element mit mehr als einem Element verbunden sein. Bei einer Linked List, zum Beispiel, sind Elemente auch verbunden aber es gibt stets eine eindeutige Richtung.
+	\subsection{Graphen}
+	Graphen sind Bäume wo es keinen expliziten Anfang gibt, da dieser auch im Kreis gehen kann. Bei Graphen unterscheidet man zwischen gerichteten und ungerichteten Graphen. Ein ungerichteter Graph gibt keine Richtung der Verbindung an und kann so auf beiden Wegen verbunden sein. Gerichtete Graphen hingegen geben eine explizite Richtung an, wodurch diese auch nur in diese Richtung gehen kann.
+	\begin{wrapfigure}{l}{0.5\textwidth}
+	\includegraphics[width=0.5\textwidth]{Bilder/graph.png}
+	\caption{Implementation eines Graphen in Java}
+	\end{wrapfigure}
+	\subsubsection{Java}
+	Java bietet keine spezifische Datenstruktur an um einen Graphen darzustellen, jedoch kann man mit einem zweidimensionalen Array einfach eine definieren. Diese Datenstruktur nennt man Adjazenzmatrix oder Nachbarschaftsmatrix: \texttt{int Adjazenz [][]}. Dabei sind jeweils zwei Elemente miteinander anhand ihres Indexwertes verbunden. Elemente können entweder eine 1 oder eine 0 als Wert haben und diese sind dann in dieser Position mit dem anderen Element anhand ihres Indexes verbunden.
+	\subsection{Baum}
+	Ein Baum (oder Tree) ist eine speziellere Art von Graph wo keine Zylken enthalten sein können. Also darf ein Element nur nach unten aber nicht nach oben oder zur Seite verbunden sein. Das oberste Element eines Baumes nennt man dabei die Wurzel (root). Außer der Wurzel hat jedes Element einen Vorfahren, also ein Element das auf einer höheren Ebene liegt. Ein Vorfahre kann dabei beliebig viele Nachfolger haben. Elemente welche auf der selben Ebene liegen nennt man Geschiwster. Ein Element das nicht die Wurzel ist mit mindestens einem Nachfolger nennt man einen inneren Knoten und ein Element ohne Nachfolger nennt man Blätter. Für jeden Baum kann man auch einen Teilbaum definieren. Hierbei wird ein innerer Knoten als Wurzel eines neuen Baums definiert. Jeder innere Knoten in einem Baum kann als Teilbaum definiert werden. Ein Baum hat stets eine gewisse Menge an Ebenen, wobei die Wurzel auf der nullten Ebene (Ebene 0) ist. Jeder Nachfolger ist danach in einer weiteren Ebene.
+	\subsubsection{Binärbaum}
+	Ein Binärbaum ist eine spezielle Art von Baumstruktur. Hierbei darf jedes Element eines Baumes maximal zwei Kinder besitzen. Binärbäume sind in der Programmierung sehr nützlich da man viele Algorithmen effizient damit implementieren kann.
+	\begin{wrapfigure}{l}{0.5\textwidth}
+	\includegraphics[width=0.5\textwidth]{Bilder/balanced.png}
+	\caption{Jeweils ein balancierter und ein entarteter Baum}
+	\end{wrapfigure}
+	\subsubsection{Balancierte und Entartete Bäume}
+	Bäume können zusätzlich balanciert oder entartet (oder keines von beiden) sein. Ein balancierter baum hat abhängig der Wurzel eine balancierte Menge an Elementen. So darf sich die Menge an Elementen nur um 1 unterscheiden. (Also kann ein balancierter Baum auf einer Seite 4 und auf der anderen Seite 5 Elemente haben.) Ein entarteter Baum ist das Gegenstück zu einem balancierten Baum wobei jeder Knoten nur maximal einen weiteren Knoten hat. So ist ein entarteter Baum wiederum eine Linked List und kann in einem Durchgang durchlaufen werden.
+	\subsubsection{Java}
+	Java hat auch keine Implementation von Bäumen jedoch ist dieser wiederum relativ einfach zu implementieren. So kann man ein eigenes 'Node' Objekt definieren und dessen Kinder in eine ArrayList speichern. Da man nur einen Elternteil haben kann, kann man diesen als einzelnes Nodeelement abspeichern. So verweist jedes Node Element auf dessen Kinder und auf dessen Elternteil und man kann den Baum durchlaufen.
+	\subsection{Tree Traversal}
+	Man kann einen Baum auf mehreren Wegen durchsuchen. Zwei dieser Wege sind die Depth-First Search (DFS) und die Breadth-First Search (BFS).
+	\subsubsection{Depth-First Search (DFS)}
+	Bei der Depth-First Search wird das Blatt jeden Elements vor den inneren Knoten durchsucht. Das wird realisiert indem man stets die Kinder eines Knotens auf einen Stack legt und anhand des Stacks das nächste Element durchsucht. Wenn man so zum Beispiel bei der Wurzel beginnt, durchsucht man diesen und legt alle Kinder auf den Stack. Danach wird das erste Kind als neue Basis verwendet und dessen Kinder (falls vorhanden) wiederum auf den Stack gelegt. So wird zuerst nur eine Linie jedes Knotens durchlaufen bis man an dessen Ende kommt und untersucht danach erst die restlichen Knoten (welche wiederum in einer Linie verlaufen können).
+	
+
 
 
 	

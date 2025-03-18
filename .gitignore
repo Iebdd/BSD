@@ -1,0 +1,10 @@
+Semester 2/PRG2/scheduler
+Semester 1/Einschätzungen
+**/*.aux
+**/*.log
+**/*.out
+**/*.synctex.gz
+**/*.synctex.gz.sum.synctex
+**/*.toc
+**/*.synctex(busy)
+**/*.cpt
