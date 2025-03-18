@@ -1,0 +1,21 @@
+SQL Island
+
+select * from bewohner
+select * from bewohner where status="friedlich"
+select * from bewohner where status="friedlich" and beruf ="Waffenschmied"
+select * from bewohner where status="friedlich" and beruf like "%schmied"
+select bewohnernr from bewohner where name="Fremder"
+select gold from bewohner where bewohnernr="20
+select * from gegenstand where besitzer IS NULL
+Update gegenstand set besitzer = 20 where besitzer is null
+select * from gegenstand where besitzer="20"
+select * from bewohner where (beruf="Haendler" OR beruf="Kaufmann") And (status="friedlich")
+update gegenstand set besitzer="15" where gegenstand="Teekanne" OR gegenstand="Ring"
+update bewohner set name="Andreas Hofer" where bewohnernr="20"
+select * from bewohner where beruf="Baecker" ORDER BY gold DESC
+select * from bewohner where beruf="Pilot"
+select bewohner.name from dorf, bewohner where dorf.name="Zwiebelhausen" and bewohner.bewohnernr="13"
+ELECT COUNT(*) FROM bewohner, dorf WHERE dorf.dorfnr = bewohner.dorfnr AND dorf.name = 'Zwiebelhausen'
+select count(*) from bewohner where dorfnr="3" and geschlecht="w"
+select name from bewohner where dorfnr="3" and geschlecht="w"
+select sum(bewohner.gold) from bewohner where beruf="Haendler" OR beruf="Kaufmann" OR beruf="Baecker"

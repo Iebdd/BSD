@@ -1,0 +1,355 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[explicit]{titlesec}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\def\ojoin{\setbox0=\hbox{$\bowtie$}%
+  \rule[-.02ex]{.25em}{.4pt}\llap{\rule[\ht0]{.25em}{.4pt}}}
+\def\lojoin{\mathbin{\ojoin\mkern-5.8mu\bowtie}}
+\def\rojoin{\mathbin{\bowtie\mkern-5.8mu\ojoin}}
+\def\fojoin{\mathbin{\ojoin\mkern-5.8mu\bowtie\mkern-5.8mu\ojoin}}
+\newcommand{\ajoin}{\ensuremath{\triangleright}}
+\newcommand{\sjoin}{\ensuremath{\ltimes}}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-3cm}Datenbankdesign}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\newpage
+	\section{Kanonische Überdeckung}
+	Eine kanonische Überdeckung $F_c$ ist eine minimale Menge von funktionalen Abhängigkeiten welche noch äquivalent zu der Menge F sind. Da im schlechtesten Fall die kanonische Menge die Menge selbst ist, hat jede Menge von funktionalen Abhängigkeiten eine kanonische Menge. Eine Menge kann auch mehrere kanonische Überdeckungen haben. \\
+	Eine Menge ist eine kanonische Überdeckung wenn:
+	\begin{enumerate}
+		\item{$F_c^+=F^+$ -> Die beiden Mengen sind äquivalent}
+		\item{$F_c$ hat keine weiteren Abhängigkeiten $X\ \to\ Y$ welche überflüssig sind.}
+		\item{Alle linken Terme sidn einzigartig}
+	\end{enumerate}
+	\subsection{Vorgang}
+	Man berechnet eine kanonische Überdeckung indem man folgende Schritte ausführt:
+	\begin{enumerate}
+		\item{Linksreduktion}
+		\begin{itemize}
+			\item{Die Anzahl der linken Terme wird reduziert}
+		\end{itemize}
+		\item{Rechtsreduktion}
+		\begin{itemize}
+			\item{Die Anzahl der rechten Terme wird reduziert}
+		\end{itemize}
+		\item{Entfernen von leeren Mengen}
+		\item{Vereinigung}
+		\begin{itemize}
+			\item{Man wendet eventuell anfallende Armstrong-Axiome selbst an.}
+		\end{itemize}
+	\end{enumerate}
+	Zu beachten ist, dass in diesem Prozess eine der möglichen kanonischen Überdeckungen gefunden wird.
+	\subsubsection{Linksreduktion}
+	Für jedes $X\ \to\ Y$ wird eine Linksreduktion durchgeführt:
+	\begin{itemize}
+		\item{Für alle Attribute A von X wird überprüft ob:}
+		\begin{itemize}
+			\item{$Y \subseteq H(F, X - A)$}
+			\item{Ist Y äquivalent zur Hülle $X-A$}
+		\end{itemize}
+		\item{Wenn das gilt, dann wird X durch $X-A$ ersetzt -> $X-A\ \to\ Y$}
+	\end{itemize}
+	Ein paar Regeln zu Vereinfachung des Vorgangs ist, dass, wenn links jeweils nur ein Attribut steht, diese nie reduziert werden können.
+	Wenn man
+	\subsubsection{Rechtsreduktion}
+	Für jedes $X\ \to\ Y$ wird eine Rechtsreduktion durchgeführt:
+	\begin{itemize}
+		\item{Für alle Attribute B wird überprüft ob:}
+		\begin{itemize}
+			\item{$B\in H(F-\{X\to Y\}\cup \{\})$}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Entfernung der leeren Mengen}
+	Alle FDs der Form $X\ \to\ \null$ werden entfernt, welche eventuell durch die Rechtsreduktion entstanden sind.
+	\subsubsection{Vereinigung}
+	Neue FDs, welche entstanden sind, sollten vereinfacht werden. \\
+	\verb|X->A, X->C, X->F wird zu X->ACF|
+	\paragraphlb{Beispiel}
+
+	\section{Datenbankzerlegung (Decomposition)}
+	Da eine Datenbank sich (wenn sie aktiv verwendet wird) stets verändert, muss man diese regelmäßig verändern um weiterhin einer Normalform zu entsprechen.
+	Bei der Zerlegung kann es speziell bei höheren Normalformen passieren, dass man eine Abhängigkeit nicht weiter abbilden kann. Also kann es unter Umständen passieren, dass eine funktionale Abhängigkeit aufgegeben werden muss. Was wiederum \textbf{niemals} passieren darf, ist, dass Daten verloren gehen. Alle Daten weiter zu besitzen ist das wichtigste Gut bei der Überführung einer Datenbank. \\
+	Bei der Zerlegung wird eine Tabelle in seine Schemata übersetzt. Diese müssen am Ende vereint wiederum die Tabelle ergeben. \\
+	Eine Zerlegung hat zwei Gütekriterien, die Verlustlosigkeit und die Abhängigkeitsbewahrung. \\
+	\subsection{Verlustlosigkeit}
+	Eine Zerlegung ist genau dann verlustlos, wenn ein Join aller Teile wiederum zur Tabelle führt: $\pi_{sch(R_1)}(R)\bowtie\pi_{sch(R_2)}(R)\bowtie ... \bowtie\pi_{sch(R_n)}(R)=R$ \\
+	Da man hier einen natural join verwendet, wodurch es seinen Partner findet, sollte es automatisch wieder zur Tabelle vereint werden. Bei der Verlustlosigkeit muss beachtet werden, dass es stets nur um die Bewahrung der Information und nicht der Tupel geht. Wenn eine Tabelle zerlegt wird, werden Duplikate entfernt. \\
+	Bei der Bestimmung der Verlustlosigkeit sollte man zuerst die gegebene Instanz untersuchen, die Tabelle aufteilen und danach überprüfen ob diese verlustfrei war. Wenn das gegeben ist kann man es allgemein überprüfen ob es für alle Instanzen gilt. \\
+	Dabei wird mit der Hülle überprüft, ob
+
+	\subsubsection{Enschränkungen}
+	Einschränkungen bestimmen, für welche Relationen
+	Das geschieht durch einen bestimmten Prozess, wobei für jede echte Teilemenge der gleiche Prozess durchlaufen wird:
+	\begin{enumerate}
+		\item{Triviale FDs werden entfernt (Wie zB. $X\to X$)}
+		\item{Nur die Attribute beachten, welche vorkommen}
+		\item{Falls Attribute vorhanden sind, werden diese hinzugefügt.}
+	\end{enumerate}
+	\paragraphlb{Beispiel}
+	Gegeben ist das Schema $F_R$=\{$A\to D$, $D\to C$, $C\to D$\} mit der Zerlegung von R zu $R_1$[A, C] und $R_2$[C, D]. \\
+	Zur Berechnung der Einschränkung sowie der Abhängigkeitsbewahrung muss zuerst die Hülle der Teile der Zerlegung berechnet werden: \\
+	H(F, A)\\\{A\}=\{D, C\} \verb|Geschnitten mit A, C ergibt das A -> C|\\
+	H(F, C)\\\{C\}=\{D\} \verb|Geschnitten mit A, C ergibt C->0 und mit C, D ergibt C->D|\\
+	H(F, D)\\\{D\}=\{C\} \verb|Geschnitten mit C, D ergibt D->C|\\
+	Aus diesem Grund sind die Einschränkungen von $R_1\ A\to C$ und von $R_2\ C\to D, D\to C$ \\
+	Wenn man nun herausfinden will, ob die Abhängigkeiten bewahrt werden, muss man überprüfen ob $F^+_R=(F_{R_1}\cup F_{R_2})$ also ob $\{A\to D, D\to C, C\to D\}^+=\{A\to C, C\to D, D\to C\}^+$ \\
+	Das erste Kriterium kann als gegeben angenommen werden, da sowohl $F_{R_1}$ als auch $F_{R_2}$ aus $F_R$ hergeleitet wurde. (Vorrausgesetzt man hat richtig gerechnet.) \\
+	\section{Normalformen}
+	Diese Zerlegungen sowie die Überprüfung ob Information verloren gegangen ist dient dazu eine Datenbank in eine bessere Form zu bringen. Eine dieser Güteklassen sind die Normalformen. Dabei existieren die erste bis zur fünften Normalformen (1NF, 2NF, 3NF, 4NF, 5NF) sowie die sogenannte Boyce-Codd Normalform (BCNF). In der Praxis finden jedoch meist nur die ersten drei, sowie die Boyce-Codd Normalform Anwendung. Für die vierte und fünfte ist der Rechenaufwand in Relation zu den Vorteilen unverhältnismäßig hoch. Aus diesem Grund werden diese auch in dieser Vorlesung nicht behandelt. Es sollte beachtet werden, dass Normalformen stets niedrigere Normalformen auch enthält. Also hat die zweite Normalform ebenfalls die Güte der ersten Normalform.
+	\subsection{Normalisierung}
+	Die Normalisierung ist der Prozess die Normalform einer Datenbank zu erhöhen. Dabei werden meist Attribute eines (schlechten) Schemas in kleinere (gute) Schemas aufgeteilt werden, welche den Normalformen genügen. Die Qualität einer Datenbank kann jedoch nur aufgrund verschiedener Tests bestimmt werden und besagt nicht, dass es auch ein gutes Schema hat. \\
+	Eine Denormalisierung passiert hingegen, wenn mehrere Relationen einer Normalform als Relation gespeichert werden. Dieses Ergebnis hat höchstwahrscheinlich eine niedrigere Normalform als dessen Ursprung.
+	\subsection{Erste Normalform / 1NF}
+	Die erste Normalform ist die niederwertigste Normalform und verbietet zusammengesetzte oder mehrwertige Attribute. Strategien um die 1NF zu erreichen können sein:
+	\begin{itemize}
+		\item{Aus zusammengesetzten Attributen: Jeden Teil zum eigenen Attribut konvertieren}
+		\item{Mehrwertige Attribute: Neues Tupel für jeden Wert des mehrwertigen Attributs}
+		\item{Geschachtelte Relationen: Erzeuge ein neues Tupel für jedes Tupel der geschachtelten Relation}
+	\end{itemize}
+	\begin{tabular}{| l | l | l | l |}
+		\toprule
+		MName & MNum & MSVN & Standort \\ \midrule
+		Martin & 1 & 12345678 & \{Graz, Linz, Salzburg\} \\ \hline
+		
+		\bottomrule
+	\end{tabular}
+	\subsection{Zweite Normalform / 2NF}
+	Die zweite Normalform wird erreicht, wenn jedes nicht-Schlüsselattribut voll funktional abhängig von allen Kandidatenschlüsseln ist. In anderen Worten darf es keine Spalte geben, welcher nicht durch den Kandidatenschlüssel eindeutig identifizierbar ist. Die mathematische Definition ist: $K \to\, A \iff K \to\, A \land \forall X \subset K:X \notto A$
+	Strategien sind erneut:
+	\begin{itemize}
+		\item{Für jeden Teilschlüssel eine neue Relation mit seinen abhängigen Attributen generieren.}
+	\end{itemize}
+	Während jedoch keine direkten Abhängigkeiten erlaubt sind, können diese immer noch transitiv voneinander abhängig sein.
+	\subsection{Dritte Normalform / 3NF}
+	Die dritte Normalform wird erreicht, wenn jeder Superschlüssel X mindestens eine der Vorraussetzungen erfüllt: 
+	\begin{enumerate}
+		\item{X ist trivial}
+		\item{X ist ein Superschlüssel von Y}
+		\item{Es darf kein Attribut geben, welches in der Relation nicht vom Kandidatenschlüssel X abhängig ist.}
+	\end{enumerate}
+
+	\subsubsection{Zerlegung in 3NF}
+	Man kann mittels des Synthesealgorithmus eine große Tabelle in kleinere Tabellen zerlegen. Diese Tabellen sind danach alle in der dritten Normalform. Gleichzeitig ist diese Zerlegung auch Verlustfrei und abhängigkeitsbewahrend. \\
+	Zur Berechnung muss man:
+	\begin{enumerate}
+		\item{Die Kanonische Überdeckung berechnen}
+		\item{Für jede Funktionale Abhängigkeit aus der kanonischen Überdeckung:}
+		\begin{itemize}
+			\item{Erstelle eine Relation welche die Abhängigkeit $X \to Y$ vereinigt.}
+			\item{Diese Relation erhält die FDs}
+		\end{itemize}
+		\item{Falls keine der neuen Relationen einen Kandidatenschlüssel enthält, wähle einen K aus dem Schema.}
+		\begin{itemize}
+			\item{Erstelle dadurch eine Relation mit dem Schema K}
+			\item{}
+		\end{itemize}
+	\end{enumerate}
+	\subsubsection{Boyce-Codd-Normalform / BCNF}
+	Die Boyce-Codd-Normalform (BCNF) und die 3NF haben relativ ähnliche Vorraussetzungen, jedoch schränkt die BCNF das Schema noch etwas mehr ein. Während bei der dritten Normalform jeder Kandidatenschlüssel eine der drei Vorraussetzungen erfüllen musste, ist die dritte in der BCNF nicht mehr zulässig. Dadurch kann in der BCNF nicht mehr alle funktionalen Abhängigkeiten bewahrt werden, was bis zur 3NF möglich war.
+	\paragraphlb{Dekompositionsalgorithmus}
+	Der Dekompoisitionsalgorithmus dient zur Konvertierung einer Relation in die BCNF. Hierbei werden jedoch eventuell nicht alle Funktionalen Abhängigkeiten bewahrt. Die Schritte sind:
+	\begin{enumerate}
+		\item{}
+	\end{enumerate}
+	\subsection{Übung:}
+	R[A, B, C, D, E, G] mit F = $\{A\to BD, AB\to E, B\to EG, C\to AB\}$
+
+	Linksreduktion: Da nur AB mehr als ein Element besitzt, kann man dieses als einziges eventuell reduzieren.
+	Wenn man das A bei $AB\to E$ wegstreichen will, muss man zuerst die Hülle berechnen um das zu bestätigen. Dazu muss man die Hülle bestimmen um nachzuprüfen, ob man trotzdem auf die gleiche Abhängigkeit kommt.
+	$\cancel{A}B\to E$ \texttt{->} $H(F, B)$=\{E, G\} \texttt{-> Deshalb kann man A weglassen}.
+	$A\cancel{B}\to E$ \texttt{->} $H(F, B)$=\{B. D, E, G\} \texttt{-> Deshalb kann man auch B weglassen. Aus diesem Grund kann man die gesamte Abhängigkeit weglassen}
+	Rechtsreduktion: Hierbei kann man nicht sofort das Ergebnis sehen, aber ungefähr erkennen welche Teile reduziert werden können. $C\to AB$ kann eventuell reduziert werden. Hierbei muss man wieder die Hülle berechnen, wobei jedoch alle Attribute der Relation gegeben sein müssen. \\
+	$C\to A\cancel{B}$ \texttt{->} H(F, C)=\{A, B, D, E, G\} \texttt{B kann reduziert werden.} \\
+	Jetzt hat man die kanonische Überdeckung $F_C=\{A\to BD, B\to EG, C\to A\}$ und aus dieser kann man die neuen Relationen generieren.
+	$R_A[A, B, D], F_A=\{A\to BD\}$ \\
+	$R_B[B, E, G], F_B=\{B\to EG\}$ \\
+	$R_C[C, A], F_C=\{C\to A\}$ \\
+	\section{Normalform - Cheat Sheet}
+	\begin{tabular}{| l | c |}
+		\toprule
+		Normalform & Vorraussetzung \\ \midrule
+		1NF & Keine Zusammengesetzten/Mehrwertigen Attribute \\ \hline
+		2NF & Alle Attribute durch Kandidatenschlüssel identifizierbar \\ \hline
+		
+		\bottomrule
+	\end{tabular}
+	\section{Speichermedien}
+	Da sich Datenbanken stets mit der Speicherung von Daten befassen, ist die Art des Speichermediums stets eine relevante Überlegung. Dabei unterscheidet man zwischen verschiedenen Faktoren, unter anderem Kosten, Kapazität und Vefügbarkeit. \\
+	Zusätzlich unterscheidet man zwischen den unterschiedlichen herarchischen Ordnungen von Speicher (Siehe Betriebssysteme Grundlagen). Dabei bildet der Speicher eine Pyramide welche einen Kompromiss aus Schreibgeschwindigkeit und Kapazität darstellt. \\
+	Jedes Speichermedium benötigt außerdem noch einen Controller, welcher die Schnittstelle zwischen der physischen Platte und dem Computer darstellt (Siehe Betriebssysteme Grundlagen). Auf Festplatten
+	Diese sind:
+	\begin{itemize}
+		\item{Cache}
+		\begin{itemize}
+			\item{Schnellster aber auch teuerster Speicher. Wird direkt von der CPU verwaltet}
+		\end{itemize}
+		\item{RAM (Hauptspeicher)}
+		\begin{itemize}
+			\item{Trotzdem noch schneller Zugriff (< 100ns) mit Datentransferraten von 25 GB/s. Dieser Speicher ist jedoch meist zu klein um eine gesamte Datenbank zu speichern.}
+		\end{itemize}
+		\item{Festplatte}
+		\begin{itemize}
+			\item{Der erste nicht-flüchtige Speicher (Verfällt nicht sobald kein Strom gegeben ist.)}
+			\item{Bedeutend langsamer als RAM oder Cache (Im ms Bereich)}
+			\item{Daten werden auf Magnetscheiben gespeichert.}
+			\item{Kostet nur mehr 25€/TB (Statt etwa 4000€ für RAM)}
+			\item{Im Schnitt verdoppelt sich die verfügbare Kapazität alle 2 bis 3 Jahre}
+		\end{itemize}
+		\item{Solid State Drive (SSD)}
+		\begin{itemize}
+			\item{Bedeutend schneller mit geringeren Zugriffszeiten als die HDD}
+			\item{Schnellester persistenter Speicher}
+			\item{Im Embedded Systems schon seit längerem verbreitet.}
+			\item{Spezialform: EEPROM ((Electronically Erasable Programmable Read-Only Memory)) kann durch elektrische Impulse neu beschrieben werden.}
+			\item{Hat verschiedene Zugriffsmuster:}
+			\begin{itemize}
+				\item{Random-access: Kann in beliebiger Reihenfolge gelesen werden.}
+				\item{Block-based: Nicht in Bytes sondern in Blöcken (Von z.B. 4096 Bytes)}
+			\end{itemize}
+			\item{Optische Medien}
+			\begin{itemize}
+				\item{Daten werden von einer Platte via Laser gelesen und geschrieben.}
+				\item{Hat verschiedene Typen. Von CDs (640MB) bis Blu-Ray (25GB) mit unterschiedlich schnellen Zugriffszeiten}
+			\end{itemize}
+		\end{itemize}
+		\item{Magnetband}
+		\begin{itemize}
+			\item{Rein sequentieller Speicher. Dadurch sehr langsam.}
+			\item{Kostet nur mehr 10€/TB}
+		\end{itemize}
+	\end{itemize}
+	Die Forschung befasst sich momentan damit die Zugriffszeiten von persistenten Speichern zu reduzieren. Ein solches Produkt ist NVRAM (Non-Volatile Memory), welcher eine bedeutend geringere Latenz besitzt. Er ist zwar bedeutend günstiger als Ram, ist mit maximal 512GB an Größe jedoch bedeutend kleiner. Solche NVRAM-Speicher sind für Datenbanken sehr interessat, da sie viel schnellere Zugriffszeiten ermöglichen. \\
+	\subsection{Festplatten}
+	Aufgrund ihrer geringen Kosten und relativ schnellen Lesegeschwindigkeiten sind Festplatten das wichtigste Medium für Datenbanken.
+	\subsubsection{Zugriffszeiten}
+	Zur Berechnung der Zugriffszeit eines Speichers muss man einige Schritte beachten: 
+	\begin{itemize}
+		\item{Seek Time}
+		\begin{itemize}
+			\item{Die Zeit um den Lesekopf auf die richtige Spur zu bewegen}
+		\end{itemize}
+		\begin{itemize}
+			\item{Rotational Latency}
+			\begin{itemize}
+				\item{Die Zeit die benötigt wird damit der relevante Sektor den Lesekopf erreicht.}
+			\end{itemize}
+			\item{Lesezeit}
+			\begin{itemize}
+				\item{Die Zeit die benötigt wird um die Datei auszulesen}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	Die Latenz wird als Summe dieser drei Faktoren berechnet. \\
+	Die Seek Time wird aus der Drehzahl berechnet, wobei man den worst und average case beachtet. Abhängig von der Drehzahl kann man die maximale Zeit mit $L=60/Drehzahl$ berechnen. \\
+	Ein weiteres Qualitätskriterium ist die Mean Time Before Failure (MTBF) was die statistische Wahrscheinlichkeit, dass die Festplatte ausfällt, darstellt. \\
+	\subsubsection{Sektoren}
+	Zusammenhängende Reihen auf Festplatten werden Blöcke genannt. Abhängig von der Größe der Festplatte kann es zu unbeschreibbaren Lücken zwischen den Blöcken kommen (Interblock Gaps). Diese Blöcke werden in der Regel mit einer Größe von 4096 Byte generiert. Dies hat einen historischen Grund, da 4KB eine Größe war, welche von jedem Betriebssystem unterstützt wurde. Da Programme mit der Zeit immer größer werden, wird es auch relevanter die Größe der Speicherblöcke zu erhöhen.
+	\subsection{Solid State Drive (SSD)}
+	Daten auf der SSD werden auf Seiten abgelegt, welche ebenfalls in Blöcke unterteilt sind. Dadurch spiegelt es HDDs wieder und man merkt so keinen Unterschied ob man eine HDD oder SSD verwendet (Außer bei Schreibgeschwindigkeiten). Man muss beachten, dass SSDs keinen Block neu beschreiben können sondern stets einen Block löschen muss um ihn danach komplett neu zu beschreiben. Da die Lebensdauer einer SSD anhand ihrer Löschvorgänge beschränkt ist, werden zu löschende Daten in Erase Blocks gebündelt um dann zusammen gelöscht zu werden. Wenn man ein File also 'Updated' wird in der SSD der Speicherblock an einen anderen Ort verschoben und der alte Block zum Löschen vorgemerkt.
+	\subsubsection{Wear Levelling}
+	Eine Methode zur Verlängerung der Lebensdauer einer SSD ist das Wear Levelling. Dabei wird gespeichert wie oft ein Block bereits gelöscht worden ist und anhand dieser Information werden Erase Blocks erstellt. So kann man sicherstellen, dass alle Speicherblöcke gleichermaßen benutzt werden um so nicht einen Teil der SSD schnell zu verlieren.
+	\subsubsection{Praxis}
+	Die Performance einer SSD hängt von vielen internen Effekten ab. Eine volle SSD ist bedeutend langsamer als eine leere. Hohe Temperaturen können zu geringeren Geschwindigkeiten führen. SSDs sind auch bedeutend schneller bei sequenziellem als bei zufälligem Zugriff. Im schlimmsten Fall kann eine SSD langsamer sein als eine HDD.
+	\subsection{Zugriffsoptimierung}
+	Transfer zwischen persistentem Speicher und RAM sollte möglichst effizient sein. Dafür ist das Datenbank Management System (DBMS) verantwortlich. Dieses kann so versuchen die Anzahl der Zugriffe zu minimieren sowie so wenige Blöcke wie möglich zu schreiben/lesen. Das DBMS will auch so viel Speicher wie möglich innerhalb des RAMS behalten. \\
+	Man kann jedoch auch innerhalb des Zugriffs in der Festplatte optimieren um so einen besseren Block Speicherzugriff zu erzielen. Mittels Disk Arm Scheduling kann man sicherstellen, dass bei einem Zugriff der durchgeführte Weg des Lesearms so gering wie möglich ist. Das passiert mittels Elevator-Algorithmus, welcher bei einem Pfad die geringste Distanz findet. Zusätzlich kann man bereits bei der Speicherung der Daten diesen so abspeichern, dass er beim Lesen effizient ausgelesen werden kann. Mit der Zeit geschieht jedoch stets eine Fragmentierung des Speichers, sodass die Daten erneut optimiert werden müssen. \\
+	Alternative Wege um den Durchsatz zu erhöhen sind asynchrone Optimierungsvorgänge. So kann der Controller auf die Platte schreiben, wenn gerade Ressourcen zur Verfügung stehen um diese später schneller wieder finden zu können.
+	\subsection{Logging}
+	Das Logging schreibt ständig den Status sowei Vorgänge der Datenbank auf einen Speicher. Hierfür gibt es spezieller Logdisks, welche sequentiell beschrieben werden um so den Speicher zu optimieren.
+	\subsection{Puffer}
+	Der Puffer sitzt zwischen der Festplatte und dem Hauptspeicher und kann für schnellerem Zugriff oft benützter Dateien verwendet werden:
+	\begin{itemize}
+		\item{Anforderung an Puffer wird verwertet}
+		\item{Falls der Block im Puffer nicht verfügbar ist: Speicher wird für Block reserviert.}
+		\item{Block wird aus Festplatte gelesen und in Puffer zwischengespeichert und überschrieben sobald er sich verändert.}
+	\end{itemize}
+	Es gibt verschiedene Strategien um Blöcke zu löschen, falls kein Speicher mehr vorhanden ist:
+	\begin{itemize}
+		\item{Least Recently Used (LRE)}
+		\begin{itemize}
+			\item{Der am längsten nicht verwendete Block wird ersetzt. Durch diese können Zugriffsmuster zur Abschätzung der Zukunft verwendet werden.}
+		\end{itemize}
+		\item{Most Recently Used (MRU)}
+		\begin{itemize}
+			\item{Der als letztes verwendete Block wird verworfen.}
+			\item{Diese Strategie kann fatal für Datenbanken sein, da so kein Puffer für oft verwendete Dateien erstellt wird.}
+		\end{itemize}
+		\item{Pinned Block}
+		\begin{itemize}
+			\item{Gibt einen Block an, welcher nicht gelöscht werden darf}
+		\end{itemize}
+		\item{Toss Immediately}
+		\begin{itemize}
+			\item{Jegliche Daten werden direkt nach Verwendung verworfen.}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Dateiorganisation}
+	Auch die Organisation der Daten selbst kann ein Faktor für die Zugriffszeiten sein. Daten sind in ihrer grundlegendsten Form nur eine Sequenz an Blöcken, wodurch man ihre Abspeicherung anhand der spezifischen Anforderungne optimieren kann.
+	\subsubsection{Cooked vs Raw}
+	In einem DBMS kann man entweder den Controller des Betriebssystems verwenden um Daten abzuspeichern oder selbst einen definieren. Dies nennt man entweder cooked oder raw. Cooked ist zwar einfach zu implementieren, kann jedoch womöglich unomptimiert sein. Raw lässt zwar bedeutend mehr Optimierung zu, die gesamte Abspeicherung obliegt jedoch der Datenbank wodurch es viel Aufwand ist.
+	\subsubsection{Variable vs Fixed Length}
+	Die Anordnung einer Datei kann entweder fixiert geschehen (Wenn x byte an Daten sequenziell existieren) oder eine variable Länge besitzen. Wenn die Datensatzlänge fixiert ist, muss man, falls eine Datei in der Mitte gelöscht wird, damit umgehen, wofür es drei Strategien gibt:
+	\begin{itemize}
+		\item{Alle Datensätze werden um eine Position nach oben verschoben}
+		\item{Der letzte Datensatz wird in die Lücke kopiert}
+		\item{Jeder Datensatz hat eine Referenz auf den nächsten Datensatz (Free List)}
+	\end{itemize}
+	Heutzutage wird größtenteils die Free List Strategie verwendet da man so den geringsten Performanceverlust hat. \\
+	Speziell bei varchars, welche eine variable Größe haben können, ist eine flexible Datenlänge jedoch von Nutzen. [TODO Slide 40 - 48]
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\end{document}
