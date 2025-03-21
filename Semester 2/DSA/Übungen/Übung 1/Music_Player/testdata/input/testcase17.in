@@ -1,0 +1,5 @@
+addSong(a,/pathToA)
+toString
+selectSongyByName(a)
+toString
+getCurrentSong

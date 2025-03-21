@@ -8,3 +8,12 @@ Semester 1/Einschätzungen
 **/*.toc
 **/*.synctex(busy)
 **/*.cpt
+**/*.fdb_latexmk
+**/.DS_Store
+**/*.fls
+**/*.xdv
+**/.idea
+**/*.pdf
+**/framework
+**/NET1/Übung
+**/jscheduler

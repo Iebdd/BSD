@@ -1,0 +1,9 @@
+addSong(a,/pathToA)
+addSong(b,/pathToB1)
+addSong(c,/pathToC1)
+addSong(c,/pathToC2)
+addSong(b,/pathToB2)
+toString
+selectSongyByName(b)
+toString
+getCurrentSong
