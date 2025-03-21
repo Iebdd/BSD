@@ -1,0 +1,881 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{etoolbox}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage[explicit]{titlesec}
+\usepackage{booktabs}
+\usepackage{cprotect}
+\usepackage{graphicx}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Programmierung 1}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\newpage
+	\section{Warum Java?}
+	\preto{\@verbatim}{\topsep=0pt \partopsep=0pt }
+	Java ist eine objektorientierte Programmiersprache. Im Gegensatz dazu stehen funktionelle Sprachen. Ebenfalls ist sie plattformunabhängig. Durch die JRE läuft sie auf jeder Plattform gleich. Java wurde ursprünglich für Internetapplikationen designt, hat seitdem aber darüber hinaus Popularität erlangt. So verwenden Apps wie Acrobat Reader Java. Da Android auf Java basiert, ist es auch im Mobile Sektor viel verwendet. Java basiert auf drei Programmiersprachen: C++, Smalltalk, sowie Eiffel. Weltweit am Marktanteil gemessen, nimmt Java mit 15\% den zweiten Platz ein, wobei nur Python beliebter ist. \\
+	Warum würde man, mit Java beginnen, wenn Python doch die beliebteste ist? \\
+	Bei der besten Wahl der ersten Sprache scheiden sich die Geister. Wenn man mit Python beginnt, kann man zwar sehr schnell etwas entwickeln, jedoch ist es sehr schwer auf andere Sprachen umzusteigen, da diese einem sehr viel abnimmt. Andererseits hat man bei C bedeutend mehr Verantwortung aber auch Kontrolle wodurch der Einstieg schwer werden kann. Java nimmt die goldene Mitte der Abstraktion vs. Verantwortung ein. \\
+	\section{Was ist Java?}
+	Java ist im Vergleich zu C++ relativ einfach. Eigenschaften wie Operatorenüberladung und Mehrfachvererbung sind in Java nicht präsent. So ist der Sprachumfang von Java geringer. Java unterstützt jedoch direkt keine verteilte Ausführung, was jedoch durch eine umfangreiche Klassenbibliothek ausgeglichen wird, wo diese TCP/IP Protokolle nachgereicht werden können. Java hat auch eine relativ vertraute Syntax, da sie auf C++ basiert. \\
+	Da Java eine stark typisierte Sprache ist, muss man alle Variablenklassen explizit definieren, was bei der Programmierung zu robusteren Programmen führt. Sie besitzt auch eine Garbage Collection, was die Notwendigkeit Variablen und Klassen wieder freizugeben unnötig macht. Ein Class-Loader sowie ein Security-Manager stellen auch sicher, dass geladene Klassen sicher dem Programm zugeführt werden und Programmobjekte nur die benötigten Rechte besitzen. Dank der Java Runtime Engine läuft jedes Java-Programm auch praktisch gleich.\\
+	Primitive Java Datentypen besitzen auf jedem System in Java die gleiche Größe, statt wie zum Beispiel bei C, wo ein short in Windows kleiner ist als in Unix. \\
+	Jedoch hat Java einen relativen Overhead, da durch die JRE jedes Programm zuerst in die allgemeine Sprache übersetzt werden muss und danach erst zu Maschinencode weiterverarbeitet wird. \\
+	Java unterstützt auch nativ Multithreading und kann schnell von mehreren Prozessorkernen profitieren. Durch Dynamic Linking kann man in Java auch nur Teile des Programms neu kompilieren um Compilezeit zu sparen. \\
+	\subsection{JDK, JRE und JVM}
+	Java Code wird nicht direkt in Maschinencode übersetzt, sondern zuerst in Java Byte Code übersetzt. Dieser Byte Code ist auf jedem System der selbe, wodurch sichergestellt werden kann, dass er auf jedem System gleich läuft aber nicht mehr von Menschen lesbar. Dieser .class Code wird dann an die Java Virtual Machine (JVM) im Java Runtime Environment (JRE) ausgeführt und letztendlich zu Maschinencode übersetzt. \\
+	\subsection{JDK Tools und Utilities}
+	Ein paar Kommandos um die JDK zu verwenden:
+	\begin{itemize}
+		\item{javac}
+		\begin{itemize}
+			\item{Java compiler mit: javac [options] Sourcefile}
+		\end{itemize}
+		\item{java}
+		\begin{itemize}
+			\item{Führt eine Java Anwendung aus: java [options] class args...}
+		\end{itemize}
+	\end{itemize}
+	Der Prozess um vom Quellcode zum ausführbaren Programm zu kommen ist wie folgt:
+	\begin{enumerate}
+		\item{Den Quellcode in einem Editor schreiben und als HelloWorld.java speichern}
+		\begin{itemize}
+			\item{Im Quellcode gibt es:}
+			\begin{itemize}
+				\item{Ein Kommentar, welcher durch zwei Backslashes gezeigt wird.}
+				\item{Eine Klasse. Jedes Java Programm benötigt eine Klasse}
+				\item{Eine main Methode. Main ist der Einstiegsort des Programms und es kann ohne dieses nicht ausgeführt werden.}
+				\item{Eine print Anweisung. 'System.out.println([string])' gibt den string auf den standard output aus.}
+			\end{itemize}
+		\end{itemize}
+		\item{Mit javac HelloWord.java den code kompilieren. So entsteht plattformunabhängiger HelloWorld.class Code.}
+		\item{Mit java HelloWorld.class den ByteCode ausführen.}
+	\end{enumerate}
+	\subsection{Was wird benötigt?}
+	\begin{itemize}
+		\item{Java Development Kit (JDK) 21 oder 23 (Neueste Version)}
+		\begin{itemize}
+			\item{Bei Windows muss man eventuell Umgebungsvariablen setzen}
+		\end{itemize}
+		\item{Online-Dokumentation}
+		\begin{itemize}
+			\item{https://docs.oracle.com/en/java/javase/23/index.html}
+		\end{itemize}
+		\item{Eine integrierte Entwicklungsumgebund (IDE) wie zum Beispiel:}
+		\begin{itemize}
+			\item{\textbf{IntelliJ}}
+			\item{Eclipse}
+			\item{Netbeans}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Ignorierter Whitespace}
+	Der Compiler ignoriert stanardmäßig Whitespace. Zeilenumbrüche sowie Whitespace dienen lediglich der besseren Lesbarkeit.
+	\subsubsection{Kommentare}
+	Blockkommentare werden mit /* angefangen und mit */ beendet. Dieses Kommentar kann auch über mehrere Zeilen gehen. \\
+	Andererseits kann man mit // ein Zeilenkommentar beginnen. Dieses Kommentar endet mit dem nächsten Zeilenumbruch. \\
+	\subsubsection{Java Coding Conventions}
+	\begin{itemize}
+		\item{Die Umgangssprache innerhalb des Codes sollte auf Englisch sein. Also sollten Variablennamen sowie Kommentare alle auf Englisch sein. Dies bereitet auf den Alltag vor, da man immer annehmen muss, dass ein geschriebenes Programm von jemandem gesehen wird, der/die kein Deutsch beherrscht.}
+		\item{Variablen sollten 'Sprechende Namen' besitzen und angeben was ihre Funktion ist.}
+		\item{Variablenkonvention:}
+		\begin{itemize}
+			\item{Beginnt mit einem Kleinbuchstaben}
+			\item{CamelCase (Erster Buchstabe klein, danach alle Wörter groß z.B. userCount)}
+		\end{itemize}
+		\item{Konstanten}
+		\begin{itemize}
+			\item{Beginnend mit Großbuchstaben}
+			\item{Bestehen nur aus Großbuchstaben und Ziffern}
+		\end{itemize}
+		\item{Methoden}
+		\begin{itemize}
+			\item{Beginnen mit Kleinbuchstaben}
+			\item{CamelCase z.B. getUsers()}
+		\end{itemize}
+		\item{Klassen}
+		\begin{itemize}
+			\item{Beginnen mit Großbuchstaben}
+			\item{CamelCase}
+			\item{Nur Substantive}
+			\item{z.B. ActionListener}
+		\end{itemize}
+		\item{Package, Import}
+		\begin{itemize}
+			\item{Beginnen mit Kleinbuchstaben}
+			\item{umgekehrte Domain}
+		\end{itemize}
+	\end{itemize}
+	\section{Variablen}
+	\label{sec:Datentypen}
+	Variablen sind symbolische Namen für Speicherstellen. Mit diesen erstellten Werten kann man in Folge eine Berechnung durchführen oder diese verändern. \\
+	Grundsätzlich müssen Variablen definiert werden, bevor sie verwendet werden. Dabei muss man der Variable einen Namen und einen Datentyp geben. \\
+	Ein Name kann in der Regel beliebig lange und aus Buchstaben und Ziffern bestehen, jedoch darf kein Buchstabe an erster Stelle stehen. Variablen dürfen auch nicht wie native Java Befehle wie main, if oder while genannt werden. Variablen in Java sind case-sensitive, also ist counter nicht gleich Counter. Der Inhalt einer Variable kann (Innerhalb des Datentyps) einen beliebigen Wert annehmen und dieser kann auch verändert werden. \\
+	\subsection{Datentypen}
+	Eine Variable muss mit einem Datentypen generiert werden. Dabei muss man je nach Bedarf mehr oder weniger Speicher reservieren. Wenn man zum Beispiel nur eine kleine Zahl speichern will, muss man keinen großen Variablentypen verwenden. \\
+	Datentypen sind: \\
+	\begin{itemize}
+		\item{Boolean}
+		\begin{itemize}
+			\item{Der Boolean hat nur zwei Zustände: True oder False und kann nur einen einzelnen Wahrheitswert speichern. Während dies nur einen Bit an Speicher benötigen würde, ist die Größe eines Booleans undefiniert, da die 1 Bit Größe zu Lücken im 8 Bit Speicher führen könnte, weshalb der spezifische Speicherverbrauch situationsabhängig ist.}
+		\end{itemize}
+		\item{Char}
+		\begin{itemize}
+			\item{Ein Char hat 16 Bit, kann also 65535 verschiedene Unicode Zeichen speichern. Bei einem Print wird dann jeweils die Unicode Repräsentation des Zahlenwerts ausgegeben.}
+		\end{itemize}
+		\item{Byte bis Long}
+		\begin{itemize}
+			\item{Ganzzahlen können in verschiedenen Größen gespeichert werden, was abhängig von der erforderlichen Größe der Variable ist. Der kleinste ist der Byte, welcher 256 Werte speichern kann. Der Short ist 16 Bit lang und kann 65535 verschiedene Werte speichern. Der Int ist der am häufigsten verwendete Datentyp und benötigt 32 Bit, wodurch er 4,2 Milliarden Zustände abspeichern kann. Falls man mehr als diese Größen braucht, ist der Long 64 Bit groß und kann $2^126$ Zustände speichern.}
+		\end{itemize}
+		\item{Gleitkommazahlen}
+		\begin{itemize}
+			\item{Für rationale Zahlen gibt es den Float und den Double, welcher die Gleitkommanotation verwendet. Diese verbrauchen wieder 32 und 64 Bit und können abhängig der Größe der Zahl sehr kleine Werte darstellen.}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Deklaration}
+	Eine Variable zu definieren nennt man 'deklarieren', welche eine Variable für das Programm verfügbar macht.
+	\begin{verbatim}
+		int counter;
+	\end{verbatim}
+	Man kann jedoch auch mehrere Variablen mit einer deklaration initialisieren.
+	\begin{verbatim}
+	float radius, sum;
+	\end{verbatim}
+	Während der Deklaration kann man auch gleich eine Wertzuweisung angeben.
+	\begin{verbatim}
+	counter = 0;
+	\end{verbatim}
+	Wenn man eine Gleitkommavariable definieren und initialisieren will, muss man hinter der Zahl ein f schreiben.
+	\begin{verbatim}
+	radius = 0.5f;
+	\end{verbatim}
+	Da links des Zuweisungsoperators (=) immer eine Zuweisung geschieht, kann man auch einer Variable den Wert einer anderen Variable geben. 	
+	\begin{verbatim}
+	sum = radius;
+	\end{verbatim}
+	Man kann jedoch auch gleich den Datentyp angeben, wodurch Zweideutigkeiten eliminiert werden. Bei deklaration eines Chars, kann man auch gleich die Charakterepräsentation angeben
+	\begin{verbatim}
+	char line = '\n';
+	\end{verbatim}
+	\subsection{Ausgabe}
+	Mit \verb|System.out.print()| kann man Daten an die Konsole ausgeben. Wenn man mehrere Variablen gleichzeitig ausgeben will, kann man diese mit einem '+' verbinden. Bei einem Zeilenumbruch kann man diesen mit einem '\textbackslash n' erzwingen.\\
+	Man kann diesen Zeilenumbruch auch implizit nach der Ausgabe angeben wenn man \verb|System.out.println()| verwenden. \\
+	Eine weitere Ausgabemöglichkeit ist \verb|System.out.printf()| mit welchem man formattierte Strings ausgeben kann. Dabei gibt man einen String mit spezifischen Platzhaltern an, welche dann durch weitere Argumente besetzt werden.
+	\subsection{Operatoren}
+	\label{sec:Operatoren}
+	Java besitzt Arithmetische Operatoren um Zahlen manipulieren zu können. \\
+	\begin{itemize}
+		\item{Addition - +}
+		\begin{itemize}
+			\item{Addiert zwei Zahlen}
+			\item{\verb|sum = num1 + num2|}
+		\end{itemize}
+		\item{Subtraktion}
+		\begin{itemize}
+			\item{Subtrahiert die zweite Zahl von der Ersten.}
+			\item{\verb|sub = num1 - num2|}
+		\end{itemize}
+		\item{Multiplikation}
+		\begin{itemize}
+			\item{Multipliziert zwei Zahlen}
+			\item{\verb|mult = num1 * num2|}
+		\end{itemize}
+		\item{Division}
+		\begin{itemize}
+			\item{Dividiert zwei Zahlen}
+			\item{\verb|div = num1 / num2|}
+		\end{itemize}
+		\item{Modulo (Rest)}
+		\begin{itemize}
+			\item{Gibt den Rest einer Division an.}
+			\item{\verb|mod = num1 % num2|}
+		\end{itemize}
+		\item{Inkrement (Pre und Post)}
+		\begin{itemize}
+			\item{Erhöht den Wert einer Variable um 1. Dabei ist es wichtig, ob dieser Vor oder Nach der Variable steht. Steht er vor der Variable, passiert die Addition bevor die Variable verwendet wird. Steht er nach der Variable, wird dieser erst erhöht, nachdem die Operation beendet wurde.}
+			\item{\verb|num1++ -> Post-Inkrement|}
+			\item{\verb|++num2 -> Pre-Inkrement|}
+		\end{itemize}
+		\item{Dekrement (Pre und Post)}
+		\begin{itemize}
+			\item{Verringert den Wert einer Variable um 1. Post und Pre verhalten sich gleich wie bei dem Inkrement.}
+			\item{\verb|num1-- -> Post-Dekrement|}
+			\item{\verb|--num2 -> Pre-Dekrement|}
+		\end{itemize}
+		\item{Negatives Vorzeichen}
+		\begin{itemize}
+			\item{Negiert die Zahl durch ein minus vor die Variable.}
+			\item{\verb|neg = -num1|}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Kombinationen von Operatoren}
+	Man kann diese Operatoren auch mit einer Zuweisung kombinieren, so dass, man diese nicht doppelt schreiben muss.
+	\begin{itemize}
+		\item{Addition und Zuweisung - \verb|+=|}
+		\begin{itemize}
+			\item{\verb|sum += 10| - Addiert 10 zu sum}
+			\item{Äquivalent zu \verb|sum = sum + 10|}
+		\end{itemize}
+		\item{Subtraktion und Zuweisung - \verb|-=|}
+		\begin{itemize}
+			\item{\verb|difference -= ++a| - Erhöht a um 1 und zieht es von difference ab}
+			\item{Äquivalent zu \verb|a = a + 1|}
+			\item[]{\verb|            difference = difference - a|}
+		\end{itemize}
+		\item{Multiplikation und Zuweisung - \verb|*=|}
+		\begin{itemize}
+			\item{\verb|product *= i * j| - Multipliziert product mit i und j}
+			\item{Äquivalent zu \verb|product = product * i * j|}
+		\end{itemize}
+		\item{Addition und Zuweisung - \verb|/=|}
+		\begin{itemize}
+			\item{\verb|quotient /= x++| - Dividiert \verb|quotient| durch x und addiert 1}
+			\item{Äquivalent zu \verb| quotient = quotient / x|}
+			\item[]{\verb|             x = x + 1|}
+		\end{itemize}
+		\item{Addition und Zuweisung - \verb|%=|}
+		\begin{itemize}
+			\item{\verb|secondsLeft %= 60| - Nimmt den Rest der Division secondsLeft / 60}
+			\item{Äquivalent zu \verb|secondsLeft = secondsLeft % 60|}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Vergleichsoperatoren}
+	Es gibt auch Operatoren, mit welchen man Variablen vergleichen kann. Diese haben als Rückgabewert stets einen Boolean Wert, sind also immer entweder True oder False.
+	\begin{itemize}
+		\item{gleich - ==}
+		\begin{itemize}
+			\item{Vergleiche haben stets zwei Zuweisungsoperatoren}
+			\item{\verb|num1 == num2|}
+		\end{itemize}
+		\item{nicht gleich - !=}
+		\begin{itemize}
+			\item{Überprüft ob zwei Variablen nicht gleich sind}
+			\item{\verb|num1 != num2|}
+		\end{itemize}
+		\item{kleiner - <}
+		\begin{itemize}
+			\item{Überprüft, ob eine Variable kleiner ist als die andere}
+			\item{\verb|num1 < num2|}
+		\end{itemize}
+		\item{größer - >}
+		\begin{itemize}
+			\item{Überprüft ob eine Variable größer ist als die andere}
+			\item{\verb|num1 > num2|}
+		\end{itemize}
+		\item{größer gleich - \verb|>=|}
+		\begin{itemize}
+			\item{Überprüft, ob eine Variable größer oder gleich ist als die andere}
+			\item{\verb|num1 >= num2|}
+		\end{itemize}
+		\item{kleiner gleich - \verb|<=|}
+		\begin{itemize}
+			\item{Überprüft, ob einer Variable kleiner oder gleich ist als die andere}
+			\item{\verb|num1 <= num2|}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Bool'sche Operatoren}
+	\begin{itemize}
+		\item{Negation - !}
+		\begin{itemize}
+			\item{Invertiert den Ausdruck}
+			\item{\verb|bool1 = !bool1|}
+		\end{itemize}
+		\item{Und - \&\&}
+		\begin{itemize}
+			\item{Wahr wenn beide Operatoren wahr sind.}
+		\end{itemize}
+		\item{Oder - ||}
+		\begin{itemize}
+			\item{Wahr wenn mindestens einer der beiden Operatoren wahr ist.}
+		\end{itemize}
+		\item{xor - \^{}}
+		\begin{itemize}
+			\item{Wahr wenn genau einer der beiden Operatoren wahr ist.}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Short-Circuit Evaluation}
+	Bei logischen Ausdrücken werden die Operatoren stets von links nach rechts ausgewertet. Dabei optimiert er in gewisser Weise, indem er die rechte Seite einer verbundenen Aussage nicht auswertet, falls dieses bei \&\& False ist oder bei || Wahr ist. Das geschieht, da bei Oder der Ausdruck wahr sein wird, wenn der Erste wahr ist und bei Und der Ausdruck Falsch sein wird, wenn der erste Ausdruck schon Falsch ist.
+	\section{Benutzereingabe}
+	\subsection{Zahlen einlesen}
+	Java hat mehrere Möglichkeiten um eine Benutzereingabe zu ermöglichen. Eine default package von Java ist das \verb|java.util.Scanner|, welche Benutzereingaben ermöglicht. \\
+	Der Scanner kann Benutzereingaben über die Konsole zur Laufzeit einlesen und analysieren. Die Klasse bietet auch Funktionalitäten zur Überprüfung des eingelesenen Datentyps. So kann man vorraussetzen, dass die eingegebene Variable auch den erwarteten Typ hat. Obwohl es in Java mehrere Möglichkeiten zum Einlesen gibt, wird in PRG1 nur \verb|java.util.Scanner| verwendet. \\
+	\subsubsection{Verwendung}
+	\begin{verbatim}
+	import java.util.Scanner;
+
+	Scanner scanner = new Scanner(System.in);
+	int num;
+	if (scanner.hasNextInt())
+	num = scanner.nextInt();
+
+	scanner.close();
+	\end{verbatim}
+	Zum Verwenden des Scanners muss man diesen mit \verb|import java.util.Scanner| zuerst importieren. \\
+	Danach muss ein Scanner Objekt erstellt werden, das man dann verwenden kann: \verb|Scanner scanner = new Scanner(System.in| \\
+	Zum Einlesen eines Wertes kann man dann Methoden des Scanner Objekts aufrufen. Abhängig von der erwarteten Variable ist diese unterschiedlich. Wenn man einen Integer einlesen will, muss man die Methode \verb|int num = scanner.nextInt()| aufrufen und in eine Integervariable speichern. Es gibt auch eine Methode, welche jeden Variablentyp annimmt: \verb|scanner.next()|, welche diesen danach als String speichert. Wenn man eine Type vorraussetzt, gibt scanner im Falle einer inkorrekten Eingabe eine Exception zurück.\\
+	Um sicherzustellen, dass die eingegebene Variable wirklich die korrekte Type hat, kann man die scannereigene Methode \verb|scanner.hasNextInt()| aufrufen um zwar eine Eingabe aufzurufen, diese aber nicht zu konsumieren. Diese Methode gibt nur Wahr zurück, wenn die eingegebene Variable gleich der erwarteten ist. \\
+	Am Ende des Vorgangs muss das Scannerobjekt wieder geschlossen werden. Das kann mit der Methode \verb|scanner.close()| vollbracht werden. Es ist Vorsicht geboten, dass das Scannerobjekt mit \verb|scanner.close()| erst geschlossen wird, wenn man sicher keine Eingaben mehr benötigt. Selbst wenn man danach ein weiteres Scannerobjekt erstellt, kann man keine weiteren Eingaben abspeichern, da \verb|scanner.close()| nicht nur den Scanner sondern auch den darunterliegenden Stream schließt.
+	\section{Methoden}
+	Methoden sind Wege um ein Programm in mehrere Teile aufzuspalten. Dabei will man komplexere Probleme in Teilprobleme aufzuspalten, bis es zu einer übersehbaren Größe reduziert wurde. Methoden bieten auch eine gute Möglichkeit um die Arbeit aufzuteilen. So hat eine Aufgabe drei Probleme und kann dadurch die nötige Arbeit in drei Methoden auf drei Personen aufteilen. \\
+	Methoden dienen auch zur Abstraktion. So kann jede Methode ein diskretes Problem abarbeiten und einen Wert zurückgeben. Dadurch braucht der Aufrufer der Funktion nicht darüber nachdenken wie eine Methode eine Aufgabe vollbringt, welche Werte sie benötigt und zurückgibt und sonst nichts. \\
+	Wiederverwendbarkeit ist auch ein wichtiger Faktor. Wenn man eine relativ allgemeine Funktion schreibt, kann man diese oft wiederverwenden um so weniger Platz zu verbrauchen. \\
+	\subsection{Struktur}
+	Eine Methode hat eine spezifische Struktur:
+	\begin{verbatim}
+	public static int minFunction(int a, int b) {
+	int min;
+	if (a > b)
+	min = b;
+	else
+	min = a;
+	return min;
+	}
+	\end{verbatim}
+	Diese Struktur kann man wie folgt generalisieren:
+	\begin{verbatim}
+	   <modifiers> <returnType> <nameOfMethod> (<ParameterList>) { 
+	   \\method header
+	   <statements>
+	   }
+	\end{verbatim}  
+	\begin{itemize}
+		\item{<modifiers> -> public/static}
+		\begin{itemize}
+			\item{Definieren die Zugriffsart, wie public, private, static, etc.. Diese sind optional, es kann aber auch mehr als eine geben (Jedoch jede nur ein Mal)}
+		\end{itemize}
+		\item{<returnType> -> int}
+		\begin{itemize}
+			\item{Welchen Typ die Methode zurückgibt}
+		\end{itemize}
+		\item{<nameOfMethod> -> minFunction}
+		\begin{itemize}
+			\item{Der Name der Methode}
+		\end{itemize}
+		\item{<ParameterList> -> int a, int b}
+		\begin{itemize}
+			\item{Die Liste an Werten, welche übergeben werden}
+		\end{itemize}
+		\item{<statements>}
+		\begin{itemize}
+			\item{Der Code, welcher in der Methode ausgeführt wird.}
+		\end{itemize}
+	\end{itemize}
+	\subsection{\texorpdfstring{\texttt{return}}{return}}
+	Zusätzlich gibt es den Token \verb|return|, welcher die Ausführung der Methode abbricht. Wenn danach eine Variable angegeben wird (und die Methode kein void type ist), wird diese Variable auch an die aufrufende Funktion zurückgegeben.
+	\subsubsection{\texorpdfstring{\texttt{void}}{void}}
+	Ein spezieller <returnType> ist \verb|void|. Dieser zeigt, dass die Methode keine Variable zurückgibt, wenn sie beendet wird. In void Methoden muss kein return statement gegeben sein und sie beendet die Ausführung einfach, wenn sie an ihr Ende kommt. 
+	\subsection{Call-By-Value}
+	In Java gilt im Allgemeinen \textit{Call-By-Value}. Also werden übergebene Variablen bei Übergabe zu einer Funktion kopiert und existieren separat zur ursprünglichen Variable. Das Gegenstück dazu ist \textit{Call-By-Reference}, was jedoch in Java nicht so funktioniert wie in anderen Programmiersprachen. Ausnahme von dieser Regel sind Objekte (Unter anderem auch Arrays, jedoch keine Strings), welche stets By Reference übergeben werden. Das bedeutet, dass man ein übergebenes Array nicht zurückgeben muss, da die Änderungen bereits am Originalarray durchgeführt wurden.
+	\section{Klassen und Objekte}
+	Java ist eine objektorientierte Programmiersprache. Objekte dienen dazu gewisse Variablen und Funktionen zu bündeln. Wenn man beispielsweise zehn Variablen einer Gruppe an Personen darstellen will, wäre es sehr umständlich diese alle zu definieren. Aus diesem Grund kann man in einer Klasse diese Variablen definieren und danach für jede Person ein eigenes Objekt zu erstellen. \\
+	Eine Klasse benötigt stets ein Modell, welche beschreibt wie sie definiert wird. Dabei werden Variablen und Methoden der Klasse aber auch dessen Konstruktor, welcher definiert, wie die Variablen bei dessen Erstellung befüllt werden. Aus einer Klasse, welcher nur einen Plan darstellt, kann ein Objekt erstellt werden. Diese sind mit konkreten Werten befüllt und beschreiben eine spezifische Instanz. \\
+	Ziel eines solchen Ansatzes ist eine Modularisierung und Wiederverwendbarkeit einzelner Teile eines Programms.
+	\subsection{Klassenvariablen}
+	Bis jetzt wurden nur lokale Variablen definiert. Diese Variablen existieren nur innerhalb ihres spezifischen Codeblocks. Wenn man eine Variable innerhalb einer for Schleife definiert, wird diese nur innerhalb dieser Schleife verfügbar sein. \\
+	Gegenüber dem stehen \textit{Instanzvariablen}, welche nur außerhalb einer Methode in einer Klasse definiert werden können. Diese Variablen geben die Attribute des Objekts wieder und existieren pro Objekt genau ein Mal. So existiert eine Instanzvariable bei 5 Objekten auch 5 Mal. Dadurch ist ihre Lebensdauer auch genau so lange, wie des Objektes dem sie zugewiesen sind. \\
+	Als einzigartige Version dieser Instanzvariable existiert die Klassenvariable, welche mit dem keyword \verb|static| angegeben wird. Solch eine Klassenvariable existiert ein Mal pro Klasse, also teilen sich alle Instanzen einer Klasse eine Variable und können so verwendet werden. \\
+	\subsection{Constructor}
+	Ein Constructor initialisiert ein Objekt wenn es erstellt wird und hat den gleichen Namen wie die Klasse: \verb|Klasse() {}|. Wenn eine Klasse initialisiert wird übergibt man die Attribute, welche beim Erstellen des Objekts erteilt werden. Man kann auch mehrere Konstruktoren pro Klasse verwenden, solange diese eine unterschiedliche Signatur (Anzahl an Attributen oder Attributstypen) besitzen. Zum Beispiel kann man zwei Konstruktoren generieren, wobei bei einer eine der Attribute fehlt, wodurch diese zur Erstellung der Klasse optional ist. Der Konstruktor ist jedoch nicht verpflichtend, und Java erstellt einen default constructor zur Verfügung. Dieser default constructor erstellt jedoch nur das Objekt und weist keine Variablen zu. \\
+	Zusätzlich gibt es gewisse keywords, welche bestimmte Bedeutungen besitzen oder einer Variable oder Methode Rechte zu geben:
+	\begin{itemize}
+		\item{this}
+		\begin{itemize}
+			\item{\verb|this| stellt immer eine Referen auf das aktuelle Objekt und dessen Variablen oder Methoden. Dies ist nützlich wenn man zwischen lokalen Variablen und Instanzvariablen zu unterscheiden.}
+		\end{itemize}
+		\item{new}
+		\begin{itemize}
+			\item{\verb|new| erzeugt ein neues Objekt einer Klasse. So kann man mit \verb|new <Konstruktor>(<Attribute>)| eine neue Klasse initalisieren und die Attribute an den Konstruktor zu übergeben.}
+		\end{itemize}
+		\item{static}
+		\begin{itemize}
+			\item{\verb|static| zeigen Variablen und Methoden ohne Instanzbindung. Dadurch gehören sie zur Klasse und nicht zur Instanz.}
+		\end{itemize}
+		\item{Zugriffsmodifizierer}
+		\begin{itemize}
+			\item{Regeln wer auf diese Klasse und Methode zugreifen darf. Es gibt:}
+			\begin{itemize}
+				\item{Public - Kann von allen Klassen aufgerufen werden}
+				\item{Protected - Kann nur von Unterklassen oder der eigenen Klasse aufgerufen werden.}
+				\item{(default) - }
+				\item{Private - Nur die eigene Klasse kann darauf zugreifen. Instanzvariablen sollten immer Private sein.}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Getter/Setter Methoden}
+	Getter und Setter Methoden sind spezielle Methoden um entweder Instanz-/Klassenvariablen kontrolliert zu verwenden oder auszulesen. Solche Variablen sind in der Regel Private, wodurch nicht direkt auf sie zugegriffen werden kann, jedoch ermöglichen Setter und Getter kontrollierten Zugriff. Dadurch kann man regulieren wie Variablen ausgelesen und verändert werden können.
+	Zum Beispiel kann man verhindern, dass eine Variable, welche nur positiv sein darf, negativ gesetzt wird. So sollte es in der Regel für jede Variable Getter und Setter geben, sofern Zugriff von außen erwünscht ist.
+	\section{Strings}
+	Strings stellt eine Zeichenkette dar, welche eigentlich eine Sequenz an \verb|char| Charakteren. In Java sind Strings Objekte, müssen also als Objekt erstellt werden. Java stellt jedoch die String Klasse zur Verfügung weshalb man nicht zwangsläufig \verb|new| verwenden muss: \\
+	Es gibt zwei Möglichkeiten ein String Objekt zu erstellen. Entweder \verb|String s1 = "Hello world!";| wie andere Variablen oder \verb|String s2 = new String ("Hello world!");|. Die erste Methode ist hierbei eher zu verwenden, da sie ähnlicher zu einer traditionellen Variablendeklaration ist. \\
+	Da Strings Objekte sind, kann man diese auch nicht mit \verb|==| vergleichen. Sollte man das versuchen, würde das Programm eigentlich versuchen herauszufinden, ob die beiden String Objekte die gleichen sind (Welche sie meistens nicht sind). Dabei würde ein Objekt mit dem gleichen Inhalt, nicht zwangsmäßig das gleiche Objekt sein und somit \verb|false| zurückgeben. \\
+	Da Strings ein Objekt sind, haben diese auch Instanzmethoden, welche stattdessen zu verwenden sind. Ein Weg zwei Strings miteinander zu vergleichen ist die Instanzmethode \verb|.equals()|, welche verwendet werden kann um Strings effizient mitenander zu vergleichen. Beispiel:
+	\begin{verbatim}
+	       String s1 = "Hello world!";
+	       String s2 = "Hello world!";
+	       System.out.Println(s1.equals(s2)) -> True
+	\end{verbatim}
+	Einige weitere String Methoden sind:
+	\begin{itemize}
+		\item{\verb|s1.length()|}
+		\begin{itemize}
+			\item{Gibt die Länge des Strings zurück. \verb|-> 12|}
+		\end{itemize}
+		\item{\verb|s1.concat(s2)|}
+		\begin{itemize}
+			\item{Fügt beide Strings zusammen. \verb|-> Hello world!Hello world!|}
+		\end{itemize}
+		\item{\verb|s1.charAt(2)|}
+		\begin{itemize}
+			\item{Gibt den char an der dritten Position zurück (Da Strings bei 0 beginnen) \verb|-> 'l'|}
+		\end{itemize}
+		\item{\verb|s1.indexOf('l')|}
+		\begin{itemize}
+			\item{Gibt die Position des ersten gesuchten characters zurück. Gibt -1 zurück wenn er nicht gefunden wird \verb|-> 3|}
+		\end{itemize}
+		\item{\verb|s1.startswith("He")|}
+		\begin{itemize}
+			\item{Gibt an, ob der String mit dem gesuchten String beginnt. \verb|-> True|}
+		\end{itemize}
+		\item{\verb|s1.substring(0, 2)|}
+		\begin{itemize}
+			\item{Gibt einen neuen String zurück, welcher innerhalb der Indizes liegt. Dabei \textit{inkludiert} der Anfangswert den character an dieser Stelle, \textit{exkludiert} jedoch den character an dem Endwert. Das ist nützlich, da man so die Länge des String per .length() direkt als Endwert angeben kann (Welcher jedoch um einen höher als der höchste Indexwert ist.) wenn man bis zum Ende des Strings auslesen will. \verb|-> Hel|}
+		\end{itemize}
+		\item{\verb|s1.toLowerCase()|}
+		\begin{itemize}
+			\item{Gibt den String mit Kleinbuchstaben zurück. Das Gegenteil ist \verb|s1.toUpperCase()|  was den String mit Großbuchstaben zurückgibt. \verb|-> hello world!|}
+		\end{itemize}
+		\item{\verb|s1.repeat(2)|}
+		\begin{itemize}
+			\item{Wiederholt den String so oft, wie angegeben, in diesem Fall zwei Mal. \verb|-> Hello World!Hello World!|}
+		\end{itemize}
+	\end{itemize}
+	Man kann auf Strings auch arithmetische Operationen durchführen. Dabei wird der Wert des characters erhöht und dessen Repräsentation ausgegeben: \verb|char c1 = 'a' -> System.out.println(c1++) -> 'b'|
+	\section{Debugging}
+	Debugging hilft bei der Fehlererkennung und -behebung während des Programmierens eines Programms. So man kan ein Programm Schritt für Schritt durchlaufen und nachverfolgen. Man kann zusätzlich auch Variablen während der Laufzeit verändern. \\
+	\subsection{Breakpoints}
+	Eine der wichtigsten Funktionen im Debuggin ist das Setzen von Breakpoints. Sobald das Programm den Breakpoint erreicht, wird das Programm anhalten, wonach man den Status zu diesem Zeitpunkt inspizieren kann.
+	\subsubsection{Step-Over}
+	Sobald man bei einem Breakpoin angehalten hat, kann man mittels Step-Over angeben, zwar den Wert der Variablen auslesen, und so jede Iteration der Methode überprüfen, ohne jedes Mal die gesamte Methode durchlaufen zu müssen.
+	\subsubsection{Step-Into}
+	Im Gegensatz gibt man mit Step Into an, dass man die Methode betreten will.
+	\section{Arrays}
+	Arrays dienen dazu mehrere Daten des selben Typs in einer einzigen Variable zu speichern. Arrays haben eine fixe Größe, also kann man sie, nachdem sie generiert wurden, nicht mehr verändern. Wenn man also danach ein größeres Array benötigt, muss man ein neues Array anlegen und den Inhalt kopieren. Man kann auch Arrays wieder auf zwei Arten deklarieren: Entweder mit einer Klammer nach dem Datentyp \verb|<dataType>[] <varName>| oder nach dem Variablennamen wie es in C++ der Fall ist \verb|<dataType> <varName>[]|. Wenn man ein Array danach mit einer bestimmten Größe initialisieren will, muss man dieses gleich wie bei Strings mit \verb|new| generieren: \verb|<varName> = new <dataType>[<arraySize>];|.\\
+	Man kann jedoch ein Array auch zum gleichen Zeitpunkt deklarieren und initialisieren: \\ \verb|<dataType>[] <varName> = new <dataType>[<arraySize>]|.
+	Gleich wie bei Strings kann man auch auf Arrays mittels Index zugreifen, dabei muss man die Position auf welche man zugreifen will mittels eckiger Klammer angeben: \verb|myArray[5]| greift als beispielsweise auf das sechste Element des Arrays zu. (Da auch Arrays bei 0 beginnen.). \\
+	Da Arrays mehrere Daten in einer Variable vereinen können, gibt die Variable selbst nur den Speicherort der Werte an. Aus diesem Grund kann man Arrays auch nicht direkt vergleichen, weshalb es, gleich wie bei Strings, im Falle eines Vergleichs mit \verb|==| nur die Adressen der Objekte vergleicht. (Und höchstwahrscheinlich False erhält.) \\
+	\subsection{\texorpdfstring{\texttt{java.util.Arrays}}{java.util.Arrays}}
+	Java hat eine Hilfsklasse um effizienter mit Arrays arbeiten zu können. Einige Methoden dieser Klasse sind:
+	\begin{itemize}
+		\item{\verb|sort|}
+		\begin{itemize}
+			\item{Sortiert das Array in aufsteigender Reihenfolge.}
+		\end{itemize}
+		\item{\verb|fill|}
+		\begin{itemize}
+			\item{Setzte alle Werte des Arrays auf einen bestimmten Wert.}
+		\end{itemize}
+	\end{itemize}    
+	Man muss bei Arrays aufpassen, dass man bei dem Zugriff auf Indizes innerhalb der Größe des Arrays verbleibt. Ein Zugriff auf das Array mit einem Index kleiner als 0 oder größer als die Größe des Arrays - 1, führt dabei zu einer \verb|ArrayOutOfBoundsException| und falls diese nicht behandelt wird, zu einem Absturz.
+	\subsubsection{Mehrdimensionale Arrays}
+	Arrays sind jedoch nicht auf eine einzige Dimension begrenzt. In der Theorie kann man ein Array mit MAX\_INT ($~{}$ 4,2 Milliarden) Dimensionen füllen, was aber höchstwahrscheinlich bald auf Speicherprobleme treffen würde. Ein praktisches Beispiel eines mehrdimensionalen Arrays ist zum Beispiel das Speichern von Messwerten verschiedener Sensoren. Dabei kann man jedem Sensor eine eigene Dimension zuweisen und kann diese so in einer einzigen Variable bündeln. \\
+	Mehrdimensionale Arrays existieren nicht separat zu normalen Arrays, vielmehr sind mehrdimensionale Arrays lediglich eine Variable welche aus Arrays von Arrays besteht. Mehrdimensionale Arrays kann man generieren indem man mehrere Klammern an den Variablentyp stellt. (Zusätzlich zu dem Ersten): \verb|int[][] twoDimArr| -> Generiert ein zweidimensionales Array namens twoDimArr. Wenn man auf Elemente in einem mehrdimensionalen Array zugreifen will, muss man wiederum mehrere Klammern als Index angeben. Dabei greift man stets nur über die letzte Klammer auf die Elemente in den Arrays zu, und alle Klammern davor dienen nur zur Definition des Arrays: \verb|twoDimArr[0][5]| -> Greift auf die erste Spalte und das sechste dort enthaltene Element zu. \\
+	Arrays werden auch sehr ähnlich zu normalen Arrays gespeichert. Während ein normales Array am Speicherort des Arrays nur einen Verweis auf die Reihe an Elementen im Speicher enthält, hat ein mehrdimensionales Array in der Variable einen Verweis auf ein Array aus Arrays, welche dann schließlich jeweils auf die Werte zeigen.  
+	\section{\texorpdfstring{\texttt{foreach}}{foreach}}
+	Die \verb|foreach| Schleife ist eine erweiterte for Schleife, welche nicht das bekannte Format der drei Teile besitzt, sondern nur eine Iterationsvariable besitzt, welche über die Länge eines Arrays oder Strings läuft und dabei jedes Element hintereinander auswählt. Die Syntax hierfür ist: \verb|for(<datatype> <iterator> : <array>) {<code>}| wobei die Variable iterator, welche vom gleichen Datentypen als das Array sein sollte, Platzhalter für jedes Element im Array ist.
+	\section{Eingabenautomatisierung}
+	Ein Programm zu testen kann oft ein langwieriger Prozess sein. Ein einfacherer Weg ein Programm umfassend zu testen, ist test cases zu schreiben und diese automatisiert einzugeben. Dazu kann man ein Text File schreiben, wo alle Eingaben sequenziell mit line breaks getrennt angegeben sind. Um es dann verwenden zu können, muss man, wenn man das Programm in der command line ausführt mit dem kleiner Zeichen \verb|<| es als input für das Programm angeben: \verb|java prg.class < input1.in| 
+	\section{Typumwandlung}
+	Es ist mit Einschränkungen möglich Variablen in einen anderen Typen umzuwandeln, jedoch muss man dafür einige Sachen beachten.
+	\subsection{Implizite Umwandlung}
+	Manche Variablentypen sind in der Lage implizit in eine andere konvertiert zu werden. Das ist jedoch nur möglich wenn diese ohne Verluste möglich ist. Zum Beispiel kann man einen Integer Wert stets in einer Long Variable speichern, da dieser stets kleiner ist. Umgekehrt funktioniert dies nur, wenn die Long Variable kleiner als $2^{32}-1$ ist. Die gleiche Situation besteht auch mit Float und Double Werten. Eine implizite Konversion geschieht, wie der Name impliziert, ohne explizite Angabe, zum Beispiel bei: \begin{verbatim}
+	int i = 5;
+	long f = i; -> Implizite Konversion eines Integers zu einem Long
+	\end{verbatim}
+	\subsection{Casting}
+	Man kann jedoch auch Verlustbehaftete Konversionen angeben, diese müssen jedoch explizit mittels Castoperator verlangt werden. Dadurch teilt man dem Compiler mit, dass man den Verlust von Information in Kauf nimmt. Auf diese Weise kann man zum Beispiel einen Float Wert in einen Integer konvertieren, dabei gehen jedoch alle Nachkommastellen verloren. Ein relevantes Beispiel wäre das Casting einer der beiden Integervariablen einer Division um eine Nachkommastelle zu erhalten:
+	\begin{verbatim}
+	int i = 9;
+	int j = 5;
+	double div = i / (double) j; -> j wird zu einem Double gecastet, 
+	                                da das Ergebnis sonst 1 wäre, anstatt 1,8 (Integerdivision)
+	\end{verbatim}
+	Solche Castingvorgänge sind auch zwischen komplexen Datentypen verfügbar. Wenn zwei Klassen zum Beispiel eine Vererbungsbeziehung besitzen (Eine wurde von der anderen vererbt), dann kann man zwischen diesen casten.
+	\section{Wrapper-Klassen}
+	Gleich wie andere Datentypen, haben auch primitive Datentypen eigene Klassen. Diese Klassen besitzen eine einzige Instanzvariable von dem Typ des Datentyps. (Also hat eine Integer Klasse eine Variable vom Typ int.) Diese Klassen werden jedoch ausgeschrieben und der erste Buchstabe wird großgeschrieben (Da es Klassen sind): \\
+		\begin{tabular}{l | l}
+		boolean & Boolean \\
+		char & Character \\
+		byte & Byte \\
+		short & Short \\
+		int & Integer \\
+		long & Long \\
+		float & Float \\
+		double & Double \\
+		\end{tabular}
+	\begin{verbatim}
+	Integer x = 5; -> Generiert ein neues Integer Objekt und weist ihm den Wert 5 zu.
+	int y = 9;
+	x.compareTo(y) -> Gibt -1 zurück
+	\end{verbatim}
+	Diese Klassen kann man verwenden um eine Klasse mit dem Typ dieser Variable zu generieren. Das hat in sich genommen nicht viel Sinn, da die Generierung einer neuen Klasse anstatt eines primitiven Datentyps bedeutend mehr Leistung erfordert. Der Vorteil dieser Wrapper Klassen ist, dass diese Klassen Methoden besitzen, welche nützlich sein können. Zusätzlich kann man diese auch für Collections verwenden, da collections nur Objekte und keine primitiven Datentypen verwenden kann. Einige Klassenmethoden sind:
+	\begin{itemize}
+		\item{MIN\_VALUE}
+		\begin{itemize}
+			\item{Der kleinstmögliche Wert den dieser Typ annehmen kann.}
+		\end{itemize}
+		\item{MAX\_VALUE}
+		\begin{itemize}
+			\item{Der größtmögliche Wert den dieser Typ annehmen kann.}
+		\end{itemize}
+		\item{SIZE}
+		\begin{itemize}
+			\item{Die Anzahl an Bit die dieser Typ verbraucht}
+		\end{itemize}
+		\item{compareTo()}
+		\begin{itemize}
+			\item{Vergleicht zwei Zahlen und gibt -1 zurück, wenn er kleiner ist, 0 wenn er gleich groß ist und 1 wenn er größer ist.}
+		\end{itemize}
+		\item{equals()}
+		\begin{itemize}
+			\item{Gibt zurück ob die beiden Variablen den gleichen Wert haben.}
+		\end{itemize}
+	\end{itemize}
+	\section{Collections}
+	Collections können als Sammlung von Objekten gesehen werden. Diese sind dabei nicht auf Datentypen beschränkt. Die Sammlung von diesen Objekten kann den Programmieraufwand erheblich verringern, da sie vorgefertigte Datenstrukturen und Algorithmen besitzen. \\
+	Es gibt 4 große Collectionbereiche. Diese sind als Interface organisiert, man kann also keine Instanzen davon erzeugen (Mehr zu Interfaces später):
+	\begin{enumerate}
+		\item{Listen}
+		\begin{itemize}
+			\item{Eine Aneinanderreihung von Objekten. Dabei kann man Elemente an beliebigen Positionen einfügen oder löschen. Dabei stellt die Liste sicher, dass keine Lücken entstehen und neue Plätze bei Bedarf entstehen.}
+			\item{Eine Liste hat eine bestimmte Reihenfolge.}
+			\item{Varianten:}
+			\begin{itemize}
+				\item{ArrayList}
+				\begin{itemize}
+					\item{Collection die auf Arrays basiert. Dadurch ist der Zugriff sehr schnell (\verb|get/set| aber die Manipulation der Liste selbst ist langsam \verb|add/rem|. Das hat damit zu tun, dass eventuell ein komplett neues (wiederum statisches) Array erzeugt werden muss.)}
+				\end{itemize}
+				\item{LinkedList}
+				\begin{itemize}
+					\item{Doppelt verkettete Liste. Besteht aus Elementen, welche stets zu dem nächsten und vorherigen Element zeigen. \verb|add/rem| sehr schnell, da nur die Pointer der Elemente verändert werden müssen. Langsameres \verb|get/set| da für jedes Element die Liste durchlaufen werden muss.}
+				\end{itemize}
+				\item{Vector}
+				\begin{itemize}
+					\item{Funktioniert gleich wie ArrayLists, synchronisiert aber die Tasks im Fall von Multithreading}
+				\end{itemize}
+				\item{Stack}
+				\begin{itemize}
+					\item{Eine Liste die auf LIFO (Last-In-First-Out) oder FILO (First-In-Last-Out) basiert. Zusätzlich zu den normalen Listenbefehlen kann man ebenfalls ein Objekt hinzufügen \verb|push| oder entfernen \verb|pop|, was bedeutend schneller ist. Diese Operationen entfernen bei \verb|pop| das oberste oder unterste Element bei und fügen es bei \verb|push| am Anfang oder am Ende hinzu.}
+				\end{itemize}
+			\end{itemize}
+		\end{itemize}
+		\item{Sets}
+		\begin{itemize}
+			\item{Repräsentiert die Menge in der Mathematike, wodurch ein Element nur ein Mal vorkommen kann (also ist jedes Element einzigartig). Das Set überprüft bei jedem Element das hinzugefügt wird, ob das Element bereits vorhanden ist.}
+			\item{Das Set hat im Gegensatz zur Liste keine feste Reihenfolge.}
+			\item{Varianten}
+			\begin{itemize}
+				\item{HashSet}
+				\begin{itemize}
+					\item{Elemente werden in einer Hash-Tabelle gespeichert, wodurch der Zugriff extrem schnell ist.}
+				\end{itemize}
+				\item{TreeSet}
+				\begin{itemize}
+					\item{Im Gegensatz zu anderen Sets hat das TreeSet durchaus eine (aufsteigende) Sortierung ist dadurch jedoch langsamer als das HashSet}
+				\end{itemize}
+			\end{itemize}
+		\end{itemize}
+		\item{Maps}
+		\begin{itemize}
+			\item{Bildet ein Wörterbuch ab, speichert Elemente also in strukturierter Form. Elemente werden in Key/Value Paaren gespeichert, wobei jeder Schlüssel nur ein Mal vorkommen darf.}
+			\item{Gleich wie im Set wird auch hier überprüft ob ein Schlüssel bereits existiert, bevor das Paar eingefügt wird.}
+			\item{Es gibt ebenfalls keine bestimmte Reihenfolge.}
+			\item{Varianten:}
+			\begin{itemize}
+				\item{HashMap}
+				\begin{itemize}
+					\item{Funktioniert gleich wie das HashSet mit Schlüssel/Wert Elementen.}
+				\end{itemize}
+				\item{TreeMap}
+				\begin{itemize}
+					\item{Funktioniert ebenfalls gleich wie das TreeSet mit einer aufsteigenden Reihenfolge und langsamerem Zugriff.}
+				\end{itemize}
+			\end{itemize}
+		\end{itemize}
+		\item{Queues}
+		\begin{itemize}
+			\item{Bildet eine Warteschlange ab. Objekte werden am Ende eingefügt und am Beginn herausgenommen. Dadurch ist es das Gegenteil des Stacks. FIFO (First in First Out) und LILO (Last in Last Out)}
+			\item{Varianten}
+			\begin{itemize}
+				\item{LinkedList}
+				\begin{itemize}
+					\item{Gleich wie das List Objekt, da die Linked List sowohl eine List als auch eine Queue ist.}
+				\end{itemize}
+				\item{PriorityQueue}
+				\begin{itemize}
+					\item{Elemente innerhalb des queues haben eine eigene Wichigkeit. Elemente mit höherer Wichtigkeit werden von der queue zuerst ausgegeben.}
+				\end{itemize}
+			\end{itemize}
+		\end{itemize}
+	\end{enumerate}
+	 \section{Static Initializer}
+	 Falls man einer static Variable einen Wert zuweisen will, diese Werte jedoch vor Initialisierung nicht verfügbar sind, kann man den static initializer verwenden um statischen Variablen Werte zuzweisen. Diese Methode wird noch vor der main Methode aufgerufen. \\
+	 \begin{verbatim}
+	 private static List<Integer> list;
+	 static {                        -> Wird nach dem Constructor aber vor dem ersten Methodenaufruf behandelt
+	 	list = new ArrayList<>();      -> Erstelle ein neues ArrayList
+	 	list.add(3);                   -> Und fülle es mit Werten
+	 	list.add(2);
+	 }
+	 \end{verbatim}
+	\section{\texorpdfstring{\texttt{final}}{final}}
+	Das Schlüsselwort \verb|final| kann in verschiedenen Situationen verwendet werden:
+	\begin{itemize}
+	 	\item{Bei Variablen}
+	 	\begin{itemize}
+	 		\item{Dieser Variable kann nur ein Mal ein Wert zugewiesen werden. Java stellt danach sicher, dass sie immer den gleichen Wert behält.}
+	 		\item{Kann man auch für statische sowie nicht statische Variablen verwenden.}
+	 	\end{itemize}
+	 	\item{Methoden}
+	 	\begin{itemize}
+	 		\item{Methoden können so nicht überschrieben (override) werden.}
+	 	\end{itemize}
+	 	\item{Klassen}
+	 	\begin{itemize}
+	 		\item{Klassen können nicht abgeleitet werden.}
+	 	\end{itemize}
+	 \end{itemize} 
+	 \section{Exceptions}
+	 Exceptions sind eine Fehlerbehandlung des Programms. Dabei unterscheidet man zwischen geprüften und ungeprüften exceptions. Geprüfte Exceptions werden vom Compiler erkannt, wonach dieser die Kompilation abbricht. Das passiert zum Beispiel, wenn man eine Variable verwendet, welche nicht erstellt wurde. \\
+	 Ungeprüfte Exceptions können vom Compiler vor Ausführen des Programms nicht erkannt werden und führen deshalb erst während des Ausführens zu einem Absturz. Ungeprüfte Exceptions sind zum Beispiel falsche Benutzereingaben, welche mit dem Java Scanner eingelesen werden. (Wenn man zum Beispiel ein .nextInt() hat, der Benutzer jedoch einen String eingibt.) \\
+	 Ungeprüfte exceptions können jedoch abgefangen und während des Programmablaufs behoben werden. Das macht man mit einem try/catch Block: \\
+	 \begin{verbatim}
+	 try {
+	 	\\try block (protected)    -> Code, welcher eventuell eine exception ausgibt.
+	 } catch (ExceptionName e) { -> Name der exception
+	 	\\catch Block              -> Code welcher ausgeführt wird, sollte die exception abgefangen werden
+	 } finally {
+	 	\\finally Block            -> Code welcher immer ausgeführt wird
+	 }
+	 \end{verbatim}
+	 Wenn man den Code, welcher eventuell eine Exception ausgibt, innerhalb des try Blocks ausführt, und danach eine Exception vom Typ \textit{ExceptionName e} ausgegeben wird, stürzt es nicht ab, sondern führt stattdessen den Code im catch Block aus. Man kann jedoch auch mehrere \verb|catch|  Blöcke pro \verb|try|  angeben. Wenn man zum Beispiel verschiedene exceptions abfangen, aber bei jedem etwas anderes machen will, kann man diese mit mehreren catch Blöcken spezifizieren. Sollte man den gleichen Code ausführen wollen, wenn zwei verschiedene exceptions ausgegeben werden, kann man diese auch in einem code Block mittels \verb\(ExceptionName1 e || ExceptionName2 e)\ angeben.\\
+	 Sollte eine exception nicht abgefangen werden, wird diese an die übergeordnete Methode weitergegeben, bis sie die main erreicht. Falls sie in der main Methode nicht gefangen wird, beendet das Programm mit einer exception. \\
+	 Wenn man will, dass ein Code \textit{immer} nach dem try Block ausgeführt wird, kann man diesen in den \verb|finally| Block am Ende setzen. Das Verhalten ist das selbe, als ob man den Code danach geschrieben hätte, falls es keine exception gibt, oder diese abgefangen wird. Wenn jedoch eine exception passiert, diese jedoch nicht behandelt wird, dann wird der finally Code trotzdem ausgeführt. Das kann nützlich sein, wenn man zum Beispiel einen Datenstrom innerhalb des \verb|try| Blocks hat und sicherstellen will, dass er geschlossen wird, auch wenn etwas unerwartetes passiert. (Zum Beispiel eine unerwartete Exception wird geworfen.). Es ist grundsätzlich immer eine gute Idee zusätzlich zum Code den man erwartet und behandeln will, eine Alternative für alle unerwarteten Fälle anzugeben.  \\
+	 \subsection{Try-with-resources}
+	 Ein weiterere try/catch Block mit spezieller Funktion ist der try mit einem automatischen Resourcenmanagement. Diese Resourcen muss man am Anfang des Blocks angeben und werden automatisch geschlossen wenn der Block verlassen wird.
+	 \begin{verbatim}
+	 try (Scanner scanner = new Scanner(System.in)) {
+	 	  \\use the scanner
+	 } catch (InputMismatchException e) {
+	 	  \\handle the exception
+	 }  \\scanner closes automatically
+	 \end{verbatim}
+	 Eine Variable welche in dieser Weise verwendet wird, muss das \verb|closeable| Interface implementieren.
+	 \subsection{\texorpdfstring{\texttt{throws}}{throws}}
+	 Dieses keyword wird bei Methoden angegeben um anzuzeigen, dass dieses eine spezifische Exception werfen können.
+	 \begin{verbatim}
+	 static void ExampleMethod (<Argumente>) throws ExampleException { -> throws kommt immer nach Angabe der Argumente
+	 	<Code> 	                                                          aber vor dem Programmcode selbst.
+	 }
+	 \end{verbatim}
+	 \subsection{\texorpdfstring{\texttt{throw}}{throw}} 
+	 Wenn man eine exception manuell auslösen will, kann man das keyword \verb|throw| verwenden. Wenn die exception ungeprüft ist, kann man das einfach so machen. Falls die manuell ausgelöste exception jedoch geprüft ist, muss man diese in der Methode explizit behandeln (Mit einem \verb|try|/\verb|catch| Block, oder der Methode das keyword \verb|throws <Exception>| hinzufügen)
+	 \begin{verbatim}
+	  if (divisor == 0) {                                    -> Falls divisor gleich 0 ist
+	  	throw new IllegalArgumentException("divisor is 0");  -> Gib eine IllegalArgumentException zurück, mit dem Kommentar "divisor is 0"
+	  }                                                      -> Eventuell muss die Methode in der dieser Code steht throws verwenden
+	 \end{verbatim}
+	 \subsection{Alternative Scanner Implementierung}
+	 Da exceptions jetzt bekannt sind, kann man Scanner auf eine andere Weise verwenden. Dazu wird statt der Tokenbasierten \verb|.nextInt()|, \verb|.nextLine()| verwendet, was die gesamte Eingabe bis zum Enter ausliest. Dieser Befehl liest die gesamte Eingabe, welche danach in den korrekten Datentyp konvertiert werden kann.
+	 \begin{verbatim}
+	 try {
+	 	int i = Integer.parseInt(scanner.nextLine());
+	 } catch (NumberFormatException e) {
+	 	System.out.println("Invalid input!");
+	 }
+	 \end{verbatim}
+	 In diesem Fall wird ein String mit \verb|.nextLine()| eingelesen und danach wird versucht diesen mit \verb|Integer.parseInt()| in einen Integer zu konvertieren. Falls dies nicht möglich ist, wird eine exception geworfen, welche dann von dem catch Block aufgefangen wird. In allen weiteren Beispielen in PRG1 sollte nur mehr diese Variante des Einlesens anstatt der tokenbasierten Variante verwendet werden.
+	 \section{Files}
+	 Man kann in Java natürlich Dateien ein- und auslesen. Dafür gibt es mehrere Klassen, unter anderem die \verb|java.io| Klasse. Dateien werden mittels Datenströmen aus- und eingelesen und dann auf ein Ziel, meist die Konsole oder eine Datei oder ein Netzwerk, geschrieben. \\
+	 Bei Binären Daten kann man die Klassen \verb|java.io.InputStream| zum Lesen und \verb|java.io.OutputStream| zum Schreiben verwenden, während bei Zeichen \verb|java.io.FileReader| und \verb|java.io.FileWriter| verwendet werden kann. Binär beschreibt in diesem Fall jegliche Daten, welche nicht als Zeichen interpretiert werden können. Theoretisch kann man jedoch natürlich auch Textdateien im binären Modus öffnen.
+	 \subsection{\texorpdfstring{\texttt{java.io.FileReader}}{java.io.FileReader}}
+	 Wie erwähnt liest der \verb|FileReader| Textdateien. Dabei erstellt man ein neues Objekt dieser Art und übergibt an dessen Konstruktor den Pfad für die Datei die gelesen werden soll.
+	 \begin{verbatim}
+	  FileReader reader = new FileReader(filename);
+	 \end{verbatim} 
+	 Theoretisch könnte man so eine Datei Zeichen für Zeichen auslesen. Das ist jedoch eine relativ ineffiziente Operation, weshalb, wenn man große Mengen an Daten einlesen will, zusätzlich den \verb|java.io.BufferedReader| verwenden sollte. 
+	 \subsubsection{\texorpdfstring{\texttt{java.io.BufferedReader}}{java.io.BufferedReader}}
+	 \verb|java.io.BufferedReader| ist eine Klasse, welche man über den FileReader legen kann. Dabei gibt man das FileReader Objekt mit dem Pfad als Argument an den Buffered Reader weiter.
+	 \begin{verbatim}
+	  FileReader reader = new FileReader(filename);
+	  BufferedReader buffer = new BufferedReader(reader);
+	  \end{verbatim} 
+	  Dabei speichert der BufferedReader den input des Files temporär um es danach bei Bedarf auszugeben, sodass FileReader nur ein Mal das File auslesen muss. So kann man auf den BufferedReader zugreifen um so die Datei indirekt auszulesen. BufferedReader besitzt zusätzlich Helfermethoden um es effizienter auslesen zu können. Eine davon ist \verb|.nextLine()|, mit welcher man die nächste Zeile innerhalb des Puffers auslesen kann. Wenn man das Ende der Datei erreicht hat, gibt der Puffer danach \verb|null| zurück. Auf diese Weise kann man die Datei Zeile für Zeile auslesen und erhält sofort eine Meldung wenn das Ende erreicht wird.
+	  \subsection{\texorpdfstring{\texttt{java.io.FileWriter}}{java.io.FileWriter}}
+	  Der FileWriter funktioniert sehr ähnlich zum FileReader, schreibt jedoch auf die Datei anstatt sie zu lesen. 
+	  \begin{verbatim}
+	  	FileWriter writer = new FileWriter(filename);  
+	  \end{verbatim}  
+	  Der Zugriff auf die Datei ist jedoch auch in diesem Fall sehr rechenintensiv, weshalb auch hier eine Helferklasse, \\ \verb|java.io.BufferedWriter| existiert.
+	  \subsubsection{\texorpdfstring{\texttt{java.io.BufferedWriter}}{java.io.BufferedWriter}}
+	  Diese Klasse funktioniert auch ähnlich zum BufferedReader, sodass sie anstatt jedes Zeichen einzeln zu schreiben, stattdessen in regulären Intervallen die Datei schreibt. 
+	  \begin{verbatim}
+	  FileWriter writer = new FileWriter(filename);
+	  BufferedWriter buffer = new BufferedWriter(writer);
+	  \end{verbatim}
+	  Wenn man das Schreiben erzwingen will, kann man dies mit \verb|flush()| vollbringen, wonach sofort alles was im BufferedWriter gespeichert ist, geschrieben wird. \\
+	  Die Klasse hat auch wieder Helferklassen zur Verfügung. Eine davon ist \verb|write()| um das Schreiben an das File einfacher zu machen.  
+	  \subsection{Streams}
+	  Streams wurden zwar schon viel verwendet, jedoch gab es noch keine explizite Definition.
+	  \begin{itemize}
+	  	\item{System.in}
+	  	\begin{itemize}
+	  		\item{InputStream zum Einlesen von der Konsole}
+	  	\end{itemize}
+	  	\item{System.out}
+	  	\begin{itemize}
+	  		\item{PrintStream zum Ausgeben auf der Konsole}
+	  	\end{itemize}
+	  	\item{System.err}
+	  	\begin{itemize}
+	  		\item{PrintStream zum Ausgeben von Fehlern auf der Konsole.}
+	  		\item{Wird von manchen IDEs als roter Text angezeigt.}
+	  		\item{Es kann auch über System.err geprintet werden, indem man \verb|System.err.println()| statt\\ \verb|System.out.println()| verwendet.}
+	  	\end{itemize}
+	  \end{itemize}
+	  Normalerweise geht jeder Out- und Input von und zu der Konsole, was man jedoch ändern kann.
+	  \begin{verbatim}
+	  OutputStream output = new FileOutputStream(filename); -> Definiere einen neuen OutputStream
+	  PrintStream printout = new PrintStream(output);       -> Übergibe diesen an einen PrintStream
+	  System.setOut(printOut);                              -> Setze diesen PrintStream als Out
+	  \end{verbatim}
+	  \section{Kommandozeilenparameter}
+	  Mit Kommandozeilenparametern (Command-line arguments) kann man beim Aufrufen eines Programms, diesem Information mitgeben:
+	  \begin{verbatim}
+	  java ExampleProgram These are arguments -> "These", "are" und "arguments" sind 
+	                                             jeweils ein Argument, welches mitgegeben wird.
+	  \end{verbatim}
+	  Diese übergebenen Parameter kann man dann im Programm einlesen und verwenden. Man kann in den meisten IDEs angeben, dass Parameter standardmäßig mitgegeben wird. \\
+	  Sinn solcher Parameter ist, dem Programm eine Information mitzuteilen. Zum Beispiel kann man dem Programm anweisen, dass man im Debug Modus laufen soll, wodurch mehr Ausgaben getätigt werden. Man kann jedoch auch einen Pfad als Parameter angeben, damit ein Programm aus einer Konfigurationsdatei gestartet werden kann und man nicht den Pfad in den Code selbst integrieren muss.
+	  \section{Bits und Bytes}
+	  Programme arbeiten grundlegend mit Bytes, welche stets eine gewisse Größe haben \hyperref[sec:Datentypen]{\underline{(Siehe Datentypen)}}. Dadurch kann eine Variable jeweils nur Werte einer bestimmten Größe halten.
+	  \subsection{Grundlage}
+	  Bits sind die kleinstmögliche Einheit mit der eine Computer arbeiten kann. Dabei kann dieser zwei Zustände annehmen, an oder aus. Bytes sind wiederum eine Ansammlung von jeweils 8 Bits.
+	  \subsection{Ganzzahlen}
+	  Ganzzahlen (Integer und Long) werden als Stellen einer Binärzahl interpretiert. \\
+	  Zum Beispiel kann man \verb|01011001| als 89 interpretieren, da die einzelnen Exponenten der Zahl aufsummiert werden. \\
+	  Negative Zahlen werden dabei im 2er Komplement dargestellt. Das Most Significant Bit (MSB) zeigt dabei, ob eine Zahl positiv oder negativ ist. (1 heißt negativ, 0 positiv). Das 2er-Komplement wird gebildet, indem man alle Bits einer Binärzahl invertiert (Alle 1 zu 0 und umgekehrt.) und danach 1 addiert. Der Vorteil dieser Schreibweise ist, dass wenn man zu einer so dargestellten negativen Zahl eine größere Zahl addiert, der negative Wert verschwindet, wodurch wieder eine positive Zahl entsteht. 
+	  \subsection{Oktalzahlen}
+	  Eine Oktalzahl ist, gleich wie das Binär- oder Dezimalsystem, ein Zahlensystem. Dabei ist die Basis 8 und kann die Ziffern 0 bis 7 beinhalten. Der Vorteil von Oktalzahlen ist, dass 3 Bits die gleiche Information wie eine Oktalzahl darstellen kann, wodurch man Bits in Gruppen von 3 angibt und so eine Bitzahl bedeutend verkürzt.
+	  \subsection{Hexadezimalzahl}
+	  Hexadezimalzahlen sind sehr ähnlich zu Oktalzahlen, haben jedoch die Basis 16 statt 8. Dadurch kann man Binärzahlen noch effizienter darzustellen, da man jeweils 4 Bits als eine Ziffer angeben kann. Das hat zusätzlich den Vorteil, dass 4 gut durch sowohl 8, als auch 16 und 32 teilbar ist. Deshalb kann man eine 8 Bit Zahl mit 2, 16 mit 4 und 32 mit 8 Hexadezimalzahlen darstellen.
+	  \subsubsection{Anwendung in Java}
+	  Diese Zahlentypen kann man natürlich auch in Java verwenden. Dabei muss man jedoch die Basis der Zahl explizit angeben.
+	  \begin{itemize}
+	  	\item{Binärzahlen werden beginnend mit \verb|0b| angegeben.}
+	  	\item{Oktalzahlen werden beginnend mit \verb|0| angegeben.}
+	  	\item{Hexadezimalzahlen werden beginnend mit \verb|0x| angegeben.}
+	  	\item{Jegliche andere Zahlen werden als Dezimalzahl interpretiert. Aus diesem Grund sollte man Dezimalzahlen jedoch nicht mit führenden Nullen schreiben.}
+	  \end{itemize}
+	  Zur Konvertierung zwischen den Zahlentypen hat Java einige Methoden zur Verfügung:
+	  \begin{verbatim}
+	  Integer.toBinaryString(intValue) -> Konvertiert einen Integer zu einer Binärzahl.
+	  Integer.toOctalString(intValue) -> Konvertiert einen Integer zu einer Oktalzahl.
+	  Integer.toHexString(intValue) -> Konvertiert einen Integer in eine Hexadezimalzahl.
+	  \end{verbatim}
+	  Zwischen diesen Systemen konvertiert man jeweils mit der Stellenwertkonversion. (Jedem Stellenwert wird die Basis mit der Stelle als Exponent zugewiesen und addiert.)
+	  \subsection{Überlauf/Unterlauf}
+	  Da ein Datentyp lediglich eine bestimmte Größe an Werten speichern kann, ist es ein Problem, wenn man eine größere oder kleinere Zahl darin speichern will, oder eine Addition/Subtraktion angibt, welche als Ergebnis eine größere oder kleinere Zahl hat. Dabei erkennt Java nicht ob eine Operation einen Over- oder Underflow verursachen würde.
+	  \begin{verbatim}
+	  int 2147483647 + 1 = -2147483648; -> Da der int bereits den höchstmöglichen Wert hat
+	                                       führt bereits ein weiterer Wert zu einem Overflow.
+	  \end{verbatim}
+	  Ein Weg diese Situation zu umgehen ist die \verb|Math.addExact()| Methode, welche bei einer arithmetischen Operation überprüft, ob ein Over- oder Underflow geschehen würde, und wirft eine Exception, falls dies der Fall ist.
+	  \subsection{Gleitkommazahlen}
+	  Gleitkommazahlen werden nicht wie Ganzzahlen in ihrer Reinform gespeichert. Stattdessen wird die Wissenschaftliche Notation verwendet. Dabei speichert die Variable jeweils das Vorzeichen, den Exponenten, sowie die Mantisse ab. Die Die Basis wird nicht gespeichert, da dieser immer 2 ist. Das Vorzeichen gibt dabei an, ob die Zahl negativ oder positiv ist, der Exponent um wie viele Stellen die Zahl verschoben werden muss sowie die Mantisse, welche die genaue Zahlenfolge angibt. 
+	  \subsubsection{Probleme mit Gleitkommazahlen}
+	  Da eine Gleitkommazahl Zahlen nur durch Binärexponenten dargestellt werden können, können exakte Zahlen nur sehr schwer getroffen werden. Zum Beispiel ist die Zahl 0,1 mit einer Gleitkommazahl nur annähernd mittels $\frac{1}{16} + \frac{1}{32}$ beschreibbar. Aus diesem Grund ist es meist nicht ratsam eine Gleitkommazahl direkt mit einer Ganzzahl zu vergleichen, da diese zwar augenscheinlich den gleichen Wert haben, jedoch nicht den exakt gleichen. Zum Beispiel kann es passieren, dass, wenn man eine Gleitkommazahl dekrementiert und danach mit einer Ganzzahl vergleicht um die Schleife abzubrechen, diese für immer ins negative weiterläuft, da der exakte Ganzzahlwert nicht getroffen wurde.
+	  \section{Bit-Operatoren}
+	  Zusätzlich zu den normalen Operatoren \hyperref[sec:Operatoren]{\underline{(Siehe Operatoren)}}, gibt es auch die Bitwise Operatoren. Das ist auch der Grund warum man bei der Verbindung zweier Werte bei einer Überprüfung zwei \&\& angeben muss.
+	  \begin{center}
+		  \begin{tabular}{| l | l | l |}
+		  	\toprule
+		  	Operator & Beschreibung & Beispiel \\ \midrule
+		  	\& & Bitweises UND & 0101 \& 0011 = 0001 \\ \hline
+		  	$\vert$ & Bitweises ODER & 0101 $\vert$ 0011 = 0111 \\ \hline
+		  	\textasciicircum & Bitweises XOR & 0101 \textasciicircum 0011 = 0110 \\ \hline
+		  	\textbackslash & Bitweise Negation & \textbackslash 0101 = 1010 \\ \hline
+		  	<< & Bit-Shift nach links & 00010110 << 2 = 01011000 \\ \hline
+		  	>> & Bit-Shift nach rechts & 00010110 >> 1 = 00001011 \\ \hline
+		  	\verb|>>>| & Bit-Shift nach rechts mit 0 auffüllen & 000101101 >>> 1 = 0000101101 \\
+	 	  	\bottomrule
+		  \end{tabular}
+	  \end{center}
+	  Diese Operatoren kann man gleich wie normale Operatoren wiederum mit der Zuweisung kombinieren.
+	  \subsection{Flags}
+	  Der Nutzen von Bit Operatoren mag nicht sofort ersichtlich sein, jedoch kann man zum Beispiel eine Anzahl an Flags mit einer Variable angeben, welche danach einfach überprüft werden kann. Kombiniert mit dem Wissen, dass man mit \verb|0b| eine Binärzahl definieren kann, kann man so eine Variable wie einen byte definieren und dessen Bits 'zweckentfremden' um 8 separate Flags zu generieren. Diese flags kann man dann verwenden um verschiedene Zustände anzugeben, zum Beispiel ob etwas läuft oder nicht. Mit den Bitwise Operatoren kann man diese Flag Variable überprüfen ob die benötigten Zustände zutreffen indem man sie Binär Verundet.
+	  \section{Effizienz von Java Programmen}
+	  Man kann ein Java Programm auf ihre Geschwindigkeit testen. Auf UNIX Systemen kann man mittels \verb|time| die Ausführzeit eines Programms ermitteln und diese dann miteinander vergleichen. So kann man auch die Laufzeit verschiedener Programmiersprachen vergleichen. Der gezeigte Vergleich war zwischen Java und PHP, wobei PHP jedoch eine interpretierte Sprache ist.
+	  \begin{center}
+		  \begin{tabular}{| l | l |}
+		  	\toprule
+		  	Java & PHP  \\ \midrule
+		  	0.707s & 15.084s \\ \hline
+		  	0.714s & 10.956s \\
+		  	\bottomrule
+		  \end{tabular}
+	  \end{center}
+	  Bei diesem Programm sollte das Programm jeweils alle Zahlen von 1 bis 1.000.000.000 aufsummieren. Während Java dafür weniger als eine Sekunde benötigte, brauchte PHP mehr als 10 Mal so lange. Dabei sollte man jedoch beachten, dass PHP eine Sprache in der Webentwicklung ist und andere Anwendungsmöglichkeiten dafür gibt. \\
+	  Dabei sollte man aber beachten, dass es auch eine andere Möglichkeit gibt, diese Summe zu erhalten, nämlich die Gaußsche Summenformel \verb|(n+1)*n/2|. Während die summierende Schleife eine lineare Laufzeit hat (Für jedes extra n muss die Schleife ein Mal mehr laufen), hat diese Formel eine konstante Laufzeit (Das Programm benötigt die selbe Zeit, ob sie 5 oder eine Milliarde Stellen summiert). Die Wahl des richtigen Algorithmus ist extrem wichtig, da dieser die Laufzeit des Programms grundsätzlich beeinflussen kann.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,403 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Programmierung 2}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{Grundlagen}
+	Programmiersprachen werden allgemein in fünf große Generationen geteilt:
+	\begin{enumerate}
+		\item{Maschinensprachen}
+		\begin{itemize}
+			\item{Maschinennahe Programmierung, welche nur binären Code verwendet und so direkt auf dem Computer lauffähig ist.}
+			\item{Stellen den primitivsten Programmierweg dar, wobei keine Abstraktion existiert.}
+		\end{itemize}
+		\item{Assemblersprachen}
+		\begin{itemize}
+			\item{Verwenden Eselsbrücken (Mnemonics) um den Prozess etwas zu vereinfachen. So muss man nicht den Platz des Registers wissen, sondern kann diese direkt ansprechen.}
+		\end{itemize}
+		\item{Prozedurale Sprachen}
+		\begin{itemize}
+			\item{Sind der menschlichen Sprache angenähert, wobei zwischen spezifischen Teilen des Codes hin- und hergesprungen wird.}
+		\end{itemize}
+		\item{Nicht-Prozedurale Sprachen}
+		\begin{itemize}
+			\item{Versuchten die Nachteile von Prozeduralen Sprachen auszugleichen, mündeten jedoch bald in den Objektorientierten Sprachen.}
+		\end{itemize}
+		\item{Objektorientierte Sprachen}
+		\begin{itemize}
+			\item{Bündelt zusammenhängende Teile eines Programms in einem Objekt.}
+		\end{itemize}
+	\end{enumerate}
+	\section{Rekursion und Iteration}
+	Bis jetzt waren die meisten Schleifen Iterationen und sind somit stets im Kreis gelaufen (Wie eine \texttt{while} Schleife). Ein alternativer Weg ist die Rekursion, bei welcher eine Methode sich selbst aufruft um einen gewissen Vorgang zu wiederholen. Dabei muss es eine Abbruchbedingung geben
+	\section{Programmierparadigmen}
+	Ein Programmierparadigma ist ein grundlegender Stil bzw. eine Herangehensweise in der Programmierung.
+	\subsection{Divide and Conquer}
+	Eines der grundlegendsten Paradigmen. Dabei wird ein großes Problem in mehrere kleine, leichter lösbare Teile aufgespalten. Diese aufgespaltenen Teillösungen werden dann zu einer Gesamtlösung zusammengefügt.
+	\subsection{Säulen der OOP}
+	In der OOP wird dieses Konzept weitergeführt und Probleme als quasireale Objekte dargestellt werden, welche ein bestimmtes Verhalten aufweisen. Diese Objekte sollten allgemein und wiederverwendbar sein, wodurch die Wartung des Projekts im Idealfall vereinfacht wird. Wenn man sich ein Diagramm von Programmiersprachen ansieht, ist der Trend zur Objektorientiertheit klar ersichtlich. Aus diesem Grund wird die Verwendung von OOP-Konzepten immer wichtiger. Die wichtigsten Konzepte der OOP sind: Abstraktion, Kapelsung, Polymorphismus und
+	\section{Abstraktion}
+	Bei der Abstraktion werden alle Informationen, welche für das Objekt keine Relevanz haben ignoriert. Das hilft dabei die Komplexität zu reduzieren und die Effizienz zu steigern. \\
+	So kann man reale Objekte, welche in der Regel eine Vielzahl von Attributen hat, auf die geringstmöglichen relevanten Attribute innerhalb des Objekts reduzieren. 
+	Wenn man also zum Beispiel bei einem Messagingdienst eine Nachricht verschicken will, muss man sich darauf vorbereiten alle möglichen Nachrichtentypen zu unterstützen. So sollte man einen Text, aber auch ein Bild, aber auch eine Sprachnachricht unterstützen und soll diese so allgemein wie möglich unterstützen, da man ja jetzt noch nicht weiß, was diese Nachrichten beinhalten.
+	\section{Klassen}
+	Eine Klasse ist ein Abstraktionsobjekt um diese Information zu verarbeiten und zu bündeln. Wenn man eine Klasse erstellen will, welche Nachrichten verschickt, braucht man ungefähr:
+	\begin{itemize}
+		\item{Datum}
+		\begin{itemize}
+			\item{Gespeichert als Long um die Millisekunden von einem bestimmten Datum zu speichern (z.B. UNIX Zeit)}
+		\end{itemize}
+		\item{Sender}
+		\begin{itemize}
+			\item{Wer die Nachricht verschickt hat. Gespeichert als User Objekt, welches eine weitere Klasse ist.}
+		\end{itemize}
+		\item{Nachricht}
+		\begin{itemize}
+			\item{Die Nachricht, welche verschickt werden soll.}
+		\end{itemize}
+	\end{itemize}
+	Zusätzlich benötigt die Klasse einige Klassenmethoden, welche mit diesen interagieren:
+	\begin{itemize}
+		\item{setDate}
+		\begin{itemize}
+			\item{Übergibt das aktuelle Datum.}
+		\end{itemize}
+		\item{calculateLength}
+		\begin{itemize}
+			\item{Berechnet die Länge der Nachricht}
+		\end{itemize}
+		\item{hasSent}
+		\begin{itemize}
+			\item{Bestätigt, dass die Nachricht verschickt wurde.}
+		\end{itemize}
+	\end{itemize}
+	Aus diesem Schema können danach echte Objekte (Instanzen) generiert werden, welche reale Daten enthalten (Während das davor nur der Bauplan war.) Das geschieht mithilfe des Constructors und dem keyword \texttt{new}: \\
+	\texttt{Message m1 = new Message([Übergabewerte]);}
+	\subsection{\texttt{this}}
+	Mit \texttt{this} kann man eine Referenz zum aktuellen Objekt aufbauen. Bei Constructorn kann man so zum Beispiel dem Übergabewert und der Instanzvariable den gleichen Namen geben, diese jedoch trotzdem durch \texttt{this} unterscheiden.
+	\section{Kapselung}
+	Die Kapselung beschreibt den Schutz von Klassen und Attributen vor unerwünschtem Zugriff. So soll nur die Information, welche tatsächlich vom Benutzer benötigt wird, preisgegeben.
+	\subsection{Scoping}
+	Um den Zugriff von Variablen zu bestimmen kann man Scopes verwenden. Diese sind \texttt{public}, \texttt{protected}, \texttt{package (default)} und \texttt{private}. \\
+	\begin{itemize}
+		\item{\texttt{public}}
+		\begin{itemize}
+			\item{Die Variable oder Methode kann jedem verwendet oder verändert werden.}
+		\end{itemize}
+		\item{\texttt{package(default)}}
+		\begin{itemize}
+			\item{Der Standardscope. Jede Klasse im gleichen Package kann darauf zugreifen.}
+			\item{Man sollte beachten, dass, wenn man kein package verwendet, dieses in das default package gegeben wird, wodurch es für kleine Projekte quasi public ist.}
+		\end{itemize}
+		\item{\texttt{protected}}
+		\begin{itemize}
+			\item{Nur die Klasse selbst, oder dessen vererbte Klassen können darauf zugreifen}
+		\end{itemize}
+		\item{\texttt{private}}
+		\begin{itemize}
+			\item{Nur die Klasse selbst kann darauf zugreifen. Normalerweise wird mit getter und setter kontrollierter Zugriff darauf gewährt.}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Schnittstelle}
+	Zusätzlich dient die Kapselung dazu die Aufgaben einer spezifischen Komponente zu verschleiern. Ein Programm muss nicht wissen, wie ein anderes Programm funktioniert und kann funktionieren, solange es nur dessen Input und Output kennt.
+	\section{Vererbung}
+	Bei der Vererbung werden die Attribute und Methoden einer Klasse an eine andere Klasse weitergegeben. Dabei muss man beachten, dass in Java eine Klasse stets nur von einer anderen Klasse erben kann, also sind keine Mehrfachvererbungen möglich. Jedoch kann man umgekehrt natürlich eine Klasse an mehrere Klassen vererben. Diese Einschränkung kann in einem Maß dadurch umgangen werden, dass man unbegrenzt viele Interfaces implementieren kann, welche jedoch nur die Signaturen und nicht die implementierte Logik übergeben. \\
+	Im Allgemeinen nennt man die vererbende (Elternklasse) Superklasse und die erbende (Kindklasse) Subklasse. Die Funktion der Vererbung ist auch vergleichbar mit der Spezialisierung in relationalen Datenbanken.
+	\subsection{Unified Modelling Language (UML)}
+	Ein weiterer Vergleich mit relationalen Datenbanken existiert mit der Abbildung von Klassenhierarchien. Diese wird meistens mithilfe der Unified Modelling Language (UML) angegeben, welche dem ER-Schema sehr nahe ist.
+	\subsection{Vererbungstypen}
+	Vererbungen können allgemein in 5 grobe Typen geteilt werden:
+	\begin{itemize}
+		\item{Single Inheritance}
+		\begin{itemize}
+			\item{Die grundlegende Vererbung, bei der eine Klasse von einer anderen Klasse erbt}
+		\end{itemize}
+		\item{Multilevel Inheritance}
+		\begin{itemize}
+			\item{Eine Klasse erbt von einer anderen Klasse, welche wiederum von einer anderen Klasse erbt}
+		\end{itemize}
+		\item{Hierarchical Inheritance}
+		\begin{itemize}
+			\item{Eine Oberklasse vererbt an viele Subklassen}
+		\end{itemize}
+		\item{Multiple Inheritance}
+		\begin{itemize}
+			\item{Mehrere Klassen vererben an eine Subklasse.}
+			\item{\textit{Nicht} implementierbar in Java. Man muss hierfür Interfaces verwenden. \hyperref[sub:interfaces]{\underline{(Siehe Interfaces)}}}
+		\end{itemize}
+		\item{Hybrid Inheritance}
+		\begin{itemize}
+			\item{Mischformen der genannten Typen}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Implementation}
+	\subsubsection{\texttt{extends}}
+	In Java wird die Vererbung einer Klasse mit dem keyword \texttt{extends} angegeben. \\
+	\texttt{public class Loewe extends Tier -> Implementiert die Klasse Loewe mit den Eigenschaften von Tier}
+	\subsubsection{\texttt{super}}
+	Man kann auch den Constructor der erbenden Klasse verwenden, um die neue Klasse zu generieren. Das passiert mit dem keyword \texttt{super}. Dieser kann nur im Constructor der neuen Klasse verwendet werden und man kann danach noch spezifischen Code der neuen Klasse implementieren. \\
+	\begin{verbatim}
+	public Loewe(String name, Date birthday, String race) {
+	  super(name, birthdate); -> Verwendet den Konstruktor der Elternklasse
+	  this.race == race;      -> Und fügt danach neue Attribute hinzu
+	}
+	\end{verbatim}
+	\subsubsection{\texttt{final}}
+	Wenn man verhindern will, dass eine Klasse vererbt wird, kann man diese als \texttt{final} deklarieren
+	\subsubsection{\texttt{instanceof}}
+	Mit dem keyword \texttt{instanceof} kann man überprüfen, ob eine Klasse von einer anderen Klasse erbt
+	\section{Polymorphismus}
+	Polymorphismus, oder Vielgestaltigkeit, ist die Möglichkeit einer Klasse mit demselben Namen mehrere Signaturen zuzweisen und dadurch verschiedene Verhalten zu implementieren, welche von der Art der übergebenen Parameter abhängen.
+	\begin{verbatim}
+	int show();         -> show ohne Parameter
+	int show(int time); -> show mit einem int Parameter
+	\end{verbatim}
+	Diese beiden Klassen besitzen zwar denselben Namen, können jedoch unterschiedlich implementiert werden und man kann steuern, welche Methode aufgerufen wird. \\
+	Eine Methode wird in der Regel durch drei Eigenschaften definiert:
+	\begin{itemize}
+		\item{Dem Methodennamen}
+		\item{Der Parameterliste}
+		\item{Dem Rückgabewert}
+	\end{itemize}
+	Den Prozess des Zuweisens mehrerer Signaturen zur gleichen Methode nennt man Overloading. Dabei muss man jedoch beachten, dass die Menge \textit{oder} der Typ der übergebenen Parameter unterschiedlich sind. Der Name eines Parameters und der Rückgabewert können \texttt{nicht} zur Unterscheidung von Methodensignaturen verwendet werden.
+	\subsection{Kompatibilität}
+	Zurückkerhend zur Vererbung kann man auch
+	\subsection{Interfaces}
+	\label{sub:interfaces}
+	Interfaces erlauben eine einheitliche Definition von Methoden, welche jedoch nicht direkt implementiert werden. Das hat den Vorteil, dass man zwar vorschreiben kann, welche Methoden implementiert werden sollten, die Implementation selbst aber der implementierenden Klasse vorbehalten ist. Da Interfaces nur Signaturen enthalten, können diese auch nicht instanziert werden.\\
+	Anders als bei Vererbung können beliebig viele Interfaces zu einer Klasse hinzugefügt werden. Interfaces sind auch implizit \texttt{public} wodurch man diese stets in jeder Klasse hinzufügen kann. \\
+	Beispiele für Interfaces sind Eigenschaften von Funktionen in Java wie Runnable, Iterable und Comparable, aber auch abstrakte Datentypen wie Sets und Listen (Um eine Liste zu generieren muss man dessen Vererbung instanzieren.)
+	\subsection{Abstrakte Klassen}
+	Eine abstrakte Klasse ist eine Mischung aus Interfaces sowie Oberklassen. Hierbei kann man (und muss mindestens eines) abstrakte Methoden hinzufügen, welche von der erbenden Klasse implementiert werden müssen, aber auch reguläre Methoden verwenden. So kann man alle allgemeinen Methoden implementieren und spezielle als abstrakte Methoden vorgeben. Gleich wie Interfaces können abstrakte Klassen nicht instanziert werden und existieren um (mittels \texttt{extends}) vererbt zu werden.
+	\section{Sortieren}
+	Sortieren ist eine grundlegende und oft benötigte Aufgabe. Um sortieren zu können muss man zuerst die Gleichheit definieren. Oft kann man Objekte nicht direkt miteinander vergleichen und kann so nicht im allgemeinen sagen, welches 'höher' ist. Dazu muss man auf bestimmte Gütekriterien zurückgreifen, welche direkt vergleichbar sind. Java unterscheidet zwischen \texttt{Comparable} und \texttt{Comparator} um die Sortierbarkeit zu implementieren. 
+	\subsection{Comparable}
+	Java liefert Standardmethoden um Listen zu sortieren, diese müssen hierfür jedoch das \texttt{Comparable} Interface implementieren. So kann man mittels \texttt{Collections.sort([Array])} das Array nach numerischen Werten sortieren. Man kann dieses Interface jedoch auch selbst in einer Klasse implementieren um in einer anderen Weise zu sortieren (Zum Beispiel wenn man von der größten zur kleinsten Zahl sortieren will). Dazu muss man in der Klasse \texttt{Comparable<[Datentyp]>} und die Methode \texttt{compareTo} implementieren. \texttt{compareTo} hat als Rückgabewert eine Ganzzahl und
+	\subsection{Comparator}
+	Wenn man stattdessen jedoch mehr als einen Vergleich implementieren will (da Comparable nur eine Implementation haben kann), muss man einen externen Comparator implementieren, welcher danach an die Sortierfunktion mitgegeben wird. So kann man verschiedene Implementationen der Comparatorklasse erstellen und nur den benötigten Comparator an die Sortierfunktion übergeben.
+	\section{Exceptions}
+	Exceptions sind unerwartete Probleme bei der Programmausführung, welche den normalen Ablauf stören. Exceptions können mit \texttt{try/catch} Blöcken erwartet und abgefangen werden, wodurch das Programm sich von dem Fehler erholen und weiterlaufen kann. Komponenten einer Exception sind:
+	\begin{itemize}
+		\item{try}
+		\begin{itemize}
+			\item{Block, welcher ausgeführt wird und bei einer Exception in den catch Block springt, anstatt die Exception auszugeben.}
+		\end{itemize}
+		\item{catch}
+		\begin{itemize}
+			\item{Block, welcher anstatt der Ausführung einer Exception ausgeführt wird.}
+		\end{itemize}
+		\item{throw}
+		\begin{itemize}
+			\item{Keyword, wenn man händisch eine Exception ausgeben will.}
+		\end{itemize}
+		\item{throws}
+		\begin{itemize}
+			\item{Wird an eine Methode hinzugefügt um anzugeben, dass diese eine Exception ausgeben kann}
+		\end{itemize}
+		\item{finally}
+		\begin{itemize}
+			\item{Codeblock, welcher am Ende eines try/catch Blocks steht und \textit{immer} ausgeführt wird (sofern kein Error entshet.)}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Checked vs. Unchecked}
+	Bei Exceptions unterscheidet man zwischen checked und unchecked Exceptions. \\
+	Checked Exceptions \textit{müssen} mit einem try/catch Block versehen sein. Zum Beispiel muss man bei File.IO beim Einlesen einer Datei stets einen try/catch Block verwenden, ohne welches der Compiler
+	\subsection{Error}
+	Alternativ zur Exception existiert der Error. Dieser ist nicht abfangbar und führt immer zu einem Beenden des Programms. Normalerweise finden Errors nur bei groben Fehlern der JRE statt.
+	\section{File I/O}
+	Es ist für Programme oft nötig Daten zu einem bestimmten Punkt einzulesen und abzuspeichern. Häufige Datenspeichertypen sind:
+	\begin{itemize}
+		\item{Lokale Dateien (z.B. CSV oder TXT Dateien)}
+		\item{Webanbindung (z.B. REST API)}
+		\item{Externe Festplatten}
+	\end{itemize}
+	Während die Speichermedien vielfältig sein können, werden die Lese- und Schreibvorgänge von Java in der Standardbibliothek \texttt{java.io} größtenteils wegabstrahiert. Diese Programmbibliothek übernimmt einen Großteil der nötigen Operationen zum Einlesen und Schreiben von Daten. Dabei verwenden die meisten der Methoden checked Exceptions und müssen während der Implementation explizit mit \texttt{try/catch} behandelt werden. \\
+	Zur Handhabung von diesen Dateioperationen verwendet Java Streams. Diese sind eine Folge von Daten, welche entweder von dem Programm kontinuierlich geschrieben oder eingelesen werden. \\
+	\subsection{\texttt{File}}
+	Das Bibliothekseigene Objekt \texttt{File} kann entweder eine Datei oder ein Verzeichnis beschreiben, wobei das Objekt während dessen Erstellung nicht physikalisch existieren muss. \\
+	Zur Erstellung eines solchen Objekts muss man einen Dateipfad angeben, auf welchen das Objekt zeigt. Dieser Pfad kann entweder relativ oder absolut sein. Absolute Pfade geben den Pfad mit dem Grundverzeichnis als Basis an, während relative Pfade den Ordner des ausgeführten Programms als Basis verwenden. In der Regel sind relative Pfade zu bevorzugen, da so nur die Ordnerstruktur innerhalb des Programmordners bekannt sein muss und es unwahrscheinlich ist, dass der absolute Pfad auf unterschiedlichen Systemen gleich ist. \\
+	Innerhalb dieses Pfads muss man Trennzeichen zwischen Ordnern angeben. Diese sind zwischen Windows und Unix unterschiedlich. Während Windows einen Backslash \texttt{\\} verwendet, benützt Unix einen normalen Slash \texttt{/}.
+	\subsection{Methoden}
+	Zur Verwendung dieser \texttt{File} Objekte gibt es einige Methoden:
+	\begin{itemize}
+		\item{\texttt{getName()}}
+		\begin{itemize}
+			\item{Gibt den Namen der Datei zurück}
+		\end{itemize}
+		\item{\texttt{getPath()}}
+		\begin{itemize}
+			\item{Gibt den Namen das Pfads zurück}
+		\end{itemize}
+		\item{\texttt{exists()}}
+		\begin{itemize}
+			\item{Wahr, wenn das Objekt existiert}
+		\end{itemize}
+		\item{\texttt{isDirectory()}}
+		\begin{itemize}
+			\item{Wahr, wenn es sich um ein Verzeichnis handelt}
+		\end{itemize}
+		\item{\texttt{isFile()}}
+		\begin{itemize}
+			\item{Wahr, wenn es eine normale Datei ist (Also kein Ordner)}
+		\end{itemize}
+		\item{\texttt{canExecute(), canRead(), canWrite()}}
+		\item{\texttt{length()}}
+		\begin{itemize}
+			\item{Gibt die Länge der Datei in Byte wieder. Dies muss nicht sehr viel über die wahre Länge der Datei angeben, kann jedoch Rück}
+		\end{itemize}
+		\item{\texttt{delete()}}
+		\begin{itemize}
+			\item{Löscht die Datei oder das Verzeichnis, vorrausgesetzt es ist leer.}
+			\item{Falls das Verzeichnis nicht leer ist, muss man jede Datei und jeden Unterordner separat mit einer Rekursion lösen.}
+		\end{itemize}
+		\item{\texttt{mkdir()}}
+		\begin{itemize}
+			\item{Erstellt ein neues Verzeichnis und gibt Wahr zurück wenn es erfolgreich war}
+		\end{itemize}
+		\item{\texttt{mkdirs()}}
+		\begin{itemize}
+			\item{Erstellt eine beliebige Menge an Verzeichnissen (Mit Einschränkungen) und gibt Wahr zurück, wenn alle Operationen erfolgreich waren}
+		\end{itemize}
+		\item{\texttt{list()}}
+		\begin{itemize}
+			\item{Gibt eine Liste aller Dateien im momentanen Ordner wieder}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Streams}
+	Java unterstützt eine Vielzahl an Streams. Unter anderem FileStreams um Dateien, oder ByteArrayStreams um Bilder zu übertragen.
+	\subsection{BufferedReader/Writer}
+	Der reguläre Reader und Writer liest/schreibt stets nur einen Character, was realtiv ineffizient ist. Um dieses Problem zu umgehen gibt es den BufferedReader/Writer, welcher eine größere Menge auf einmal liest oder schreibt und dadurch nicht für jeden Character auf das Betriebssystem zugreifen muss.
+	\section{GUI}
+	Bis jetzt wurde jede Programmierung nur innerhalb der Command Line ausgeführt, wodurch sie auch nur ein Command Line Interface (CLI) bereitstellte. Eine Grafische Benutzeroberfläche (Graphic User Interface (GUI)) ist jedoch eines der kritischsten Komponenten eines Programms, da Benutzer dieses als Maßstab der Güte des Programms verwenden. 
+	\subsection{Java Swing}
+	Die älteste GUI Bibliothek unter Java ist Java Swing, einer API zur Erstellung von GUIs. Swing ist bereits seit Java 1.2 verfügbar und basiert auf dem Abstract Window Toolkit (AWT). Als relativ alte Bibliothek sieht es zwar nicht mehr zeitgemäß aus, Fenster werden jedoch nahezu überall gleich dargestellt. Swing implementiert alle Funktionen welche in AWT verfügbar sind und wird immer noch laufend aktualisiert, ist jedoch auch heute noch nicht thread-sicher (Multithreading kann zur unerwarteten Interaktionen führen, wenn mehrere Threads gleichzeitig zugreifen.) \\
+	\subsubsection{Model View}
+	Swing basiert auf dem Model View Controller Prinzip. Darin existieren drei Komponenten: Den View, den Controller sowie das Model. Der View ist als einziges für den Nutzer sichtbar und kann nicht mit dem Controller direkt interagieren. Der View sendet Anfragen an den Controller, welcher wiederum Anfragen an die Datenbank (Das Model) schickt. Der Umstand, dass der Nutzer nicht direkt mit der Datenbank kommunizieren kann, ist ein wichtiges Sicherheitsfeature. Ein Großteil aller Datenleaks basieren auf der Grundlage den Controller zu umgehen und direkt mit der Datenbank zu interagieren.
+	\subsubsection{Ablauf}
+	Eine GUI erstellt man in der Regel in drei Schritten:
+	\begin{enumerate}
+		\item{Erstellen eines Containers (JFrames)}
+		\begin{itemize}
+			\item{Ein Container kann eine Gruppe von GUI-Elementen (Komponenten) enthalten. Alle Komponenten müssen sich in einem Container befinden.}
+		\end{itemize}
+		\item{Platzieren von Komponenten auf dem Container}
+		\item{Aktionen programmieren (Event-Handling)}
+		\begin{itemize}
+			\item{Event-Handling weist Komponenten an sich zu melden, falls ein Event eintritt. (Zum Beispiel einen Mausclick). Dem entgegen steht das Polling, in welcher der PC ständig überprüft ob die relevante Aktion passiert ist. (Dies ist jedoch sehr ineffizient und sollte nicht verwendet werden.)}
+		\end{itemize}
+	\end{enumerate}
+	Die Implementation kann wie folgt aussehen:
+	\begin{verbatim}
+	//Set up container
+	JFrame frame = new JFrame("Container");
+	frame.setSize(600, 400);
+
+	//Fill with components
+	Container content = frame
+	\end{verbatim}
+	\subsubsection{Komponenten}
+	Komponenten existieren innerhalb von Containern:
+	\begin{itemize}
+		\item{JLabel}
+		\begin{itemize}
+			\item{Entgegen des Namens dient es als Platzhalte für unterschiedliche Elemente wie Text oder Bilder}
+		\end{itemize}
+		\item{AbstractButton}
+		\begin{itemize}
+			\item{Dient als Basis für Button-Komponenten}
+			\item{Bietet Methoden zum Auslösen von ActionEvents}
+		\end{itemize}
+		\item{AbstractAction}
+		\begin{itemize}
+			\item{Dient als Basis für Aktions-Komponenten}
+		\end{itemize}
+		\item{JOptionPane}
+		\begin{itemize}
+			\item{Dient als Pop-Up Basis um Dialog anzuzeigen. Dabei gibt es spezielle Typen, welche auch Eingaben oder Bestätigungen akzeptieren können.}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Event Handling}
+	Bei dem Event Handling gibt es stets einen Event Listener sowie eine Event Source. Dabei registriert der Event Listener bei der Event Source ein spezifisches Event. Im Falle eines Events fängt der Event Listener dieses ab und gibt es an den Event Handler weiter, falls dieser vorhanden ist.
+	\section{Multithreading}
+	Multithreading (MT) bezeichnet den Prozess, in welchem von mehreren CPU-Kernen eine Aufgabe in Teilen gleichzeitig bearbeitet wird. Während früher die meisten CPUs nur einen Kern besaßen und dadurch auch nur eine Sache ausführen konnte. Moderne CPUs besitzen jedoch meist mehrere Kerne, welche wiederum mittels Multithreading weitere Prozesse gleichzeitig ausführen können. \\
+	Es ist zu beachten, dass Multitasking und Multithreading nicht das gleiche sind. Bei Multitasking teilen sich mehrere Prozesse eine gemeinsame Ressource, wie zum Beispiel die CPU. Bei dem Multithreading hingegen führen viele Threads Teile einer Aufgabe gleichzeitig aus. \\
+	Multithreading hat einige Vorteile:
+	\begin{itemize}
+
+		\item{Im Web: Synchroner Zugriff von mehreren Personen}
+	\end{itemize}
+	Multithreading hat jedoch einen wichtigen Nachteil: Debuggen wird extrem komplex. Da man durch di
+	Programmatisch gesehen hat ein Thread einen genau definierten Lebenszyklus. Diesen kann man als endlichen Automaten wiedergeben. Ein neuer Thread beginnt im Status \texttt{New}, und kann danach konfiguriert werden um ihn \texttt{Runnable} zu setzen. Danach kann er ausgeführt werden um in den Status \texttt{Running} überzugehen. Dazwischen kann ein Thread in den Zustand \texttt{Waiting} oder \texttt{Timed Waiting} übergehen um darauf zu warten oder nach einer gewissen Zeitspanne wieder ausgeführt zu werden. Am Ende eines Zyklus geht der Thread in den Status \texttt{Dead} über und wird aufgeräumt. \\
+	Jeder Thread hat eine Priorität, welche von 1 bis 10 gehen kann. Dabei ist 5 die Standardpriorität. Diese Priorisierung gilt jedoch nur innerhalb des Programmprozesses und hat keinen Einfluss darauf wie wichtig das Betriebssystem den Thread behandelt.
+	\subsection{Runnable}
+	Java untersützt Multithreading mittels des \texttt{Runnable} Interface. So kann man eine Klasse als Runnable implementieren um Threads zu generieren und danach gleichzeitig auszuführen. Dadurch erhält man einen erheblichen Performancevorteil mit der man eine CPU effektiver benutzen kann.
+	\subsection{Synchronised}
+	Ein Problem des MT ist der Umstand, dass das Programm nicht entscheiden kann, wann ein einzelner Thread ausgeführt wird. Dadurch kann es passieren, dass der als zweites ausgeführte Thread, seine Arbeit als erstes beendet, was zu großen Problemen führen kann. \\
+	Um dieses Problem zu lösen gibt es in Java das \texttt{synchronised} environment. Innerhalb dieses Codeblocks wird ein Thread dann über den anderen priorisiert. So kann man auch "dirty writes" verhindern, wobei zwei Threads auf die gleiche Variable zugreifen und so Schreibvorgänge unterschlagen. (Wenn zum Beispiel zwei Threads jeweils eine Variable erhöhen, wird das ENdergebnis wahrscheinlich nicht die Menge der Threads widerspiegeln).
+	\subsection{\texttt{.join}}
+	Mit \texttt{join} kann man mehrere Threads nach der Ausführung wieder zusammenfügen. Dabei muss man die Threadmethode \texttt{.join} aufrufen.
+	\subsection{Deadlock}
+	Ein Deadlock geschieht, wenn zwei Threads gleichzeitig eine Ressource für sich beanspruchen welche danach wiederum die Ressource des anderen anfragen. Dadurch können beide Threads ihre Aufgabe nicht fortführen, wodurch beide bis zum Abbruch stillstehen. \\
+	Ein Weg um Deadlocks zu vermeiden, ist es Threads Ressourcen wenn möglich in der gleichen Reihenfolge verwenden zu lassen. Wenn zwei Threads immer Ressource 1 vor Ressource zwei benötigen, kann kein Deadlock entstehen da jeder Thread der Ressource 2 benötigt zuvor Ressource 1 beanspruchen muss.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

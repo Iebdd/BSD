@@ -1,0 +1,6 @@
+addSong(a,/pathToA)
+addSong(b,/pathToB)
+addSong(c,/pathToC)
+addSong(b,/pathToB)
+addSong(a,/pathToA)
+toString

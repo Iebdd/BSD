@@ -1,0 +1,31 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}RDB1 Übung 5}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	a) $\pi_{SVN}(\sigma_{Lohn > 5000}(Mitarbeiter))$ \\
+	b) $\pi_{ANummer}(Abteilungen)$ --- $\pi_{ANummer}(Projekte)$ \\
+	c) $\pi_{VName, GDatum, Geschlecht}(\sigma_{MANummer=ANummer}(\rho_{[MANummer]}(Mitarbeiter)\times\pi_{ANummer}(\sigma_{AName='Wien'}(Abteilungen))))$ \\
+	d) $\pi_{VName, NName}(\sigma_{SVN=LeiterSVN}(Mitarbeiter \times\ \pi_{LeiterSVN}(Abteilungen)))$
+	\subsection{5.2}
+	b) $$
+\end{document}

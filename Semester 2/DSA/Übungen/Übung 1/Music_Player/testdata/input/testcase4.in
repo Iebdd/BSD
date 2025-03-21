@@ -1,0 +1,12 @@
+addSong(a,/pathToA)
+addSong(b,/pathToB)
+addSong(c,/pathToC)
+toString
+removeSongByName(b)
+toString
+removeSongByName(c)
+toString
+removeSongByName(a)
+toString
+removeSongByName(c)
+toString

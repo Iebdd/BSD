@@ -1,0 +1,7 @@
+addSong(a,/pathToA)
+getCurrentSong
+addSong(b,/pathToB)
+getNextSong
+addSong(c,/pathToC)
+getNextSong
+toString

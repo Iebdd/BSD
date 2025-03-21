@@ -1,0 +1,110 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{nicefrac}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{Netzwerktechnologien Übung 1}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\section{Verbindungsarten}
+	Themen:
+	\begin{itemize}
+		\item{$11705024\ \%\ 8 = 1$ -> Modem}
+		\begin{itemize}
+			\item{Dial-Up Modems waren eine frühe Netzwerktechnologie, welche die bereits bestehende Telefonleitung zur Datenübertragung verwenden konnte. Dies war möglich da das Modem das digitale Datensignal in ein Analoges Audiosignal umwandeln konnte, was auch der Grund für die sonderbar anmutenden Geräusche waren, die das Modem währen des Verbindens erzeugte. Durch die geringe Bandbreite und relativ hohe Latenz wurde Dial-Up jedoch bald durch rein digitale Technologien ersetzt.}
+		\end{itemize}
+		\item{$(11705024\ +\ 5)\ \%\ 8\ = 6$ -> 3G/UMTS}
+		\begin{itemize}
+			\item{Nachfolger des GSM Standards, welcher bedeutend schnellere (Bis zu 7,2Mbps statt maximal 220kbps) Geschwindigkeiten anbot. Er wird auch oft 3G genannt, da GSM als die dritte Generation der Mobilfunkstandards gesehen wird.\footnote{\href{https://3g.co.uk/guides/3g-what-is-3g-explained-in-simple-terms}} Durch weitere Verbesserungen in der Mobilfunktechnologie ist dieser heutzutage größtenteils durch LTE und 5G ersetzt worden und soll österreichweit mit Ende des Jahres 2024 eingestellt werden.\footnote{\href{https://www.derstandard.at/story/3000000188375/mobilfunkstandard-3g-wird-2024-in-oesterreich-abgeschaltet}}}
+		\end{itemize}
+	\end{itemize}
+	\section{Übertragungsdauer}
+	Ausgangssituation: \\
+	Wie lange benötigt man für die Übertragung eines Bildes mit 1800x1800 Pixel? Jeder Pixel benötigt 3 Byte für Farbinformation.
+	\begin{itemize}
+		\item{Ein Bild mit einer Auflösung von 1800x1800 Pixel hat $3.240.000$ Pixel. Da ein Pixel einen Byte groß ist und zusätzlich drei Byte für Farbe benötigt, hat das Bild eine Größe von 9.720.000 Byte was 9.720 Kilobyte oder 9,72 Megabyte entspricht. Berechnung: ($1800 * 1800 = 3.240.000 -> 3.240.000 * 3 = 9.720.000$)}
+	\end{itemize}
+	\begin{itemize}
+		\item{Bei 56kbps:}
+		\begin{itemize}
+			\item{56 Kilobit sind 7 Kilobyte ($\frac{56}{8} = 7$) also benötigt man zur Übertragung des Bildes 1.388 Sekunden bzw. 23 Minuten und 8 Sekunden.}
+			\item{Berechnung: ($\frac{9720}{7} = 1.388,57\ -> \frac{1388}{60} = 23,14$)}
+		\end{itemize}
+		\item{Bei 64kbps:}
+		\begin{itemize}
+			\item{64 Kilobit sind 8 Kilobyte ($\frac{64}{8} = 8$) also benötigt man zur Übertragung des Bildes 1.215 Sekunden bzw. 20 Minuten und 15 Sekunden.}
+			\item{Berechnung: ($\frac{9720}{8} = 1.215\ -> \frac{1215}{60} = 20,25$)}
+		\end{itemize}
+		\item{16Mbps}
+		\begin{itemize}
+			\item{16 Megabit sind 2 Megabyte ($\frac{16}{8} = 2$) also benötigt man zur Übertragung des Bildes 4,86 Sekunden.}
+			\item{Berechnung: ($\frac{9,72}{2} = 4,86)$}
+		\end{itemize}
+		\item{100Mbps}
+		\begin{itemize}
+			\item{100 Megabit sind 12,5 Megabyte ($\frac{100}{8} = 12,5$) also benötigt man zur Übertragung des Bildes \d{0,7776} Sekunden.}
+			\item{Berechnung: ($\frac{9,72}{12,5} = \d{0,7776})$}
+		\end{itemize}
+		\item{1Gbps}
+		\begin{itemize}
+			\item{1 Gbps sind 125 Megabyte ($\frac{1000}{8} = 125$) also benötigt man zur Übertragung des Bildes \d{0,07776} Sekunden oder \d{77,76} Millisekunden.}
+			\item{Berechnung: ($\frac{9,72}{125} = \d{0,07776})$}
+		\end{itemize}
+	\end{itemize}
+	\section{Latenz}
+	Ausgangssituation:\\
+	Was ist die Latenz der Datenübertragung bei folgenden Geschwindigkeiten? Die Datei ist 15 Mb groß und die Distanz 2000km bei einer Ausbreitungssgeschwindigkeit von 200.000\nicefrac{km}{s}.
+	\begin{itemize}
+		\item{Latenz = Ausbreitungsverzögerung + Übertragungsverzögerung}
+		\item{Ausbreitungsverzögerung = $\frac{\textnormal{Länge der Netzwerkverbindung}}{Ausbreitungssgeschwindigkeit}$}
+		\item{Übertragungsverzögerung = $\frac{\textnormal{Nachrichtengröße}}{\textnormal{Datenübertragungsrate}}$}
+	\end{itemize}
+	Da die Länge und die Ausbreitungssgeschwindigkeit sich in diesem Beispiel nicht verändern, beträgt die Ausbreitungsverzögerung konstante 0,01 Sekunden oder 10 Millisekunden. ($\frac{2000}{200.000} = 0,01$)
+	\begin{itemize}
+		\item{56kbps}
+		\begin{itemize}
+			\item{Da das Bild in Mb vorliegt, muss es zuerst konvertiert werden -> $15\mathrm{Mb} * 1000 = 15.000\mathrm{kb}$}
+			\item{Übertragungsverzögerung = $\frac{15.000}{56} = 267,86$ Sekunden}
+			\item{Latenz = $267,86 + 0,01 = 267,87$ Sekunden. }
+		\end{itemize}
+		\item{1Mbps}
+		\begin{itemize}
+			\item{Übertragungsverzögerung = $\frac{15}{1} = 15$ Sekunden}
+			\item{Latenz = $15 + 0,01 = 15,01$ Sekunden}
+		\end{itemize}
+		\item{100Mbps}
+		\begin{itemize}
+			\item{Übertragungsverzögerung = $\frac{15}{100} = 0,15$ Sekunden}
+			\item{Latenz = $0,15 + 0,01 = 0,16$ Sekunden}
+		\end{itemize}
+	\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+	
+\end{document}
