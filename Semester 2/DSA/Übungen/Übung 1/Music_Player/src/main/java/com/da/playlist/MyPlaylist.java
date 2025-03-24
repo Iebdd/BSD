@@ -1,5 +1,6 @@
 package com.da.playlist;
 
+import com.da.datastructures.DoubleLinkedList;
 import com.da.datastructures.Song;
 
 /**
@@ -8,6 +9,7 @@ import com.da.datastructures.Song;
  * as well as navigating to the next and previous songs in the playlist.
  */
 public class MyPlaylist {
+    private DoubleLinkedList playlist;
 
     /**
      * Adds a new song to the playlist.
@@ -15,7 +17,7 @@ public class MyPlaylist {
      * @param song The song to add to the playlist.
      */
     public void addSong(Song song) {
-        //TODO
+        playlist.add(song);
     }
 
     /**

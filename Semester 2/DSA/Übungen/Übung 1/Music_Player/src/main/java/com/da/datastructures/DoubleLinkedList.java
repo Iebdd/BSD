@@ -48,23 +48,53 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
         return this.last;
     }
 
-    public void add(LinkedListNode new_element) {
+    public void add(Song new_song) {
+        LinkedListNode new_element = new LinkedListNode(new_song);
         if(isEmpty()) {
-            this.first = new_element;
-            this.last = new_element;
-            this.first.setAdjacent(null);
+            addToEmpty(new_element);
         } else if(this.first == this.last) {
             this.first.setNext(new_element);
             this.last = new_element;
             this.last.setPrev(this.first);
-            this.last.setNext(null);
         } else {
             LinkedListNode old_last = this.last;
             this.last = new_element;
             old_last.setNext(this.last);
             this.last.setPrev(old_last);
-            this.last.setNext(null);
         }
+    }
+
+    public void addFirst(Song new_song) {
+        LinkedListNode new_element = new LinkedListNode(new_song);
+        if (isEmpty()) {
+            addToEmpty(new_element);
+        } else if (this.first == this.last) {
+            this.first.setPrev(new_element);
+            this.first = new_element;
+            this.first.setNext(this.last);
+            this.first.setPrev(null);
+        } else {
+            LinkedListNode old_first = this.first;
+            this.first = new_element;
+            old_first.setPrev(this.first);
+            this.first.setNext(old_first);
+        }
+    }
+
+    private void addToEmpty(LinkedListNode new_element) {
+        this.first = new_element;
+        this.last = new_element;
+    }
+
+    public int size() {
+        int list_size = 0;
+        if(this.first == null) {
+            return list_size;
+        }
+        for(LinkedListNode node : this) {
+            list_size++;
+        }
+        return list_size;
     }
 
 
