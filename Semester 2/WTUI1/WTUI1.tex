@@ -353,14 +353,122 @@
 				\item{Fügt dem Text weitere Elemente hinzu:}
 				\begin{itemize}
 					\item{\texttt{underline -> Unterstreicht den Text}
-					\item{\texttt{line-through -> Unterstreicht den Text}}}
+					\item{\texttt{line-through -> Streicht den Text durch}}}
 				\end{itemize}
 			\end{itemize}
 		\end{itemize}
 		\subsubsection{Schriftart}
-		Man kann auch die Schriftart des Textes ändern. Dabei bietet CSS die Möglichkeit eines Fallbacks an, welcher relevant wird, wenn der
-
+		Man kann auch die Schriftart des Textes ändern. Dabei bietet CSS die Möglichkeit eines Fallbacks an, welcher relevant wird, wenn der momentane Font nicht verfügbar ist. So kann man vermeiden, dass im ersten Moment, in dem die gewünschte Schriftart noch geladen wird, nicht alles in der Standardschriftart steht (Nennt man "Pop-In"). \\
+		Man kann anstatt einer spezifischen Schrift jedoch auch eine Schriftfamilie (Wie \texttt{Arial}) oder, ob sie serif (Mit Verzierungen) oder sans-serif (Ohne Verzierungen) sein soll.
+		\begin{verbatim}
+		p {
+		 font-family: "Times New Roman", serif;
+		} -> Der Text des Paragraphs soll Times New Roman sein, oder die nächste serif Schrift, falls nicht möglich.
+		\end{verbatim}
+		\subsection{Elementgröße}
+		Die Schriftgröße eines Elements kann durch eine Größenangabe verändert werden. Der offensichtlichste Weg ist dabei die Pixel der Größe direkt anzugeben. Dazu gibt man einfach die Größe mit \texttt{px} an (Ohne Leerzeichen zwischen Zahl und Einheit). Solche Größenangaben sind jedoch statisch und man kann sie nur für eine spezifische Größe anpassen. Wenn man also zum Beispiel die Größe der Elemente mittels Pixel für einen 1920x1080 16:9 Monitor anpasst, wird dieses auf einem Handybildschirm bedeutend schlechter aussehen da die Größe der Pixel sich nicht verändert und zudem ein anderes Größenverhältnis hat. Um diese Situation zu vermeiden gibt es relative Größenangaben. Zwei davon (Die \texttt{\%} und viewport) wurden bereits verwendet. Es gibt jedoch noch drei weitere gängige Größen:
+		\begin{itemize}
+			\item{\%}
+			\begin{itemize}
+				\item{Prozentuale Größe anhand des Elternelements}
+			\end{itemize}
+			\item{vh - Viewport Height}
+			\begin{itemize}
+				\item{Prozentuale Größe anhand der sichtbaren Höhe des Fensters}
+			\end{itemize}
+			\item{vw - Viewport Width}
+			\begin{itemize}
+				\item{Prozentuale Größe anhand der sichtbaren Breite des Fensters}
+			\end{itemize}
+			\item{em}
+			\begin{itemize}
+				\item{Größe abhängig von der Schriftgröße des Elternelements}
+			\end{itemize}
+			\item{rem}
+			\begin{itemize}
+				\item{Größe abhängig von der Schriftgröße des Wurzelelements}
+			\end{itemize}
 	\end{itemize}
+	In der Regel werden em und rem nur für Schrift verwendet da man so die Schriftgrößen der Elemente automatisch anhand einer anderen Schrift anpassen kann. In der Regel ist der Viewport auch kleiner als die Gesamtgröße des Browsers, wodurch es eine genauere Angabe des Sichtbaren Feldes darstellt. Pixel sollten in der Regel nur verwendet werden, wenn sich die Größe des Elements nicht verändern soll. (Wie zum Beispiel bei einer)
+	\section{Box Model}
+	Das Box Model beschreibt die Container in welchem alle Elemente existieren. So kann man einem Element eine spezifische Position oder Hintergrundfarb zuordnen und diese gleichzeitig bündeln. Boxen haben ebenfalls Attribute um ihre Größe, Position und Ränder zu definieren.
+	\begin{figure}[H]
+	\centering
+	\includegraphics{Bilder/box.png}
+	\caption{Die Ebenen einer Box}
+	\end{figure}
+	
+	\subsection{Positionsattribute}
+	[TODO Attribute]
+	\subsection{Position}
+	Bis jetzt wurden alle Elemente von dem Browser automatisch untereinander angeordnet. Manchmal will man jedoch Elemente an spezifischen Positionen haben. Das kann man auf verschiedenen Arten erreichen. Es gibt unzählige Wege um Elemente zu positionieren, hier werden jedoch nur position und die flexbox erwähnt. \\
+	Mit \texttt{position} kann man angeben wie sich ein Element innerhalb der Struktur verhalten soll. Dabei unterscheidet man zwischen static, relative, static, absolute und sticky. 
+	\begin{itemize}
+		\item{\texttt{static}}
+		\begin{itemize}
+			\item{\texttt{Static} ist der Standardwert, also werden Elemente anhand ihrer Struktur automatisch angepasst. Das bedeutet jedoch auch, dass Positionsattribute darauf keinen Einfluss haben. }
+		\end{itemize}
+		\item{\texttt{relative}}
+		\begin{itemize}
+			\item{Um das zu erreichen muss man ein Element als \texttt{relative} definieren. So kann man ein Element mittels Positionsattributen anpassen, es wird jedoch nicht mehr automatisch vom Browser angepasst.}
+		\end{itemize}
+		\item{\texttt{fixed}}
+		\begin{itemize}
+			\item{Wird relativ zum Ansichtsfenster positioniert, weshalb es selbst beim scrollen an der selben Stelle bleibt.}
+		\end{itemize}
+		\item{\texttt{absolute}}
+		\begin{itemize}
+			\item{Wird relativ zum nächsten relativen (Nicht static) Elternelement angepasst. In oberster Ebene wird es relativ zum gesamten Element angepasst.}
+		\end{itemize}
+		\item{\texttt{sticky}}
+		\begin{itemize}
+			\item{Verhält sich gleich wie fixed, hat jedoch eine feste Position im Dokument und bleibt beim scrollen hängen.}
+		\end{itemize}
+	\end{itemize}
+	\section{Flexbox}
+	Die flexbox ist ein alternativer Weg um Elemente anzuordnen. Dabei definiert man Flexcontainer, welche Flexitems enthalten und innerhalb des Containers dynamisch angepasst werden. Sowohl der Container als auch die Items haben ihre eigenen Attribute um diese dynamische Anordnung zu beeinflussen.
+	\subsection{Container}
+	Die Attribute des Containers zeigen wie die Elemente gehandhabt werden und sich untereinander verhalten sollen.
+	\begin{itemize}
+		\item{\texttt{flex-direction}}
+		\begin{itemize}
+			\item{Gibt die Richtung an, in welche Elemente innerhalb des Containers angeordnet werden sollen. (Horizontal oder Vertikal oder Rechts/Links Oben/Unten)}
+		\end{itemize}
+		\item{\texttt{flex-wrap}}
+		\begin{itemize}
+			\item{Gibt an, ob Elemente, falls nötig, in die nächste Zeile gedrückt werden können.}
+		\end{itemize}
+		\item{\texttt{justify-content}}
+		\begin{itemize}
+			\item{Gibt an wie Elemente im Container horizontal ausgerichtet sein sollen. So kann man angeben, dass diese mittig, oder rechts oder links oder den gesamten Container (Mit Lücken dazwischen falls nötig) aufüllen sollen.}
+		\end{itemize}
+		\item{\texttt{align-items}}
+		\begin{itemize}
+			\item{Gibt an wie Elemente im Container vertikal ausgerichtet sein sollen. So kann man angeben ob Elemente oben oder unten oder in der Mitte angepasst sein sollen. Man kann auch definieren, dass Elemente den gesamten möglichen Platz vertikal ausfüllen sollen.}
+		\end{itemize}
+	\end{itemize}
+	\section{Barrierefreiheit}
+	Barrierefreiheit beschreibt
+	\subsection{Seheinschränkung}
+	Bei einer Seheinschränkung sollte Text so konstrastreich wie möglich sein. Weiß/Schwarz sind sehr kontrastreiche Kombinationen. Das selbe gilt für Schwarz und Gelb. Solche kontrastreichen Kombinationen können auch bei einer Sehschwäche ausgemacht werden. Idealerweise kann man die Farbeinstellungen der Website selbst wählen, da man sich nie auf alle Gegebenheiten vorbereiten kann. Es ist ebenfalls wichtig, dass man die Skalierung von Text verändern kann um den bei Bedarf größer machen zu können.
+	\subsection{Blindheit}
+	Eine weitere Stufe ist komplette Blindheit. Hier geht es spezifisch um die Zugänglichkeit von Screenreadern. Dazu ist es wichtig für Bilder Alt Text einzufügen und valides HTML zu verwenden. Ein Screenreader kann ein HTML Dokument eventuell nicht richtig parsen, falls das HTML Dokument unsauber aufgebaut ist.
+	\subsection{Motorische Einschränkung}
+	Bei motorischen Problemen ist die Zugänglichkeit mit der Tastatur wichtig. So sollte man mittels Tab die Elemente der Website intuitiv durchlaufen können. Zusätzlich sollte man größere Knöpfe anbieten können um das auswählen einfacher zu machen.
+	\subsection{Gehörlosigkeit}
+	Bei Gehörlosigkeit sind Untertitel sowie Textalternativen für Videos wichtig.
+	\subsection{Web Content Accesibility Guidelines (WCAG)}
+	Die WCAG definiert einer Sammlung an Guidelines um das Web für alle zugänglich zu machen. Die 4 Prinzipien sind:
+	\subsubsection{Wahrnehmung}
+	Informationen und Bestandteile müssen dem Benutzer verfügbar gemacht werden. Einige Richtlinien sind, dass Bilder Alt-Texte beinhalten müssen und Videos Alternativtexte anbieten.
+	\subsubsection{Bedienbar}
+	Bestandteile der Website müssen navigierbar sein. So sollte man stets die passenden HTML Elemente verwenden damit man eine Idee bekommt, was dieses Element enthalten könnte.
+	\subsubsection{Verständlich}
+	Informationen und Bedienungen müssen verständlich sein. Bei Fehlern muss genau angegeben werden, was gemacht werden soll bzw. was falsch gemacht wurde.
+	\subsubsection{Robustheit}
+	Inhalte müssen zuverlässig für eine große Menge an Benutzeragenten verfügbar sein. So sollten alle Tags in HTML wieder geschlossen werden um Fehler beim parsen zu vermeiden.
+	\subsection{Rechtlich}
+	Seit 2019 existiert eine EU-Richtlinie, dass Digitale Produkte und Dienstleistungen für Menschen mit Behinderungen besser zugänglich sein müssen. Dieses Gesetz wird im Juni 2025 auch in den Österreichischen Rechtstext integriert und sieht Strafen von bis zu 80.000€ vor, falls man diese Richtlinien ignorieren sollte (wobei Ausnahmen für Kleinunternehmen gelten). Dieses Gesetz inkludiert nicht nur Websites sondern auch mobile Anwendungen, E-Books und Bankdienstleistungen. Diese Gesetze basieren auf den Guidelines definiert in den WCAG.
 	\newpage
 	\begin{tabular}{| l | l | l |}
 		\toprule

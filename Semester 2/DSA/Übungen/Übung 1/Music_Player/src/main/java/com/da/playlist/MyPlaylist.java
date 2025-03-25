@@ -3,13 +3,21 @@ package com.da.playlist;
 import com.da.datastructures.DoubleLinkedList;
 import com.da.datastructures.Song;
 
+import java.util.LinkedList;
+
 /**
  * The MyPlaylist class represents a music playlist which can hold a list of songs.
  * The playlist supports operations such as adding, removing, and selecting songs,
  * as well as navigating to the next and previous songs in the playlist.
  */
 public class MyPlaylist {
-    private DoubleLinkedList playlist;
+    private final DoubleLinkedList playlist;
+    private Song current_song;
+
+
+    public MyPlaylist() {
+        playlist = new DoubleLinkedList();
+    }
 
     /**
      * Adds a new song to the playlist.
@@ -18,6 +26,7 @@ public class MyPlaylist {
      */
     public void addSong(Song song) {
         playlist.add(song);
+        playlist.printAll();
     }
 
     /**
@@ -27,8 +36,10 @@ public class MyPlaylist {
      * @return true if the song was successfully removed, false if the song was not found.
      */
     public boolean removeSongByName(String songName) {
-        //TODO
-        return false;
+        if(current_song.getName().equals(songName)) {
+            current_song = playlist.getNextSong(this.current_song);
+        }
+        return playlist.removeByName(songName);
     }
 
 
@@ -39,8 +50,8 @@ public class MyPlaylist {
      * @return the next song in the playlist, or null if the playlist is empty.
      */
     public Song getNextSong() {
-        //TODO
-        return null;
+        this.current_song = playlist.getNextSong(this.current_song);
+        return this.current_song;
     }
 
     /**
@@ -50,8 +61,8 @@ public class MyPlaylist {
      * @return the previous song in the playlist, or null if the playlist is empty.
      */
     public Song getPreviousSong() {
-        ///TODO
-        return null;
+        this.current_song = playlist.getPreviousSong(this.current_song);
+        return this.current_song;
     }
 
     /**
@@ -60,8 +71,7 @@ public class MyPlaylist {
      * @return the current song, or null if the playlist is empty.
      */
     public Song getCurrentSong() {
-        //TODO
-        return null;
+        return this.current_song;
     }
 
     /**
@@ -71,8 +81,8 @@ public class MyPlaylist {
      * @return the selected song, or null if the song was not found.
      */
     public Song selectSongByName(String songName) {
-        //TODO
-        return null;
+        this.current_song = playlist.findByName(songName).getValue();
+        return this.current_song;
     }
 
     /**
@@ -92,8 +102,10 @@ public class MyPlaylist {
      */
     @Override
     public String toString() {
-        //TODO
-        return null;
+        if(playlist.isEmpty()) {
+            return "Playlist is empty. Add some with the 'add' command!";
+        }
+        
     }
 
 

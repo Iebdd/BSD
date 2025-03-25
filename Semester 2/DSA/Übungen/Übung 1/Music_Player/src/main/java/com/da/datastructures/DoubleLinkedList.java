@@ -52,6 +52,7 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
         LinkedListNode new_element = new LinkedListNode(new_song);
         if(isEmpty()) {
             addToEmpty(new_element);
+
         } else if(this.first == this.last) {
             this.first.setNext(new_element);
             this.last = new_element;
@@ -81,6 +82,47 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
         }
     }
 
+    public LinkedListNode findBySong(Song current_song){
+        for(LinkedListNode node : this) {
+            if(node.getValue() == current_song) {
+                return node;
+            }
+        }
+        return null;
+    }
+
+    public Song getNextSong(Song current_song) {
+        if(current_song == null) {
+            return this.first.getValue();
+        }
+        LinkedListNode current_node = findBySong(current_song);
+        if(current_node == null) {
+            return null;
+        } else if(current_node.getNext() == null) {
+            return this.first.getValue();
+        }
+        return current_node.getNext().getValue();
+    }
+
+    public Song getPreviousSong(Song current_song) {
+        if (current_song == null) {
+            return this.last.getValue();
+        }
+        LinkedListNode current_node = findBySong(current_song);
+        if(current_node == null) {
+            return null;
+        } else if (current_node.getPrev() == null) {
+            return this.last.getValue();
+        }
+        return current_node.getPrev().getValue();
+    }
+
+    public void printAll() {
+        for (LinkedListNode node : this) {
+            System.out.printf("%s%n", node.getValue());
+        }
+    }
+
     private void addToEmpty(LinkedListNode new_element) {
         this.first = new_element;
         this.last = new_element;
@@ -95,6 +137,27 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
             list_size++;
         }
         return list_size;
+    }
+
+    public LinkedListNode findByName(String song_name) {
+        for (LinkedListNode node : this) {
+            if(node.getValue().getName().equals(song_name)) {
+                return node;
+            }
+        }
+        return null;
+    }
+
+    public boolean removeByName(String song_name) {
+        LinkedListNode node = findByName(song_name);
+        if(node == null) {
+            return false;
+        }
+        LinkedListNode next = node.getNext();
+        LinkedListNode prev = node.getPrev();
+        next.setNext(prev);
+        prev.setPrev(next);
+        return true;
     }
 
 

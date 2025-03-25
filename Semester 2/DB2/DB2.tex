@@ -402,7 +402,7 @@
 	Indextypen basieren auf einer Kombination dieser zwei Kriterien. Dabei sind jedoch einige Typen nicht möglich oder kommen nur selten vor. Ein Clustering Index ist zum Beispiel meistens sparse, während ein Non-Clustering Index \textit{immer} dense ist. \\
 	Wahr für alle Indextypen ist, dass Punktanfragen signifikant schneller bearbeitet werden können. Dieser Fakt ist weniger wahr für Mehrpunktanfragen und Bereichsanfragen. Ein Index erzeugt jedoch auch Mehrkosten da bei jeder Änderung der Datenbank der Index angepasst werden muss.
 	\subsubsection{Clustering Index}
-	Bei einem Clustering Index ist sowohl die Index, als auch die Daten Datei, in einer nach dem Suchschlüssel sequentiell geordneter Form. Das macht sowohl Punkt- als auch Mehrpunkt- und Bereichsanfragen sehr effizient und lässt einen guten Nicht-Squentiellen Zugriff zu. Großer Nachteil ist, dass man \textit{nur einen} Clustering Index pro Tabelle haben kann. Wenn man also einen Clustering Index auf eine Kontonummer hat, muss man für den Kontonamen einen Non-Clustering Index anfertigen. Wenn nur ein Clustering Index für eine Suche mit einem anderen Kriterium vorhanden ist, muss die gesamte Tabelle manuell durchsucht werden. Also sollte man einen Clustering Index für oft verwendete Werte verwenden und sonst Werte als Non-Clustering Index abspeichert.
+	Bei einem Clustering Index ist sowohl die Index-, als auch die Datendatei, in einer nach dem Suchschlüssel sequentiell geordneter Form. Das macht sowohl Punkt- als auch Mehrpunkt- und Bereichsanfragen sehr effizient und lässt einen guten Nicht-Squentiellen Zugriff zu. Großer Nachteil ist, dass man \textit{nur einen} Clustering Index pro Tabelle haben kann. Wenn man also einen Clustering Index auf eine Kontonummer hat, muss man für den Kontonamen einen Non-Clustering Index anfertigen. Wenn nur ein Clustering Index für eine Suche mit einem anderen Kriterium vorhanden ist, muss die gesamte Tabelle manuell durchsucht werden. Also sollte man einen Clustering Index für oft verwendete Werte verwenden und sonst Werte als Non-Clustering Index abspeichert.
 	\subsubsection{Non-Clustering Index}
 	Ein Non-Clustering Index ist in der Index Datei sequentiell geordnet, jedoch nicht bei den Daten selbst. So verweisen Pointer in dem Index zufällig auf Werte. Das macht Punktanfragen sehr schnell, da so nur einem Pointer gefolgt werden muss. Mehrpunkt und Bereichsanfragen können jedoch sehr rechenintensiv sein und besitzen nur eine gute Effizienz wenn sie kleine Teile der Datenbank abfragen. (Die Datenbank muss jedem Pointer einzeln folgen)
 	\paragraphlb{Primär- Sekundärindex}
@@ -410,11 +410,72 @@
 	\subsubsection{Sparse Index}
 	Ein Sparse Index hat einen Index Eintrag welcher auf mehrere Datensätze verweist. So kann man die Größe des Index verringern. Ein Sparse Index ist jedoch nur möglich wenn man einen Clustering Index hat, da ein Sparse Index nur funktioniert wenn der Verweis auf einen Eintrag sequentiell abarbeitbar ist. Ein Clustering Index kann jedoch auch Dense sein.
 	\subsubsection{Dense Index}
-	Im Dense Index hat jeder Index-Eintrag einen eindeutig zugewiesenen Ort in den Daten. Aus diesem Grund ist ein Dense Index bedeutend größer als ein Sparse Index, ist in der Regel jedoch kleiner als die Daten selbst da der Index ja nur die Pointer und nicht die Daten selbst beinhaltet. Aus diesem Grund muss ein Non-Clustering Index immer Dense sein. Ein Vorteil eines Dense Index ist, dass eventuell eine Datenbank gelesen werden kann, ohne dass direkt auf diese zugegriffen werden muss. Das nennt man dann einen 'Covering Index'. \\
+	Im Dense Index hat jeder Index-Eintrag einen eindeutig zugewiesenen Ort in den Daten. Aus diesem Grund ist ein Dense Index bedeutend größer als ein Sparse Index, ist in der Regel jedoch trotzdem kleiner als die Daten selbst da der Index ja nur die Pointer und nicht die Daten selbst beinhaltet. Aus diesem Grund muss ein Non-Clustering Index immer Dense sein. Ein Vorteil eines Dense Index ist, dass eventuell eine Datenbank gelesen werden kann, ohne dass direkt auf diese zugegriffen werden muss. Das nennt man dann einen 'Covering Index'.
 	\subsection{Duplikate im Index}
 	Wenn in einem Index Einträge doppelt vorhanden sind kann dessen Handhabung relativ schwer sein. Das ist vor allem im Falle von $B^+$ Baum Indexen der Fall ($B^+$ Bäume können anders als Binärbaume viele Kinder pro Knoten haben. (Siehe Datenstrukturen und Algorithmen)) \\
 	Man kann damit jedoch umgehen indem man Mehrere Indexeinträge einführt. Zusätzlich kann es ein Problem bei Buckets sein, da dann ein Eintrag im Index zu mehreren möglichen Bucketeinträgen führt. Schlißelich muss man den Suchschlüssel noch eindeutig machen. Dabei kann ein Tupel Identifier (TID) helfen um gleiche Datensätze eindeutig zu machen. Gleichzeitig kann man auch aus einer Kombination des TID und dem Bucket einen eindeutigen Key definieren. \\
 	In der Praxis werden jedoch doppelte Einträge als solche behandelt und diese auch zurückgegeben. Im Rahmen dieser Lehrveranstaltung wird jedoch angenommen, dass alle Datensätze immer eindeutig sind, da manche besprochenen Inhalte sonst nicht möglich sind.
+	\subsection{ISAM Index}
+	Da ein großer Index sehr teuer ist, ist es oft vonnöten einen mehrstufigen Index einzuführen. Da der Index selbst sequenziert wird, ergibt es einen neuen Index, welcher auf den Index verweist. Ein solcher Index besteht immer aus einem äußeren und einem inneren Index. Der äußere Index verweist dabei auf die Index Datei, während der innere Index auf die Daten selbst verweist. Falls der äußere Index zu groß wird, wird danach eine neue Index Ebene eingeführt. Diese Art des Indexing bezeichnet man als Index Sequential Access Method (ISAM).
+	\subsubsection{CRUD}
+	Zum Durchsuchen eines ISAM-Index muss man im Wurzelknoten beginnen und alle Pointer welche zu passenden Ergebnissen führen die Pointer durch die Indizes verfolgen. Beim Einfügen, Löschen und Update muss man jedoch alle Indexknoten durchlaufen da man so sicherstellen kann, dass die Integrität bewahrt wird.
+	\subsection{$B^+-Baum$}
+	Eine Alternative zu ISAM ist die Anordnung eines Index als $B^+-Baums$. Ein $B^+-Baum$ passt seine Anzahl der Ebenen stets automatisch an. Das nennt man selbstständige Reorganisation und wird nach einem Lösch- oder Einfügevorgang nötig. Aus diesem Grund ist die gesamte Reorganisation des Index nicht erforderlich. Das bedeutet jedoch natürlich auch, dass $B^+-Bäume$ einen potentiellen Merhaufwand besitzen und bedeutend komplexer in der Implementierung ist. Bei einem Einfüge- oder Löschvorgang muss auch mehr Rechenleistung aufgebracht werden, da der Baum angepasst werden muss. \\
+	Ein $B^+-Baum$ ist ein 'hohler' Baum, hat also nur in den Blättern (Elemente ohne Kindelemente) echte Daten. Alle Zweige (Elemente mit Kindelementen) dienen nur zum richtigen Blatt zu finden. Gleichzeitig sind alle Werte in diesen Blättern sequentiell gespeichert und miteinander verbunden, wodurch man von einem Blatt die Position weiterer Blätter ableiten kann und mit dieser Information die Blätter auch durchstreifen kann. \\
+	\subsubsection{Eigenschaften}
+	Zusammengefasst hat ein $B^+-Baum$ vier Eigenschaften:
+	\begin{enumerate}
+		\item{Jeder Weg von der Wurzel zu einem Blatt hat die selbe Länge}
+		\begin{itemize}
+			\item{Das ist wichtig, da so die Zugriffszeit für jegliche Anfrage dieselbe ist. Ansonsten wären Laufzeitberechnungen nur schwer durchführbar.}
+		\end{itemize}
+		\item{Jeder Knoten hat mindestens k und höchstens 2k Einträge. Blätter haben mindestens $k^*$ und maximal $2k^*$ Einträge. Die Wurzel hat maximal 2k Einträge, oder $2k^*$ falls die Wurzel ein Blatt ist. (Also kann die Wurzel weniger als k Einträge haben.)}
+		\begin{itemize}
+			\item{Die Verhältnisse aller Knoten- sowie Wurzelverbindungen müssen gleichmäßig verteilt sein.}
+		\end{itemize}
+		\item{Jeder Knoten mit n Einträgen hat n+1 Kinder}
+		\begin{itemize}
+			\item{Der Fan-Out eines Knotens beschreibt stets die Menge an Entscheidungen die in der Struktur getroffen werden kann. Der Fan-Out eines Knotens ist immer eines mehr als die Menge an verbundenen Knoten.}
+		\end{itemize}
+		\item{Enthält $R_1$ bis $R_n$ Knoten zur Verfügung wobei jeder Knoten zwischen k und 2k }
+	\end{enumerate}
+	Diese Eigenschaften garantieren einige Vorteile und Nachteile:
+	\begin{itemize}
+		\item{Da jeder Knoten k Einträge benötigt, ist jeder Knoten zu 50\% gefüllt.}
+		\item{Obwohl jedes Lesen dadurch wahrscheinlich einen random access der Festplatte verursacht, sollte durch die k bis 2k Vorgabe die Tiefe Flach bleiben um Zugriffe zu verringern.}
+		\item{Die ersten Ebenen werden oft im RAM gecached um die Zugriffszeiten zu verringern.}
+	\end{itemize}
+	\subsubsection{Balancing}
+	Der $B^+-Baum$ ist wie bereits erwähnt in der Lage sich selbst zu reorganisieren. Dabei muss man bei jedem Einfügen und Löschen die Integritätsbedingung des Baumes überprüfen. Wenn ein Baum also ein k von 2 hat und ein weiterer Knoten in eine Tabelle mit bereits vier Einträgen hinzugefügt wird, dann muss diese Tabelle gesplittet werden. Dazu wird die Tabelle in zwei Tabellen mit jeweils der Hälfte an Werten aufgeteilt und die Pointer in der Tabelle darüber gesplittet. Dabei muss man jedoch sicherstellen, dass das Splitting der Tabellen nicht wiederum zu einer Integritätsverletzung führt und die obere Tabelle im Fall ebenfalls splittet. \\
+	Das umgekehrte passiert beim Löschen. Wenn ein Knoten gelöscht wird, muss man immer sicherstellen, dass 2 Knoten in einer Tabelle verbleiben und 
+	\subsection{Hash Index}
+	Ein Hash Index erlaubt eine effizientere Suche und gleicht die Nachteile von ISAM und dem $B^+-Baum$ aus, da diese stets eine binäre Suche und eine Indexsuche durchlaufen müssen. Indem man Daten hasht, kann man direkt auf die Daten zuzugreifen ohne eine Indexstruktur verwenden zu müssen. Natürlich kann man Hashing auch verwenden um einen Index zu erstellen. \\
+	Spezifisch organisiert ein Hash Index einen Suchschlüssel aus Paaren an Pointern mit der gesuchten Datei.
+	\subsubsection{Nachteile}
+	Obwohl ein Hash Index im Mittel sehr schnell ist, hat er einen großen Nachteil: Im Worst Case hat ein Hash Index eine Komplexität von O(n). Das passiert wenn ein Hash Index sehr viele identische Werte enthält, da viele Werte in den gleichen Bucket kommen und so den Vorteil des Hashings nicht nutzen. \\
+	Ein $B^+-Baum$ hat andererseits dank seiner konstanten Länge stets die Komplexität von O(log(n)). Also ist ein Hash Index im besten Fall schneller als ein $B^+-Baum$ im schlechtesten Fall jedoch bedeutend schlechter. \\
+	Im Allgemeinen kann man entscheiden, welcher Index verwendet werden soll, indem man die Art der Anfragen ansieht. Bei Punkt- und Mehrpunktanfragen haben ein $B^+-Baum$ und ein Hash Index in der Regel annähernd gleiche Geschwindigkeiten, wodurch man beide verwenden kann. Wenn man jedoch viele Bereichsanfragen (Wie alle Konten mit einem Kontostand zwischen x€ und y€) hat, dann sollte man definitiv einen $B^+-Baum$ verwenden da dieser die Sequentielle Sortierung der Daten verwenden kann um alle Daten in einem Schwung zu finden.
+	\subsection{Mehrschlüsselindex}
+	Bei einer Anfrage mit zwei Werten (Wie einem SELECT wobei im WHERE zwei Attribute verundet werden) gibt es verschiedene Strategien diese abzuarbeiten.
+	\begin{enumerate}
+		\item{Den ersten Wert suchen und diesen mit dem zweiten Wert vergleichen}
+		\item{Den zweiten Wert suchen und diesen mit dem zweiten Wert vergleichen.}
+		\begin{itemize}
+			\item{In den ersten beiden Ansätzen hat man stets eine schnelle und eine langsame Anfrage. Aus diesem Grund sollte man das kleinere Datenset zuerst suchen und dann mit dem größeren Vergleichen um die Anfrage effizienter zu gestalten.}
+		\end{itemize}
+		\item{Wenn beide Werte einen Index besitzen kann man zwei separate Abfragen mit beiden Werten machen und die Schnittmenge der Ergebnisse berechnen. Dies kann signifikant schneller sein, als die ersten zwei Strategien.}
+		\begin{itemize}
+			\item{Wenn jedoch eine der beiden Werte bedeutend öfter vorkommt als der andere, kann diese Strategie relativ langsam sein.}
+		\end{itemize}
+	\end{enumerate}
+	Es gibt jedoch auch weitere spezialisierte Indizes für kombinierte Schlüssel. Einige Beispiele sind Grid Files, Quad-Trees und Bitmap-Indizes 
+	\subsection{Indizes in SQL}
+	Der SQL Standard 92 definiert keine Syntax für Indizes, da es kein Teil des logischen Datenmodells ist. Alle gängigen Datenbanksysteme stellen jedoch ihre eigene Indexsysteme zur Verfügung. In der Regel sieht die Syntax wie folgt aus:
+	\begin{verbatim}
+	CREATE INDEX name ON RELNAME | ATTRLIST -> CREATE INDEX myINDEX ON
+	\end{verbatim}
+	Wenn eine Datenbank einen neuen Wert einfügt oder löscht, wird stets der Index angepasst. Dadurch kann die Existenz eines Indexes Änderungsoperationen verlangsamen. \\
+	Das erste Erstellen eines Indexes kann abhängig von der Größe der Datenbank auch relativ lange dauern. Da die DB einen Index anhand der Struktur erstellt, ist es auch bedeutend effizienter einen Index erst nach Einfügen von Daten anzupassen.
 
 
 

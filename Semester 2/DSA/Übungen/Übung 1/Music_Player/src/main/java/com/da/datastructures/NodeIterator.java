@@ -19,33 +19,21 @@ public class NodeIterator implements Iterator<LinkedListNode> {
 
     @Override
     public LinkedListNode next() throws NoSuchElementException {
-        LinkedListNode next;
-        if (!reverse) {
-            next = this.currentNode.getNext();
-        } else {
-            next = this.currentNode.getPrev();
-        }
-        if (next != null) {
-            currentNode = next;
-            return next;
-        } else {
+        if(this.currentNode == null) {
             throw new NoSuchElementException();
         }
+        LinkedListNode current_item = this.currentNode;
+        this.currentNode = (!reverse) ? this.currentNode.getNext() : this.currentNode.getPrev();
+        return current_item;
     }
 
     public LinkedListNode prev() throws NoSuchElementException {
-        LinkedListNode prev;
-        if (!reverse) {
-            prev = this.currentNode.getPrev();
-        } else {
-            prev = this.currentNode.getNext();
-        }
-        if (prev != null) {
-            currentNode = prev;
-            return prev;
-        } else {
+        if(this.currentNode == null) {
             throw new NoSuchElementException();
         }
+        LinkedListNode current_item = this.currentNode;
+        this.currentNode = (!reverse) ? this.currentNode.getPrev() : this.currentNode.getNext();
+        return current_item;
     }
 
     /**
@@ -55,22 +43,8 @@ public class NodeIterator implements Iterator<LinkedListNode> {
      */
     @Override
     public boolean hasNext() {
-        if (!reverse) {
-            return (this.currentNode.getNext() != null); 
-        } else {
-            return (this.currentNode.getPrev() != null);
-        }
+        return this.currentNode != null;
     }
-
-    /**
-     * Returns whether the node has a predecessor
-     *
-     * @return true if it does, false if not
-     */
-    public boolean hasPrev() {
-        return (this.currentNode.getPrev() != null);
-    }
-
 
 
 }
