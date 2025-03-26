@@ -1,5 +1,6 @@
 Semester 2/PRG2/scheduler
 Semester 1/Einschätzungen
+Semester 2/KIB1/Übung
 **/*.aux
 **/*.log
 **/*.out
@@ -18,3 +19,4 @@ Semester 1/Einschätzungen
 **/NET1/Übung
 **/jscheduler
 **/*.mp3
+

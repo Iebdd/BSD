@@ -105,7 +105,7 @@ public class MyPlaylist {
         if(playlist.isEmpty()) {
             return "Playlist is empty. Add some with the 'add' command!";
         }
-        
+
     }
 
 
