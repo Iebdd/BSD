@@ -469,6 +469,111 @@
 	Inhalte müssen zuverlässig für eine große Menge an Benutzeragenten verfügbar sein. So sollten alle Tags in HTML wieder geschlossen werden um Fehler beim parsen zu vermeiden.
 	\subsection{Rechtlich}
 	Seit 2019 existiert eine EU-Richtlinie, dass Digitale Produkte und Dienstleistungen für Menschen mit Behinderungen besser zugänglich sein müssen. Dieses Gesetz wird im Juni 2025 auch in den Österreichischen Rechtstext integriert und sieht Strafen von bis zu 80.000€ vor, falls man diese Richtlinien ignorieren sollte (wobei Ausnahmen für Kleinunternehmen gelten). Dieses Gesetz inkludiert nicht nur Websites sondern auch mobile Anwendungen, E-Books und Bankdienstleistungen. Diese Gesetze basieren auf den Guidelines definiert in den WCAG.
+	\section{HTTP}
+	[TODO ENTIRE HTTP]
+	\section{Proxy}
+	\subsection{Fat und Thin Client}
+	[TODO THIN/FAT CLIENT]
+	\subsection{Proxy}
+	Ein Proxy ist ein Zwischenhändler, welcher Transaktionen im Namen des Clients ausführt. Dabei unterscheidet man zwischen transparent und opaque proxies, welche jeweils nicht sichtbar oder sichtbar sind. Wenn kein Proxy vorhanden ist, kommuniziert ein Cleint direkt mit dem Server. Zusätzlich existieren Forward und Reverse Proxies, welche jeweils zwischen dem Client und dem Internet und dem Server und dem Internet sitzen. Einige Proxyarten sind:
+	\subsubsection{Filter}
+	Jegliche durch den Proxy laufende Anfragen werden geprüft und nur zugelassene auch weitergereicht. Das kann verwendet werden um zum Beispiel in einem Firmennetzwerk gewisse Websiten zu sperren oder einen Jugendfilter einzusetzen.
+	\subsubsection{Anonymizer}
+	Da man bei einem HTTP Request stets die gesamte nötige Information mitgeben muss, ist man stets eindeutig identifizierbar. Um das zu umgehen gibt es Anonymizer, welcher Teile der Anfrage durch andere Werte ersetzen, diese Anfrage weitergeben und bei der Antwort die Information wieder einfügen.
+	\subsubsection{Load Balancer}
+	Ein Load Balancer dient die Daten, welche normalerweise auf einen einzigen Server geschehen würden, auf viele Server aufzuteilen. So kann man sicherstellen, dass man dynamisch auf die Menge an Anfragen reagieren, und trotzdem stets die gleiche Adresse ansprechen kann.
+	\section{Web Cache}
+	Bei dem Caching werden geladene Daten zwischengespeichert um so oft genutzte Resourcen schneller zur Verfügung zu stellen. Das hilft auch dabei die Serverlast zu reduzieren, da man es so nur ein Mal bereitstellen muss.
+	\subsubsection{Arten von Caches}
+	Es gibt mehrere Arten von Caches:
+	\begin{itemize}
+		\item{Browser Cache}
+		\begin{itemize}
+			\item{Die einfachste Art von Cache wird direkt lokal gespeichert.}
+		\end{itemize}
+		\item{Proxy Cache}
+		\begin{itemize}
+			\item{Cache zwischen dem Client und dem Zielserver. Ein ISP muss so die Anfrage an den Server nicht weiterleiten und kann ihn direkt aus dem Cache laden.}
+		\end{itemize}
+		\item{Content Delivery Network}
+		\begin{itemize}
+			\item{Global verteilte Server welche Resourcen bereitstellen um so Resourcen so schnell wie möglich bereitzustellen.}
+			\item{}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Hit and Miss}
+	Bei dem Zugriff auf den Cache gibt es, gleich wie bei PC-Cache, einen Cache Hit und einen Cache Miss. Ein Cache Hit bedeutet, dass eine Resource im Cache vorhanden ist. Ein Cache Miss heißt dabei, dass die Resource nicht vorhanden ist und muss angefragt werden. Es wird danach auch im Cache für die nächste Anfrage gespeichert.
+	\subsubsection{Freshness}
+	Da es wichtig ist, dass Resourcen im Cache stets frische Daten enthält, muss man sicherstellen dass keine alten (stale) Daten im Cache liegen. \\
+	Jede Resource im Cache hat eine definierte Ablaufzeit und diese ist noch frisch, wenn es innerhalb der Ablaufzeit liegt und alt wenn nicht. \\
+	Resourcen können entweder in absoluter oder relativer Zeit gespeichert werden. Bei der absoluten Zeit wird der Zeitpunkt des Speicherns gespeichert, was jedoch leicht manipuliert werden kann (indem man die lokale Zeit ändert). Aus diesem Grund ist relative Zeit die bessere Methode, da es eine maximale Zeit in Sekunden festlegt und der Browser diese individuell unabhängig von der momentanen Zeit anpasst. \\
+	Ein Server kann die Ablaufzeit des Dokuments individuell festlegen und auch vorraussetzen, dass die Resource nicht gecached wird.
+	\subsubsection{Revalidation}
+	Hin und wieder muss man überprüfen, ob die gecachten Dateien noch aktuell sind. Diesen Vorgang nennt man Cache Revalidation. Wenn sich das Dokument am Server geändert hat wird es neu angefragt, wenn es jedoch noch aktuell ist wird die Ablaufzeit neu angepasst. \\
+	Eine Revalidation geschieht mittels Conditional \texttt{GET} Request, wobei nur der Header gesendet wird um zu überprüfen ob sich etws verändert hat. Der GET Request hat dabei den Header \texttt{IF-NONE-MATCH}. Wenn sie noch gleich ist wird es bestätigt und wenn nicht wird die Resource erneut sofort mitgesendet. \\
+	Die Gleichheit der Resourcen wird mit einem \texttt{ETag} festgestellt. Ein ETag ist eine eindeutige Versionsnummer des Dokuments womit man feststellen kann ob sie noch die selbe ist.
+	\subsubsection{Cache Control Header}
+	Der Cache Control Header gibt Einstellungen der zu cachenden Resource an. Dabei kann er mehrere Anweisungen an den Client weitergeben:
+	\begin{itemize}
+		\item{\texttt{private/public}}
+		\begin{itemize}
+			\item{Gibt an ob die Datei nur am Browser (private) oder auch am ISP (public) gecached werden darf.}
+		\end{itemize}
+		\item{\texttt{no-store}}
+		\begin{itemize}
+			\item{Resource darf nicht gecached werden}
+		\end{itemize}
+		\item{\texttt{no-cache}}
+		\begin{itemize}
+			\item{Resource muss immer revalidated werden bevor sie dem Client weitergegeben wird.}
+		\end{itemize}
+	\end{itemize}
+	\section{Cookies}
+	Da HTTP zustandslos ist, wird jede Anfrage als unabhängige Transaktion behandelt. Dadurch geht die Information früherer Requests verloren. In manchen Fällen will man jedoch persistente Information irgendwo zwischenspeichern. Diese Information kann über Cookies gespeichert werden. Diese sind kleine Speicherstellen, welche von der Website auf dem Client für später zwischengespeichert werden.
+	\subsection{Erzeugung}
+	Um einen Cookie zu erzeugen kann eine HTTP Anfrage mit dem \texttt{Set-Cookie} Header gesendet werden. Der Body enthält eine beliebige Menge an Name/Werte Paaren, welche danach als Cookies abgespeichert werden. 
+	\subsection{Attribute}
+	Cookies haben verschiedene Attribute, welche ihr Verhalten beeinflussen:
+	\begin{itemize}
+		\item{\texttt{Expires/Max-Age}}
+		\begin{itemize}
+			\item{Definiert ein Ablaufdatum. Kann erneut entweder in absoluten Zeitdaten (Mit Expires) oder relativen Sekunden (Mit Max-Age) angegeben werden.}
+			\item{Ein Cookie welches weder \texttt{Expires} noch \texttt{Max-Age} angibt wird gelöscht sobald die Session geschlossen wird.}
+		\end{itemize}
+		\item{\texttt{Domain}}
+		\begin{itemize}
+			\item{Gibt an zu welcher Website ein Cookie gehört (Die Domäne). Die Domain limitiert auch wo das Cookie gilt. Die Domain unterscheidet ob es sich um ein First- oder Third-Party Cookie hat.}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Third-Party Cookie}
+	Abhängig von ihrer Domain sind Cookies First oder Third-Party. Wenn ein Cookie für eine andere Website gesetzt ist, als die Domain die sie gesetzt hat, spricht man von einem Third-Party Cookie. Third-Party Cookies können potenziell von Unternehmen verwendet werden um eine Person über das Internet zu verfolgen und so dessen Interessen herauszufinden. Das geschieht trotz der \texttt{Domain} Einschränkung, da Firmen wie Facebook oder Google in fremden Websiten eingebunden werden und so für die Website das Scope erlangen.
+	\paragraphlb{Rechtliches}
+	Während Cookies anfangs einen utilitären Zweck hatte, werden Cookies zunehmend zweckentfremdet. Um dem entgegenzuwirken wurde in Teilen der Welt Legislatur erlassen, welche die Verwendung von Cookies einschränkt. Die EU zum Beispiel hat 2018 die Datenschutzgrundverordnung (DSGVO) erlassen um Websiten zu zwingen, dass Benutzern die Option gegeben wird Cookies abzulehnen um so Third-Party Tracking abzulehnen. Dadurch besitzen User einen Opt-In (Explizite Zustimmung um Cookies zu erhalten) statt eines Opt-Outs (Explizite Ablehnung um keine Cookies zu erhalten).
+	\section{Mensch-Maschine-Kommunikation (HCI)}
+	Die Mensch-Maschine-Kommunikation (auf Englisch Human-Computer-Interaction (HCI) genannt) hilft bei der besseren Interaktion zwischen eines PCs und dem Menschen. Es geht dabei nicht nur darum die Technologie verwenden zu können, sondern dies auch intuitiv ohne Anleitung tun zu können. Das ist speziell ersichtlich bei schlechtem Design. Das gilt 
+	\subsection{Affordances}
+	Affordances bilden den Angebotscharakter, also was man mit dem Objekt machen kann. Ein Lichtschalter hat zum Beispiel den Angebotscharakter ihn aus- oder einzuschalten. Ein Sessel hat den Angebotscharakter darauf zu sitzen. Dieser sollte intuitiv ersichtlich sein, zum Beispiel lernen Kinder schon was man mit Objekten machen kann. Das gleiche gilt auch bei digitalen Geräten. So hat man bei einem Tablet die Affordances zu tippen, aber auch zu swipen oder Gesten auszuführen.
+	\subsubsection{Reale und Wahrgenommene}
+	Reale Affordances ist die Bandbreite aller möglichen Aktionen, während wahrgenommene nur die Aktionen sind die ein Nutze für möglich hält. \\
+	Abhängig davon wie offensichtlich die Affordances eines Objekts sind, können die realen und wahrgenommenen Affordances voneinander abweichen. Idealerweise sollten alle möglichen Aktionen jedoch intuitiv erkennbar sein.
+	\subsection{Signifier}
+	Signifier sind Zeiger, die ein angemessenes Verhalten vermitteln. Diese sind sehr eng mit den wahrgenommenen Affordances verbunden, da man so auf die Möglichkeiten hinweisen kann. Im Idealfall sollten Signifiers einem intuitiv vermitteln was die Möglichkeiten eines Objekts sind und nicht zusätzlich noch mit Text ergänzt werden müssen. In der Regel gilt ein Signifier als fehlplatziert wenn er textuell erweitert werden muss.
+	\subsection{Constraints}
+	Contraints sind physische, logische, semantische oder kulturelle Einschränkungen um die Aktionen des Benutzers zu leiten. Constraints werden speziell wichtig, wenn keine Vorerfahrung zur Benutzung besteht. Während Affordances also die Bandbreite der Möglichkeiten angeben, begrenzen Constraints die Anzahl der Alternativen um so idealerweise nur die möglichen übrigzulassen. \\
+	Constraints sind ideal wenn man aus kultureller Sicht eventuelle Verhaltensunterschiede hat. Zum Beispiel sollte bei einer Datumseingabe nicht nur ein Textfeld vorhanden sein, da man so nicht wissen kann, ob zuerst der Tag oder der Monat kommt. Wenn man nur eine Zahleneingabe hat, kann ein mobiler Client nur Zahleneingabe zulassen.
+	\subsection{Mapping}
+	Bei dem Mapping sollte
+	\subsection{Feedback}
+	Feedback ist wichtig, dass der Benutzer weiß, dass eine Aktion etwas bewirkt hat. Wenn man bei einer Fußgängerampel auf den Knopf drückt, sollte diese einem mitteilen, dass das Drücken erfasst wurde. In einem Computerkontext sollte ein Pop-Up einen über eine getätigte Aktion informieren oder einen Ladebalken anzeigen.
+	\subsection{Conceptual Model}
+	Das konzeptionelle Modell ist das mentale Bild, das ein Benutzer von einem Objekt hat. So kann man abhängig vom kulturellen Kontext auch falsche Annahmen treffen. \\
+	In der Regel werden Sachen, die Menschen bereits verstehen, als Referenz verwendet um die Funktionsweise eines digitalen Objekts zu vermitteln. Zum Beispiel sieht der Papierkorb in einem PC wie ein realer Papierkorb an, um anzuzeigen, dass man nicht mehr benötigte Dateien dort loswerden kann.
+	\subsection{Benutzungsaspekte}
+	Bei dem erwarteten Wissen eines Programms unterscheidet man zwischen Knowledge in the World und Knowledge in the Brain. Da ein Mensch nur eine gewisse Menge an Dingen wissen kann, sollte ein Großteil der Erwartungen des Programms aufgrund des World Knowledge basieren. Wenn man die Benutzung an die kulturellen Gegebenheiten des Benutzers anpasst, muss man sich die Benutzung selbst nicht pro Programm merken. \\
+	Man sollte auch immer damit rechnen, dass ein Benutzer einen Fehler macht, wodurch diese wieder korrigierbar sein sollten. Dabei unterscheidet man zwischen Action Errors und Thinking Errors. Ein Action Error ist ein Fehler, der ausgeführt wird, obwohl der Benutzer das richtige machen wollte, wie zum Beispiel Cut statt Copy zu verwenden. Ein Thinking Error ist jedoch ein Fehler welcher aufgrund einer fehlerhaften Annahme geschieht. So kann man zum Beispiel zwar eine Datei von .rtf in .doc umbenennen, die Datei selbst ist jedoch nicht richtig formatiert und kann deshalb nicht als .doc Datei gelesen werden.
+	\subsection{System- vs. User-Centered}
+	Bei der Erstellung eines Produkts muss man stets auf die Anforderungen achten. Diese können entweder Anforderungen des Systems oder des Benutzers sein. Abhängig davon, was priorisiert wird, spricht man von System-Centered-Design oder User-Centered-Design. \\
+	System-Centered-Design basiert auf den
 	\newpage
 	\begin{tabular}{| l | l | l |}
 		\toprule
