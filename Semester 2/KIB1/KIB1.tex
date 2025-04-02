@@ -284,6 +284,175 @@
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
+	\section{Building}
+	\subsection{.jar}
+	In Java a Jar file is one of the key concepts in Java. It bundles multiple source files into a single archive including associated resources like images or sounds. Ultimately it is a zip archive with a different file extension, which lets you unpack the file again if you were to rename and unzip it. \\
+	Another included file within the jar is the manifest file. It describes metadata about this jar file like:
+	\begin{itemize}
+		\item{Specifying the entry point}
+		\begin{itemize}
+			\item{Specifies the \texttt{Main-Class} property which is run when executed. This must include the full package name plus the class name}
+			\item{You can specify a jar file to be runnable by including a manifest file with the \texttt{Main-Class} supplied by using the \texttt{cfm} option}
+		\end{itemize}
+		\item{Hashsum signing}
+		\item{Specifying the version}
+		\item{Sealing the file}
+		\begin{itemize}
+			\item{Stops foreign packages from being executed}
+		\end{itemize}
+	\end{itemize}
+	Jar files can exist in two configurations: runnable or used as an external library. Runnable is executed directly (and requires a \texttt{Main-class} manifest header) while external libraries are only used as parts of other applications.
+	\subsection{Compiling manually}
+	While Maven can be useful to automate the compilation, it is still good to know how to run it manually: \\
+	\texttt{javac <path to java file> -d <target directory> -> Compiles the java file into the target directory} \\
+	Like in all CLI programs you can use batching to compile many at once by using an asterisk \texttt{*} instead of a file name. \\
+	In order to subsequently run the compiled file you need to use \texttt{java} instead of \texttt{javac} and define the full package name: \texttt{java -cp <folder where class files are located> <full package name> <arguments> -> The package name including the class name must be added in order to run the file} \\
+	In order to create a jar package you need to use the command line argument \texttt{cvfe}: \texttt{jar cvfe <jar file> <package name> -C <class path> . -> The full stop at the end must be added or it won't work}. \\
+	Running the jar file is done by calling the regular java command: \texttt{java -jar <jar file> <command line argument>}
+	\section{Maven}
+	Up until now IntelliJ has likely automatically run without much hassle when pressing the play button. That's because the IDE uses a proprietary build system. An alternative, open-source, build system is Maven. Maven as a build system can manage the entire product lifecycle from managing dependencies over compiling the source files to run unit tests as well as deploy the finished product. This process is called the 'Build Process'. 
+	\subsection{Automation}
+	This entire process can be automated by using Maven so it doesn't have to be repeated every single iteration. This ideally works if the process is CRISP:
+	\begin{itemize}
+		\item{C}
+		\item{Repeatable}
+		\begin{itemize}
+			\item{That on every build process the same result is created}
+		\end{itemize}
+		\item{Informative}
+		\begin{itemize}
+			\item{Get feedback from the build process to figure out issues easily}
+		\end{itemize}
+		\item{Schedulable}
+		\begin{itemize}
+			\item{Be able to have builds be executed on a set schedule since it might take a long time to build. Also ensures that unit tests are run regularly}
+		\end{itemize}
+		\item{Portable}
+		\begin{itemize}
+			\item{The build process should be platform agnostic and run on any system without requiring specific setup}
+		\end{itemize}
+	\end{itemize}
+	Maven includes all of the configured files like project configurations, the source code, the test code, included libraries and documentation to create a finished jar file. The process includes:
+	\begin{itemize}
+		\item{Building the project}
+		\item{Providing a uniform build system}
+		\item{Providing project information}
+		\begin{itemize}
+			\item{The \texttt{pom.xml} (Project Object Model) file provides a uniform way to configure Maven projects.}
+		\end{itemize}
+		\item{Providing development best practice guidelines}
+		\begin{itemize}
+			\item{Because Maven has a default structure it promotes best practices for folder structure and naming conventions.}
+		\end{itemize}
+		\item{Allow transparent migration to new features}
+		\begin{itemize}
+			\item{Due to specific versioning for dependencies backwards compatibility is always maintained and also ensures to make migration to new versions as easy as possible}
+		\end{itemize}
+	\end{itemize}
+	\subsection{pom.xml}
+ 	The pom.xml is standardised across Maven projects to ensure it does not take a lot of effort to understand the structure of a different project. With the ability to include dependencies it is easy to include plugins which provide the functionality needed. \\
+ 	The pom file includes certain aspects of the project:
+ 	\begin{itemize}
+ 		\item{The root folder of the project}
+ 		\item{dependencies}
+ 		\begin{itemize}
+ 			\item{A list of all libraries that need to be included}
+ 		\end{itemize}
+ 		\item{properties}
+ 		\begin{itemize}
+ 			\item{Defines common and reusable properties forthe projec}
+ 		\end{itemize}
+ 		\item{build}
+ 		\begin{itemize}
+ 			\item{Defines build configurations}
+ 		\end{itemize}
+ 	\end{itemize}
+ 	The useful part about the dependencies in the pom file is, that it automatically downloads all of the specified dependencies and versions them correctly. Since it creates a local copy of the libraries you only need to be connected to the internet while running Maven the first time and can afterwards use it offline as well. The repositories are saved in the User folder under a hidden folder called \texttt{.m2}
+ 	\subsection{Additional Phases}
+ 	In addition to the already mentioned phases of a build process, there's some more miscellaneous phases:
+ 	\subsubsection{Validate}
+ 	Ensures that all necessary information within the project is correct.
+ 	\subsubsection{clean}
+ 	Removes all generated files and folders. This is useful if you have deleted some dependencies and want to ensure it is not part of the build files anymore.
+ 	\section{Failure}
+ 	When talking about failure, you must distinguish between different tiers of failures. An error or a mistake is a human action that leads to an incorrect result (Like foregetting a semicolon). An error can potentially lead to a defect, which is a deficiency in a work product which does not meet its requirements or specifications. This defect can potentially lead to a failure which is an event in which a component in a system does nto perform within specified limits.
+ 	\subsection{Identifying mistakes}
+ 	When a failure occurs, you must reverse the error process by first identifying the failure itself, identifying the defect and then identifying the error and fixing the mistake.
+ 	\subsection{Debugging}
+ 	A way to simplify this process is testing and debugging. There are seven steps to debugging which can be abbreviated by TRAFFIC:
+ 	\begin{itemize}
+ 		\item{Track the problem}
+ 		\item{Reproduce it}
+ 		\item{Automate the testing process}
+ 		\item{Find infection origins}
+ 		\item{Focus on most likely origins}
+ 		\item{Isolate the infection chain}
+ 		\item{Correct the error behind the defect and rerun all tests (Maybe the fix has caused further errors)}
+ 	\end{itemize}
+ 	Even if you think you have fixed the mistake, make sure to only push well working code to production to not cause more issues than the fix should fix.
+ 	\subsection{Tiers of Testing}
+ 	There are four tiers of tests, which range from testing specific components in a vaccuum to testing the program within its UI:
+ 	\begin{itemize}
+ 		\item{Unit Tests}
+ 		\begin{itemize}
+ 			\item{Tests only methods or modules}
+ 		\end{itemize}
+ 		\item{Integration Tests}
+ 		\begin{itemize}
+ 			\item{Tests the execution in the final environment}
+ 		\end{itemize}
+ 		\item{End to End Tests}
+ 		\begin{itemize}
+ 			\item{Tests the product within its ecosystem}
+ 		\end{itemize}
+ 		\item{UI Test}
+ 		\begin{itemize}
+ 			\item{Tests the product within the finished UI}
+ 		\end{itemize}
+ 	\end{itemize}
+ 	In general the later a bug is discovered the more effort it takes to fix it. Fixing a bug while implementing it takes a few minutes but fixing a bug in a product that has already been deployed can take a very long time and require considerable effort.
+ 	\subsection{Unit Tests}
+ 	We will mainly focus on Unit Tests, which does not test the product itself but only the specific function of a single method. Ideally every production code should be tested. One metric is test coverage which specifies the percentage of the code that is covered by unit tests. \\
+ 	One Unit Test consists of four phases, of which not all are necessarily needed but useful.
+ 	\begin{itemize}
+ 		\item{Setup}
+ 		\begin{itemize}
+ 			\item{Sets up the environment in order to test the system}
+ 		\end{itemize}
+ 		\item{Exercise}
+ 		\begin{itemize}
+ 			\item{The system is executed with the specified paramaters}
+ 		\end{itemize}
+ 		\item{Verify}
+ 		\begin{itemize}
+ 			\item{Compares the program output with the pre-defined expected result}
+ 			\item{A Unit Test is only as good as the accuracy of the pre-defined test result}
+ 		\end{itemize}
+ 		\item{Teardown}
+ 		\begin{itemize}
+ 			\item{Deletes data created during the test process like folders or code}
+ 		\end{itemize}
+ 	\end{itemize}
+ 	\subsubsection{JUnit}
+ 	JUnit is a framework to write repeatable tests for Java files. To write a test a specific test class has to be created. Before you can use JUnit you need to import it. Within Maven you need to import the three artifacts \texttt{junit-jupiter-api}, \texttt{junit-jupiter-engine} and \texttt{junit-jupiter-params} all coming from the \texttt{org.junit.jupiter} group. The class then requires three Decorators:
+ 	\begin{itemize}
+ 		\item{@BeforeEach (@Before in JUnit 4)}
+ 		\begin{itemize}
+ 			\item{Specify what should be done before the test is executed}
+ 			\item{This can include the creation of new classes or the definition of variables}
+ 		\end{itemize}
+ 		\item{@AfterEach (@After in JUnit 4)}
+ 		\begin{itemize}
+ 			\item{Specifiy what should be done after the tests have concluded}
+ 		\end{itemize}
+ 		\item{@Test}
+ 		\begin{itemize}
+ 			\item{Specifies the tests to be executed.}
+ 			\item{Within this test environment you should use \texttt{Assert.assertTrue()} or other assert functions to check if the output is as expected. Only failed asserts are recorded to immediately see tests that have failed.}
+ 		\end{itemize}
+ 	\end{itemize}
+ 	For small tests it isn't necessary to specifically define BeforeEach and AfterEach. Instead you can just call @Test, create the necessary variables and immediately run the function to be tested as an argument of the assert function.
+
 
 
 

@@ -1,15 +1,15 @@
 package com.da.musicplayer;
 
-import com.da.datastructures.Song;
-import com.da.playlist.MyPlaylist;
-import com.da.util.TestPlaylistImplemention;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+
+import com.da.datastructures.Song;
+import com.da.playlist.MyPlaylist;
+import com.da.util.TestPlaylistImplemention;
 
 /**
  * MusicPlayerApplication simulates a basic MP3 player with functionality to add, remove,
@@ -192,9 +192,11 @@ public class MusicPlayerApplication {
         Song currentSong = playlist.getCurrentSong();
         if (playlist.removeSongByName(removeName)) {
             stringBuilder.append("Song ").append(removeName).append(" removed\n");
-            if (currentSong.getName().equals(removeName)) {
-                player.stop();
-                stringBuilder.append(playCurrentSong());
+            if(currentSong != null) {
+                if (currentSong.getName().equals(removeName)) {
+                    player.stop();
+                    stringBuilder.append(playCurrentSong());
+                }
             }
         } else {
             stringBuilder.append("Song ").append(removeName).append(" could not be removed as it was not contained in" +

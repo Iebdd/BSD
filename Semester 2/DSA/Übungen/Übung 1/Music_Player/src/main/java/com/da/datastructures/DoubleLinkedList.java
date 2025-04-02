@@ -3,14 +3,30 @@ package com.da.datastructures;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * A limited implementation of a Double Linked List. It is iterable and supports
+ * random removal in linear time as well as adding or removing the last or first
+ * element in constant time
+ */
 public class DoubleLinkedList implements Iterable<LinkedListNode>{
     private LinkedListNode first;
     private LinkedListNode last;
 
+    /**
+     * Decides whether the datastructure is empty.
+     *
+     * @return true if the List is empty, false if not
+     */
     public boolean isEmpty() {
         return (this.first == null && this.last == null);
     }
 
+    /**
+     * Removes the first element in the list. Also removes the reference to the last
+     * if the List only contained one element
+     *
+     * @return The next element in the list or null if it is now empty
+     */
     public LinkedListNode remove() throws NoSuchElementException {
         if(this.first == this.last) {
             this.first = null;
@@ -23,6 +39,12 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
         return this.first;
     }
 
+    /**
+     * Removes the last element in the list. Also removes the reference to the first
+     * if the List only contained one element
+     *
+     * @return The previous element in the list or null if it is now empty
+     */
     public LinkedListNode removeLast() throws NoSuchElementException {
         if (this.first == this.last) {
             this.first = null;
@@ -35,25 +57,44 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
         return this.last;
     }
 
+    /**
+     * Removes all references in the list by removing both pivot points
+     *
+     */
     public void clear() {
         this.first = null;
         this.last = null;
     }
 
+    /**
+     * Retrieves the first element of the list
+     *
+     * @return The first element of the list
+     */
     public LinkedListNode getFirst() {
         return this.first;
     }
 
+    /**
+     * Retrieves the last element of the list
+     *
+     * @return The last element of the list
+     */
     public LinkedListNode getLast() {
         return this.last;
     }
 
+    /**
+     * Adds the passed song to the end of the list
+     *
+     * @param new_song The Song to be added
+     */
     public void add(Song new_song) {
         LinkedListNode new_element = new LinkedListNode(new_song);
         if(isEmpty()) {
             addToEmpty(new_element);
 
-        } else if(this.first == this.last) {
+        } else if(isSingleElement()) {
             this.first.setNext(new_element);
             this.last = new_element;
             this.last.setPrev(this.first);
@@ -65,11 +106,16 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
         }
     }
 
+    /**
+     * Adds the passed song to the front of the list
+     *
+     * @param new_song The Song to be added
+     */
     public void addFirst(Song new_song) {
         LinkedListNode new_element = new LinkedListNode(new_song);
         if (isEmpty()) {
             addToEmpty(new_element);
-        } else if (this.first == this.last) {
+        } else if (isSingleElement()) {
             this.first.setPrev(new_element);
             this.first = new_element;
             this.first.setNext(this.last);
@@ -82,15 +128,27 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
         }
     }
 
-    public LinkedListNode findBySong(Song current_song){
+    /**
+     * Finds an element of the list by its object reference
+     *
+     * @param song The song to be found
+     * @return The Song if it was found, null if not
+     */
+    public LinkedListNode findBySong(Song song){
         for(LinkedListNode node : this) {
-            if(node.getValue() == current_song) {
+            if(node.getValue() == song) {
                 return node;
             }
         }
         return null;
     }
-
+    
+    /**
+     * Retrieves and returns the next song after the one currently playing
+     *
+     * @param current_song The song currently playing
+     * @return The song following the current one or the first if there is none playing
+     */
     public Song getNextSong(Song current_song) {
         if(current_song == null) {
             return this.first.getValue();
@@ -103,7 +161,13 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
         }
         return current_node.getNext().getValue();
     }
-
+    
+    /**
+     * Retrieves and returns the previous song before the one currently playing
+     *
+     * @param current_song The song currently playing
+     * @return The song preceding the current one or the last if there is none playing
+     */
     public Song getPreviousSong(Song current_song) {
         if (current_song == null) {
             return this.last.getValue();
@@ -116,29 +180,49 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
         }
         return current_node.getPrev().getValue();
     }
-
-    public void printAll() {
-        for (LinkedListNode node : this) {
-            System.out.printf("%s%n", node.getValue());
-        }
-    }
-
+    
+    /**
+     * Adds the first element to the empty list
+     *
+     * @param songName The name of the song to remove.
+     * @return true if the song was successfully removed, false if the song was not found.
+     */
     private void addToEmpty(LinkedListNode new_element) {
         this.first = new_element;
         this.last = new_element;
     }
-
+    
+    /**
+     * Decides if the List only has one element
+     *
+     * @return true if the first and last element are the same, false if not
+     */
+    private boolean isSingleElement() {
+        return (this.first == this.last);
+    }
+    
+    /**
+     * Returns the amount of nodes currently in the list
+     *
+     * @return The amount of nodes as an integer
+     */
     public int size() {
         int list_size = 0;
         if(this.first == null) {
             return list_size;
         }
-        for(LinkedListNode node : this) {
+        for(LinkedListNode unused : this) {
             list_size++;
         }
         return list_size;
     }
-
+    
+   /**
+     * Finds an element of the list by its song name
+     *
+     * @param song_name The name of the song to be found
+     * @return The Node if it was found or null if not
+     */
     public LinkedListNode findByName(String song_name) {
         for (LinkedListNode node : this) {
             if(node.getValue().getName().equals(song_name)) {
@@ -147,24 +231,38 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
         }
         return null;
     }
-
+    
+    /**
+     * Removes a song from the playlist by its name.
+     *
+     * @param songName The name of the song to remove.
+     * @return true if the song was successfully removed, false if the song was not found.
+     */
     public boolean removeByName(String song_name) {
         LinkedListNode node = findByName(song_name);
         if(node == null) {
             return false;
         }
-        LinkedListNode next = node.getNext();
-        LinkedListNode prev = node.getPrev();
-        next.setNext(prev);
-        prev.setPrev(next);
+        if(isSingleElement()){
+            this.first = null;
+            this.last = null;
+        } else if(node == this.first) {
+            LinkedListNode next = node.getNext();
+            this.first = next;
+            this.first.setPrev(null);            
+        } else if (node == this.last) {
+            LinkedListNode prev = node.getPrev();
+            this.last = prev;
+            this.last.setNext(null);
+        }
         return true;
     }
 
 
     /**
-     * Constructor to create a node with a specified value. The next and previous nodes are set to null.
+     * Returns an Iterable, iterating over the Linked List
      *
-     * @param value the song stored in the node
+     * @return The Iterator of the List
      */
     @Override
     public Iterator<LinkedListNode> iterator() {
@@ -172,9 +270,9 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
     }
 
     /**
-     * Constructor to create a node with a specified value. The next and previous nodes are set to null.
+     * Returns an Iterable, iterating over the Linked List with an option to reverse the direction
      *
-     * @param value the song stored in the node
+     * @return The Iterator of the List
      */
     public Iterator<LinkedListNode> iterator(boolean reverse) {
         return (reverse) ? new NodeIterator(this.last, reverse) : new NodeIterator(this.first, reverse);

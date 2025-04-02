@@ -1,0 +1,73 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[ngerman]{babel}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Datenstrukturen und Algorithmen 1 - Progress Report}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\section*{Fortschritt}
+	Ich bin bereits mit dem Projekt fertig und muss es nur noch debuggen und die Dokumentation schreiben. Ich habe mich entschieden eine Double Linked List zu implementieren und diese als Playlist zu verwenden.
+	\section*{Entscheidungen}
+	\subsection*{nullPointerException bei remove}
+	Bei einer meiner Entscheidungen bin ich mir etwas unsicher und hängt davon ab, ob man die anderen Klassen verändern darf. Wenn man bei einer leeren Playlist remove verwendet stürzt es unweigerlich ab, da die Variable für das aktuelle Lied leer ist, remove jedoch nicht überprüft ob currentSong null ist bevor es darauf zugreift. Deshalb habe ich diese Überprüfung bei \texttt{remove} der MusicPlayerApplication hinzugefügt. Falls das nicht erlaubt ist, kann ich auch ein dummy Song Objekt als Standardwert nehmen, das fühlt sich jedoch nicht wie die beste Lösung an.
+	\subsection*{Löschen des aktuellen Lieds}
+	Wenn das aktuell abgespielte Lied gelöscht wird, soll das nächste gespielt werden. Falls das letzte gelöscht wird das erste und falls es das letzte Lied war soll der Player nichts mehr abspielen.
+	\subsection*{Hinzufügen von Liedern}
+	Das aktuelle Lied wird nur automatisch gesetzt wenn vorher kein Lied in der Playlist war. Wenn man also add bei einer leeren Liste aufruft wird das hinzugefügte Element das aktuelle Lied und sonst wird es nicht verändert.
+	\subsection*{Löschen nicht vorhandener Lieder}
+	Falls das zu löschende Lied nicht existiert wird das Programm sagen, dass das Lied nicht gefunden wurde.
+	\subsection*{Duplikate}
+	Duplikate können ungestört existieren und werden auch so ausgegeben.
+	Die Liste wird stets von vorne nach hinten durchgegangen und wenn man ein spezifisches Lied spielen will, wird das erste anhand dieser Suche gewählt. \\
+	\subsection*{Ausgabereihenfolge}
+	Ich habe es momentan so implementiert, dass sie immer vom Anfang ausgegeben wird, aber es wäre definitiv cooler, wenn sie stets das aktuelle Lied als oberstes Element hätte.
+	\section*{Schwierigkeiten}
+	Eine Sache an der ich etwas länger gesessen bin, ist die korrekte Implementation der \texttt{next} Methode im Iterator. Wenn man das erste Element übergibt und bei next stets den nächsten Wert nimmt, überspringt sie den Ersten. Deshalb musste ich stets den aktuellen Wert zurückgeben und danach die interne Variable auf das nächste Objekt setzen und bei hasNext() nicht überprüfen ob das nächste, sondern das momentane Element existiert. \\
+	Mir war Anfangs auch nicht bewusst wie viele unterschiedliche Fälle es geben kann, wenn man ein Lied entfernt. Man darf nicht nur darauf achten ob auch die Elemente vorne und hinten richtig wieder miteinander verbunden werden sondern muss schauen ob es das einzige Element ist und wenn nicht ob es das letzte oder erste Element ist und braucht für jeden Fall eine eigene Strategie.
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}

@@ -1,9 +1,9 @@
 package com.da.playlist;
 
 import com.da.datastructures.DoubleLinkedList;
+import com.da.datastructures.LinkedListNode;
 import com.da.datastructures.Song;
 
-import java.util.LinkedList;
 
 /**
  * The MyPlaylist class represents a music playlist which can hold a list of songs.
@@ -25,8 +25,10 @@ public class MyPlaylist {
      * @param song The song to add to the playlist.
      */
     public void addSong(Song song) {
+        if(playlist.isEmpty()) {
+            this.current_song = song;
+        }
         playlist.add(song);
-        playlist.printAll();
     }
 
     /**
@@ -36,10 +38,17 @@ public class MyPlaylist {
      * @return true if the song was successfully removed, false if the song was not found.
      */
     public boolean removeSongByName(String songName) {
+        if(playlist.isEmpty()) {
+            return false;
+        }
         if(current_song.getName().equals(songName)) {
             current_song = playlist.getNextSong(this.current_song);
         }
-        return playlist.removeByName(songName);
+        boolean found = playlist.removeByName(songName);
+        if (playlist.isEmpty()) {
+            this.current_song = null;
+        }
+        return found;
     }
 
 
@@ -91,8 +100,31 @@ public class MyPlaylist {
      * @return true if the playlist is empty, false otherwise.
      */
     public boolean isEmpty() {
-        //TODO
-        return false;
+        return playlist.isEmpty();
+    }
+
+    /**
+     * Returns the longest string of either the name or the path, depending on the passed argument
+     *
+     * @param values Which values to check. 0 for the names and 1 for the paths
+     * @return An integer representing the length of the longest string found
+     */
+    private int longestString(int values) {
+        int longest = 0;
+        if(values == 0) {
+            for(LinkedListNode node : this.playlist) {
+                if (node.getValue().getName().length() > longest) {
+                    longest = node.getValue().getName().length();
+                }
+            }
+        } else if (values == 1) {
+            for (LinkedListNode node : this.playlist) {
+                if(node.getValue().getPath().length() > longest) {
+                    longest = node.getValue().getPath().length();
+                }
+            }
+        }
+        return longest;
     }
 
     /**
@@ -102,10 +134,23 @@ public class MyPlaylist {
      */
     @Override
     public String toString() {
+        int order = 1;
+        int longest_name = longestString(0);
+        int longest_path = longestString(1);
+        StringBuilder string = new StringBuilder();
         if(playlist.isEmpty()) {
             return "Playlist is empty. Add some with the 'add' command!";
         }
+        string.append(String.format(" %s %n", "_".repeat(13 + longest_name + longest_path)));
+        string.append(String.format("| Nr. |%sName%s|%sPath%s|%n", " ".repeat(longest_name/2), " ".repeat(longest_name/2), " ".repeat(longest_path/2), " ".repeat(longest_path/2)));
 
+        for(LinkedListNode node : this.playlist) {
+            string.append(String.format("|  %d%s | %-" + (longest_name + 1) + "s | %-" + (longest_path + 1) + "s |%n", order, (order < 10) ? " " : "", 
+                                                                                                node.getValue().getName(), node.getValue().getPath()));
+            order++;
+        }
+        string.append(String.format("|%s|%n", "_".repeat(13 + longest_name + longest_path)));
+        return string.toString();
     }
 
 
