@@ -59,6 +59,9 @@ public class MyPlaylist {
      * @return the next song in the playlist, or null if the playlist is empty.
      */
     public Song getNextSong() {
+        if(this.current_song == null) {
+            return null;
+        }
         this.current_song = playlist.getNextSong(this.current_song);
         return this.current_song;
     }
@@ -70,6 +73,9 @@ public class MyPlaylist {
      * @return the previous song in the playlist, or null if the playlist is empty.
      */
     public Song getPreviousSong() {
+        if(this.current_song == null) {
+            return null;
+        }
         this.current_song = playlist.getPreviousSong(this.current_song);
         return this.current_song;
     }
@@ -90,7 +96,11 @@ public class MyPlaylist {
      * @return the selected song, or null if the song was not found.
      */
     public Song selectSongByName(String songName) {
-        this.current_song = playlist.findByName(songName).getValue();
+        LinkedListNode new_node = playlist.findByName(songName);
+        if(new_node == null) {
+            return null;
+        }
+        this.current_song = new_node.getValue();
         return this.current_song;
     }
 
@@ -128,6 +138,22 @@ public class MyPlaylist {
     }
 
     /**
+     * Returns padding spaces to account for increasing number size
+     *
+     * @param number The current ordinal of the playlist item
+     * @return A String containing spaces depending on its order
+     */
+    private String numberSpaces(int number) {
+        if (number < 10) {
+            return "  ";
+        } else if (number < 100) {
+            return " ";
+        } else {
+            return "";
+        }
+    }
+
+    /**
      * Returns a string representation of the playlist, showing the current song and all songs in the list.
      *
      * @return a string representing the playlist, or a message indicating the playlist is empty.
@@ -141,15 +167,15 @@ public class MyPlaylist {
         if(playlist.isEmpty()) {
             return "Playlist is empty. Add some with the 'add' command!";
         }
-        string.append(String.format(" %s %n", "_".repeat(13 + longest_name + longest_path)));
-        string.append(String.format("| Nr. |%sName%s|%sPath%s|%n", " ".repeat(longest_name/2), " ".repeat(longest_name/2), " ".repeat(longest_path/2), " ".repeat(longest_path/2)));
+        string.append(String.format(" %s %n", "_".repeat(16 + longest_name + longest_path)));
+        string.append(String.format("|  Nr. | %sName%s |%sPath%s|%n", " ".repeat(longest_name/2), " ".repeat(longest_name/2), " ".repeat(longest_path/2), " ".repeat(longest_path/2 )));
 
         for(LinkedListNode node : this.playlist) {
-            string.append(String.format("|  %d%s | %-" + (longest_name + 1) + "s | %-" + (longest_path + 1) + "s |%n", order, (order < 10) ? " " : "", 
+            string.append(String.format("|  %d%s |  %-" + (longest_name + 1) + "s  | %-" + (longest_path + 1) + "s |%n", order, numberSpaces(order),
                                                                                                 node.getValue().getName(), node.getValue().getPath()));
             order++;
         }
-        string.append(String.format("|%s|%n", "_".repeat(13 + longest_name + longest_path)));
+        string.append(String.format("|%s|%n", "_".repeat(16 + longest_name + longest_path)));
         return string.toString();
     }
 
