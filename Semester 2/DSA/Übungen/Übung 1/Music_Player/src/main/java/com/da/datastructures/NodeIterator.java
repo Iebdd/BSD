@@ -3,6 +3,12 @@ package com.da.datastructures;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/*
+ * Project: music-player
+ * Author:  John Coed
+ *
+ * An Iterator to be used with the DoubleLinkedList Class of LinkedListNodes
+ */
 public class NodeIterator implements Iterator<LinkedListNode> {
     private LinkedListNode currentNode;
     private boolean reverse = false;
@@ -17,6 +23,11 @@ public class NodeIterator implements Iterator<LinkedListNode> {
         this.reverse = reverse;
     }
 
+    /**
+     * Returns the currently stored node and advances the cursor
+     *
+     * @return The Node currently stored
+     */
     @Override
     public LinkedListNode next() throws NoSuchElementException {
         if(this.currentNode == null) {
@@ -27,6 +38,11 @@ public class NodeIterator implements Iterator<LinkedListNode> {
         return current_item;
     }
 
+    /**
+     * Returns the currently stored node and advances the cursor in reverse
+     *
+     * @return The Node currently stored
+     */
     public LinkedListNode prev() throws NoSuchElementException {
         if(this.currentNode == null) {
             throw new NoSuchElementException();

@@ -15,6 +15,7 @@ Semester 2/KIB1/Übung
 **/*.xdv
 **/.idea
 **/*.pdf
+**/*.zip
 **/framework
 **/NET1/Übung
 **/jscheduler

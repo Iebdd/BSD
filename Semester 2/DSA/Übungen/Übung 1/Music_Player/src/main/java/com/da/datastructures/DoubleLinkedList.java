@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
+ * project: Playlist for a simple music player
+ * Author: John Coed
  * A limited implementation of a Double Linked List. It is iterable and supports
  * random removal in linear time as well as adding or removing the last or first
  * element in constant time
@@ -147,11 +149,16 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
      * Retrieves and returns the next song after the one currently playing
      *
      * @param current_song The song currently playing
-     * @return The song following the current one or the first if there is none playing
+     * @return The song following the current one, the first one if there is
+     *         none playing or null if the playlist is empty
      */
     public Song getNextSong(Song current_song) {
         if(current_song == null) {
-            return this.first.getValue();
+            if (this.first != null) {
+                return this.first.getValue();
+            } else {
+                return null;
+            }
         }
         LinkedListNode current_node = findBySong(current_song);
         if(current_node == null) {
@@ -170,7 +177,11 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
      */
     public Song getPreviousSong(Song current_song) {
         if (current_song == null) {
-            return this.last.getValue();
+            if(this.last != null) {
+                return this.last.getValue();
+            } else {
+                return null;
+            }
         }
         LinkedListNode current_node = findBySong(current_song);
         if(current_node == null) {
@@ -184,8 +195,7 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
     /**
      * Adds the first element to the empty list
      *
-     * @param songName The name of the song to remove.
-     * @return true if the song was successfully removed, false if the song was not found.
+     * @param new_element The element to add to the list
      */
     private void addToEmpty(LinkedListNode new_element) {
         this.first = new_element;

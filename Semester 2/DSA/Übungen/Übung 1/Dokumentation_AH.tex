@@ -1,0 +1,77 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[ngerman]{babel}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Datenstrukturen und Algorithmen: Übung 1 - Dokumentation}
+\author{John Coed}
+
+\begin{document}
+	\maketitle
+	\section*{Struktur}
+	Ich habe mich für eine doppelt verkettete Liste entschieden, da man so als dynamische Datenstruktur eine beliebige Menge an Liedern hinzufügen kann. Doppelt verkettet da man auch das vorherige Element ansprechen können muss und man sonst jedes Mal von einem Ende die Liste durchsuchen müsste. Da jedoch nur ein Verweis auf das letzte und erste Elemente besteht, ist die Suche oder das Löschen zufälliger Elemente etwas langsamer. Als doppelt verkettete Liste ist auch der Speicherbedarf marginal höher, da man stets eine weitere Referenz speichern muss.
+	\section*{Anforderungen}
+	Da die vorhandene SimpleMusicPlayer Klasse für jede der relevanten Funktionen (play, next, prev, remove) eine Nullabfrage enthielt, habe ich mich dazu entschieden bei einer fehlerhaften Anfrage (Wie einer dieser Befehle bei einer leeren playlist) den generischen Fehler der übergeordneten Klasse auszugeben. Nur im Falle des remove bei einer leeren Playlist musste ich die remove Methode etwas anpassen, da die Abfrage des momentan spielenden Lieds zu einer Exception führte.
+	\section*{Offene Fragen}
+	\subsection*{Löschen des aktuellen Lieds}
+	Wenn das aktuell abgespielte Lied gelöscht wird, soll das nächste gespielt werden. Falls das letzte gelöscht wird das erste und falls es das letzte Lied war soll der Player nichts mehr abspielen.
+	\subsection*{Hinzufügen von Liedern}
+	Das aktuelle Lied wird nur automatisch gesetzt wenn vorher kein Lied in der Playlist war. Wenn man also add bei einer leeren Liste aufruft wird das hinzugefügte Element das aktuelle Lied und sonst wird es nicht verändert.
+	\subsection*{Löschen nicht vorhandener Lieder}
+	Falls das zu löschende Lied nicht existiert wird das Programm sagen, dass das Lied nicht gefunden wurde.
+	\subsection*{Duplikate}
+	Duplikate können ungestört existieren und werden auch so ausgegeben.
+	Die Liste wird stets von vorne nach hinten durchgegangen und wenn man ein spezifisches Lied spielen will, wird das erste anhand dieser Suche gewählt.
+	\subsection*{Ausgabereihenfolge}
+	Die Ausgabenreihenfolge beginnt stets mit dem ersten Lied, es gibt in der Ausgabe jedoch eine Markierung, welches Lied das Momentane ist.
+	\section*{Zeitkomplexität}
+	Als Linked List ist die Suchkomplexität stets O(n), da es stets mit einem Ende der Liste beginnt. Das Hinzufügen und Entfernen des letzten oder ersten Elements geschieht in konstanter Zeit (O(1)). 
+	\subsection*{getNextSong()}
+	Die Auswahl des nächsten Lieds, welche theoretisch auch konstant verlaufen könnte (Da man den Pointer des momentanen Lieds verwenden kann um das nächste zu finden), geschieht in linearer Zeit. Wenn man stets nur den Pointer des übergebenen Elements als nächstes Element nimmt, könnte man ein Element das nicht in der Liste ist übergeben um so zwei separate Listen in der Playlist zu erhalten. Ich weiß nicht ob das sicherheitsrelevant ist, aber ich dachte mir, dass es definitiv eine unerwünschte Situation wäre. Aus diesem Grund durchsucht die getNextSong() Methode stets die Playlist um sicherzustellen, dass es innerhalb der Playlist ist, bevor dessen nächstes Element aufgerufen wird.
+	\section*{Fazit}
+	Ich bin relativ zufrieden mit meiner Implementation. Sie macht (soweit ich das gesehen habe) das was sie sollte. Ein paar meiner Entscheidungen sind zwar etwas billig, eine zufriedenstellende Lösung würde jedoch wahrscheinlich die Grundfunktion des Music Players verändern. Wenn man zum Beispiel zwei Lieder mit dem gleichen Namen in der Playlist hat, nimmt es immer das Erste. Es gibt jedoch definitiv die Situation wo zwei Lieder mit dem gleichen Namen nicht die gleichen Lieder sind. Um dieses Problem zu lösen und nicht nur das Erstbeste zu nehmen, müsste man den Pfad ansehen und den User fragen, welches man denn eigentlich meint, was jedoch nicht mit der momentan implementierten Suchfunktion (und wahrscheinlich dem Testsystem) kompatibel wäre. Mit mehr Zeit hätte ich diese Funktionen wahrscheinlich verändert um keine solche Auswege nehmen zu müssen.
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}

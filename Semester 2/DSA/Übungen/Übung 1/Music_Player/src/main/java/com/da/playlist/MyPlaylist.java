@@ -6,6 +6,9 @@ import com.da.datastructures.Song;
 
 
 /**
+ * Project: Playlist for a simple music player
+ * Author: John Coed
+ * 
  * The MyPlaylist class represents a music playlist which can hold a list of songs.
  * The playlist supports operations such as adding, removing, and selecting songs,
  * as well as navigating to the next and previous songs in the playlist.
@@ -59,7 +62,7 @@ public class MyPlaylist {
      * @return the next song in the playlist, or null if the playlist is empty.
      */
     public Song getNextSong() {
-        if(this.current_song == null) {
+        if(this.current_song == null && !this.playlist.isEmpty()) {
             return null;
         }
         this.current_song = playlist.getNextSong(this.current_song);
@@ -167,15 +170,15 @@ public class MyPlaylist {
         if(playlist.isEmpty()) {
             return "Playlist is empty. Add some with the 'add' command!";
         }
-        string.append(String.format(" %s %n", "_".repeat(16 + longest_name + longest_path)));
-        string.append(String.format("|  Nr. | %sName%s |%sPath%s|%n", " ".repeat(longest_name/2), " ".repeat(longest_name/2), " ".repeat(longest_path/2), " ".repeat(longest_path/2 )));
+        string.append(String.format(" %s %n", "_".repeat(20 + longest_name + longest_path)));
+        string.append(String.format("| C |  Nr. | %sName%s |%sPath%s|%n", " ".repeat(longest_name/2), " ".repeat(longest_name/2), " ".repeat(longest_path/2), " ".repeat(longest_path/2 )));
 
         for(LinkedListNode node : this.playlist) {
-            string.append(String.format("|  %d%s |  %-" + (longest_name + 1) + "s  | %-" + (longest_path + 1) + "s |%n", order, numberSpaces(order),
-                                                                                                node.getValue().getName(), node.getValue().getPath()));
+            string.append(String.format("| %s |  %d%s |  %-" + (longest_name + 1) + "s  | %-" + (longest_path + 1) + "s |%n", (node.getValue() == this.current_song) ? "*" : " ", order, 
+                                                                                                            numberSpaces(order), node.getValue().getName(), node.getValue().getPath()));
             order++;
         }
-        string.append(String.format("|%s|%n", "_".repeat(16 + longest_name + longest_path)));
+        string.append(String.format("|%s|%n", "_".repeat(20 + longest_name + longest_path)));
         return string.toString();
     }
 
