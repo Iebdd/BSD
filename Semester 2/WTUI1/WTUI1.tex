@@ -207,14 +207,12 @@
 		\end{itemize}
 		\item{Mit dem \texttt{width} Attribut kann man die Breite eines Elements an die Breite des Browsers binden und so die Größe des Elements dynamisch anhand der Browsergröße verändern.}
 		\begin{itemize}
-			\item{\texttt{<img src="img_girl.jpg" style="width:100\%;"> -> Das Bild hat jeweils die Breite des Browserfensters}}
+			\item{\verb|<img src="img_girl.jpg" style="width:100%;"> -> Das Bild hat jeweils die Breite des Browserfensters|}
 		\end{itemize}
 		\item{Während zuvor die Größe \texttt{width} mit 100\% angegeben wurde, was die Größe des Browserfensters angibt, kann mn alternativ auch die Größen viewport width (vw) und viewport height (vh) verwenden, da der Viewport (Der tatsächlich sichtbare Teil des Browsers eventuell kleiner ist als der Browser selbst)}
 	\end{itemize}
 	\subsection{Document Object Model (DOM)}
 	Da Elemente in einem HTML Dokument hierarchisch angeordnet sind, kann dieser auch in einer Baumstruktur angegeben werden. Diese Struktur nennt man Document Object Model (DOM) und verbindet alle Elemente innerhalb des Dokuments beginnend mit \texttt{<html>}. Der DOM ist ein wichtiges Element um Teile des Dokuments mittels Javascript zu ändern. So kann man Knoten hinzufügen oder verändern.
-	\section{Veröffentlichen}
-	Ein HTML Dokument ist relativ schnell erstellt, muss jedoch, bevor es öffentlich im Internet verfügbar ist, auf einem Server gehostet werden. Ein solcher Host ist typischerweise gemieteter Speicherplatz auf dem Webserver eines Hosting-Unternehmens. Dieser Server bietet dadurch eine eindeutige Adresse, welche von jedem im Internet aufrufbar ist.
 	\section{Cascading Style Sheets (CSS)}
 	CSS ist die Standard Sprache um Stylesheets für HTML zu definieren. Mit diesem Stylesheet kann man die visuelle Gestaltung von Inhalten definieren. Man kann zwar in einem HTML Element auch den Style definieren, jedoch sollte man jegliche solche Information in dem CSS Dokument bündeln um nicht jedes Element einzeln beschreiben zu müssen. (Separation of Concerns). \\
 	CSS wird verwendet um das Styling einer Website anzugeben, da HTML in sich genommen nicht besonders schön ist und nur zur Angabe der Struktur und des Inhalts verantwortlich ist. So kann man mit CSS unter anderem die Schriftart, die Farbe oder die Größe eines Elements angeben. Man kann mittels drei Wegen CSS Styling in einem HTML Element verwenden:
@@ -232,7 +230,7 @@
 			\item{Das Styling wird in einem separaten \texttt{*.css} Dokument angegeben und im Header verlinkt. Dieser Weg ist in der Regel der Beste, da man CSS Stylings so in mehreren Dokumenten verwenden kann und es so nicht für jedes inkludierte Dokument angeben muss.}
 		\end{itemize}
 	\end{itemize}
-	\section{Übersicht}
+	\subsection{Übersicht}
 	\subsubsection{Syntax}
 	CSS hat eine spezielle Syntax um Regeln anzugeben: \\
 	\texttt{h1 \{color:purple; font-size: 12px;\}} \texttt{-> selector \{property: value\}} \\
@@ -249,15 +247,15 @@
 		\item{ID Selector}
 		\begin{itemize}
 			\item{Verwendet das id Attribut eines Elements um es zu verändern. Dabei muss id \textit{genau einem} Element entsprechen und darf nicht als Duplikat vorkommen.}
-			\item{Um ein Element mittels id anzusprechen muss man davor eine Raute schreiben: \texttt{#}}
-			\item{\texttt{#number \{color: blue;\}}}
+			\item{Um ein Element mittels id anzusprechen muss man davor eine Raute schreiben: \verb|#|}
+			\item{\verb|#number \{color: blue;\}|}
 		\end{itemize}
 		\item{Class Selector}
 		\begin{itemize}
 			\item{Verwendet das class Attribut um ein Element zu verändern. Class, kann, im Gegensatz zu einer id, dabei mehrere Elemente gleichzeitig ansprechen.}
 			\item{Um ein Element mittels id anzusprechen muss man davor einen Punkt schreiben: \texttt{.}}
 			\item{\texttt{.header \{color: blue;\}}}
-			\item{Zusätzlich kann man das mit Elementen kombinieren um nur diese Elementer dieser Klasse zu verändern. Dabei muss man das Element vor den Selektor schreiben: \texttt{h1.header \{{color: blue;\}}}
+			\item{Zusätzlich kann man das mit Elementen kombinieren um nur diese Elementer dieser Klasse zu verändern. Dabei muss man das Element vor den Selektor schreiben: \verb|h1.header {color: blue;}|}
 		\end{itemize}
 		\item{Universal Selector}
 		\begin{itemize}
@@ -286,10 +284,10 @@
 			\item{Alle nachfolgenden Geschwister}
 		\end{itemize}
 	\end{itemize}
-	\begin{wrapfigure}{l}{0.5\textwidth}
+	\begin{figure}
 	\includegraphics[scale=0.2]{Bilder/relations.png}
 	\caption{Kinder, Nachbarn und Geschwister stehen in spezieller Relation}
-	\end{wrapfigure}
+	\end{figure}
 	Hierbei muss man zuvor jedoch erst definieren, was ein Nachfahre, Kinder, Geschwister und Nachbarn sind.
 	\begin{itemize}
 		\item{Wenn ein Element von einem anderen Element umschlossen wird (Wenn also zum Beispiel ein Paragraph innerhalb eines divs stehen), dann ist jedes dieser Elemente ein Nachfahre.}
@@ -333,7 +331,7 @@
 		\item{Hexadezimal}
 		\begin{itemize}
 			\item{Funktioniert gleich wie RGB, die Zahlen werden jedoch in Hexadezimalzahlen angegeben.}
-			\item{Um eine Farbe als Hex anzugeben, muss man # for die Zahlen schreiben: \texttt{#00ff00}}
+			\item{Um eine Farbe als Hex anzugeben, muss man \verb|#| for die Zahlen schreiben: \verb|#00ff00|}
 		\end{itemize}
 		Weitere Attribute von Text sind das \texttt{text-alignment} und das \texttt{text-decoration}:
 		\begin{itemize}
@@ -348,6 +346,7 @@
 					\item{\texttt{justified -> Blocksatz}}
 				\end{itemize}
 			\end{itemize}
+		\end{itemize}
 			\item{\texttt{text-decoration}}
 			\begin{itemize}
 				\item{Fügt dem Text weitere Elemente hinzu:}
@@ -390,7 +389,7 @@
 			\end{itemize}
 	\end{itemize}
 	In der Regel werden em und rem nur für Schrift verwendet da man so die Schriftgrößen der Elemente automatisch anhand einer anderen Schrift anpassen kann. In der Regel ist der Viewport auch kleiner als die Gesamtgröße des Browsers, wodurch es eine genauere Angabe des Sichtbaren Feldes darstellt. Pixel sollten in der Regel nur verwendet werden, wenn sich die Größe des Elements nicht verändern soll. (Wie zum Beispiel bei einer)
-	\section{Box Model}
+	\subsection{Box Model}
 	Das Box Model beschreibt die Container in welchem alle Elemente existieren. So kann man einem Element eine spezifische Position oder Hintergrundfarb zuordnen und diese gleichzeitig bündeln. Boxen haben ebenfalls Attribute um ihre Größe, Position und Ränder zu definieren.
 	\begin{figure}[H]
 	\centering
@@ -398,9 +397,9 @@
 	\caption{Die Ebenen einer Box}
 	\end{figure}
 	
-	\subsection{Positionsattribute}
+	\subsubsection{Positionsattribute}
 	[TODO Attribute]
-	\subsection{Position}
+	\subsubsection{Position}
 	Bis jetzt wurden alle Elemente von dem Browser automatisch untereinander angeordnet. Manchmal will man jedoch Elemente an spezifischen Positionen haben. Das kann man auf verschiedenen Arten erreichen. Es gibt unzählige Wege um Elemente zu positionieren, hier werden jedoch nur position und die flexbox erwähnt. \\
 	Mit \texttt{position} kann man angeben wie sich ein Element innerhalb der Struktur verhalten soll. Dabei unterscheidet man zwischen static, relative, static, absolute und sticky. 
 	\begin{itemize}
@@ -425,9 +424,9 @@
 			\item{Verhält sich gleich wie fixed, hat jedoch eine feste Position im Dokument und bleibt beim scrollen hängen.}
 		\end{itemize}
 	\end{itemize}
-	\section{Flexbox}
+	\subsection{Flexbox}
 	Die flexbox ist ein alternativer Weg um Elemente anzuordnen. Dabei definiert man Flexcontainer, welche Flexitems enthalten und innerhalb des Containers dynamisch angepasst werden. Sowohl der Container als auch die Items haben ihre eigenen Attribute um diese dynamische Anordnung zu beeinflussen.
-	\subsection{Container}
+	\subsubsection{Container}
 	Die Attribute des Containers zeigen wie die Elemente gehandhabt werden und sich untereinander verhalten sollen.
 	\begin{itemize}
 		\item{\texttt{flex-direction}}
@@ -448,7 +447,7 @@
 		\end{itemize}
 	\end{itemize}
 	\section{Barrierefreiheit}
-	Barrierefreiheit beschreibt
+	Barrierefreiheit beschreibt die problemlose Verwendung einer Website trotz physischer Einschränkungen. So sollte man eine Website verwenden können, auch wenn man blind, gehörlos oder bewegungseingeschränkt ist.
 	\subsection{Seheinschränkung}
 	Bei einer Seheinschränkung sollte Text so konstrastreich wie möglich sein. Weiß/Schwarz sind sehr kontrastreiche Kombinationen. Das selbe gilt für Schwarz und Gelb. Solche kontrastreichen Kombinationen können auch bei einer Sehschwäche ausgemacht werden. Idealerweise kann man die Farbeinstellungen der Website selbst wählen, da man sich nie auf alle Gegebenheiten vorbereiten kann. Es ist ebenfalls wichtig, dass man die Skalierung von Text verändern kann um den bei Bedarf größer machen zu können.
 	\subsection{Blindheit}
@@ -498,7 +497,6 @@
 		\item{Content Delivery Network}
 		\begin{itemize}
 			\item{Global verteilte Server welche Resourcen bereitstellen um so Resourcen so schnell wie möglich bereitzustellen.}
-			\item{}
 		\end{itemize}
 	\end{itemize}
 	\subsubsection{Hit and Miss}
@@ -573,17 +571,160 @@
 	Man sollte auch immer damit rechnen, dass ein Benutzer einen Fehler macht, wodurch diese wieder korrigierbar sein sollten. Dabei unterscheidet man zwischen Action Errors und Thinking Errors. Ein Action Error ist ein Fehler, der ausgeführt wird, obwohl der Benutzer das richtige machen wollte, wie zum Beispiel Cut statt Copy zu verwenden. Ein Thinking Error ist jedoch ein Fehler welcher aufgrund einer fehlerhaften Annahme geschieht. So kann man zum Beispiel zwar eine Datei von .rtf in .doc umbenennen, die Datei selbst ist jedoch nicht richtig formatiert und kann deshalb nicht als .doc Datei gelesen werden.
 	\subsection{System- vs. User-Centered}
 	Bei der Erstellung eines Produkts muss man stets auf die Anforderungen achten. Diese können entweder Anforderungen des Systems oder des Benutzers sein. Abhängig davon, was priorisiert wird, spricht man von System-Centered-Design oder User-Centered-Design. \\
-	System-Centered-Design basiert auf den
-	\newpage
-	\begin{tabular}{| l | l | l |}
-		\toprule
-		Name &  & & & \\ \midrule
-		
-		\bottomrule
-	\end{tabular}
-	\subsection{Text}
+	System-Centered-Design basiert auf den Anforderungen des Systems
+	\subsection{ISO}
+	Die ISO definiert drei messbare Usabilityattribute: Effektivität, Effizienz und Satisfaction:
+	\begin{itemize}
+		\item{Effektivität}
+		\begin{itemize}
+			\item{Die Genauigkeit und Vollständigkeit das Ziel zu erreichen.}
+		\end{itemize}
+		\item{Effizienz}
+		\begin{itemize}
+			\item{Die Menge an Ressourcen die aufgewendet werden müssen um das Ziel zu erreichen.}
+		\end{itemize}
+		\item{Zufriedenheit}
+		\begin{itemize}
+			\item{Wie frei von Unannehmlichkeiten man ein Ziel erreichen kann.}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Usability nach Nielsen}
+	Jacob Nielsen erweiterte diese Definitionen mit zusätzlichen Faktoren:
+	\begin{itemize}
+		\item{Learnability}
+		\begin{itemize}
+			\item{Die Einfachheit des Erlernens des Systems (Zum Beispiel Word vs. Latex)}
+			\item{Gemessen durch die Zeit die ein neuer Benutzer braucht um eine typische Aufgabe zu erledigen.}
+		\end{itemize}
+		\item{Efficiency}
+		\begin{itemize}
+			\item{Wie viel Zeit bzw. wie viele Schritte benötigt werden um zum Resultat zu kommen.}
+			\item{Man unterscheidet zwischen einem Fokus auf Einsteiger oder Experten. Für Experten besteht eine größere Lernkurve, man ist danach jedoch effizienter. Für Einsteiger ist die Lernkurve deutlich geringer und man erreicht eine gute Effizienz relativ schnell, bleibt jedoch wahrscheinlich unter der einer Expertensoftware.}
+			\item{Gemessen an der Zeit die ein Experte braucht um eine typische Aufgabe zu erfüllen.}
+		\end{itemize}
+		\item{Memorability}
+		\begin{itemize}
+			\item{Auch wenn man das System nicht oft verwendet, muss man nicht jedes Mal lernen das System neu zu verwenden.}
+			\item{Gemessen an der Zeit die ein Gelegenheitsnutzer benötigt um eine typische Aufgabe zu erfüllen.}
+		\end{itemize}
+		\item{Errors}
+		\begin{itemize}
+			\item{Jede Aktion die das gewünschte Ziel nicht erreicht. Im Idealfall besteht eine nidrige Fehlerquote und eine niedrige katastrophale }
+			\item{Gemessen an der Menge an kleinen und katastrophalen Fehlern die von einem Benutzer bei der Ausführung einer typischen Aufgabe gemacht werden.}
+		\end{itemize}
+		\item{Satisfaction}
+		\begin{itemize}
+			\item{Die Zufriedenheit des Users während der Benutzung des Systems}
+			\item{Gemessen an der subjektiven Meinung der Benutzer, welcher das System ausprobiert.}
+		\end{itemize}
+		\item{Effectiveness}
+		\begin{itemize}
+			\item{Genauigkeit und Vollständigkeit mit der das Ziel erreicht werden kann.}
+			\item{Gemessen an dem Prozentsatz der Benutzer die ein Zeil erreichen konnten. (Eventuell mit oder ohne Hilfe)}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Zielbasierte Evaluierungsmethoden}
+	\begin{itemize}
+		\item{Exploratory}
+		\begin{itemize}
+			\item{Wie wird es verwendet? Wie wird es verwendet werden?}
+			\item{Es wird im Vorhinein über die }
+		\end{itemize}
+		\item{Predictive}
+		\begin{itemize}
+			\item{Wie gut wird es sein?}
+		\end{itemize}
+		\item{Formative}
+		\begin{itemize}
+			\item{Wie kann man es besser machen?}
+			\item{Es wird aktiv darüber nachgedacht wie man es während der Entwicklung verbessern kann.}
+		\end{itemize}
+			\item{Summative}
+		\begin{itemize}
+			\item{Wie gut ist es?}
+			\item{Nach Abschluss wird eine Einschätzung getroffen.}
+		\end{itemize}
+	\end{itemize}
+	\section{Evaluierungsarten}
+	Usability kann mittels zweier Arten evaluiert werden: Usability Inspection und Usability Testing.
+	\begin{itemize}
+		\item{Usability Inspection}
+		\begin{itemize}
+			\item{Usability-Spezialisten überprüfen das Design nach ihrem eigenen Urteilsvermögen und Wissen. Geschieht ohne Testnutzer}
+		\end{itemize}
+		\item{Usability Testing}
+		\begin{itemize}
+			\item{Testnutzer werden aufgefordert ein Problem zu lösen, und ihr Verhalten wird analysiert.}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Usability Inspection}
+	Bei der Usability Inspection wird ein System nur heuristisch von versierten Personen evaluiert. Ein System sollte zwar in jedem Fall von Testnutzern überprüft werden, der Aufwand dafür ist jedoch ungleich höher. Dabei geht es nicht nur um die Personen, sondern auch um die Räume die zur Verfügung stehen müssen sowie die Zeit die benötigt wird um das Material auszuwerten. \\
+	Um eine weniger aussagekräftige, jedoch trotzdem nützliche und bedeutend günstigere Evaluierung durchzuführen, gibt es die Usability Inspection. \\
+	Die Usability Inspection überprüft ein Interface durch Usability Spezialisten mithilfe ihrer eigenen Expertise. Der Gutachter muss sich dabei in den User hineinversetzen da es keine empirische Analyse gibt. Diese Inspection kann auch schon früh im Lebenszyklus des Produkts angewandt werden, da kein fertiges oder gar funktionierendes Produkt benötigt wird. Diese Inspektion besiert auf 10 Heuristiken, welche die Anforderungen vereinfacht darstellen.
+	\subsubsection{Heuristiken}
+	\paragraphlb{Feedback}
+	Der Benutzer sollte stets über den Systemzustand informiert werden. Wenn also etwas geladen wird, sollte der Benutzer darüber informiert werden. In der Regel sollte jede Aktion die nicht 'sofort' geschieht, ein Feedback darüber geben. Eine Aktion geschieht für den User sofort, wenn sie weniger als 0,1 Sekunden dauert. Ab 1 Sekunde sollte der Benutzer mit einem Ladeicon oder anderem darüber informiert werden, dass das System arbeitet. Ab 10 Sekunden ist der Hinweis, dass etwas passiert nicht mehr ausreichend und ein Ladebalken sollte über den Zustand des Systems und dessen Fortschritt informieren. \\
+	Andererseits sollte der Benutzer auch darüber informiert werden, wenn etwas fertig ist oder das System sich schließt.
+	\paragraphlb{Sprache des Benutzers verwenden}
+	Man sollte es vermeiden systemorientierte Begriffe zu verwenden. Zum Beispiel sollte ein Benutzer nie HTTP Fehlermeldungen ohne zusätzlichen Kontext erhalten, da dieser wahrscheinlich mit Fehlercodes nicht vertraut ist. \\
+	Zusätzlich sollten Konventionen der realen Welt verwendet werden um den User intuitiv mit dem Design der Seite vertraut zu machen. Dabei muss man jedoch auch die Zielgruppe kennen, da Konventionen für Kinder und Erwachsene sich zum Beispiel unterscheiden.
+	\paragraphlb{Kontrolle und Freiheit}
+	Ein Benutzer sollte auf einer Seite in der Lage sein die Website frei erkunden zu können, andererseits jedoch ungewollte Zustände auch in einem ersichtlichen Weg wieder rückgängig machen können. Also muss man den User glauben lassen, dass er die Freiheit und Kontrolle hat, ihn jedoch im Hintergrund vor Fehlern zu bewahren.
+	\paragraphlb{Konsistenz}
+	Das gleiche Wort, die gleiche Situation oder die gleiche Aktion sollte immer das gleiche bedeuten. Ein Tastenkürzel sollte idealerweise also immer die gleiche Aktion durchführen und das User Interface in etwa immer den gleichen Konventionen entsprechen. Allgemeinen Konventionen sollte, wenn es keinen guten Grund gibt es nicht zu tun, gefolgt werden. Bei einer Eingabe sollte man zum Beispiel verplfichtende Felder, wenn nicht explizit angegeben, mit einem Stern markieren. UI Familien wie Material Design helfen dabei die Konsistenz der Oberfläche zu wahren.
+	\paragraphlb{Fehlervermeidung}
+	Während das Erkennen von Fehlern gut ist, ist das Vermeiden von Fehlern noch besser. Fehler sollten vorgebeugt werden, indem das System den User darüber informiert, was für eine Eingabe erwartet wird. Wenn zum Beispiel eine Eingabe ein bestimmtes Format verlangt, sollte man darüber informieren, wie das gewünschte Format aussehen sollte. Passwörter haben auch oft bestimmte Zeichenvorgaben (Wie eine gewisse Menge an Zeichen, einen Großbuchstaben, ein Sonderzeichen etc.) und der Benutzer sollte sofort darüber informiert werden, wie das Format des Passworts aussehen soll.
+	\paragraphlb{Erkennen ist besser als Erinnern}
+	So viel Wissen wie möglich sollte zur Benutzung des Interfaces intuitiv ersichtlich sein. Viele Icon besitzen bereits eine feste Bedeutung wie eine Diskette um etwas zu Speichern und man sollte diese Designsprache verwenden um den Aufwand zum Lernen eines neuen Interfaces zu minimieren. So wenig Wissen wie möglich sollte explizit für das Programm erlernt werden müssen (Auch wenn eine Benutzeranleitung nie falsch ist)
+	\paragraphlb{Flexibilität und Effizienz}
+	Abkürzungen können die Effizienz einer Anwendung steigern. Diese sollten auch den verbreiteten Konventionen entsprechen, sodass CTRL + C den markierten Inhalt kopiert. Diese Abkürzungen sollten individuell einstellbar sein.
+	\paragraphlb{Ästhetik und minimales Design}
+	Das Interface sollte keine Information enthalten, die unwichtig ist. Designelemente sollten auf ihre nötigen Funktionen reduziert werden.
+	\paragraphlb{Gute Fehlermeldungen}
+	Fehlermeldungen sollten nicht die Standardfehlermeldung aus dem System weitergeben. Ein Benutzer und ein Programmierer benötigen sehr unterschiedliche Fehlermeldungen und die detaillierten Fehlermeldungen für den Programmierer sind nicht sehr relevant für den Endbenutzer. Aus diesem Grund sollte diese Fehlermeldung abgefangen werden und durch eine bessere ersetzt werden (wobei man trotzdem den Fehlercode weitergeben kann). Gute Fehlermeldungen sollten:
+	\begin{itemize}
+		\item{In einfacher Sprache formuliert sein und nicht nur Fehlercodes enthalten}
+		\item{Präzise sein (Jedoch nicht technisch)}
+		\item{Defensiv sein (Nie dem Benutzer die Schuld geben)}
+		\item{Konstruktiv sein (Einen möglichen Lösungsweg angeben)}
+		\item{Mehrstufig (Hinweise zu weiteren Ressourcen geben)}
+	\end{itemize}
+	Eine gute Fehlermeldung sollte also darüber informieren, was schief gelaufen ist, wie der Fehler vermieden werden kann und wie der Fehler wieder behoben werden kann.
+	\paragraphlb{Hilfe und Dokumentation}
+	Auch wenn Systeme idealerweise ohne Dokumentation auskommen, ist diese meist notwendig. Dokumentation muss jedoch nicht aus einer Lektüre zur Verwendung von Software bestehen, da diese oft nicht gelesen wird. Stattdessen sollte Information zu einem bestimmten Thema verfügbar sein, wenn sie relevant wird (Zum Beispiel mit einem Fragezeichen neben einer Eingabebox, wenn ein spezifisches Format gewünscht wird).
+	\subsubsection{Heuristische Evaluierung}
+	Die Heuristische Evaluierung ist ein Usability Inspection-Vorgang, bei dem mehrere Experten unabhängig voneinander eine Website überprüfen. Das hängt damit zusammen, dass man sich eventuell anders verhält, wenn man etwas in Zusammenarbeit evaluiert.
 
-
+	\subsection{Inspection - Vorgang}
+	\subsubsection{Heuristiken Template}
+	Es wird eine Vorlage der überprüften Heuristiken erstellt an der sich die Experten orientieren sowie eine Liste des Alters, des Geschlechts bzw des Systems jedes Gutachters gesammelt.
+	\subsubsection{Aufgabenliste (Optional)}
+	Bei Bedarf erhält jeder Gutachter eine Liste von zu überprüfenden Anforderungen.
+	\subsubsection{Fachspezifische Schulung (Optional)}
+	Falls die Anforderungen sehr speziell sind, können die Gutachter zuvor geschult werden.
+	\subsubsection{Das Interface wird alleine evaluiert}
+	Jeder Gutachter evaluiert die Website alleine. Dabei wird die Evaluierung in Bild und Ton aufgenommen. Der Gutachter versucht dabei sich in den Benutzer hineinzuversetzen. Das Interface wird jeweils zwei Mal durchgegangen. Beim ersten mal besteht der Fokus auf den allgemeinen Fluss, wobei beim zweiten Mal mehr Fokus auf spezielle Elemente gelegt wird. Basierend auf den Notizen und den Videos soll dann eine individuelle Liste an Problemen und positiven Eindrücken erstellt werden. Jeder Eintrag sollte dabei von einem Bildschirmfoto unterstützt werden. Dieser Prozess dauert zwischen 1 und 2 Stunden.
+	\subsubsection{Faciliator aggregiert einzelne Evaluierungen}
+	Alle Gutachten werden zusammengetragen und in einer Tabelle gesammelt. Dabei werden ähnliche Fehler gesammelt wiedergegeben. Es wird ebenfalls der verwendete Browser sowie ein Weg den Fehler zu rekonstruieren angegeben.
+	\subsubsection{Gutachter bewerten jedes gefundene Problem}
+	Die gesammelten Einträge werden an die Gutachter verteilt und anhand eines severity ratings bezüglich ihrer Schwere bewertet. Dieses Rating hilft dabei die wichtigen Probleme zu kategorisieren. Es gibt 5 Schweregrade:
+	\begin{enumerate}
+		\item[4]{Katastrophische Fehler welche das Abschließen des Fehlers verhindern}
+		\item[3]{Wichtiger Fehler, welcher die Funktion einschränkt}
+		\item[2]{Kleiner Fehler, welcher zwar relativ unwichtig ist, aber trotzdem relevant ist}
+		\item[1]{Kometischer Fehler, welcher die Funktion nicht beeinträchtigt}
+		\item[0]{Einträge welche nicht als Fehler bewertet werden}
+	\end{enumerate}
+	\subsubsection{Bewertungen werden gemittelt}
+	Alle Bewertungen werden zusammengenommen und der Durchschnitt der Severity Ratings angegeben.
+	\subsubsection{Probleme werden anhand ihrer Severity sortiert}
+	Um die wichtigsten Fehler zuerst zu sehen, werden die schwerwiegendsten Fehler zuerst angegeben.
+	\subsubsection{Positive Bewertungen}
+	Der selbe Prozess passiert auch mit den positiven Bewertungen, wobei eine 'Goodness Scale' verwendet wird.
+	\subsubsection{Debriefing}
+	Die Stakeholder werden über mögliche Lösungswege informiert.
+	\subsubsection{Abschlussbericht}
+	Ein umfassender Bericht wird als Zusammenfassung der Evaluierung erstellt.
 
 
 

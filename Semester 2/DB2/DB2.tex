@@ -191,7 +191,7 @@
 		\end{itemize}
 	\end{enumerate}
 	\subsubsection{Boyce-Codd-Normalform / BCNF}
-	Die Boyce-Codd-Normalform (BCNF) und die 3NF haben relativ ähnliche Vorraussetzungen, jedoch schränkt die BCNF das Schema noch etwas mehr ein. Während bei der dritten Normalform jeder Kandidatenschlüssel eine der drei Vorraussetzungen erfüllen musste, ist die dritte in der BCNF nicht mehr zulässig. Dadurch kann in der BCNF nicht mehr alle funktionalen Abhängigkeiten bewahrt werden, was bis zur 3NF möglich war.
+	Die Boyce-Codd-Normalform (BCNF) und die 3NF haben relativ ähnliche Vorraussetzungen, jedoch schränkt die BCNF das Schema noch etwas mehr ein. Während bei der dritten Normalform jeder Kandidatenschlüssel eine der drei Vorraussetzungen erfüllen musste, ist die dritte in der BCNF nicht mehr zulässig. Dadurch können in der BCNF nicht mehr alle funktionalen Abhängigkeiten bewahrt werden, was bis zur 3NF möglich war.
 	\paragraphlb{Dekompositionsalgorithmus}
 	Der Dekompoisitionsalgorithmus dient zur Konvertierung einer Relation in die BCNF. Hierbei werden jedoch eventuell nicht alle Funktionalen Abhängigkeiten bewahrt. Die Schritte sind:
 	\begin{enumerate}
@@ -201,9 +201,9 @@
 	R[A, B, C, D, E, G] mit F = $\{A\to BD, AB\to E, B\to EG, C\to AB\}$
 
 	Linksreduktion: Da nur AB mehr als ein Element besitzt, kann man dieses als einziges eventuell reduzieren.
-	Wenn man das A bei $AB\to E$ wegstreichen will, muss man zuerst die Hülle berechnen um das zu bestätigen. Dazu muss man die Hülle bestimmen um nachzuprüfen, ob man trotzdem auf die gleiche Abhängigkeit kommt.
-	$\cancel{A}B\to E$ \texttt{->} $H(F, B)$=\{E, G\} \texttt{-> Deshalb kann man A weglassen}.
-	$A\cancel{B}\to E$ \texttt{->} $H(F, B)$=\{B. D, E, G\} \texttt{-> Deshalb kann man auch B weglassen. Aus diesem Grund kann man die gesamte Abhängigkeit weglassen}
+	Wenn man das A bei $AB\to E$ wegstreichen will, muss man zuerst die Hülle berechnen um das zu bestätigen. Dazu muss man die Hülle bestimmen um nachzuprüfen, ob man trotzdem auf die gleiche Abhängigkeit kommt. \\
+	$\cancel{A}B\to E$ \texttt{->} $H(F, B)$=\{E, G\} \texttt{-> Deshalb kann man A weglassen}.\\
+	$A\cancel{B}\to E$ \texttt{->} $H(F, B)$=\{B. D, E, G\} \texttt{-> Deshalb kann man auch B weglassen. Aus diesem Grund kann man die gesamte Abhängigkeit weglassen}\\
 	Rechtsreduktion: Hierbei kann man nicht sofort das Ergebnis sehen, aber ungefähr erkennen welche Teile reduziert werden können. $C\to AB$ kann eventuell reduziert werden. Hierbei muss man wieder die Hülle berechnen, wobei jedoch alle Attribute der Relation gegeben sein müssen. \\
 	$C\to A\cancel{B}$ \texttt{->} H(F, C)=\{A, B, D, E, G\} \texttt{B kann reduziert werden.} \\
 	Jetzt hat man die kanonische Überdeckung $F_C=\{A\to BD, B\to EG, C\to A\}$ und aus dieser kann man die neuen Relationen generieren.
@@ -419,8 +419,8 @@
 	Da ein großer Index sehr teuer ist, ist es oft vonnöten einen mehrstufigen Index einzuführen. Da der Index selbst sequenziert wird, ergibt es einen neuen Index, welcher auf den Index verweist. Ein solcher Index besteht immer aus einem äußeren und einem inneren Index. Der äußere Index verweist dabei auf die Index Datei, während der innere Index auf die Daten selbst verweist. Falls der äußere Index zu groß wird, wird danach eine neue Index Ebene eingeführt. Diese Art des Indexing bezeichnet man als Index Sequential Access Method (ISAM).
 	\subsubsection{CRUD}
 	Zum Durchsuchen eines ISAM-Index muss man im Wurzelknoten beginnen und alle Pointer welche zu passenden Ergebnissen führen die Pointer durch die Indizes verfolgen. Beim Einfügen, Löschen und Update muss man jedoch alle Indexknoten durchlaufen da man so sicherstellen kann, dass die Integrität bewahrt wird.
-	\subsection{$B^+-Baum$}
-	Eine Alternative zu ISAM ist die Anordnung eines Index als $B^+-Baums$. Ein $B^+-Baum$ passt seine Anzahl der Ebenen stets automatisch an. Das nennt man selbstständige Reorganisation und wird nach einem Lösch- oder Einfügevorgang nötig. Aus diesem Grund ist die gesamte Reorganisation des Index nicht erforderlich. Das bedeutet jedoch natürlich auch, dass $B^+-Bäume$ einen potentiellen Merhaufwand besitzen und bedeutend komplexer in der Implementierung ist. Bei einem Einfüge- oder Löschvorgang muss auch mehr Rechenleistung aufgebracht werden, da der Baum angepasst werden muss. \\
+	\subsection{\texorpdfstring{$B^+-Baum$}{B+ Baum}}
+	Eine Alternative zu ISAM ist die Anordnung eines Index als $B^+-Baums$. Ein $B^+-Baum$ passt seine Anzahl der Ebenen stets automatisch an. Das nennt man selbstständige Reorganisation und wird nach einem Lösch- oder Einfügevorgang nötig. Aus diesem Grund ist die gesamte Reorganisation des Index nicht erforderlich. Das bedeutet jedoch natürlich auch, dass $B^+-B\textnormal{ä}ume$ einen potentiellen Merhaufwand besitzen und bedeutend komplexer in der Implementierung ist. Bei einem Einfüge- oder Löschvorgang muss auch mehr Rechenleistung aufgebracht werden, da der Baum angepasst werden muss. \\
 	Ein $B^+-Baum$ ist ein 'hohler' Baum, hat also nur in den Blättern (Elemente ohne Kindelemente) echte Daten. Alle Zweige (Elemente mit Kindelementen) dienen nur zum richtigen Blatt zu finden. Gleichzeitig sind alle Werte in diesen Blättern sequentiell gespeichert und miteinander verbunden, wodurch man von einem Blatt die Position weiterer Blätter ableiten kann und mit dieser Information die Blätter auch durchstreifen kann. \\
 	\subsubsection{Eigenschaften}
 	Zusammengefasst hat ein $B^+-Baum$ vier Eigenschaften:
@@ -475,7 +475,205 @@
 	CREATE INDEX name ON RELNAME | ATTRLIST -> CREATE INDEX myINDEX ON
 	\end{verbatim}
 	Wenn eine Datenbank einen neuen Wert einfügt oder löscht, wird stets der Index angepasst. Dadurch kann die Existenz eines Indexes Änderungsoperationen verlangsamen. \\
-	Das erste Erstellen eines Indexes kann abhängig von der Größe der Datenbank auch relativ lange dauern. Da die DB einen Index anhand der Struktur erstellt, ist es auch bedeutend effizienter einen Index erst nach Einfügen von Daten anzupassen.
+	Das erste Erstellen eines Indexes kann abhängig von der Größe der Datenbank auch relativ lange dauern. Da die DB einen Index anhand der Struktur erstellt, ist es auch bedeutend effizienter einen Index erst nach Einfügen von Daten anzupassen anstatt bei jedem Einfügen
+	\section{Zugriffsoptimierung}
+	Eine der wichtigsten Aufgaben des Datenbankmanagementsystems (DBMS) ist ein effizienter Auswertungsplan einer query. Der Ablauf einer Query passiert stets in einer festen Abfolge:
+	\begin{enumerate}
+		\item{Query wird eingelesen}
+		\item{Query wird in relationale Algebra übersetzt}
+		\item{Auswertungsplan wird erstellt}
+		\begin{itemize}
+			\item{Wenn möglich wird die Query optimiert um die Anfragenlaufzeit zu reduzieren. (z.B. Umdrehen des Kreuzprodukts)}
+		\end{itemize}
+		\item{Query wird ausgewertet}
+	\end{enumerate}
+	Der Optimierungsgrad der Anfrage kann dabei einen sehr großen Einfluss auf die Dauer der Zugriffszeit haben. Zusätzlich gibt es auch noch weitere Hardwarebasierte Faktoren:
+	\begin{itemize}
+		\item{Stärke der CPU}
+		\item{HDD Zugriffszeiten (Sequentiell oder Random)}
+		\item{Puffergröße (RAM)}
+		\item{Geschwindigkeit des Netzwerks}
+	\end{itemize}
+	\subsection{Puffergröße}
+	Ein größerer RAM reduziert die Anzahl der Zugriffe auf die HDD, da mehr zwischengespeichert werden kann, womit dieser einer der größten Faktoren der Zugriffszeit ist. Die tatsächlich benötigte Puffergröße hängt von anderem am Server ausgeführten Prozesse aus und es kann schwer sein dies im Vorhinein akkurat abzuschätzen. In der Abschätzung der Anforderungen sollte immer vom Worst Case ausgehen, da es überall laufen muss, und nur besser läuft, falls das System besser ausgestattet ist.
+	\subsubsection{Kosten eines Zugriffs}
+	Die Kosten eines Plattenzugriffs hängt von drei Faktoren ab:
+	\begin{itemize}
+		\item{Dem Spurwechsel - Der mittleren Spurwechselzeit}
+		\item{Der Block-Lese-Operation}
+		\item{Der Block-Schreib-Operation}
+	\end{itemize}
+	Das Schreiben des Ergebnisses kann in der Regel vernachlässigt werden.
+	\paragraphlb{Sortierung}
+	Da diese drei Faktoren davon abhängen an wie vielen Orten nach den Daten gesucht wird, ist die Sortierung des Datensatzes extrem wichtig. Viele der Datenbankoperationen wie Joins sind wesentlich effizienter, wenn eine Relation sortiert ist. Durch das gewonnene Wissen wenn eine Relation sortiert ist, können die meisten Anfragen bedeutend effizienter ausgewertet werden. \\
+	Ein Sekundärindex kann dabei ein großes Problem für diese Optimierung darstellen, da dieser die Daten nur logisch und nicht physisch sortiert. \\
+	Die zwei am häufigsten verwendeten Sortieralgorithmen bei Datenbanken, ist der Quicksort und der Mergesort. Welcher der beiden verwendet wird, hängt davon ab ob die Relation oder der Puffer größer ist. Hat der Puffer eine ausreichende Größe, sollte Quicksort verwendet werden und sonst Mergesort. Das hängt damit zusammen, dass Quicksort mehr Anfragen an die Relationen benötigt und so nur schneller ist, wenn man komplett im Hauptspeicher agieren kann.
+	\subsection{Selektion}
+	Die Selektion (Siehe Datenbanken 1) wählt Daten anhand einer Einschränkung aus. Dabei gibt es zwei Wege um diese Anfrage abzuarbeiten:
+	\begin{itemize}
+		\item{Sequentiell}
+		\begin{itemize}
+			\item{Die gesamte Datenbank wird durchsucht und jedes Tupel wird gelesen um jene Tupel zu finden die die Relation erfüllen.}
+		\end{itemize}
+		\item{Indexsuche}
+		\begin{itemize}
+			\item{Der Index wird verwendet um Tupel im voraus auszuwählen. Zum Beispiel der Index eines $B^+-Baums$.}
+		\end{itemize}
+	\end{itemize}
+	Offensichtlicherweise ist der Zugriff schneller, wenn man einen Index hat, da man so nur einen Teil der Datenbank durchsuchen muss anstatt jede Relation durchgehen zu müssen.
+	\subsubsection{Prädikate}
+	Die Art der Anfrage hängt auch von dem verwendeten Prädikat ab:
+	\begin{itemize}
+		\item{Gleichheitsanfrage}
+		\begin{itemize}
+			\item{$\phi_{X=Z}$(R)}
+		\end{itemize}
+		\item{Bereichsanfrage}
+		\begin{itemize}
+			\item{$\phi_{X<Z}$(R) oder $\phi_{X>Z}$(R)}
+		\end{itemize}
+		\item{Konjunktive Selektion}
+		\begin{itemize}
+			\item{$\phi_{\theta_1\lor\theta_2\lor\theta_3\lor...\lor\theta_n}$(R)}
+			\item{Eine Suche die nur aus Oder-Verbindungen besteht}
+		\end{itemize}
+		\item{Disjunktive Selektion}
+		\begin{itemize}
+			\item{$\phi_{\theta_1\land\theta_2\land\theta_3\land...\land\theta_n}$(R)}
+			\item{Eine Suche die nur aus Und-Verbindungen besteht}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Auswertung}
+	Abhängig von dem Prädikat, wird die Suche auf anderer Weise durchgeführt:
+	\paragraphlb{Lineare Suche}
+	Jeder einzelne Block wird gelesen und die Selektionsbedingung überprüft. Dieser Vorgang ist wahrscheinlich teuer (abhängig von der Größe der Datenbank) aber immer möglich. Die Dauer der Auswertung ist hierbei unahängig von Indexstrukturen, Sortierung, Daten oder der Art der Selektion. Die Geschwindigkeit der Anfrage kann durch Lesen von hintereinanderliegenden Blöcken beschleunigt werden, wobei die Festplatte dabei auch durch pre-fetching die wahrscheinlich nächste Datei zur Verfügung stellt, bevor sie benötigt wird.
+	\subparagraphlb{Kosten}
+	Die Kosten dieser Suche sind in der Regel relativ hoch. Im Worst Case muss die gesamte Datenbank durchlaufen werden und selbst im Average Case muss die halbe Datenbank durchlaufen werden.
+	\paragraphlb{Binäre Suche}
+	Falls die Datensätze nach dem gesuchten Wert sortiert sind, kann man die Binärsuche anwenden. Dabei wird stets die Mitte der Daten (Der Pivotpoint) gewählt und anhand der gefundenen Datei im linken oder im rechten Block weitergesucht. Also wird in jeder Iteration die Menge der noch zu suchenden Daten halbiert, weshalb die Suche der Daten sehr effektiv ist.
+	\subparagraphlb{Kosten}
+	Die Auffindung des ersten Tupels ist das teuerste mit einer Laufzeit von $\log(b) + 1$, da der gesamte $B^+-Baum$ durchlaufen werden muss. Danach, kann man den Baum sequentiell durchlaufen, wodurch die weiteren Anfragen sehr schnell sind.
+	\subsubsection{Suchverhalten}
+	Die Kosten einer Anfrage können anhand des verwendeten Index sowie des Suchprädikat ermittelt werden. Angenommen wird, dass ein $B^+-Baum$ verwendet wird.
+	\begin{itemize}
+		\item{Primärindex + Gleichheitsbedingung auf Suchschlüssel}
+		\begin{itemize}
+			\item{Liefert genau einen Datendatz.}
+			\item{Kosten ist ein Durchlauf der Knoten + 1}
+		\end{itemize}
+		\item{Clustered Index + Gleichheitsbedingung auf Suchschlüssel}
+		\begin{itemize}
+			\item{[TODO]}
+		\end{itemize}
+		\item{Sekundärindex + Gleichheitsbedingung auf Suchschlüssel}
+		\begin{itemize}
+			\item{Falls der Suchschlüssel der Kandidatenschlüssel ist}
+			\begin{itemize}
+				\item{Liefert einen Datendatz}
+				\item{Kosten ist ein Durchlauf der Knoten + 1}
+			\end{itemize}
+			\item{Falls der Suchschlüssel nicht der Kandidatenschlüssel ist}
+			\begin{itemize}
+				\item{Liefert potentiell viele Datensätze}
+				\item{[TODO KOSTEN]}
+				\item{Diese Anfrage kann sehr teuer werden da alle Daten auf verschiedenen Blöcken liegen kann. Es kann potentiell schneller sein alle Datensätze sequentiell zu durchsuchen}
+			\end{itemize}
+		\end{itemize}
+		\item{Primärindex auf X + Bereichsanfrage}
+		\begin{itemize}
+			\item{}
+		\end{itemize}
+		\item{Sekundärindex auf X + Bereichsanfrage}
+	\end{itemize}
+	\paragraphlb{Pointersuche}
+	Wenn viele Pointer verfolgt werden müssen, da man einen Sekundärindex verwendet, kann die Anfrage \textbf{sehr} langsam sein. Da jeder Datensatz auf einem anderen Block liegen kann und nicht sortiert sind, muss jeder im random access gesucht werden.
+	\subparagraphlb{Bitmap Index Scan}
+	Mit einem Bitmap Index Scan kann man diesen Vorgang in manchen Fällen beschleunigen. Dabei wird eine Bitmap verwendet um entweder mit 0 oder 1 anzuzeigen ob der gesuchte Wert existiert oder nicht und man so nahezu sequentiell darauf zugreifen kann. Diese Strategie kann praktisch sein, wenn der Suchschlüssel kein Kandidatenschlüssel ist.
+	\subsection{Join}
+	Beim Join werden zwei Tabellen miteinander kombiniert. Das geschieht entweder anhand eines Werts (Beim Theta-Join $\bowtie_\theta$) oder mit dem gleichen Attribut in der anderen Tabelle (Beim Natural-Join $\bowtie$). \\
+	Ein Join ist sowohl kommutativ, als auch assoziativ. Außer bei der Ordnung der Attribute spielt die Reihenfolge der Werte keine Rolle (Wodurch $r\bowtie=\pi(s\bowtie)$ und $r\bowtie$)$\bowtie=r\bowtie(s\bowtie)$. Auch wenn das Ergebnis der Operationen austauschbar sind, kann es einen \textbf{großen} Unterschied in der Performance machen. Das hängt damit zusammen, dass wenn eine große mit einer kleinen Tabelle verbunden wird, bedeutend mehr falsche Tupel erstellt werden als umgekehrt. \\
+	Ein paar Definitionen sind:
+	\begin{itemize}
+		\item{$r\bowtie$}
+		\begin{itemize}
+			\item{r ist die äußere Relation}
+			\item{s ist die inner Relation}
+		\end{itemize}
+		\item{Kardinalität: Die absolute Größe des Join Ergebnisses}
+		\begin{itemize}
+			\item{$|r\bowtie_\theta$s|}
+		\end{itemize}
+		\item{[TODO]: Relative Größe des Join Ergebnisses}
+		\begin{itemize}
+			\item{[TODO FORMEL]}
+		\end{itemize}
+		\item{[TODO SELEKTIVITÄT]}
+	\end{itemize}
+	\subsubsection{Arten der Joins}
+	Es gibt verschiedene Algorithmen zur Auswertung von Join Befehlen:
+	\begin{itemize}
+		\item{Nested Loop Join (Immer anwendbar)}
+		\item{Block Nested Loop (berücksichtigt Blöcke)}
+		\item{Indexed Nested Loop Join (Erfordert Index auf innere Relation)}
+		\item{Merge Join}
+		\item{Hash Join}
+	\end{itemize}
+	\paragraphlb{Nested Loop Join}
+	Der Nested Loop Join ist immer anwendbar, da jedes Tupel mit jedem anderen Tupel verglichen wird, ist dadurch aber meist teuer.
+	Algorithmisch bestehen zwei Schleifen, welche jedes einzelne Tupel mit jedem anderen Tupel vergleicht und die Auswertung nur hinzufügt wenn sie der Anforderung entspricht.
+	\subparagraphlb{Kosten}
+	Da die äußeren Tupel nur ein Mal gelesen werden, die inneren aber n Mal, ist die Ordnung der Tupel für die Laufzeit relevant. \\
+	Im Worst Case passt nur ein Block je Relation in den Puffer. Die Kosten setzen sich so aus $b_r+n_r*b_s$ zusammen. Der Menge an Blöcken der äußeren Relation plus der Menge an Datensätzen der äußeren Relation Mal der Menge an Blöcken der inneren Relation. Der Nested Loop Join ist somit bedeutend effizienter wenn die äußere Relation die kleinere Relation ist. (Da für jeden Datensatz ein Block der inneren Relation geladen werden muss.) 
+	Im Best Case ist die innere Relation komplett im Hauptspeicher geladen, wodurch der Zugriff auf diese extrem schnell ist. In diesem Fall ist die Laufzeit annähernd linear anhand der äußeren Relation, da nur diese auf den Sekundärspeicher zugreifen muss. \\
+	Aus diesem Grund sollte man überprüfen ob die kleinere Relation in den Puffer passt und wenn nicht die kleinere Relation als äußere verwenden.
+	\subparagraphlb{Beispiel:}
+	Die Relationen Person und Auto sollen gejoint werden. Person hat 155.000 Datensätze auf 250 Blöcken, während Auto 965.000 Datensätze auf 700 Blöcken hat. \\
+	Wenn man $Person\bowtie Auto$ rechnet: $250+155.000*700=108.500.250$ Blockzugriffe \\
+	Wenn man $Auto\bowtie Person$ rechnet: $700+965.000*250=241.250.700$ Blockzugriffe \\
+	Wenn die Blöcke von Person in den Puffer passen: $700+250=950$
+	\paragraphlb{Block Nested Loop Join}
+	Bei dem Block Nested Loop Join wird nicht jeder Datensatz mit jedem Block verglichen, sondern jeder Block mit jedem Block. Also wird ein Block der äußeren Relation geladen und mit einem Block aus der inneren Relation verglichen. Also wird jeder Block jeder Relation nur ein Mal gelesen was zu einer bedeutend effizienteren Laufzeit führt.
+	\subparagraphlb{Kosten}
+	Im Worst Case muss so jeder Block beider Tupel verglichen werden, anstatt jeder Datensatz mit jedem Block: $b_r+b_r*b_s$.
+	Im Best Case ändert sich im Vergleich zur anderen Methode nicht viel: $b_r+b_s$
+	\subparagraphlb{Beispiel:}
+	Die Relationen Konten und Kunde sollen gejoint werden. Kunde hat 15.000 Datensätze und 500 Blöcke und Konten 5.000 Datensätze und 100 Blöcke. Da jedoch nur Blöcke verglichen werden ist die Menge der Datensätze irrelevant. \\
+	Wenn man $Konten\bowtie Kunde$ rechnet: $100+100*500=50.100$ Blockzugriffe \\
+	Wenn man $Kunde\bowtie Konten$ rechnet: $500+500*100=50.500$ Blockzugriffe \\
+	Wenn die Blöcke von Person in den Puffer passen: $500+100=600$ Blockzugriffe
+	\section{Stored Procedures}
+	Stored Procedures (SP) sind vorgefertigte Funktionen die vom DBMS im Systemkatalog abgespeichert werden. Diese werden dann von dort bei Bedarf ausgeführt. Ein SP selbst ist ein normaler SQL Befehl. SP sparen nicht bei der Laufzeit am Server sondern dem Netzwerkbedarf, da SQL-Queries relativ lang und komplex sein können. Wenn dieser SQL-Befehl bereits am Server existiert, muss nur eine Referenz auf diese übertragen werden, wodurch Bandbreite gespart wird. Gleichzeitig kann das DBMS die Befehle bedeutend besser optimieren da es mehr Zeit hat. Wenn man eine solche SP benötigt muss man nur den Trigger am Server aufrufen um sie anzustoßen.
+	\subsection{SQL}
+	In SQL wird eine SP durch
+	\begin{verbatim}
+	 CREATE PROCEDURE procedure_name
+	 AS
+	 SELECT * FROM customers
+	 \end{verbatim}
+	 Eine SP kann danach mittels \texttt{EXEC} auf diese Stored Procedure zugreifen.
+	 \begin{verbatim}
+	 EXEC procedure_name
+	 \end{verbatim}
+	 \subsection{Trigger}
+	 Trigger können zusätzlich zur Ausführung der SP auch bei Insert-, Update- oder Deleteoperationen ausgeführt werden um so schnell eine gewisse Funktion auszuführen. \\
+	 Ein Trigger bezieht sich genau auf eine Tabelle und kann:
+	 \begin{itemize}
+	  	\item{Ereignisgesteuert aufgrund einer Datenmanipulation (Create, Update, Delete) aufgerufen werden.}
+	  	\item{Zeitpunktgesteuert (Bevor oder nach einem auslösenden Element)}
+	  	\item{Befehls- oder Datensatzorientiert im Bezug auf die ausgelöste Aktion sein}
+	  \end{itemize} 
+	  Pro Tabelle und pro Spalte kann man pro Kombination maximal einen Trigger definieren. \\
+	  \subsubsection{SQL}
+	  Ein Trigger wird mittels \texttt{CREATE TRIGGER} erstellt, wobei man die Tabelle sowie den Zeitpunkt angeben muss:
+	  \begin{verbatim} Eckige Klammern [] sind optional
+	  CREATE TRIGGER [schema_name].trigger_name -> Name des Schemas und triggers
+	  ON table_name -> Tabelle auf die sich der Trigegr bezieht
+	  AFTER {[INSERT], [UPDATE], [DELETE]} -> Definition der Event(s)
+	  [NOT FOR REPLICATION] -> Trigger wird nicht ausgelöst wenn Daten bei Replikation kopiert werden
+	  AS
+	  {sql_statement}
+	  \end{verbatim}
+	 
 
 
 
