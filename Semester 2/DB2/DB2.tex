@@ -412,13 +412,13 @@
 	\subsubsection{Dense Index}
 	Im Dense Index hat jeder Index-Eintrag einen eindeutig zugewiesenen Ort in den Daten. Aus diesem Grund ist ein Dense Index bedeutend größer als ein Sparse Index, ist in der Regel jedoch trotzdem kleiner als die Daten selbst da der Index ja nur die Pointer und nicht die Daten selbst beinhaltet. Aus diesem Grund muss ein Non-Clustering Index immer Dense sein. Ein Vorteil eines Dense Index ist, dass eventuell eine Datenbank gelesen werden kann, ohne dass direkt auf diese zugegriffen werden muss. Das nennt man dann einen 'Covering Index'.
 	\subsection{Duplikate im Index}
-	Wenn in einem Index Einträge doppelt vorhanden sind kann dessen Handhabung relativ schwer sein. Das ist vor allem im Falle von $B^+$ Baum Indexen der Fall ($B^+$ Bäume können anders als Binärbaume viele Kinder pro Knoten haben. (Siehe Datenstrukturen und Algorithmen)) \\
+	Wenn in einem Index Einträge doppelt vorhanden sind kann dessen Handhabung relativ schwer sein. Das ist vor allem im Falle von $B^+$ Baum Indizes der Fall ($B^+$ Bäume können anders als Binärbaume viele Kinder pro Knoten haben. (Siehe Datenstrukturen und Algorithmen)) \\
 	Man kann damit jedoch umgehen indem man Mehrere Indexeinträge einführt. Zusätzlich kann es ein Problem bei Buckets sein, da dann ein Eintrag im Index zu mehreren möglichen Bucketeinträgen führt. Schlißelich muss man den Suchschlüssel noch eindeutig machen. Dabei kann ein Tupel Identifier (TID) helfen um gleiche Datensätze eindeutig zu machen. Gleichzeitig kann man auch aus einer Kombination des TID und dem Bucket einen eindeutigen Key definieren. \\
 	In der Praxis werden jedoch doppelte Einträge als solche behandelt und diese auch zurückgegeben. Im Rahmen dieser Lehrveranstaltung wird jedoch angenommen, dass alle Datensätze immer eindeutig sind, da manche besprochenen Inhalte sonst nicht möglich sind.
 	\subsection{ISAM Index}
 	Da ein großer Index sehr teuer ist, ist es oft vonnöten einen mehrstufigen Index einzuführen. Da der Index selbst sequenziert wird, ergibt es einen neuen Index, welcher auf den Index verweist. Ein solcher Index besteht immer aus einem äußeren und einem inneren Index. Der äußere Index verweist dabei auf die Index Datei, während der innere Index auf die Daten selbst verweist. Falls der äußere Index zu groß wird, wird danach eine neue Index Ebene eingeführt. Diese Art des Indexing bezeichnet man als Index Sequential Access Method (ISAM).
 	\subsubsection{CRUD}
-	Zum Durchsuchen eines ISAM-Index muss man im Wurzelknoten beginnen und alle Pointer welche zu passenden Ergebnissen führen die Pointer durch die Indizes verfolgen. Beim Einfügen, Löschen und Update muss man jedoch alle Indexknoten durchlaufen da man so sicherstellen kann, dass die Integrität bewahrt wird.
+	Zum Durchsuchen eines ISAM-Index muss man im Wurzelknoten beginnen und alle Pointer welche zu passenden Ergebnissen führen die Pointer durch die Indizes verfolgen. Beim Einfügen, Löschen und Update muss man jedoch alle möglichen Indexknoten durchlaufen da man so sicherstellen kann, dass die Integrität bewahrt wird.
 	\subsection{\texorpdfstring{$B^+-Baum$}{B+ Baum}}
 	Eine Alternative zu ISAM ist die Anordnung eines Index als $B^+-Baums$. Ein $B^+-Baum$ passt seine Anzahl der Ebenen stets automatisch an. Das nennt man selbstständige Reorganisation und wird nach einem Lösch- oder Einfügevorgang nötig. Aus diesem Grund ist die gesamte Reorganisation des Index nicht erforderlich. Das bedeutet jedoch natürlich auch, dass $B^+-B\textnormal{ä}ume$ einen potentiellen Merhaufwand besitzen und bedeutend komplexer in der Implementierung ist. Bei einem Einfüge- oder Löschvorgang muss auch mehr Rechenleistung aufgebracht werden, da der Baum angepasst werden muss. \\
 	Ein $B^+-Baum$ ist ein 'hohler' Baum, hat also nur in den Blättern (Elemente ohne Kindelemente) echte Daten. Alle Zweige (Elemente mit Kindelementen) dienen nur zum richtigen Blatt zu finden. Gleichzeitig sind alle Werte in diesen Blättern sequentiell gespeichert und miteinander verbunden, wodurch man von einem Blatt die Position weiterer Blätter ableiten kann und mit dieser Information die Blätter auch durchstreifen kann. \\
@@ -437,7 +437,7 @@
 		\begin{itemize}
 			\item{Der Fan-Out eines Knotens beschreibt stets die Menge an Entscheidungen die in der Struktur getroffen werden kann. Der Fan-Out eines Knotens ist immer eines mehr als die Menge an verbundenen Knoten.}
 		\end{itemize}
-		\item{Enthält $R_1$ bis $R_n$ Knoten zur Verfügung wobei jeder Knoten zwischen k und 2k }
+		\item{Enthält $R_1$ bis $R_n$ Knoten zur Verfügung wobei jeder Knoten zwischen k und 2k Kinder hat}
 	\end{enumerate}
 	Diese Eigenschaften garantieren einige Vorteile und Nachteile:
 	\begin{itemize}
