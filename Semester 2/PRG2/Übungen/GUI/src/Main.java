@@ -10,7 +10,7 @@ public class Main {
                 register.createUserButtonListener(new CreateUserButtonListener() {
                     @Override
                     public void onSaveClicked(User user) {
-                        System.out.println("Entered Book Details:");
+                        register.saveChanges();
                     }
                 });
             }
