@@ -18,7 +18,13 @@ Semester 2/KIB1/Übung
 **/*.zip
 **/framework
 **/NET1/Übung
-**/jscheduler
+**/[Tt]arget/
+**/framework/
+Review/
+**/scheduler
 **/music
 **/*.mp3
 
+Semester 2/DSA/Review/Review_1/target/music-player-1.0-SNAPSHOT.jar
+Semester 2/KIB1/Übung/Übung_2/bsd24_hofer_andreas
+Semester 2/PRG2/Projekt/scheduler

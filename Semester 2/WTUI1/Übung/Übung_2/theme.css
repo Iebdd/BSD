@@ -1,0 +1,17 @@
+.page_img {
+    width: 100vw;
+    margin: auto;
+}
+
+footer p {
+    font-size: 8pt;
+}
+
+.g_maps {
+    width: 100vw;
+}
+
+iframe {
+    width: 100vw;
+    height: 400px;
+}

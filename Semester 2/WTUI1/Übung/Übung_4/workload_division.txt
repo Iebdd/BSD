@@ -1,0 +1,17 @@
+Group Workload Division:
+------------------------
+Max Mustermann: Performed the facilitation of the evaluation
+Mira Musterfrau: Co-created the presentation with Jane Doe
+Jane Doe: ...
+John Doesnotdoanything: - 
+
+Percentage of Work (estimation):
+--------------------------------
+Max Mustermann: 33.33%
+Mira Musterfrau: 33.33%
+Jane Doe: 33.33%
+John Doesnotdoanything: - 
+
+Additional Notes:
+-----------------
+John Doesnotdoanything did not participate in the group work
