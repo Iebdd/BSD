@@ -1,0 +1,263 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{amsmath}
+\usepackage{cancel}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+\setcounter{tocdepth}{5}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Mathematik für Informatik 2 - Übungen}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{Kombinatorik}
+	\begin{itemize}
+		\item[2]{Wie viele verschiedene 4-stellige PINS lassen sich aus folgenden Ziffern bilden, wenn man jede der Ziffern auch mehr als einmal vorkommen darf?}
+		\begin{itemize}
+			\item[a]{0, 1, 2}
+			\begin{itemize}
+				\item{Die Maske ist ZZZZ wobei jede Möglichkeit 0, 1 oder 2 sein kann. Hierbei muss man die Produktregel anwenden: $n^k=3^4=81$}
+			\end{itemize}
+			\item[b]{3, 5, 6, 9}
+			\begin{itemize}
+				\item{Gleiche Maske von ZZZZ jedoch mit 4 Möglichkeiten: $4^4=256$}
+			\end{itemize}
+			\item[c]{1, 3, 5, 6, 9}
+			\begin{itemize}
+				\item{Wieder ZZZZ mit 5 Möglichkeiten: $5^4=625$}
+			\end{itemize}
+		\end{itemize}
+		\item[14]{In einem Schulfach gibt es ein Schulübungsheft und ein Hausübungsheft. Wie viele Möglichkeiten gibt es, die Hefte einzubinden, wenn es Heftumschläge in 8 verschiedenen Farben gibt und folgende Richtlinien eingehalten werden.}
+		\begin{itemize}
+			\item[a]{Hefte sollen unterschiedliche Farben haben}
+			\begin{itemize}
+				\item{Mit Reihenfolge, ohne Zurücklegen: $\frac{n!}{(n-k)!}$}
+			\end{itemize}
+		\end{itemize}
+		\item[17]{Wie viele Möglichkeiten gibt es, aus 2 blauen und 3 grünen Bausteinen, die sich nur durch Farbe unterscheiden, einen 4 Steine hohen Turm zu bauen?}
+		\begin{itemize}
+			\item{Da jeder Turm aus mindestens zwei Farben bestehen muss, muss man dieses Beispiel in zwei Phasen berechnen: Zuerst mit einem blauen und danach mit zwei blauen Steinen.}
+			\item{Da alle grünen Steine ununterscheidbar sind und man jeden Stein nur ein Mal ziehen will, berechnet man es ohne Reihenfolge und ohne Zurücklegen. Die beiden Teile müssen wiederum als Produkt kombiniert werden: $\binom{n1}{k1}*\binom{n2}{k2}=\binom{4}{1}*\binom{3}{3}=\frac{4!}{a!(4-1)!}*\frac{3!}{3!(3-3)!}=4*1=4$}
+			\item{Im zweiten Schritt wird das gleiche mit zwei blauen Steinen berechnet: $\binom{4}{2}*\binom{2}{2}=6$}
+			\item{Insgesamt gibt es also $6+4=10$ Möglichkeiten}
+		\end{itemize}
+		\item[19]{Wie viele mögliche Permutationen gibt es?}
+		\begin{itemize}
+			\item[a]{FH}
+			\begin{itemize}
+				\item{Mit Reihenfolge, ohne Zurücklegen und man kann die vereinfachte Formel verwenden: $n!=2!=4$}
+			\end{itemize}
+			\item[b]{GRAZ}
+			\begin{itemize}
+				\item{Gleich wie bei a aber mit 4: $n!=4!=24$}
+			\end{itemize}
+			\item[c]{SAAL}
+			\begin{itemize}
+				\item{Da es hier zwei gleiche Buchstaben gibt, muss man diese ausschließen. Dabei gibt es gleich wie bei 17 zwei Möglichkeiten}
+				\item[1]{Man berechnet zuerst die Menge an möglichen Positionen der beiden As und multipliziert diese danach mit den Möglichkeiten der weiteren Buchstaben: $\binom{4}{2}*\binom{2}{1}*\binom{1}{1}=6*2*1=12$}
+				\item[2]{Man berechnet zuerst alle Variationen und zieht danach die Duplikate ab: $\frac{n!}{k_A!}=\frac{4!}{2!}=4*3=12$}
+			\end{itemize}
+			\item[d]{OTTO}
+			\begin{itemize}
+				\item[1]{Gleich wie bei SAAL wobei man hier zwei Dupliakte hat: $\binom{4}{2}*\binom{2}{2}=6*1=6$}
+				\item[2]{$\frac{n!}{k_O!*k_T!}=\frac{4!}{2!*2!}=\frac{4!}{4}=\frac{24}{4}=6$}
+			\end{itemize}
+			\item[e]{ANANAS}
+			\begin{itemize}
+				\item[1]{Wieder gleich wie bei den vorherigen: $\binom{6}{3}*\binom{3}{2}*\binom{1}{1}=60$}
+				\item[2]{$\frac{n!}{k_A!*k_N!}=\frac{6!}{3!*2!}=\frac{120}{2}=60$}
+			\end{itemize}
+		\end{itemize}
+		\item[20]{Beim Kartenspiel "Schnapsen" gibt es 20 Karten, wovon 4 Asse sind. Zu Beginn bekommt man 5 Karten. In wie vielen Fällen enthalten diese 5 Karten:}
+		\begin{itemize}
+			\item[a]{kein Ass?}
+			\begin{itemize}
+				\item{Die Reihenfolge macht keinen Unterschied und man will keine Karte doppelt haben. Also kann man 16 über 5 rechnen: $\binom{20-4}{5}=\binom{16}{5}=\frac{16!}{5!(16-5)!}=\frac{16!}{5!*11!}=\frac{16*15*14*13*12}{5*4*3*2}=4368$}
+			\end{itemize}
+			\item[b]{genau ein Ass?}
+			\begin{itemize}
+				\item{Funktioniert gleich wie a wobei man ein Ass und 4 nicht-Asse ziehen will: $\binom{4}{1}*\binom{16}{4}=4*1820=7280$}
+			\end{itemize}
+			\item[c]{genau 2 Asse?}
+			\begin{itemize}
+				\item{Gleich wie b: $\binom{4}{2}*\binom{16}{3}=\frac{4!}{2!*2!}*\frac{16!}{3!*13!}=6*560=3360$}
+			\end{itemize}
+			\item[d]{alle 4 Asse?}
+			\begin{itemize}
+				\item{Gleich wie b: $\binom{4}{4}*\binom{16}{1}=1*16=16$}
+			\end{itemize}
+			\item[e]{höchstens ein Ass?}
+			\begin{itemize}
+				\item{Hierbei kann man die Ergebnisse von a (kein Ass) und b (ein Ass) kombinieren: $4368+7280=11648$}
+			\end{itemize}
+			\item[f]{mindestens ein Ass?}
+			\begin{itemize}
+				\item{Hierbei gibt es zwei Varianten wie man einige der vorherigen Ergebnisse kombinieren kann:}
+				\item[1]{b (ein Ass) + c (zwei Asse) + (drei Asse) + d (alle vier Asse)}
+				\item[2]{irgendeine Karte - a (kein Ass): $\binom{20}{5} - \binom{16}{5}$}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	3 - Ein Kleidungshersteller bietet Jeans in fünf verschiedenen Größen, vier verschiedenen Farben und in drei unterchiedlichen Schnitten an. Wie viele unterschiedliche Jeans gibt es? \\
+	Da jede der drei Teilmöglichkeiten unabhängig sind, muss man wieder die Produktregel anwenden: $5*4*3=60$ \\
+	4 - Es wird 3 Mal gewürfelt und die Augenzahlen werden nebeneinander aufgeschrieben. \\
+	a) - Wie viele verschiedene 3-stellige Zahlen sind dabei möglich? \\
+	Es gibt drei Möglichkeiten, weshalb die Maske wie ZZZ aussieht. Da es 6 Möglichkeiten gibt, ist die Formel $n^k=6^3=216$
+	b) - Wie viele verschiedene gerade 3-stellige Zahlen sind dabei möglich? \\
+	Da die Zahl nur Gerade ist, wenn die letzte Ziffer gerade ist, kann man die Maske als ZZG aufschreiben, während G jeweils eine gerade Zahl ist. Die Formel lautet also $6*6*3=6^2*3=108$ \\
+	6 - Wie viele verschiedene Wörter (auch sinnfreie) aus Kleinbuchstaben der Länge 3, 4 oder 5 gibt es? \\
+	$26^3+26^4+26^5=12.355.928$ \\
+	7 - Wie viele verschiedene 6-stellige Passwörter können aus Groß- und Kleinbuchstaben, Ziffern und Sonderzeichen \verb|!?.;:<>#| gebildet werden? \\
+	Man hat 26 Klein- und Großbuchstaben, sowie 10 Ziffern und 8 Sonderzeichen, wodurch man zu 70 Möglichkeiten kommt. Bei 6 Stellen berechnet man so $70^6=117.649.000.000$ Möglichkeiten \\
+	8 - Wie viele verschieden Wörter (auch sinnfreie) aus 3 Kleinbuchstaben, die mit einem Vokal (a,e,i,o,u) beginnen oder einem Vokal enden, gibt es? \\
+	Da ein Wort, welches mit einem Vokal beginnt, auch mit einem Vokal enden kann, muss man beide Teile kombinieren und danach die Schnittmenge abziehen: $5*26^2+26^2*5-5*26*5=3380+3380-650=6110$ \\
+	13 - In einer FUßballliga gibt es 16 Mannschaften. Wie viele Spiele finden insgesamt in einer Saison statt, wenn es zwischen zwei Mannschaften je ein Hin- und ein Rückspiel gibt? \\
+	Die Reihenfolge ist relevant, da zwei Mannschaften jeweils in zwei Konstellationen gegeneinander spielen sollen und ohne Zurücklegen, da keine Mannschaft gegen sich selbst spielen soll. $\frac{n!}{(n-k)!}=\frac{16!}{(16-2)!}=\frac{16!}{14!}=\frac{16*15*\cancel{14!}}{14!}=16*15=240$ \\
+	Ein Alternativer Lösungsweg ist, keine Reihenfolge zu verwenden wodurch man nur die Anzahl der Paarungen der Mannschaften berechnet. Wenn man diese danach mit 2 multipliziert, erhält man das selbe Ergebnis. \\
+	14 - In einem Schulfach
+	22 - Wie viele verschiedene Möglichkeiten für eine Zuordnung gibt es bei der Auswahlrunde in der Millionenshow, bei der vier Elemente vier Antworten zugeordnet werden müssen? Zeigen Sie die Lösung auch mittels Entscheidungsbaum. \\
+	Die Reihenfolge ist hier sehr wohl relevant, es gibt jedoch kein Zurücklegen. Da alle Elemente zugeordnet werden müssen, ist die Zuordnungsmenge und die Elementmenge die selbe wodurch es mit n! berechnet werden kann: 4! = 24. \\
+	23 - In einem Eissalon gibt es 25 verschiedene Eissorten. Wie viele verschiedene Kombinationen aus 3 Eiskugeln gibt es, wenn eine Sorte auch mehrmals gewählt werden kann? \\
+	\section{Vektoren}
+	\begin{itemize}
+		\item[2]{Gegeben sind die Vektoren $\vec{a}=(1,3), \vec{b}=(4,1)$. Berechnen Sie: $2(\vec{b}+\vec{a})-(\vec{a}+2\vec{b})$}
+		\begin{itemize}
+			\item{Zuerst sollte man die Vektoren als Spaltenvektoren aufschreiben: $2*(\begin{pmatrix} 4 \\ 1 \end{pmatrix}+\begin{pmatrix} 1 \\ 3 \end{pmatrix})-\begin{pmatrix} 1 \\ 3 \end{pmatrix}+2*\begin{pmatrix} 4 \\ 1 \end{pmatrix})$}
+			\item{$2*\begin{pmatrix} 5 \\ 4 \end{pmatrix}-(\begin{pmatrix} 1 \\ 3 \end{pmatrix}+\begin{pmatrix} 8 \\ 2 \end{pmatrix})=\begin{pmatrix} 10 \\ 8 \end{pmatrix}-\begin{pmatrix} 9 \\ 5 \end{pmatrix}=\begin{pmatrix} 1 \\ 3 \end{pmatrix}=\vec{a}$}
+			\item[2]{Es gibt auch eine zweite in diesem Fall schnellere Variante indem man es umformt: $2(\vec{b}+\vec{a})-(\vec{a}+2 \vec{b})=2*\vec{b}+2*\vec{a}-\vec{a}-\vec{}$}
+		\end{itemize}
+		\item[3]{Gegegben sind die Vektoren \vec{a}=(-4,8), \vec{b}=(6, -2). Berechnen Sie:}
+		\begin{itemize}
+			\item[a]{$\frac{1}{2}(\vec{a}+\vec{b})$}
+			\begin{itemize}
+				\item{$\frac{1}{2}[\begin{pmatrix} -4 \\ 8 \end{pmatrix}+\begin{pmatrix} 6 \\ -2 \end{pmatrix}]=\frac{1}{2}*\begin{pmatrix} 6 \\ 2 \end{pmatrix}=\begin{pmatrix} 1 \\ 3 \end{pmatrix}$}
+			\end{itemize}
+			\item[b]{$-4(\vec{a}+\vec{b})$}
+			\begin{itemize}
+				\item{$\vec{a}-(\vec{b}-2 \vec{a}) -4 \vec{a}=\vec{a}-\vec{b}+2 \vec{a}-4 \vec{a}=-\vec{a}-\vec{b}=\begin{pmatrix} -4 \\ 8 \end{pmatrix}-\begin{pmatrix} 6 \\ 2 \end{pmatrix}=\begin{pmatrix} -2 \\ -6 \end{pmatrix}=-\begin{pmatrix}  \\  \end{pmatrix}$}
+			\end{itemize}
+		\end{itemize}
+		\item[5]{Berechnen Sie das Skalarprodukt folgender Vektoren:}
+		\begin{itemize}
+			\item[a]{$\vec{a}(1,0), \vec{b}=2,1$}
+			\begin{itemize}
+				\item{$\vec{a}\cdot\vec{b}=1*2 + 0*1=2$}
+			\end{itemize}
+			\item[c]{$\vec{a}(2, -1, 5), \vec{b}=6,7,8$}
+			\begin{itemize}
+				\item{$\vec{a}\cdot\vec{b}=2*6+-1*7+5*2=12-7+10=15$}
+			\end{itemize}
+			\item[e]{$\vec{a}=\begin{pmatrix} \frac{1}{4} \\ 3 \\ 5 \end{pmatrix}, \vec{b}=\begin{pmatrix} 4 \\ -\frac{2}{3} \\ \frac{1}{5} \end{pmatrix}$}
+			\begin{itemize}
+				\item{$\vec{a}\cdot\vec{b}=\frac{1}{4}*4+3*-\frac{2}{3}+5*\frac{1}{5}=1-2+1=0$}
+			\end{itemize}
+		\end{itemize}
+		\item[6]{Sind folgende Vektoren orthogonal zueinander?}
+		\begin{itemize}
+			\item[a]{$\vec{a}=(\frac{3}{2}, 3), \vec{b}=(1, -\frac{1}{2})$}
+			\begin{itemize}
+				\item{$\begin{pmatrix} \nicefrac{3}{2} \\ 3 \end{pmatrix}\cdot \begin{pmatrix} 1 \\ -\nicefrac{1}{2} \end{pmatrix}=\nicefrac{3}{2}-\nicefrac{3}{2}=0$}
+			\end{itemize}
+		\end{itemize}
+		\item[7]{Berechnen Sie die Länge folgender Vektoren}
+		\begin{itemize}
+			\item[b]{$\vec{a}=(\frac{1}{2}, -\frac{3}{2}, 1, \frac{1}{2}, -\frac{1}{2})$}
+			\begin{itemize}
+				\item{Man muss jedes Element quadrieren, alle Elemente addieren und davon die Wurzel ziehen: $||\vec{a}||=\sqrt{(\nicefrac{1}{2})^2+(-\nicefrac{3}{2})^2+1^2+(\nicefrac{1}{2})^2+(-\nicefrac{1}{2})}$ [TODO]}
+			\end{itemize}
+		\end{itemize}
+		\item[8]{Berechnen Sie den Abstand zwischen folgenden zwei Punkten:}
+		\begin{itemize}
+			\item[a]{A(2|3|1|3|2|1), B(5|3|3|2|3|2)}
+			\begin{itemize}
+				\item{$||\overrightarrow{AB}||=\sqrt{(2-5)^2+(3-3)^2+(1-3)^2+(3-2)^2+(2-3)^2+(2-1)^2}$ [TODO]}
+			\end{itemize}
+		\end{itemize}
+		\item[9]{Beweisen Sie das Kommutativgesetz der Addition von Vektoren: $\vec{a}+\vec{b}=\vec{b}+\vec{a}$}
+		\begin{itemize}
+			\item{Es ist zu beweisen dass $\vec{a}+\vec{b}$ gleich $\vec{b}+\vec{a}$ ist. Dazu muss man von einem umformen um schlussendlich zum anderen zu kommen.}
+			\item{Man kann $\vec{a}+\vec{b}$ als $\begin{pmatrix} a_1 \\ a_2 \\ ... \\ a_n \end{pmatrix}+\begin{pmatrix} b_1 \\ b_2 \\ ... \\ b_n \end{pmatrix}$ beschreiben, welche als Addition als $\begin{pmatrix} a_1 + b_1 \\  a_2 + b_2 \\ ... \\ a_n + b_n \end{pmatrix}$ beschrieben werden können.}
+			\item{Da wir bereits vorraussetzen können, dass die Addition zweier Skalare (a+b) kommutativ und somit vertauschbar sind, kann man in der kombinierten Vektorschreibweise die Additionen vertauschen zu: $\begin{pmatrix} b_1 + a_1 \\  b_2 + a_2 \\ ... \\ b_n + a_n \end{pmatrix}$}
+			\item{Diese vertauschten Vektoren kann man nun wieder aufspalten wodurch gezeigt wird, dass das Kommutativgesetz bei Skalaren Additionen auch bei Vektoren gilt: $\begin{pmatrix} b_1 \\ b_2 \\ ... \\ b_n \end{pmatrix}+\begin{pmatrix} a_1 \\ a_2 \\ ... \\ a_n \end{pmatrix}=\vec{b}+\vec{a}$}
+		\end{itemize}
+		\item[12]{Berechnen Sie die 1-Norm, 2-Norm und Maximumsnorm folgender Vektoren:}
+		\begin{itemize}
+			\item[a]{$\vec{a}=(1,-1,2,3,0,1)$}
+			\begin{itemize}
+				\item[1-Norm]{Die Summe der Beträge aller Werte: $|1|+|-1|+|2|+|3|+|0|+|1|=8$}
+				\item[2-Norm]{Die Wurzel der Summe des Quadrats aller Elemente: $\sqrt{1^2+-1^2+2^2+3^2+0^2+1^2}=\sqrt{16}=4$}
+				\item[Maximumsnorm]{Der Längste Wert aller Beträge: $3$}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+
+
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}

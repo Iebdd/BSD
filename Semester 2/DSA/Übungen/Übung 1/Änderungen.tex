@@ -1,0 +1,67 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[ngerman]{babel}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Datenstrukturen und Algorithmen: Übung 1 - Änderungen}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\section*{Änderungen}
+	\subsection*{Entfernen eines Lieds in der Mitte der Playlist}
+	In meinen Tests hatte ich nie mehr als 2 nodes, weshalb das zu entfernende Element nie weder das Erste noch das Letzte war. Jetzt sollte es wie erwartet funktionien.
+	\subsection*{Dead Code}
+	Ich habe first, last und setAdjacent im Vorhinein implementiert und dann übersehen, dass sie gar keinen Nutzen haben. Sie wurden entfernt
+	\subsection*{numberSpaces in toString}
+	Gibt jetzt eine beliebige Menge an Leerzeichen zurück, da die Menge mittels Logarithmus berechnet wird.
+	\subsection*{enum für longestString}
+	Das Argument für longestString ist jetzt ein enum und heißt entweder Path oder Name
+	\subsection*{Kommentare in toString}
+	Ich habe die Formattierung in toString geändert und ein paar Kommentare hinzugefügt um es eventuell lesbarer zu machen
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}

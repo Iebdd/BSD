@@ -704,7 +704,7 @@
 	Falls die Anforderungen sehr speziell sind, können die Gutachter zuvor geschult werden.
 	\subsubsection{Das Interface wird alleine evaluiert}
 	Jeder Gutachter evaluiert die Website alleine. Dabei wird die Evaluierung in Bild und Ton aufgenommen. Der Gutachter versucht dabei sich in den Benutzer hineinzuversetzen. Das Interface wird jeweils zwei Mal durchgegangen. Beim ersten mal besteht der Fokus auf den allgemeinen Fluss, wobei beim zweiten Mal mehr Fokus auf spezielle Elemente gelegt wird. Basierend auf den Notizen und den Videos soll dann eine individuelle Liste an Problemen und positiven Eindrücken erstellt werden. Jeder Eintrag sollte dabei von einem Bildschirmfoto unterstützt werden. Dieser Prozess dauert zwischen 1 und 2 Stunden.
-	\subsubsection{Faciliator aggregiert einzelne Evaluierungen}
+	\subsubsection{Facilitator aggregiert einzelne Evaluierungen}
 	Alle Gutachten werden zusammengetragen und in einer Tabelle gesammelt. Dabei werden ähnliche Fehler gesammelt wiedergegeben. Es wird ebenfalls der verwendete Browser sowie ein Weg den Fehler zu rekonstruieren angegeben.
 	\subsubsection{Gutachter bewerten jedes gefundene Problem}
 	Die gesammelten Einträge werden an die Gutachter verteilt und anhand eines severity ratings bezüglich ihrer Schwere bewertet. Dieses Rating hilft dabei die wichtigen Probleme zu kategorisieren. Es gibt 5 Schweregrade:
@@ -725,7 +725,65 @@
 	Die Stakeholder werden über mögliche Lösungswege informiert.
 	\subsubsection{Abschlussbericht}
 	Ein umfassender Bericht wird als Zusammenfassung der Evaluierung erstellt.
-
+	\section{Usability Testing}
+	Usability Testing ist, im Gegensatz zum Usability Testing mit Experten, eine Testmethode bei der repräsentative Anwender die Software benutzen und deren Erfahrungen analysiert werden. Gleich wie die Wahl der Experten bei der Inspection, ist die gute Wahl der Anwender extrem wichtig.
+	\subsection{Bestandteile}
+	Usability Testing besteht aus drei Komponenten:
+	\subsubsection{Rollen}
+	Es gibt drei Rollen in einem Testteam: Den Testuser und den Facilitator sowie Observer. Der Testuser testet die Anwendung, der Facilitator führt diesen ein und gibt falls nötig Hilfestellungen und der Observer macht sich Notizen.
+	\subsubsection{Testeuipment}
+	[TODO]
+	\subsubsection{Testumgebung}
+	[TODO]
+	\subsection{Ablauf}
+	Usability Testing geschieht in 6 Stufen:
+	\subsubsection{Testplan}
+	Zuerst muss entschieden werden wie das Produkt getestet werden soll. Man muss auch feststellen, welche Ressourcen benötigt werden und was der FOkus des Tests sein soll. Im Plan sollte deshalb:
+	\begin{itemize}
+		\item{Der Zweck und die Problemstellung - Was ist das Ziel?}
+		\begin{itemize}
+			\item{Die Gründe für die Durchführung und die zu lösende Problemstellung}
+		\end{itemize}
+		\item{Die Teilnehmer - Wer testet?}
+		\begin{itemize}
+			\item{Die Merkmale potentieller Teilnehmer. Dabei wird eine Liste erstellt, wie viele Benutzer welche Charakteristika haben sollten.}
+		\end{itemize}
+		\item{Die Methode, eine Aufgabenliste, die Testumgebung und zu erhebende Daten - Wie wird getestet?}
+		\begin{itemize}
+			\item{Aufgaben, welche vom Benutzer abgeschlossen werden sollen. Es sollte eine Maximaldauer angegeben werden, damit Benutzer nicht frustiert werden.}
+			\item{Welches Equipment sollte benutzt werden? Wer ist der Faciliator und Observer?}
+			\item{Wie werden Daten analysiert?}
+			\begin{itemize}
+				\item{Man unterscheidet zwischen Performance Data und Preference Data}
+				\item{Performance Data - Messung des Teilnehmerverhaltens objektiven Fakten}
+				\item{Preference Data - Messung der Meinung des Teilnehmers als subjektive Einschätzungen}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Akquisition von Teilnehmern}
+	Da Testergebnisse nur repräsentativ sind, wenn man typische Anwender hat, muss man diese vorsichtig auswählen. In der Regel sollten für jede erstellte Benutzergruppe mindestens 5 Testbenutzer ausgewählt werden. Anwender kann man oft über Agenturen finden aber auch Familie und Bekannte können Benutzer sein. Man sollte jedoch aufpassen, keine Benutzer aus der unmittelbaren Umgebung zu wählen (Sogenanntes convencience sampling), da das die Daten verfälschen kann. Zum Beispiel sollte man nicht Studenten aus dem gleichen Studiengang wählen, da man so eine Gruppe an Personen die die selben Interessen besitzen als Benutzergruppe hat.
+	\subsubsection{Vorbereitung des Testmaterials}
+	Wenn man Benutzer ausgewählt hat, muss man diese danach einen Fragebogen über ihre Daten, sowie DSGVO und anderes ausfüllen lassen. Danach muss der Benutzer in die Aufgaben eingeführt werden. Dabei soll dem Benutzer die Aufgabe schriftlich vorgelegt werden, damit es eventuell erneut gelesen werden kann. Der Benutzer sollte dabei die Aufgabe laut vorlesen um das in der Aufnahme festzuhalten und um sicherzustellen, dass er die Aufgabe mindestens ein Mal komplett gelesen hat. Aufgaben sollten nach Schwierigkeit geordnet sein, damit keine Frustration und ein Erfolgserlebnis garantiert wird. Aufgaben sollten in einer logischen Reihenfolge gegeben werden. Falls die Reihenfolge keinen Unterschied macht, hilft es diese zu randomisieren um die Qualität der Daten zu erhöhen.
+	\subsubsection{Befragung nach dem Test}
+	Nach dem Test sollten Benutzer über ihre Erfahrungen befragt werden. Das kann entweder mittels Questionnaire oder Interview geschehen
+	\subsection{Thinking Aloud Test}
+	[TODO]
+	\subsection{Formales Experiment}
+	Formale Experimente sind kontrollierte Experimente mit Testbenutzern. Es dient meist nur Sammlung von quantitativen Daten, ist in seiner Durchführung jedoch relativ aufwändig weshalb es erst zur summativen Bewertung (Der Bewertung des vollendeten Produkts) verwendet werden. \\
+	Die Menge der Testbenutzer hängt von dem gewünschten Konfidenzintervall ab. In der Forschung liegt das Confidence Level meist bei 95\%, während es bei kommerziellen Produkten oft bei 80\% liegt. Nielsen empfiehlt stets mindestens 20 Personen
+	Es gibt zwei Varianten eines formalen Experiments: Entweder man bewertet das Produkt absolut oder relativ anhand von zwei Designs um diese gegenüberzustellen. Bei der Überstellung gibt es zwei Versionen:
+	\subsubsection{Between-Subject}
+	Hierbei werden Benutzer in zwei Gruppen geteilt und jeder Gruppe wird zufällig eine der beiden Ausführungen zugeteilt. Je mehr Leute man dabei hat umso besser ist die Variabilität der Teilnehmer.
+	\subsubsection{Within Subject}
+	Jeder Benutzer testet in Serie beide Versionen. Das hat den Vorteil, dass man die Benutezr direkt nach ihrer Meinung befragt werden kann und weniger Tester benötigt. Man muss jedoch aufpassen, dass die Reihenfolge der Versionen wechselt, damit kein Lerneffekt von der Ersten zur zweiten Version geschieht.
+	\subsection{A/B Testing}
+	Bei dem A/B Testing wird die Performance von zwei Variationen gegenübergestellt und nach ihrer statistischen Signifikanz ausgewertet. Dabei erhält ein ausgeliefertes Softwareprodukt eine kleine Änderung (Zum Beispiel die Farbe eines Buttons) und jeweils die Hälfte aller Benutzer sieht die neue Version. Der Vorteil ist dabei, dass man keine Testgruppen einladen muss, da der reguläre Benutzer des Produkts ein Tester wird. Dadurch ist es sehr günstig und selbst kleine Änderungen können effektiv getetstet werden, da man eine große Testbenutzeranzahl hat. Man kann ebenfalls relativ dramatische Änderungen einfach testen, da es bei einem Fehlschlag einfach nicht implementiert wird. Nachteil ist, dass es nur mit einigen Produkttypen funktioniert und man muss in der Lage sein schnell und einfach Änderungen einspielen zu können. Es ist auch nur als summatives Verfahren verwendbar da man ja nur die Unterschiede der Endbenutzer während des Tests erfährt. Zusätzlich sieht man nur das Ergebnis aber nicht den Grund, da man nur die statistische Auswertung erhält.
+	\subsection{Nutzungsstudien}
+	Nutzungsstudien beobachten die Verwendung eines Produkts von außen
+	\subsubsection{Diary Studies}
+	Benutzer (In der Regel 3 bis 5) werden gebeten Tagebuch über ihre Nutzung des Systems zu führen. Da es jedoch Selbstauskunft ist, sollte man die Ergebnisse immer als unzuverlässig betrachten. Als Vorteil erhält man anekdotische Einschätzungen. Ein Nachteil ist jedoch, dass es schwer sein kann, 5 Personen zu finden, die gewillt sind Tagebuch über ihre Softwarenutzung zu schreiben.
+	\subsubsection{Software Logging}
+	\subsubsection{Observational Studies}
 
 
 

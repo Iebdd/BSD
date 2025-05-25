@@ -131,6 +131,16 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
     }
 
     /**
+     * Adds the first element to the empty list
+     *
+     * @param new_element The element to add to the list
+     */
+    private void addToEmpty(LinkedListNode new_element) {
+        this.first = new_element;
+        this.last = new_element;
+    }
+
+    /**
      * Finds an element of the list by its object reference
      *
      * @param song The song to be found
@@ -192,15 +202,7 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
         return current_node.getPrev().getValue();
     }
     
-    /**
-     * Adds the first element to the empty list
-     *
-     * @param new_element The element to add to the list
-     */
-    private void addToEmpty(LinkedListNode new_element) {
-        this.first = new_element;
-        this.last = new_element;
-    }
+
     
     /**
      * Decides if the List only has one element
@@ -264,6 +266,9 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
             LinkedListNode prev = node.getPrev();
             this.last = prev;
             this.last.setNext(null);
+        } else {
+            node.getPrev().setNext(node.getNext()); //Assigns the found node's next node as the previous node's next one
+            node.getNext().setPrev(node.getPrev()); //Assigns the found node's previous node as the next node's previous one
         }
         return true;
     }

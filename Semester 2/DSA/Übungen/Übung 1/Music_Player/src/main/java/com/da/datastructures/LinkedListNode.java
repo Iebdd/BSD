@@ -52,40 +52,6 @@ public class LinkedListNode {
     }
 
     /**
-     * Returns the first Node in the List
-     *
-     * @return The List's first node
-     */
-    public LinkedListNode first() {
-        if(prev != null) {
-            LinkedListNode current_node = prev;
-            while (current_node.getPrev() != null) {
-                current_node = current_node.getPrev();
-            }
-            return current_node;
-        } else {
-            return this;
-        }
-    }
-
-    /**
-     * Returns the last Node in the List
-     *
-     * @return The List's last node
-     */
-    public LinkedListNode last() {
-        if (next != null) {
-            LinkedListNode current_node = next;
-            while (current_node.getNext() != null) {
-                current_node = current_node.getNext();
-            }
-            return current_node;
-        } else {
-            return this;
-        }
-    }
-
-    /**
      * Returns the next node in the list.
      *
      * @return the next node
@@ -119,11 +85,6 @@ public class LinkedListNode {
      */
     public void setPrev(LinkedListNode prev) {
         this.prev = prev;
-    }
-
-    public void setAdjacent(LinkedListNode adjacent) {
-        this.prev = adjacent;
-        this.next = adjacent;
     }
 
     /**

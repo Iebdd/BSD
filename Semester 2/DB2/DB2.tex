@@ -665,14 +665,137 @@
 	  Pro Tabelle und pro Spalte kann man pro Kombination maximal einen Trigger definieren. \\
 	  \subsubsection{SQL}
 	  Ein Trigger wird mittels \texttt{CREATE TRIGGER} erstellt, wobei man die Tabelle sowie den Zeitpunkt angeben muss:
-	  \begin{verbatim} Eckige Klammern [] sind optional
-	  CREATE TRIGGER [schema_name].trigger_name -> Name des Schemas und triggers
-	  ON table_name -> Tabelle auf die sich der Trigegr bezieht
-	  AFTER {[INSERT], [UPDATE], [DELETE]} -> Definition der Event(s)
-	  [NOT FOR REPLICATION] -> Trigger wird nicht ausgelöst wenn Daten bei Replikation kopiert werden
-	  AS
+	\begin{verbatim} Eckige Klammern [] sind optional
+		CREATE TRIGGER [schema_name].trigger_name -> Name des Schemas und triggers
+		ON table_name -> Tabelle auf die sich der Trigegr bezieht
+		AFTER {[INSERT], [UPDATE], [DELETE]} -> Definition der Event(s)
+		[NOT FOR REPLICATION] -> Trigger wird nicht ausgelöst wenn Daten bei Replikation kopiert werden
+		AS
 	  {sql_statement}
-	  \end{verbatim}
+	\end{verbatim}
+	\section{Datenbankangriffe}
+	Wenn man eine Datenbank unterhält muss man natürlich immer sicherstellen, dass unberechtigte Benutzer keinen Zugriff auf den kompletten Datensatz haben. Ein grundlegender Faktor für Datensicherheit sind Views (Siehe Relationale Datenbanken 1), da man so nur eine gefilterte Ausgabe der Daten bekommt. Bei einem View gibt man zum Beispiel an, dass von außen nur der Durchschnitt eines Werts einsehbar ist und man kann so im Idealfall nie auf die einzelnen Noten der Studenten zugreifen.
+	\subsection{Audit}
+	Beim Auditing wird für ein gewisses Event (Wie zum Beispiel ein Select der nicht erfolgreich war) das System nach unerwünschten Operationen überprüft. Dabei kann man auch angeben, welche Art der Abfrage (Select, Create, Delete, etc...) überprüft werden soll.
+	\subsection{Role Based Access Control (RBAC)}
+	Nahezu jedes Datenbanksystem verwendet ein Rollensystem um die Berechtigungen der Benutzer zu verwalten. So kann man pro Gruppe eine gewisse Menge an Zugriffsrechte definieren und muss nicht pro Benutzer die Rechte explizit angeben.
+	\subsection{SQL Injection}
+	Da die meisten Webanwendungen im Hintergrund eine Datenbank verwenden, wird getätigter Input an die Datenbank weitergegeben. Dabei ist es extrem wichtig, dass man diesem Input nicht implizit vertraut. Das hat damit zu tun, dass man eine SQL Query als Input an die Datenbank übergeben kann um so Daten auszulesen oder Schaden anzurichten.
+	\subsubsection{Naive Authentifizierung}
+	Wenn nur naiv Input der Datenbank übergeben wird kann man, zum Beispiel bei einer Passwortüberprüfung zusätzlich zum Passwort eine weitere Überprüfung mitgeben um so stets erfolgreich zu authentifizieren:
+	\begin{verbatim}
+	Select *
+	FROM Studenten s JOIN prüfen p on s.MathNr = p.MathNr 
+	WHERE s.Name = "Susanne" AND
+								s.Passwort = "WilleUndVorstellung" OR "x"="x"
+	\end{verbatim}
+	Wenn der Input unsanitized übergeben wird, wird nicht nur auf das Passwort überprüft sondern zusätzlich ob x gleich x ist. Da x immer gleich x ist und durch das OR nur eine der beiden Überprüfungen wahr sein muss, kann man sich unabhängig vom Passwort erfolgreich authentifizieren.
+	\paragraphlb{Vektor}
+	Um so einen Angriff durchzuführen, muss man zuerst herausfinden wie das Datenmodell der Datenbank aussieht. Das kann man schaffen, indem man davor SELECT injected. So kann man zum Beispiel herausfinden, ob die Spalte als Zahl oder String oder sonstiges gespeichert wird.
+	\paragraphlb{Prepared Statements}
+	Ein effektiver Weg um innerhalb der Datenbank solche Injections zu vermeiden sind Prepared Statements. Da bei der Ausführung eines PS keine Daten in den Befehl eingesetzt werden, kann man sicherstellen, dass nur erlaubte Zugriffe abgesetzt werden.
+	\subsubsection{Kyptographie}
+	Um Daten nicht einfach aus der Datenbank auslesen zu können, kann man die gespeicherten Daten verschlüsseln. Passwörter sollten zum Beispiel nie in ihrer Reinform gespeichert werden, da man so selbst bei einem Datenleck die Information nicht zum Einloggen verwenden kann.
+	\paragraphlb{Passwort vs. Public/Private Key}
+	Man kann Passwörter auf einige Wege verschlüsseln: Entweder man verwendet ein Passwort um die Daten zu ver-/ und entzuschlüsseln. Das kann jedoch riskant sein, da so beide Parteien das Passwort benötigen. Hierbei ist ein Public/Private Key besser, da die Daten mittels Public Key verschlüsselt werden (Welcher von jedem einsehbar ist) aber nur mit dem Private Key wieder entschlüsselt werden können (Welchen nur der Benutzer hat und nie überträgt)
+	\section{Fehlerbehandlung}
+	Wenn ein Einbruch erfolgt ist, muss man die Daten sichern und feststellen welche Daten manipuliert wurden. Der erste Schritt ist dabei die Recovery Phase: Diese Klassifiziert den Fehler um diesen danach behandeln zu können. Diese Klassifikation geht von R1 bis R4:
+	\begin{itemize}
+		\item{R1}
+		\begin{itemize}
+			\item{Wenn ein Query noch nicht gespeichert wurde, kann man diesen löschen um so den Fehler beheben zu können.}
+		\end{itemize}
+		\item{R2}
+		\item{R3}
+		\item{R4}
+	\end{itemize}
+	Es gibt unterschiedliche Änderungsstrategien: Steal sowie Force
+	
+	\begin{itemize}
+		\item{Steal}
+		\begin{itemize}
+			\item{[TODO]}
+		\end{itemize}
+		\item{Force}
+		\begin{itemize}
+			\item{Jede Transaktion muss sofort auf den Speicher geschrieben werden}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Änderungsstrategien}
+	Es gibt verschiedene Strategien um Daten im Speicher zu verändern:
+	\begin{itemize}
+		\item{Duplication}
+		\begin{itemize}
+			\item{Daten werden stets überschrieben}
+		\end{itemize}
+		\item{Twin-Block}
+		\begin{itemize}
+			\item{[TODO]}
+		\end{itemize}
+		\item{Schattenblock}
+	\end{itemize}
+	\subsection{Logging}
+	Um die Änderungen einer Datenbank abzuspeichern, benötigt man eine Loggingstrategie. Ein Logeintrag hat so stets ein gewisses Format:
+	\begin{enumerate}
+		\item{Nummer des Logeintrages}
+		\item{Die Laufnummer der Transaktion}
+		\item{Die ID der Page die verändert wird}
+		\item{Die Strategie um den Befehl nochmal durchzuführen}
+		\item{Die Strategie um den Befehl rückgängig zu machen}
+		\item{Die ID des vorherigen Logeintrags}
+	\end{enumerate}
+	\subsubsection{Physisch/Logisch}
+	Man unterscheidet zwischen einer physischen und einer logischen Protokollierung. Bei einer physischen Protokollierung wird jeweils ein image des vorherigen und nachfolgenden Status abgespeichert. Bei der lgoischen Abspeicherung wird der Zustand nicht direkt abgespeichert sondern nur die Veränderungen zum vorherigen Staus.
+	\subsubsection{Wiederherstellung}
+	Um Daten aus den Logs wiederherstellen zu können, muss man wissen, wo diese begonnen haben. Aus diesem Grund werden auf jeder Page die höchste Logsequenz abgespeichert.
+	\paragraphlb{Speicherung}
+	Da es passieren kann, dass im Event eines Datenverlustes auch die Logdateien verloren gehen, ist es normalerweise eine gute Idee, nur die ersten drei Logklassifizierungen vor Ort zu speichern und die vierte (und umfangreichste) in einem Archiv, welches an einem anderen physischen Ort sein sollte.
+	\subsubsection{Speicherzeit}
+	Man muss auch darüber nachdenken, wie lange Logs gespeichert werden sollten, da diese sehr viel Speicher benötigen können. Eine Strategie zur Speicherung ist der Log-Ring. Dabei hat das Log eine fixe Größe und sobald die Größe des Logs erreicht wurde, wird der älteste Eintrag überschrieben.
+	\subsubsection{Write Ahead}
+	Da das Logging heutzutage extrem wichtig ist, werden in der Regel auch Logs für Transaktionen geschrieben, welche noch nicht committed wurden. Das hilft dabei einen Fehler zu erkennen, welcher ein System zum Absturz bringt.
+	\subsection{Wiederanlauf}
+	Bei der Wiederherstellung einer Datenbank infolge eines Absturzes, muss man herausfinden, welche Transaktionen abgeschlossen wurden (Die Winner) und welche durch den Absturz unterbrochen wurden (Die Loser). Infolge eines Absturzes muss man dabei alle Loser rückgängig machen um den Zustand vor dem Absturz wiederherzustellen.
+	\subsubsection{Kompensationseinträge}
+	Wenn bei der Wiederherstellung Transaktionen vonnöten sind, müssen diese auch in das Log File geschrieben werden. Diese Einträge nennt man Kompensationseinträge und werden innerhalb des Logfiles mit spitzen Klammern <...> gekennzeichnet.
+	\subsection{Sicherungspunkte}
+	Wenn man eine Sicherung einer Datenbank erstellt, kann diese in drei Strategien vollbringen: Transaktionskonsistent, Aktionskonsistent und Fuzzy
+	\begin{itemize}
+		\item{Transaktionskonsistent}
+		\begin{itemize}
+			\item{Nach Abschluss einer Transaktion wird der Status gesichert.}
+		\end{itemize}
+		\item{Aktionskonsistent}
+		\begin{itemize}
+			\item{Statt ganzer Transaktionen werden die Aktionen innerhalb der Transaktionen als Speicherpunkt gesetzt wodurch es genauerer Zuordnung erlaubt}
+		\end{itemize}
+		\item{Fuzzy}
+		\begin{itemize}
+			\item{Eine minimale Speicherstrategie da nur die PageID sowie die minimale Änderung der Datenbank gespeichert wird. Man benötigt jedoch eine große Menge an Rechenleistung um das Logfile zu generieren.}
+		\end{itemize}
+	\end{itemize}	
+	\section{Mehrbenutzersynchronisierung}
+	Im Idealfall sollten natürlich mehrere Benutzer gleichzeitig auf einen Datenbank zugreifen können. Die grundlegendste Strategie dabei ist der Einzelbetrieb wobei eine Transaktion nach der anderen abgeschlossen wird. Eine weitere aber komplexere Strategie ist der Mehrbenutzerbetrieb bei dem jeder Transaktion eine gewisse Zeit zugeschrieben wird und diese somit "gleichzeitig" stattfinden.
+	\subsection{Serialisierbarkeit}
+	Zwei Transaktion sind serialisierbar, wenn diese nacheinander ausgeführt werden können um das gleiche Ergebnis zu erhalten. Das funktioniert nur, wenn eine Transaktion nicht von der anderen abhängig ist.
+	\subsubsection{Theorie}
+	Die Theorie der Serialisierbarkeit beschreibt, wann eine Transaktion serialisierbar ist. Diese besagt, dass zwei Transaktionen serialisierbar sind:
+	\begin{itemize}
+		\item{Beide T}
+	\end{itemize}
+	\section{Verteilte Umgebung}
+	Da Datenbanken skalierbar sein sollten, sind verteilte Umgebungen essenziell. Diese haben den großen Vorteil, dass die Anwendung zwar jeweils die gleiche ist, jedoch auf vielen verschiedenen Servern läuft. Das kann man auf drei verschiedene Wege erreichen:
+	\begin{itemize}
+		\item{Asynchron}
+		\begin{itemize}
+			\item{Prozesse sind aktiv oder passiv wobei nur aktive Prozesse Nachrichten versenden}
+		\end{itemize}
+		\item{Synchron}
+		\item{Atommodell}
+	\end{itemize}
+	\subsection{Potentielle Probleme}
+	Ein Single-Point of Failure (SPOF) ist ein
+
 	 
 
 

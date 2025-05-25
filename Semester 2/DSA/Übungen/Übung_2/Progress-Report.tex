@@ -1,0 +1,44 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+\setcounter{tocdepth}{5}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Datenstrukturen und Algorithmen - Aufgabe 2 - Progress Report}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\section*{Fortschritt}
+	Ich bin mit dem Erstellen des Labyrinths nahezu fertig. Das Programm findet den Lösungsweg und die Alternativpfade, ich muss jedoch noch die Kürzungsfunktion implementieren (Welche wahrscheinlich sehr ineffizient sein wird).
+	\section*{Schwierigkeiten}
+	Ich musste ein Mal neu beginnen, da ich ständig die beiden Indexwerte der Arrays vertauschte und es so zu unzähligen Problemen kam. Beim zweiten Versuch habe ich Maze und Cell erweitert sodass es auch das Objekt statt eines Integerarrays zurückgeben kann und nur mit diesen gearbeitet (Sowie einem enum). Ich hoffe, dass das die Funktion der Testsoftware nicht beeinträchtigt.
+	\section*{Strategie}
+	\subsection*{Erstellen des Labyrinths}
+	Ich war mir unsicher wie ich das Erstellen des Labyrinths als rekursive Funktion implementieren würde, weshalb ich stattdessen eine iterative gewählt habe. Dabei wird es in vier Phasen generiert:
+	\begin{enumerate}
+		\item{Ein zufällig gewählter Pfad wird durch das Labyrinth vom Anfang zum Ende generiert.}
+		\item{Eventuelle Schleifen werden entfernt um den kürzestmöglichen Pfad zu finden.}
+		\item{Abhängig von der Größe des Labyrinths wird eine variable Menge (Mein Gedanke liegt bei der abgerundeten Kubikwurzel der Fläche) an weiteren Pfaden generiert die von einem zufälligen Punkt im Labyrinth (Entfernt vom End- oder Anfangspunkt) den Lösungspfad kreuzen.}
+		\item{Der Rest wird mit Wänden aufgefüllt.}
+	\end{enumerate}
+	\subsection*{Lösen des Labyrinths}
+	Zur Lösung brauche ich dann natürlich eine rekursive Funktion. Mein Gedanke ist es die Methode mit Anfangspunkt und Richtung aufzurufen. Diesem Pfad wird dann gefolgt bis er auf zwei Möglichkeiten stößt wonach er sich erneut mit jeweils den Möglichkeiten als Anfangspunkt und der neuen Richtung aufruft. Der Rückgabewert ist stets eine ArrayList und das Ergebnis der letzten Funktion wird an das bisherige Ergebnis hinzugefügt. Wenn ein Pfad keine Möglichkeiten mehr aht gibt er eine leere Liste zurück, sonst den zurückgelegten Pfad.
+\end{document}

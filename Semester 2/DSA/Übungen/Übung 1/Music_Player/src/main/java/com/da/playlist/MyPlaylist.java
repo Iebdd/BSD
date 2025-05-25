@@ -17,9 +17,14 @@ public class MyPlaylist {
     private final DoubleLinkedList playlist;
     private Song current_song;
 
+    private enum Arg {
+        Path,
+        Name
+    }
+
 
     public MyPlaylist() {
-        playlist = new DoubleLinkedList();
+        this.playlist = new DoubleLinkedList();
     }
 
     /**
@@ -45,7 +50,7 @@ public class MyPlaylist {
             return false;
         }
         if(current_song.getName().equals(songName)) {
-            current_song = playlist.getNextSong(this.current_song);
+            this.current_song = playlist.getNextSong(this.current_song);
         }
         boolean found = playlist.removeByName(songName);
         if (playlist.isEmpty()) {
@@ -119,18 +124,18 @@ public class MyPlaylist {
     /**
      * Returns the longest string of either the name or the path, depending on the passed argument
      *
-     * @param values Which values to check. 0 for the names and 1 for the paths
+     * @param values Which values to check. Eithe the Name or the Path
      * @return An integer representing the length of the longest string found
      */
-    private int longestString(int values) {
+    private int longestString(Arg values) {
         int longest = 0;
-        if(values == 0) {
+        if(values == Arg.Name) {
             for(LinkedListNode node : this.playlist) {
                 if (node.getValue().getName().length() > longest) {
                     longest = node.getValue().getName().length();
                 }
             }
-        } else if (values == 1) {
+        } else if (values == Arg.Path) {
             for (LinkedListNode node : this.playlist) {
                 if(node.getValue().getPath().length() > longest) {
                     longest = node.getValue().getPath().length();
@@ -147,13 +152,7 @@ public class MyPlaylist {
      * @return A String containing spaces depending on its order
      */
     private String numberSpaces(int number) {
-        if (number < 10) {
-            return "  ";
-        } else if (number < 100) {
-            return " ";
-        } else {
-            return "";
-        }
+        return " ".repeat((int) Math.log10(number) + 2);
     }
 
     /**
@@ -163,19 +162,27 @@ public class MyPlaylist {
      */
     @Override
     public String toString() {
-        int order = 1;
-        int longest_name = longestString(0);
-        int longest_path = longestString(1);
+        int order = 1;                                      // The order of the songs in the playlist
+        int longest_name = longestString(Arg.Name);         // The amount of characters the longest name
+        int longest_path = longestString(Arg.Path);         // and path are long
         StringBuilder string = new StringBuilder();
         if(playlist.isEmpty()) {
             return "Playlist is empty. Add some with the 'add' command!";
         }
         string.append(String.format(" %s %n", "_".repeat(20 + longest_name + longest_path)));
-        string.append(String.format("| C |  Nr. | %sName%s |%sPath%s|%n", " ".repeat(longest_name/2), " ".repeat(longest_name/2), " ".repeat(longest_path/2), " ".repeat(longest_path/2 )));
+        string.append(String.format("| C |  Nr. | %sName%s |%sPath%s|%n", 
+                                            " ".repeat(longest_name/2),         // Spaces before Name
+                                            " ".repeat(longest_name/2),         // Spaces after Name
+                                            " ".repeat(longest_path/2),         // Spaces before Path
+                                            " ".repeat(longest_path/2)));       // Spaces after Path
 
         for(LinkedListNode node : this.playlist) {
-            string.append(String.format("| %s |  %d%s |  %-" + (longest_name + 1) + "s  | %-" + (longest_path + 1) + "s |%n", (node.getValue() == this.current_song) ? "*" : " ", order, 
-                                                                                                            numberSpaces(order), node.getValue().getName(), node.getValue().getPath()));
+            string.append(String.format("| %s |  %d%s |  %-" + (longest_name + 1) + "s  | %-" + (longest_path + 1) + "s |%n", 
+                                        (node.getValue() == this.current_song) ? "*" : " ",     // | %s |
+                                        order,                                                  // | %d
+                                        numberSpaces(order),                                    //     %s |
+                                        node.getValue().getName(),                              // | %-xs |
+                                        node.getValue().getPath()));                            // | %-xs |
             order++;
         }
         string.append(String.format("|%s|%n", "_".repeat(20 + longest_name + longest_path)));
