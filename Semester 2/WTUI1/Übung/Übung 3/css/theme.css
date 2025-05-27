@@ -1,0 +1,104 @@
+@font-face {
+    font-family: "Unageo";
+    src: local('./Unageo-Black.ttf'), format('truetype');
+}
+.page_img {
+    width: 100vw;
+    margin-top: 30px;
+}
+footer p {
+    font-size: 8pt;
+}
+.g_maps {
+    width: 100vw;
+}
+iframe {
+    width: 100vw;
+    height: 400px;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.top-bar {
+    display: flex;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 999;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: #71aad5;
+}
+.intro {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+}
+.intro > div {
+    font-family: Unageo, sans-serif;
+    flex-basis: 25%;
+    font-size: 30pt;
+    padding-right: 10px;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+}
+.intro img {
+    flex-basis: 50%;
+    flex-grow: 2;
+}
+.intro .left {
+    border-left: 5px solid black;
+}
+.intro .right {
+    border-right: 5px solid black;
+}
+.top-bar a {
+    display: inline;
+    color: black;
+    height: 80px;
+    line-height: 80px;
+    width: 130px;
+    border-left: 5px solid white;
+    border-right: 5px solid white;
+    margin-left: 30px;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: 15pt;
+}
+.top-bar a:hover {
+    background: white;
+}
+.lake div{
+    text-align: center;
+    font-size: 25pt;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: Unageo, sans-serif;
+    margin-left: 50px;
+    text-align: center;
+}
+.lake-img {
+    display: flex;
+    flex-direction: row;
+}
+.lake-img img {
+    flex-basis: 50%;
+}
+.manndl {
+    display: flex;
+    flex-direction: row;
+}
+.manndl > img {
+    flex-basis: 25%;
+}
+.manndl > div {
+    flex-basis: 75%;
+}
+.wurm p {
+    text-align: center;
+    font-size: 25pt;
+}

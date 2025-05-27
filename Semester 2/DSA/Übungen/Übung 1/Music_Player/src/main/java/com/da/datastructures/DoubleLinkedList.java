@@ -247,7 +247,7 @@ public class DoubleLinkedList implements Iterable<LinkedListNode>{
     /**
      * Removes a song from the playlist by its name.
      *
-     * @param songName The name of the song to remove.
+     * @param song_name The name of the song to remove.
      * @return true if the song was successfully removed, false if the song was not found.
      */
     public boolean removeByName(String song_name) {

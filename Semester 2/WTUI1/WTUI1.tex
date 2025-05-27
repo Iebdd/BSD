@@ -725,6 +725,7 @@
 	Die Stakeholder werden über mögliche Lösungswege informiert.
 	\subsubsection{Abschlussbericht}
 	Ein umfassender Bericht wird als Zusammenfassung der Evaluierung erstellt.
+<<<<<<< Updated upstream
 	\section{Usability Testing}
 	Usability Testing ist, im Gegensatz zum Usability Testing mit Experten, eine Testmethode bei der repräsentative Anwender die Software benutzen und deren Erfahrungen analysiert werden. Gleich wie die Wahl der Experten bei der Inspection, ist die gute Wahl der Anwender extrem wichtig.
 	\subsection{Bestandteile}
@@ -787,6 +788,166 @@
 
 
 
+=======
+	\section{Usability Engineering}
+	Es gilt die Regel, dass eine Änderung welche früher geschieht, weniger Aufwand benötigt. Wenn man seine Datenstruktur während des Designs ändert, ist der Aufwand sehr gering da nur das Modell selbst geändert werden muss. Wenn dies jedoch erst nach Auslieferung des Produkts geschieht, muss man eventuell das gesamte System umbauen. Usability Engineering ist das Einbeziehen von Usability noch während der Erstellung des Produkts. So wird die Usability nicht erst nach Fertigstellung gemessen, sondern laufend in den Prozess eingebaut, da so eventuelle Usabilityprobleme schnell erkannt und früher behoben werden können.
+	\subsection{Lifecycle}
+	\begin{enumerate}
+		\item{Know the User}
+		\begin{itemize}
+			\item{Wer sind die Benutzer die ich ansprechen will eigentlich? Und was sind ihre Anforderungen.}
+		\end{itemize}
+		\item{Usability Benchmark}
+		\begin{itemize}
+			\item{Was sind die Ziele die das Produkt erreichen will?}
+		\end{itemize}
+		\item{Goal-Oriented Design}
+		\begin{itemize}
+			\item{Was sind die Ziele der Benutzer mit meinem Produkt?}
+		\end{itemize}
+		\item{Iterative Design}
+		\begin{itemize}
+			\item{Ein kontinuierlicher Prozess aus Prototyping und Formate Evaluation. Es wird ein Prototyp erstellt und ausgewertet wonach diese Information erneut in den Prototyp einfließt.}
+		\end{itemize}
+		\item{Summative Evaluation}
+		\begin{itemize}
+			\item{Eine Evaluiering }
+		\end{itemize}
+	\end{enumerate}
+	Der Prozess des Usability Engineering folgt dabei einem spezifischen Prozess:
+	\subsubsection{Know the User}
+	Zuallererst muss herausgefunden werden, wer die beabsichtigten Benutzer sind und wie das Produkt verwendet werden soll. Diese Fragen soltle man so früh wie möglich beantworten da die individuellen Anforderungen der Zielgruppe eine sehr große Auswirkung auf die Benutzerfreundlichkeit haben. Man muss auch überlegen, ob es mehrere Gruppen an Endbenutzern geben kann. Zum Beispiel mag eine Software zwar von einer Führungskraft implementiert, aber größtenteils von anderen Mitarbeitern verwendet werden. Um User gut identifizieren zu können, werden diese in vier Gruppen geteilt:
+	\begin{itemize}
+		\item{Novice}
+		\begin{itemize}
+			\item{Benutzer die noch nicht viel mit dem System zu tun hatten}
+		\end{itemize}
+		\item{Casual User}
+		\begin{itemize}
+			\item{Nutzt das Produkt nur gelegentlich}
+		\end{itemize}
+		\item{Experts}
+		\begin{itemize}
+			\item{Hohe Erfahrung mit dem Produkt}
+		\end{itemize}
+		\item{Power User}
+		\begin{itemize}
+			\item{Detaillierte Produktkenntnisse}
+		\end{itemize}
+	\end{itemize}
+	\paragraphlb{Perpetual Intermediates}
+	Man muss dabei auch beachten, dass diese Gruppen der Benutzer nicht statisch sind. Auf einer Normalverteilung stehen links die Novices, in der Mitte die Intermediates und rechts die Experten. Da ein Novice jedoch nicht lange unerfahren bleibt und ein Experte eventuell nach einer längeren Zeit in der das Produkt nicht verwendet wurde, nicht mehr das gleiche Wissen hat, fällt ein Großteil aller Nutzer in die Mitte.
+	\paragraphlb{Interviews}
+	Man kann mittels Interviews auch verwenden um Werte, Ziele und Erwartungen der Benutzer zu erfahren. Dabei unterscheidet man zwischen einer Quantitativen und Qualitativen Forschung. Quantitative Fragen beschäftigen sich damit wie viele Personen was machen und basiert größtenteils auf Zahlen. Qualitative Fragen legen dabei einen größeren Fokus auf subjektive Einschätzungen und erfragen das Warum.
+	\subparagraphlb{Personenkreise}
+	Bei Interviews muss man stets auf die relevanten Personengruppen achten. In der Regel hat ein Produkt vier relevante Personenkreise, welche eventuell die selben Personen sein können.
+	\begin{itemize}
+		\item{Stakeholder}
+		\begin{itemize}
+			\item{Jene die die Verantwortung für das zu entwerfende Produkt tragen.}
+		\end{itemize}
+		\item{Fach- und Domainexperten}
+		\begin{itemize}
+			\item{Experten in dem Bereich in dem das Produkt eingesetzt wird.}
+		\end{itemize}
+		\item{Kunden}
+		\begin{itemize}
+			\item{Jene die die Kaufentscheidung treffen}
+		\end{itemize}
+		\item{Benutzer}
+		\begin{itemize}
+			\item{Jene die das Produkt verwenden. Sollte stets der Hauptfokus sein.}
+		\end{itemize}
+	\end{itemize}
+	[TODO BENUTZERINTERVIEWS]
+	\subsubsection{Usability Benchmark}
+	Bei dem Usability Benchmark werden die Anforderungen des Usability festgelegt. 
+	\paragraphlb{Kompetetive Analyse}
+	;an unter anderem Konkurrenzprodukte evaluieren. Fragen mit denen man sich beschäftigen sollte, sind:
+	\begin{itemize}
+		\item{Wie nutzbar ist die Konkurrenz?}
+		\item{Was sollte unsere Oberfläche besser machen?}
+		\item{Abhängig der Konkurrenz, wie hoch ist der ROI?}
+		\item{Was ist der Stand der Technik und was ist möglich?}
+		\item{Sich von konkurrierenden Produkten inspirieren lassen. Dabei Stärken übernehmen und Schwächen umgehen}
+	\end{itemize}
+	\paragraphlb{Usabilityziele}
+	Man sollte auch feststellen, welche Aspekte der Usability relevanter sind als andere. Zusätzlich muss man feststellen, welcher Kennzahlen relevant sind. Wenn man zum Beispiel an Userfehlern pro Stunde interessiert ist, muss man festlegen, wie viele Fehler eines Users pro Stunde Akzeptabel, Optimal und Inakzeptabel sind.
+	\paragraphlb{Return on Investment (ROI)}
+	Zusätzlich sollte man überlegen, was der Return on Investment (ROI) des Produkts ist. Wie viel kostet es das Produkt zu verwenden und wie viel Geld sparen sich Benutzer durch höhere Effizienz? Damit ein Produkt eine gute Investition ist, muss man sich mit der Effizienzsteigerung mehr Zeit und Geld sparen, als das Produkt kostet.
+	\subsubsection{Goal-Oriented Interaction Design}
+	Goal-Oriented Interaction Design verläuft über vier Stufen:
+	\begin{itemize}
+		\item{Research}
+		\begin{itemize}
+			\item{Benutzer befragen und Verhaltensmuster bestimmen}
+		\end{itemize}
+		\item{Modeling}
+		\begin{itemize}
+			\item{Basierend auf den Mustern Ziele definieren und 'Personas' schaffen}
+		\end{itemize}
+		\item{Requirements}
+		\begin{itemize}
+			\item{Konkrete Szenarien werden zum Erreichen der Ziele definiert}
+		\end{itemize}
+		\item{Design}
+		\begin{itemize}
+			\item{Ein Design wird anhand der Szenarien erzeugt}
+		\end{itemize}
+	\end{itemize}
+	\paragraphlb{Personas}
+	Eine Persona ist ein Benutzerarchetyp. Dieser repräsentiert dabei nicht einen spezifischen Benutzer sondern eine allgemeine, an Gruppen von Benutzern welche im Allgemeinen ähnliche Eigenschaften haben, angelehnte Persönlichkeit. Eine Persona ist also ein imaginärer Mensch für welchen spezifische Benutzergruppen stehen. Dabei stellt man sich mit den Motivationen, Zielen, Verhaltensweisen und Frustrationen dieser Persona auseinander. Solche Personas werden danach dafür verwendet um das Design mit Rollen durchzuspielen und so zu überprüfen ob das Design den Anforderungen des Produkts entspricht.
+	\subparagraphlb{Erstellung einer Persona}
+	Eine Persona erstellt man indem man Interviews durchführt um die Benutzergruppen zu erfassen. Anhand dieser Interviews werden dann Typen zusammengefasst um eine Persona zu erstellen. Es sollte so spezifisch wie möglich sein um eventuell anfallende Fragen während des Implementationsprozesses beantworten zu können.
+	\paragraphlb{Szenarien}
+	Nachdem Personas erstellt wurden, müssen Szenarien für diese definiert werden. Dabei wird pro Persona ein spezifischer Vorgang durchgespielt um die beispielhafte Benutzung des Produkts anzuzeigen. \\
+	Man unterscheidet dabei zwischen drei Typen an Szenarien:
+	\begin{itemize}
+		\item{Täglicher Gebrauch}
+		\begin{itemize}
+			\item{Aktionen welche regelmäßig und häufig ausgeführt werden. Diese Szenarien müssen so benutzerfreundlich wie möglich sein.}
+		\end{itemize}
+		\item{Notwendige Szenarien}
+		\begin{itemize}
+			\item{Selten verwendete, aber notwendige Szenarien}
+		\end{itemize}
+		\item{Edge Case Szenarien}
+		\begin{itemize}
+			\item{Szenarien welche nur selten und von viele gar nicht verwendet werden. Können in der Regel während der Designphase ignoriert werden.}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Iterative Design}
+	Nachdem Szenarien definiert wurden, muss das Design erarbeitet werden. Man unterscheidet bei Design zwischen Design Patterns, welche Designs sind, die oft verwendet und allgemein akzeptiert sind. Das Gegenteil davon sind Design Anti-Patterns, welche vermieden werden sollten, da sie die Usability in der Regel negativ beeinflussen. Dabei gibt es unterschiedliche Designstrategien:
+	\begin{itemize}
+		\item{Participatory}
+		\begin{itemize}
+			\item{Die Benutzer (Kunden, Mitarbeiter oder User) werden in den Designprozess miteinbezogen.}
+		\end{itemize}
+		\item{Parallel}
+		\begin{itemize}
+			\item{Mehrere Designer erstellen unabhängig voneinander einen Designentwurf.}
+		\end{itemize}
+	\end{itemize}
+	Diese Designs werden kontinuierlich erstellt, evaluiert und anhand dieser neu erstellt:
+	\begin{itemize}
+		\item{Ein Prototyp wird erstellt und bewertet.}
+		\item{Usability-Probleme werden entdeckt}
+		\item{Probleme werden behoben und anhand dessen ein neues Design erstellt.}
+		\item{Die neue Version wird erneut evaluiert.}
+		\item{Wiederholen bis Zeit oder Geld ausgeht}
+	\end{itemize}
+	\paragraphlb{Prototyp}
+	Ein Prototyp ist die Entwurfsversion eines Produkts der dazu dient ein Design zu demonstrieren. Ein Prototyp kann dabei von einer einfachen Zeichnung auf Papier bis zu einer Website reichen. Man unterscheidet zwischen zwei Typen des Prototyps:
+	\subparagraphlb{Low-Fidelity}
+	Hilft bei sehr frühen Iterationen da es nicht viel Aufwand bedarf. Da es meist nur eine simple Zeichnung ist, besteht der Fokus nicht auf das Aussehen sondern dessen theoretische Funktionalität. Low-Fidelity Prototypes bieten somit nur einige der Endfunktionen an und es werden nur Schlüsselinhalte berücksichtigt. Bei Bedarf kann die Funktion eines Prototyps auch von einem Menschen simuliert werden.
+	\subparagraphlb{High-Fidelity}
+	Das Gegenteil davon ist der High-Fidelity Prototype, welcher aufwändig designt wird um dem fertigen Produkt visuell so nahe wie möglich zu stehen. Dadurch müssen sich Tester das Design des Produkts nicht zuerst vorstellen. Nachteil ist es, dass der Aufwand bedeutend höher ist als mit Low-Fidelity, da es designt und gedruckt werden muss. Man kann auch interaktive Prototypen erstellen, die Funktionen beispielhaft digital darstellen. Dazu kann man Programme wie Adobe XD oder Figma verwenden.
+	\subparagraphlb{Working Prototype}
+	Eine weitere Method einen Prototyp zu Erstellen ist ein funktionierender Prototyp. Dabei ist die Funktionalität des Produkts bereits gegeben und man kann sich von Funktionen direkt überzeugen. Für diesen Prototyp werden oft Beispieldaten eingefügt, da diese in dem Moment nicht relevant sind. Ein Working Prototype ist mit einem noch größeren Aufwand verbunden als ein High-Fidelity Prototype
+	\subsubsection{Follow-Up Studies}
+	Ein Produkt kann für zukünftige Projekte auch als Prototyp dienen. Dabei dienen 
+	
+>>>>>>> Stashed changes
 
 
 

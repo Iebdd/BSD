@@ -6,7 +6,9 @@
 \usepackage{multicol}
 \usepackage{setspace}
 \usepackage{changepage}
+\usepackage{amsmath}
 \usepackage{booktabs}
+\usepackage{amssymb}
 \usepackage[explicit]{titlesec}
 \usepackage{hyperref}
 \usepackage{graphicx}
@@ -35,6 +37,12 @@
     \expandafter\xvekSp@lten
   \fi}
 \makeatother
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\M}{\mathbb{M}}
 \setstretch{1.10}
 \setlength{\parindent}{0pt}
 \setcounter{tocdepth}{5}
@@ -75,7 +83,7 @@
 	\paragraphlb{Verallgemeinerung}
 	Für diese Regel existiert auch einen Verallgemeinerung, bei der mehr als zwei Mengen verwendet werden kann. Eine Regel dabei ist, dass der Schnitt jeder Menge die leere Menge ergibt.
 	\subsubsection{Produktregel}
-	Anders als bei der Summenregel müssen bei der Produktregel die Mengen nicht disjunkt sein. Hierbei wird das kartesische Produkt der Mengen gebildet: $|AxB|=|A|\point|B|$. Ein Beispiel zur Anwendung ist die Routenplanung. Angenommen es gibt drei Routen von Wien nach Graz und 4 Routen von Wien nahc Marburg, kann man diese kombinieren, da man eine beliebige Route von Wien nach Graz und eine beliebige Route von Graz nach Marburg verwenden kann. So gibt es ingsesamt 12 verschiedene Möglichkeiten von Wien nach Marburg zu kommen, da man jede der ersten Route mit jeder der zweiten Route kombinieren kann.
+	Anders als bei der Summenregel müssen bei der Produktregel die Mengen nicht disjunkt sein. Hierbei wird das kartesische Produkt der Mengen gebildet: $|AxB|=|A|\cdot|B|$. Ein Beispiel zur Anwendung ist die Routenplanung. Angenommen es gibt drei Routen von Wien nach Graz und 4 Routen von Wien nahc Marburg, kann man diese kombinieren, da man eine beliebige Route von Wien nach Graz und eine beliebige Route von Graz nach Marburg verwenden kann. So gibt es ingsesamt 12 verschiedene Möglichkeiten von Wien nach Marburg zu kommen, da man jede der ersten Route mit jeder der zweiten Route kombinieren kann.
 	\paragraphlb{Verallgemeinerung}
 	Auch bei der Produktregel existiert eine Verallgemeinerung mit beliebig vielen Schritten. Dabei wird wieder die Mächtigkeit jeder Teilmenge mit jeder anderen Teilmenge multipliziert. Ein Beispiel dafür ist die Menge der Möglichkeiten bei einer Binärzahl. So hat man 8 Bits zur Verfügung und jedes Bit kann zwei Mögliche Zustände (1 und 0) besitzen, wodurch man diese zwei Möglichkeiten acht Mal miteinander multipliziert um zum Ergebnis zu kommen: $2^8=256$
 	\subsubsection{Kombination}
@@ -84,7 +92,7 @@
 	\begin{enumerate}
 		\item{Man berechnet die Menge aller Möglichkeiten mit Ziffern und Buchstaben und zieht davon alle Möglichkeiten welche nur Buchstaben enthalten ab}
 		\begin{itemize}
-			\item{$P_6 - (Menge an Passwörtern ohne Ziffern) = P_6 - 26^6 = 36^6 - 26^6 = 1.867.866.560$}
+			\item{$P_6 - ($Menge an Passwörtern ohne Ziffern$) = P_6 - 26^6 = 36^6 - 26^6 = 1.867.866.560$}
 		\end{itemize}
 		\item{Man nimmt jede Ziffer diskret wahr und berechnet anhand dessen dann die Menge an Möglichkeiten pro Ziffer}
 		\begin{itemize}
@@ -109,8 +117,8 @@
 	\subsubsection{Kombination}
 	Bei der Kombination spielt die Reihenfolge keine Rolle und wird auch als Ungeordnete Auswahl bezeichnet. Eine Kombination entspricht genau einer Teilmenge. 
 	\paragraphlb{Ohne Zurücklegen}
-	Die Anzahl der möglichen Kombinationen wird als C(n, k) geschrieben und kann mit \frac{P(n, k)}{k!} oder \frac{n!}{k!(n-k)!} berechnet werden. \\
-	Kombinationen sind relevant wenn man ein Team uas einer bestimmten Menge an Personen wählen will. Da es keinen Unterschied macht ob man zuerst Person 1 oder Person 2 wählt. Wenn man also eine Gruppe aus 4 Personen hat und ein zweiköpfiges Team bilden will, berechnet man das mit \frac{P(4,2)}{2!}=\frac{4!}{2!(4-2)!}=\frac{4!}{2!2!}=\frac{24}{4}=6
+	Die Anzahl der möglichen Kombinationen wird als C(n, k) geschrieben und kann mit $\frac{P(n, k)}{k!} oder \frac{n!}{k!(n-k)!}$ berechnet werden. \\
+	Kombinationen sind relevant wenn man ein Team uas einer bestimmten Menge an Personen wählen will. Da es keinen Unterschied macht ob man zuerst Person 1 oder Person 2 wählt. Wenn man also eine Gruppe aus 4 Personen hat und ein zweiköpfiges Team bilden will, berechnet man das mit $\frac{P(4,2)}{2!}=\frac{4!}{2!(4-2)!}=\frac{4!}{2!2!}=\frac{24}{4}=6$
 	\paragraphlb{Mit Zurücklegen}
 	Die Kombination mit Zurücklegen basiert auf dem gleichen Prinzip, kombiniert jedoch alle möglichen Kombinationen aus Werten. Die Formel ist: $\binom{n+k-1}{k}$. Da man die Werte stets wieder zurücklegt, wird die Formel behandelt, als ob sie die Elemente plus alle zurückgelegten Elemente enthält.
 	\subparagraphlb{Beispiel}
@@ -120,7 +128,7 @@
 	Diese msus man nun mit der Produktregel kombinieren: C(3,2)*C(7,3)=3*35=105. \\
 	Wenn man stattdessen wissen will, wie viele Stichproben mit mindestens einem defekten Gerät existieren
 	\subsubsection{Binomialkoeffizient}
-	Eine alternative Schreibweise für die Kombination ohne Zurücklegen, ist der Binomialkoeffizient. Diese wird als \binom{n}{k} geschrieben und beschreibt die gleiche Formel.
+	Eine alternative Schreibweise für die Kombination ohne Zurücklegen, ist der Binomialkoeffizient. Diese wird als $\binom{n}{k}$ geschrieben und beschreibt die gleiche Formel.
 	\paragraphlb{Lehrsatz}
 	Der binomische Lehrsatz besagt, dass $(x+y)^n$ gleich $\sum_{k=0}^{n}\binom{n}{k}x^{n-k}y^k$. Mithilfe diese Lehrsatzes kann man für ein beliebiges n die binomische Formel herleiten.
 	\paragraphlb{Mit Zurücklegen}
@@ -131,23 +139,23 @@
 	\subsection{Darstellung}
 	Vektoren können auf verschiedene Weisen dargestellt werden:
 	\subsubsection{Ortsvektor}
-	Ein Ortsvektor ist in ein Vektor in $\R^2$ oder $\R^3$ mittels Pfeil. Für höhere Dimensionen ist es nicht wirklich möglich. Der Ausgangspunkt für einen Ortsvektor ist dabei der Ursprung (0,0) welcher zu den Koordinaten führt: \textbf{a}=\vec{a}=[TODO OP MIT PFEIL]=Q(5|6). \\
-	Ein Vektor muss jedoch nicht vom Ursprung beginnen. In diesem Fall wird der Ausgangspunkt nicht mit O sondern mit einem anderen Vektor bezeichnet: \textbf{b}=\vec{b}=[TODO PQ] \\
-	Wenn man einen Vektor als Orientierung zwischen zwei Punkten verwendet, muss man \textbf{Spitze minus Schaft} rechnen: [AB]=\begin{pmatrix}$x_B-x_A$ \\ $y_B-y_A$ \end{pmatrix} \texttt{->} [TODO Vector SLIDE 10]
+	Ein Ortsvektor ist in ein Vektor in $\R^2$ oder $\R^3$ mittels Pfeil. Für höhere Dimensionen ist es nicht wirklich möglich. Der Ausgangspunkt für einen Ortsvektor ist dabei der Ursprung (0,0) welcher zu den Koordinaten führt: $\textbf{a}=\vec{a}$=[TODO OP MIT PFEIL]=Q(5|6). \\
+	Ein Vektor muss jedoch nicht vom Ursprung beginnen. In diesem Fall wird der Ausgangspunkt nicht mit O sondern mit einem anderen Vektor bezeichnet: $\textbf{b}=\vec{b}$=[TODO PQ] \\
+	Wenn man einen Vektor als Orientierung zwischen zwei Punkten verwendet, muss man \textbf{Spitze minus Schaft} rechnen: [AB]=$\begin{pmatrix}x_B-x_A \\ y_B-y_A \end{pmatrix}$ \texttt{ -> } [TODO Vector SLIDE 10]
 	\subsection{Rechenoperationen}
 	\subsubsection{Addition/Subtraktion}
-	Vektoren kann man gleich wie Skalare addieren und subtrahieren. Dabei werden diese elementweise verbunden, müssen jedoch stets aus dem selben Vektorraum sein: \textbf{a + b}=\vec{a}+\vec{b}=\begin{pmatrix} $a_1+b_1$ \\ $a_2+b_2$ \\ $a_3+b_3$ \\ ... \\ $a_n+b_n$\end{pmatrix} \\
+	Vektoren kann man gleich wie Skalare addieren und subtrahieren. Dabei werden diese elementweise verbunden, müssen jedoch stets aus dem selben Vektorraum sein: $\textbf{a + b}=\vec{a}+\vec{b}=\begin{pmatrix} a_1+b_1 \\ a_2+b_2 \\ a_3+b_3 \\ ... \\ a_n+b_n\end{pmatrix}$ \\
 	Hierbei werden die Vektoren direkt miteinander kombiniert und es entsteht ein neuer Vektor im gleichen Raum.
 	\begin{figure}[H]
 	\centering
-	\includegraphics{Bilder/vector_add.png}
+	\includegraphics[scale=0.5]{Bilder/vector_add.png}
 	\caption{Vektoraddition}
 	\end{figure}
 	\subsubsection{Multiplikation}
-	\paragraphlb{Mite Skalar}
-	Man kann einen Vektor auch multiplizieren, dabei diesen jedoch auch mit einem Skalar verbinden wobei jedes Element des Vektors mit diesem Skalar multipliziert wird: \textbf{a}*k=\vec{a}*k=\begin{pmatrix} $a_1*k$ \\ $a_2*k$ \\ $a_3*k$ \\ ... \\ $a_n*k$\end{pmatrix} \\
+	\paragraphlb{Mit Skalar}
+	Man kann einen Vektor auch multiplizieren, dabei diesen jedoch auch mit einem Skalar verbinden wobei jedes Element des Vektors mit diesem Skalar multipliziert wird: $\textbf{a}*k=\vec{a}*k=\begin{pmatrix} a_1*k \\ a_2*k \\ a_3*k \\ ... \\ a_n*k\end{pmatrix}$ \\
 	\paragraphlb{Skalarprodukt}
-	Wenn man zwei Vektoren miteinander multipliziert erhält man am Ende einen Skalar. Dabei wird jedes Element eines Vektors mit dessen Paar multipliziert, welche danach addiert werden. \textbf{a*b}=\vec{a}*\vec{b}=$a_1*b_1+a_2+b_2+...+a_n*b_n$. Das Skalarprodukt wird als $\vec{a}\cdot\vec{b}$ geschrieben
+	Wenn man zwei Vektoren miteinander multipliziert erhält man am Ende einen Skalar. Dabei wird jedes Element eines Vektors mit dessen Paar multipliziert, welche danach addiert werden. $\textbf{a*b}=\vec{a}*\vec{b}=a_1*b_1+a_2+b_2+...+a_n*b_n$. Das Skalarprodukt wird als $\vec{a}\cdot\vec{b}$ geschrieben
 	\subsubsection{Gleichheit}
 	Die Gleichheit von Vektoren ist gegeben wenn jedes Element eines Vektors gleich ist wie das passende Element des anderen Vektors: \textbf{a=b}$=a_1=a_2, a_2=a_3$
 	\subsection{Beispiele}
@@ -168,7 +176,7 @@
 		\end{itemize}
 		\item{Assoziativität}
 		\begin{itemize}
-			\item{(\vec{a}+\vec{b})+\vec{c}?\vec{a}+(\vec{b}+\vec{c})}
+			\item{$(\vec{a}+\vec{b})+\vec{c}?\vec{a}+(\vec{b}+\vec{c})$}
 		\end{itemize}
 		\item{Neutrales Element}
 		\item{Inverses Element}
@@ -177,11 +185,11 @@
 	\begin{itemize}
 		\item{Assoziativität}
 		\begin{itemize}
-			\item{k(h \vec{a})=(kh)\vec{a}}
+			\item{$k(h \vec{a})=(kh)\vec{a}$}
 		\end{itemize}
 		\item{Neutrales Element}
 		\begin{itemize}
-			\item{1 \vec{a}=\vec{a}}
+			\item{$1 \vec{a}=\vec{a}$}
 		\end{itemize}
 		\item{Distributivität}
 		[TODO REGELN]
@@ -213,47 +221,215 @@
 	\paragraphlb{Teschebyschow Norm}
 	Hierbei wird das Maximum der Komponenten genommen. Dabei wird der Betrag jedes Elements eines Vektors herangezogen und das Maximum genommen. Wenn ein Vektor also die Werte 1, 2 und -3 enthält, wäre das Maximum 3, da der Betrag von -3 der höchste Wert ist. Das entspricht der einzelnen längsten Länge des Vektors.
 	\subsection{Lineare Unabhängigkeit}
-	Vektoren sind jeweils entweder linear abhängig oder unabhängig voneinander. Ein Vektor ist linear abhängig von einem anderen Vektor, wenn diese parallel zueinander stehen. Vektoren sind genau dann linear unabhängig wenn man in der Vektorgleichung $k_1 \overrightarrow{a_1}+k_2 \overrightarrow{a_2}+...+k_m \overrightarrow{a_m}=\vec{0}$ erhält, wobei jedes k gleich 0 ist und \textit{das die einzige Möglichkeit ist} um das Ergebnis zu erhalten. Falls das nicht möglich ist, sind zwei Vektoren linear abhängig. Auch wenn sich nur einer der Vektoren als Linearkombination schreiben lässt, sind diese linear abhängig. Per Definition ist auch ein Nullvektor linear abhängig.
+	Vektoren sind jeweils entweder linear abhängig oder unabhängig voneinander. Ein Vektor ist linear abhängig von einem anderen Vektor, wenn diese parallel zueinander stehen. Vektoren sind genau dann linear unabhängig wenn man in der Vektorgleichung $k_1 \vec{a_1}+k_2 \vec{a_2}+...+k_m \vec{a_m}=\vec{0}$ erhält, wobei jedes k gleich 0 ist und \textit{das die einzige Möglichkeit ist} um das Ergebnis zu erhalten. Falls das nicht möglich ist, sind zwei Vektoren linear abhängig. Auch wenn sich nur einer der Vektoren als Linearkombination schreiben lässt, sind diese linear abhängig. Per Definition ist auch ein Nullvektor linear abhängig. Das bedeutet, dass Vektoren linear unabhängig sind, wenn es keine k gibt, die nicht alle 0 sind, für welche man den Nullvektor bilden kann.
 	\subsubsection{Komplanar}
 	Drei Vektoren sind abhängig, wenn sie in einer Ebene durch Verlängerung oder Verkürzung eine Ebene bilden. Im zweidimensionalen Raum sind ab einer gewissen Länge alle Vektoren komplanar. In einem dreidimensionalen Raum können Vektoren jedoch unabhängig sein, wenn sie in einer anderen Dimension stehen. \\
 	Man kann Vektoren kombinieren, indem Vektoren mit beliebigen Skalaren verbunden werden. Dabei wird jeder Vektor mit einem Skalar multipliziert und danach aufaddiert. Das Resultat ist ein neuer Vektor. \\
-	Um eine Linearkombination zu ermitteln, muss man für zwei Vektoren ein lineares Gleichungssystem bilden. [TODO Kombination] \\
-	In diesem Fall existiert eine eindeutige Lösung. Das funktioniert, da diese beiden Vektoren linear unabhängig sind. Man kann für jeden beliebigen Vektor eine Lösung finden, falls die Vektoren linear unabhängig voneinander sind. \\
-	Das funktioniert auch im dreidimensionalen Raum
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	Um eine Linearkombination zu ermitteln, muss man für zwei Vektoren ein lineares Gleichungssystem bilden. $\sum_{j=1}^{m}k_j \vec{a_j})k_1*\vec{a_1}+k_2+...+k_m*\vec{a_m}$ \\
+	In diesem Fall existiert eine eindeutige Lösung. Das funktioniert, da diese beiden Vektoren linear unabhängig sind. Man kann für jeden beliebigen Vektor eine Lösung finden, falls die Vektoren linear unabhängig voneinander sind.
+	\subsection{Vektorbasis}
+	Einheitsvektoren entlang drei verschiedener Achsen sind jeweils linear unabhängig: $\vec{e_1}=(1,0,0),\vec{e_2}=(0,1,0),\vec{e_3}=(0,0,3)\in\R^3$. Ein weiterer Vektor in diesem Raum würde die lineare Unabhängigkeit jedoch zerstören. Die drei Einheitsvektoren $e_1,e_2,e_3$ bilden die Standardbasis. \\
+	Mit einer Basis kann man jeden beliebigen Vektor aus dem selben Vektorraum darstellen: $\vec{a}=\sum_{j=1}^{n}k_j \vec{e_j}$. So kann man einen Vektor stets als Linearkombination von Standardvektoren darstellen. \\
+	Eine Basis besteht stets aus einer Familie aus Vektoren die wiederum aus n linear unabhängigen Vektoren besteht. Dabei muss es stets alle Dimensionen eines Raumes ausgeschöpft werden (Also 3 Vektoren im Raum $\R^3$). Innerhalb dieses Raums lässt sich jeder Vektor als Kombination dieser Vektoren darstellen. \\
+	\paragraphlb{Beispiel}
+	Gegeben sind drei linear unabhängige Vektoren: $\vec{a_1}=(2,0,1),\vec{a_2}=(1,2,0),\vec{a_3}=(0,0,2)$ \\
+	Gesucht werden die Koordinaten (1,-10,4) bezüglich der Basis: $k_1 \vec{a_1}+k_1 \vec{a_2}+k_3 \vec{a_3}=\begin{pmatrix} 1 \\ -10 \\ 4 \end{pmatrix}$ \\
+	$k_1 \begin{pmatrix} 2 \\ 0 \\ 1 \end{pmatrix}+k_2 \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}$ [TOOD SLIDE 68]
+	\subsection{Dimension}
+	Die Dimension ist die maximale Anzahl linear unabhängiger Vektoren in einem Raum und wird geschrieben als dim(V) und $dim(\R^n)=n$. Die Definition beschreibt die maximale Anzahl, da auch bei weniger Vektoren eine lineare abhängigkeit erreicht werden kann.
+	\subsection{Geraden und Ebenen}
+	Die Geradengleichung war stets in der parameterfreien Form. Die Parameterform beschreibt stattdessen Vektoren: $g:\vec{x}=\vec{p}+h \vec{r}$
+	\begin{itemize}
+		\item{$\vec{x}$ - Beschreibt den Ortsvektor $\overrightarrow{0X}$ eines Punkts X auf der Geraden}
+		\item{$\vec{p}$ - Beschreibt einen Ortsvektor $\overrightarrow{0P}$ eines Punkts P}
+		\item{$\vec{r}$ - Beschreibt den Richtungsvektor der Geraden}
+		\item{h - }
+	\end{itemize}
+	\paragraphlb{Beispiel}
+	Gegeben ist P(2|-1),$\vec{r}$=(1,5) wobei die Geradengleichung gesucht wird. \\
+	Man kann einfach in die Geradengleichung einsetzen: $g:\vec{x}=\vec{p}+h \vec{r}$\texttt{ -> }$\vec{x}=\begin{pmatrix} 2 \\ -1 \end{pmatrix}+h \begin{pmatrix} 1 \\ 5 \end{pmatrix}$ \\
+	Diese Parametergleichung kann man in die Normalform überbringen indem man diese mit einem linearen Gleichungssystem löst: \\
+	\begin{itemize}
+		\item[I]{$2+1h$ \texttt{ -> } Multipliziert mit 5}
+		\item[II]{$-1+5h$}
+		\item[5*II]{$5x=10+5h$}
+		\item[5*II-I]{$5x-y=10+5h-(-1+5h)=11$ \texttt{ -> }$y=5x-11$}
+	\end{itemize}
+	\subsubsection{Ebenengleichung}
+	Eine Ebene in einem Raum wird definiert durch den Punkt P mit dem Ortsvektor/Stützvektor $\vec{p}$ und den Richtungsvektoren $\vec{r}$ und $\vec{s}$. Dabei dürfen die Vektoren $\vec{r}$ und $\vec{s}$ nicht parallel sein. \\
+	Eine Ebene kann auch in Parameterform stehen: $\epsilon:\vec{x}=\vec{p}+h \vec{r}+i \vec{s}$
+	Es existiert auch wiederum eine Parameterfreie Form: [TODO] \\
 	\section{Matrizen}
+	Matrizen kann man als mehrdimensionale Vektoren verstehen. Es wird geschrieben als rechteckiges Zahlenschema. Man spricht in der Regel von einem m$\times$ n Schema, welches aus m Zeilen und n Spalten besteht. Eine Matrix wird geschrieben mit gerundeten Klammern als mehrdimensionaler Vektor. \\
+	Vektoren sind spezielle Matrizen. Aus diesem grund sind Spalten- und Zeilenvektoren auch Matrizen. Ein Spaltenvektor ist eine Matrix mit einer Zeile und m Spalten, wobei ein Zeilenvektor eine Spalte und n Zeilen besitzt. \\
+	Auch ein Skalar ist eine spezielle Matrix, nämlich mit einer Spalte und einer Zeile.
+	\subsection{Nullmatrix}
+	Ein Nullmatrix ist eine spezielle Matrix welche nur mit 0 gefüllt ist.
+	\subsection{Quadratische Matrix}
+	Eine Quadratische Matrix ist eine Matrix bei welcher die Anzahl der Spalten und Zeilen die selbe ist.
+	\subsection{Dreiecksmatrix}
+	Eine Dreiecksmatrix ist eine quadratische Matrix, welche nur Werte in einer Hälfte der Matrix enthält. Dabei wird zwischen der oberen und der unteren Dreiecksmatrix unterschieden, wobei nur die Hälfte oberhalb oder unterhalb der Hauptachse Werte enthält und alle anderen 0 sind (Die Werte können jedoch auch 0 sein).
+	\subsection{Diagonalmatrix}
+	Die Diagonalmatrix ist eine weitere spezielle Quadratische Matrix, welche außerhalb der Hauptdiagonale nur 0 besitzt.
+	\subsection{Einheitsmatrix}
+	Die Einheitsmatrix ist eine Diagonalmatrix, welche auf der Hauptdiagonale nur 1 besitzt. Es wird oft mit I benannt, nach der englischen Bezeichnung von "Identity Matrix". Die Einheitsmatrix hat den gleichen Effekt wie die Zahl 1 bei normalen Berechnungen, da sie immer die selbe Matrix als Ergebnis hat mit der sie multipliziert wurde.
+	\subsection{Transponierte Matrix}
+	Eine transponierte Matrix ist eine Matrix, bei welcher Zeilen und Spalten vertauscht wurden. Sie wird geschrieben als hochgestelltes T: $(a_{ij})^T=(a_{ji})$
+	\subsection{Symmetrische Matrix}
+	Eine Matrix ist eine quadratische Matrix, bei welcher die Werte ober und unter der Hauptachse gleich sind. Die formale Definition ist, dass eine Matrix symmetrisch ist, wenn die transponierte Matrix diese nicht verändert: $A=A^T$
+	\subsection{Rechenregeln}
+	\subsubsection{Gleichheit}
+	Zwei Matrizen sind gleich $A=B$, wenn sie die gleiche Menge an Dimensionen besitzt und alle Werte an den gleichen Stellen die gleichen Werte besitzen.
+	\subsubsection{Addition}
+	Gleich wie bei Vektoren müssen Matrizen vom selben Typ sein damit sie addiert oder subtrahiert werden können: $A+B, A-B$ \\
+	Matrizen können auch mit Skalaren multipliziert werden
+	\subsubsection{Multiplikation}
+	Die Multiplikation zweier Matrizen ist eine etwas komplexere Angelegenheit. Bei der Multiplikation müssen die beiden Matrizen im Format $m\times p$ A und $p\times n$ B. Dabei muss die Spaltenanzahl der Matrix A gleich der Zeilenanzahl der Matrix B sein. \\
+	Dabei entsteht eine neue Matrix mit der Spaltenanzahl der Ersten und Zeilenanzahl der Zweiten: $(\textcolor{red}{m},\textcolor{green}{p})\cdot(\textcolor{green}{p},\textcolor{blue}{n})=(\textcolor{red}{m},\textcolor{blue}{n})$ \\
+	Also wird aus der Multiplikation einer Matrix mit m Zeilen und p Spalten A und p Zeilen und n Spalten B zu einer neuen Matrix mit m Zeilen und n Spalten. \\
+	Die multiplikation geschieht indem von jeder Zeile und Spalte das Skalarprodukt gebildet wird. Bei der Multiplikation gilt das Kommutativgesetz \textbf{nicht}. Also ist AB nicht gleich BA.
+	\subsection{Inverse Matrix}
+	Wenn man eine quadratische Matrix A und dessen inverse Matrix miteinander multipliziert, ergibt das stets die Einheitsmatrix: $AA^{-1}=A^{-1}A=I$. Eine Matrix welche invertierbar ist nennt man reguläre oder invertierbare Matrix. Für eine reguläre Matrix gibt es eine eindeutig bestimmte inverse Matrix. Die Dimensionen einer regulären Matrix und dessen Inverse haben jeweils die gleiche Dimension. \\
+	Es gibt jedoch auch quadratische Matrizen, welche keine Inverse besitzen. Diese nennt man dann singulär ode nicht invertierbar. \\
+	Jede reguläre Matrix kann mit dem Simultanverfahren, oder dem Gauß-Jordan-Verfahren, in eine inverse Matrix konvertiert werden. Diese wird jedoch erst später behandelt. \\
+	Fürs erste wird die Formel für die Invertierung einer 2x2 Matrix besprochen: $A^{-1}=\begin{pmatrix} a & b \\ c & d \end{pmatrix}^{-1}=\frac{1}{ad-bc}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$ \\
+	Dabei muss jedoch beachtet werden, dass dies nur möglich ist, wenn $ad-bc\ne 0$, da sonst bei dem Bruch durch 0 dividiert werden würde. In diesem Fall handelt es sich dann um eine singuläre Matrix.
+	\paragraphlb{Beispiel:}
+	Gegeben: $A=\begin{pmatrix} 5 & 3 \\ 2 & 1 \end{pmatrix}$ \\
+	$A^{-1}=\frac{1}{5*1-3*2}\begin{pmatrix} 1 & -3 \\ -2 & 5 \end{pmatrix}=-1 \begin{pmatrix} 1 & -3 \\ -2 & 5 \end{pmatrix}=\begin{pmatrix} -1 & 3 \\ 2 & -5 \end{pmatrix}$ \\
+	Inverse Matrizen helfen dabei lineare Gleichungssysteme mit folgenden Eigenschaften zu lösen:
+	\begin{itemize}
+		\item{Das Gleichungssystem besteht aus gleich vielen Gleichungen wie unbekannten}
+		\item{Das Gleichungssystem ist in der Form $A \vec{x}=\vec{b}$}
+		\item{A ist invertierbar}
+	\end{itemize}
+	Dazu muss man beide Seiten des Gleichungssystems jeweils links mit der inversen Matrix $A^{-1}$ multiplizieren: $A^{-1}A \vec{x}=A^{-1}\vec{b}$ \texttt{ -> }$\vec{x}=A^{-1}\vec{b}$. Auf diese Weise kann man den Lösungsvektor $\vec{x}$ bestimmen.
+	\subsection{Determinante}
+	Die Determinante ist eine Funktion, welche einer quadratischen Matrix eine Zahl zuordnet. Anders als die Inverse, hat jede quadratische Matrix eine Determinante. \\
+	Die Berechnung der Determinante gibt einige Informationen über die verwendete Matrix:
+	\begin{itemize}
+		\item{Falls die Determinante ungleich 0 ist}
+		\begin{itemize}
+			\item{Ist die Matrix regulär und invertierbar}
+			\item{Sind die Zeilen und Spalten linear unabhängig}
+		\end{itemize}
+		\item{Falls die Determinante gleich 0 ist}
+		\begin{itemize}
+			\item{Ist die Matrix singulär und nicht invertierbar}
+			\item{Sind die Zeilen und Spalten linear abhängig}
+		\end{itemize}
+	\end{itemize}
+	Bei linearen Gleichungssystemen kann man zusätzlich, wenn man die Determinante der Koeffizientenmatrix bestimmt, sagen, dass
+	\begin{itemize}
+		\item{Falls sie ungleich 0 ist}
+		\begin{itemize}
+			\item{Sie eindeutig lösbar ist}
+		\end{itemize}
+		\item{Falls sie gleich 0 ist}
+		\begin{itemize}
+			\item{Sie nicht eindeutig lösbar ist.}
+			\item{Das kann entweder bedeuten, dass sie keine oder unendlich viele Lösungen besitzt.}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Berechnung}
+	Die Determinante einer 1x1 Matrix (Also eines Skalars) ist der Wert selbst. \\
+	Die Determinante einer 2x2 Matrix wird berechnet mittels: $det(A)=det \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}=\begin{matrix}  \\  \\  \end{matrix}=a_{11}*a_{22}-a_{21}*a_{12}$
+	Die Determinante einer 3x3 Matrix wird mit der Regel von Sarrus berechnet. dabei werden die Werte gespiegelt und dann quer miteinander multipliziert und einmal addiert bzw subtrahiert.
+	\subsubsection{Laplacescher Entwicklunssatz}
+	Mit diesem Entwicklungssatz kann man die Determinante einer beliebigen mxn Matrix bestimmen. Dabei entwickelt man die Determinante nach Spalte oder Zeile. Es ist eine gute Idee eine Spalte oder Zeile mit vielen Nullen zu wählen, da das den Aufwand verringert. Falls es keine 0 gibt, kann man auch die meisten einsen wählen. \\
+	Die Elemente dieser Reihe multipliziert man dann mit einer entsprechenden Unterdeterminante. Die Vorzeichen der Elemente alternieren dabei, beginnend mit + bei $a_{11}$ nach dem Schema $\begin{matrix} + & - & + \\ - & + & - \\ + & - & + \end{matrix}$ \\
+	\subsubsection{Gaußsche Eliminationsverfahren}
+	Eine weitere Methode zur Bestimmung der Determinante einer beliebigen Matrix ist das Gaußsche Eliminationsverfahren. Dabei gibt es 4 Regeln:
+	\begin{itemize}
+		\item{Bei einer Dreiecksmatrix:}
+		\begin{itemize}
+			\item{Die Determinante ist das Produkt der Hauptdiagonalelemente: $\begin{vmatrix} 1 & 2 & 3 \\ 0 & 5 & 6 \\ 0 & 0 & 9 \end{vmatrix}=1*5*9=45$}
+		\end{itemize}
+		\item{Man kann Zeile und Spalten vertauschen. Dabei ändert sich das Vorzeichen der Determinante. So wird durch vertauschen aus $det(B)=-det(A)$}
+		\begin{itemize}
+			\item{$\begin{vmatrix} 1 & 2 & 3 \\ 0 & 0 & 9 \\ 0 & 5 & 6 \end{vmatrix}=-\begin{vmatrix} 1 & 2 & 3 \\ 0 & 5 & 6 \\ 0 & 0 & 9 \end{vmatrix}=-(1*5*9)=45$}
+		\end{itemize}
+		\item{Man kann das Vielfache einer Zeile nehmen, wobei die Determinante erhalten bleibt.}
+		\begin{itemize}
+			\item{So kann man das Vielfache einer Zeiler einer anderen Zeile hinzufügen oder subtrahieren.}
+			\item{$\begin{vmatrix} 1 & 2 & 3 \\ 0 & 5 & 6 \\ 2 & 4 & 15 \end{vmatrix}=\begin{vmatrix} 1 & 2 & 3 \\ 0 & 5 & 6 \\ 0 & 0 & 9 \end{vmatrix}=1*5*9=45$}
+		\end{itemize}
+		\item{Man kann eine Zeile oder Spalte mit einer Zahl multiplizieren, wobei die Determinante mit der gleichen Zahl multipliziert wird.}
+		\begin{itemize}
+			\item{$\begin{vmatrix} \nicefrac{1}{2} & 2 & 3 \\ 0 & 5 & 6 \\  [TODO] & & \end{vmatrix}$}
+		\end{itemize}
+	\end{itemize}
+	Ziel dieser Regeln ist es, Regeln 2 bis 4 anzuwenden um die Matrix in eine Dreiecksmatrix überzuführen, was die Determinante einfach bestimmbar macht.
+	\subsection{Matrixnormen}
+	Gleich wie Vektoren, besitzen auch Matrizen Normen. Dabei gibt es auch wieder drei relevante:
+	\begin{itemize}
+		\item{Spaltensummennorm}
+		\begin{itemize}
+			\item{$\begin{Vmatrix} A \end{Vmatrix}_1=max\begin{bmatrix}\sum_{i=1}^{2}|a_{ij}|:j=1,2\end{bmatrix}=max(|3|+|1|, |4|+|2|)=max(4,6)=6$}
+		\end{itemize}
+		\item{Zeilensummennorm}
+		\begin{itemize}
+			\item{$\begin{Vmatrix} A \end{Vmatrix}_{\infty}=max \begin{bmatrix} \sum_{j=1}^{2} |a_{ij}|:i=1,2 \end{bmatrix}=max(|3|+|4|, |1|+|2|)=max(7,3)=7	$}
+		\end{itemize}
+		\item{Schurnorm}
+		\begin{itemize}
+			\item{$\begin{Vmatrix} A \end{Vmatrix}=\sqrt{\sum_{i=1}^{2}\sum_{j=1}^{2}=|a_{ij}^2}$}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Spur und Rang}
+	\subsubsection{Spur}
+	Die Spur einer quadratischen Matrix ist die Summe der Hauptdiagonalelemente: $Spur(A)=\sum_{j=1}^{n}a_{jj}=a_{11}+a_{22}+...+a_{nn}$. \\
+	Diese entspricht der Summe der Eigenwerte der Matrix. \\
+	Da eine Transposition der Matrix die Hauptdiagonale nicht verändert, ist die Spur einer Transponierten Matrix die gleich wie ihres Originals. Wenn eine Matrix eine Spur von 0 hat, nennt man diese Spurfrei.
+	\subsubsection{Rang}
+	Der Rang einer Matrix ist dessen Anzahl linear unabhängiger Zeilen. \\
+	Der Rang einer Matrix ist immer auch der Rang der transponierten Matrix: $rang(A)=rang(A^T)$. Der kleinere Wert der Menge an Spalten und Zeilen ist immer die obere Grenze des Rangs einer Matrix. \\
+	Man kann den Rang einer Matrix erneut mittels Gaußschem Eliminationsverfahren berechnen. Dabei bringt man die äquivalente Matrix in die Zeilen/Stufenform, was eine generalisierte Dreiecksform für nicht-quadratische Matrizen ist.
+	\subsection{Erweiterte Koeffizientenmatrix}
+	Bis jetzt war es nur möglich zu bestimmen, ob ein lineares Gleichungssystem eine Lösung hat oder nicht (Und deshalb entweder keine oder unendlich viele). Das kann man jedoch schaffen, indem man eine erweiterte Koeffizientenmatrix erstellt und diese analysiert. \\
+	Ein lineares Gleichungssystem hat somit:
+	\begin{itemize}
+		\item{Keine Lösung}
+		\begin{itemize}
+			\item{Wenn $rang(A)\ne rang(A|\vec{b})$}
+		\end{itemize}
+		\item{Eindeutige Lösung}
+		\begin{itemize}
+			\item{Wenn $rang(A)=rang(A|\vec{b})=n$}
+		\end{itemize}
+		\item{Unendlich viele Lösungen}
+		\begin{itemize}
+			\item{Wenn $rang(A)=rang(A|\vec{b})<nx$}
+		\end{itemize}
+	\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	\section{Graphentheorie}
 
 	

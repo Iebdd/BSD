@@ -5,6 +5,8 @@
 \usepackage{array}
 \usepackage{multicol}
 \usepackage{setspace}
+\usepackage{tikz}
+\usepackage{multicol}
 \usepackage{changepage}
 \usepackage{booktabs}
 \usepackage{multicol}
@@ -18,6 +20,7 @@
 \usepackage{float}
 \newcolumntype{?}{!{\vrule width 1pt}}
 \newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\checkmark}{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
 \renewcommand{\contentsname}{Inhaltsverzeichnis:}
 \renewcommand\theadalign{tl}
 \setstretch{1.10}
@@ -274,7 +277,186 @@
 	Man kann einen Baum auf mehreren Wegen durchsuchen. Zwei dieser Wege sind die Depth-First Search (DFS) und die Breadth-First Search (BFS).
 	\subsubsection{Depth-First Search (DFS)}
 	Bei der Depth-First Search wird das Blatt jeden Elements vor den inneren Knoten durchsucht. Das wird realisiert indem man stets die Kinder eines Knotens auf einen Stack legt und anhand des Stacks das nächste Element durchsucht. Wenn man so zum Beispiel bei der Wurzel beginnt, durchsucht man diesen und legt alle Kinder auf den Stack. Danach wird das erste Kind als neue Basis verwendet und dessen Kinder (falls vorhanden) wiederum auf den Stack gelegt. So wird zuerst nur eine Linie jedes Knotens durchlaufen bis man an dessen Ende kommt und untersucht danach erst die restlichen Knoten (welche wiederum in einer Linie verlaufen können).
-	
+	\section{Algorithmische Grundpinzipien}
+	Einige grundlegende Prinzipien der Algorithmik sind Divide-and-Conquer sowie Backtracking.
+	\subsection{Divide-and-Conquer}
+	Teile und Herrsche lautet die Devise. Dabei wird ein großes Problem in kleinere Teilprobleme aufgespalten und diese danach einzeln betrachtet. Das hat den Vorteil, dass man einen großen komplexen Ablauf auf viele kleine einfacherer Abläufe reduzieren kann um das Problem lösbarer zu machen. Diese Methode findet sich in vielen Aspekten der Softwareentwicklung wieder; selbst bei dem Schreiben von Code ist es eine gute Idee eine große Aufgabe in kleinere Teilaufgaben zu teilen.
+	\subsubsection{Rekursion}
+	Ein Teil wo dieser Ansatz relevant wird ist die Rekursion. Dabei ruft sich eine Methode wiederholt mit neuen Parametern (idealerweise einem Teilproblem) selbst auf. Das läuft im Gegensatz zu iterativen Algorithmen, welche mit einer Schleife den selben Code wiederholt ausführen. Dabei muss man jedoch beachten, dass sich \textbf{jedes rekursive Problem in ein iteratives transformieren lassen kann und umgekehrt.} \\
+	Eine Rekursive Aufgabe braucht jedenfalls eine Abbruchbedingung da sie sonst endlich weiterläuft und einen Stack Overflow auslöst. Dieser geschieht, da jede neue Methode erneut auf den Call Stack gelegt wird und, falls die Methode unendlich verläuft, diese sich anhäufen bis er voll ist. \\
+	Rekursionen können Vorteile gegenüber iterativen Ansätzen bieten. Bei geeigneten Aufgabenstellungen ist die Implementation bedeutend einfacher und erlaubt eine einfacherer Analyse durch rekursive Zeitgleichungen. Durch den rekursiven Aufruf verbraucht es jedoch mehr Speicher da jeder Durchlauf im Stack gespeichert werden muss. Zusätzlich kann es einen geringen Overhead durch die Notwendigkeit neue Methodenaufrufe zu generieren. In der Regel sollten rekursive Ansätze nur verwendet werden, wenn die Problemformulierung auch rekursiv geschieht. Wenn man zum Beispiel die Fibonacci-Zahlen berechnen will, benötigt man stets die beiden letzten zwei Ergebnisse womit es sich für eine rekursive Implementation gut eignet. \\
+	Rekursion findet bei dem Durchsuchen von Baumstrukturen sowie bei einigen Datentypen wie Linked Lists oder Trees Anwendung.
+	\subsection{Backtracking}
+	Backtracking beschreibt das Verhalten, bei dem man nach Antreffen einer Sackgasse umdreht und die nächste Entscheidung trifft. Ein Beispiel dafür ist das Durchlaufen eines Labyrinths. Dabei wird, jedes Mal wenn man eine Sackgasse findet, zurückgegangen und die nächste Abzweigung gewählt. Ein Softwareproblem ist das Damenproblem. Dabei muss auf dem Feld eines Schachbretts mit n Reihen in jeder Reihe eine Dame platziert werden, sodass diese mit ihren Bewegungsmöglichkeiten keine andere Dame erreichen kann. Diese Strategie ist besonders effektiv wenn eine partielle Lösung in vielen Weisen erweitert werden kann. Dabei wird in der Theorie ein Baum aller Möglichkeiten gespannt und dieser danach durchlaufen.
+	\section{Sortieren}
+	Sortieren ist der Vorgang Daten in einem Array in ein bestimmtes Format zu bringen. Das kann von einer Sortierung nach Zahlengröße bis zum Code eines Characters reichen. Sortierverfahren werden in ihrer Komplexität und Laufzeit eingeordnet:
+	\begin{itemize}
+		\item{Elementare Sortierverfahren}
+		\begin{itemize}
+			\item{Relative einfache Implementationen jedoch auch hohe Laufzeit (Oft O($n^2$))}
+		\end{itemize}
+		\item{Effizientere Sortierverfahren}
+		\begin{itemize}
+			\item{Komplexere Implementation jedoch bedeutend niedrigere Laufzeiten (Immer unter O($n^2$))}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Sortiervarianten}
+	Es gibt vier Eigenschaften von Sortieralgorithmen:
+	\begin{itemize}
+		\item{In-Place}
+		\begin{itemize}
+			\item{Es wird kein zusätzlicher Speicher benötigt um den Vorgang durchzuführen. Wenn dies nicht der Fall ist, nennt man das Out-Of-Place}
+		\end{itemize}
+		\item{Stable}
+		\begin{itemize}
+			\item{Elemente mit gleichem Schlüssel haben im Array nach der Sortierung immer noch die gleiche Anordnung. (Wenn zwei Elemente den Wert 5 haben, kommt die 5 die davor zuerst war auch danach noch davor vor.)}
+			\item{Stable Sorts sind wichtig, wenn man eine Liste von Elementen mehrmals sortieren will. Wenn man also zuerst nach Nach- und dann nach Vornamen sortiert, will man eventuell, dass auch nach der zweiten Sortierung alle Nachnamen noch gleich sortiert sind.}
+		\end{itemize}
+		\item{Adaptiv}
+		\begin{itemize}
+			\item{Der Sortiervorgang ist schneller, wenn das Array bereits teilweise oder komplett vorsortiert ist. (Was zum Beispiel bei Insertion Sort der Fall ist)}
+		\end{itemize}
+		\item{Worst-Case Optimal}
+		\begin{itemize}
+			\item{Unabhängig von der Vorsortierung, wird das Array in O($n\ \log n$) sortier.}
+		\end{itemize}
+	\end{itemize}
+
+	\subsection{Elementare Verfahren}
+	Elementare Sortierverfahren die besprochen werden sind Insertion Sort und Selection Sort.
+	\subsubsection{Insertion Sort}
+	Das Array wird von links nach rechts durchlaufen, wobei jedes Mal wenn rechts ein kleinerer Wert als links steht werden diese vertauscht. Danach wird das gerade getauschte kleinere Element erneut mit dessen linkem Element verglichen bis es größer ist. Nachdem der rechte Rand des Arrays erreicht ist, ist das Array sortiert. Insertion Sort ist sehr effizient wenn das Array relativ klein ist und es schon teilweise vorsortiert ist.
+	\subsubsection{Selection Sort}
+	Es wird innerhalb des Arrays jeweils das kleinste Element gesucht und festgehalten bei welchem Index das sortierte Array beginnt. Sobald das kleinste Element rechts des sortieren Arrays gefunden wurde, wird es mit dem ersten Element des Arrays getauscht und der Index des sortierten Arrays um 1 erhöht. Selection Sort ist praktisch wenn man wenig temporären Speicher zur Verfügung hat und Speicherzugriffe teuer sind da jeweils nur ein Wert getauscht wird.
+	\subsection{Effizientere Sortierverfahren}
+	\subsubsection{Merge Sort}
+	Bei dem Merge Sort wird das Array jeweils in 2 gleich große Hälften geteilt bis diese nicht mehr teilbar sind. Danach werden die jetzt einzelnen Teilelemente anhand ihrer Größe sortiert und somit kombiniert. Diese größeren Elemente werden wiederum auf die gleiche Weise kombiniert bis das Ursprungsarray sortiert zum Vorschein kommt. Die Zeitkomplexität des Mergesort ist O($n \log n$). Das hängt damit zusammen, dass in jeder Ebene des Splittens und Mergens ein Aufwand von O(n) besteht. Da das Array jedes Mal halbiert wird, kann man es als Binärbaum darstellen und man weiß, dass ein Binärbaum mit n Elementen eine Höhe von $\log n$ hat. Deshalb kann man diese Teile kombinieren um zu O($n \log n$) zu kommen. \\
+	Merge Sort hat durch die Menge an Splits mit dem Call Stack einen relativ großen Overhead. Aus diesem Grund passiert es manchmal, dass Merge Sort mit Insertion Sort verbunden wird. Dabei wird das Array zuerst mit Mergesort gespalten wonach ab einer gewissen Mindestgröße (Oft 10 Elemente) die gespaltenen Arrays mit Insertion Sort sortiert werden.
+	\subsubsection{Quick Sort}
+	Quicksort funktioniert ähnlich zu dem Merge Sort, dass das Array bei jeder Iteration halbiert wird. Der Ablauf ist wie folgt:
+	\begin{enumerate}
+		\item{Das erste Element des Arrays wird als Pivot Element gewählt (Es gibt auch andere Strategien den Pivot zu wählen)}
+		\item{Die Elemente des Arrays werden jeweils von links und rechts zur Mitte durchlaufen. Falls ein Element links des Pivot größer als dessen Wert und ein Element rechts des Pivot kleiner als dessen Wert ist, werden diese vertauscht, sodass jeweils kleinere und größere Werte links und rechts des Pivot stehen.}
+		\item{In den Teilelementen wird das erste Element wiederum als Pivot gewählt und der Vorgang wiederholt.}
+		\item{Sobald alle Teilelemente alleine stehen, ist das Array sortiert.}
+	\end{enumerate}
+	In diesem Fall wird der Pivot stets als das erste Element gewählt (was eine fragwürdige Wahl ist) und die Laufzeit im Worst Case hängt stark von diesem Faktor ab. Wenn ein zufälliges Pivotelement gewählt wird, ist die Laufzeit weniger abhängig von der Sortiertheit des Arrays.
+	\subsection{Zusammenfassung}
+	\begin{tabular}{| c | c | c | c | c | c | c |}
+		\toprule
+		&In-Place & Stabil & Adaptiv & Best Case & Avg. Case & Worst Case \\ \midrule
+		Insertion Sort & \checkmark & \checkmark & \checkmark & O(n) & O($n^2$) & O($n^2$) \\ \hline
+		Selection Sort & \checkmark & x & x & O($n^2$) & O($n^2$) & O($n^2$) \\ \hline
+		Merge Sort & x & \checkmark & x & O($n \log n$) & O($n \log n$) & O($n \log n$) \\ \hline
+		Quick Sort & \checkmark & x & x & O($n \log n$) & O($n \log n$) & O($n^2$) \\
+		\bottomrule
+	\end{tabular} \\
+	\begin{itemize}
+		\item{\textbf{Insertion Sort} ist sowohl in-place, als auch stabil und adaptiv.}
+		\item{\textbf{Selection Sort} ist nicht in-place weil die Reihenfolge geändert werden kann und  nicht Adaptiv, da stets für jedes n das Array 1 Mal durchgangen werden muss.}
+		\item{\textbf{Merge Sort} ist nicht in-place, da es zwei Hilfsarrays zum mergen benötigt und nicht adaptiv, da es immer die gleiche Laufzeit hat.}
+		\item{\textbf{Quick Sort} ist in der genannten Ausführung nicht stabil (Kann es jedoch sein) und nicht adaptiv da er schlechter abschneidet, wenn das Feld sortiert ist.}
+	\end{itemize}
+		\section{Heap}
+	Ein Heap ist eine spezielle Datenstruktur, welche anhand eines Binärbaums Elemente mit einer Priorität anordnet. Diese Priorität wird anhand einer Priority Queue wiedergegeben. Diese ist eine Warteschlange, welche anhand eines bestimmten Schlüssels sortiert ist. Die Queue selbst kann man nur manipulieren indem man das minimale oder maximale Element (Das Erste oder Letzte) entfernt. Jedes Mal, wenn ein Element in die Queue eingefügt wird muss dieses danach wieder in die richtige Form gebracht werden, wodurch die Komplexität der Operation O(n) ist. Auch wenn das Entfernen eine konstante Laufzeit hat, ist es unpraktisch, dass das Einfügen relativ ineffizient ist. Das Ziel wäre deshalb, dass alle Operationen auf die Priority Queue eine Komplexität von O(log(n)) haben.
+	\subsection{Haldenbedingung}
+	\begin{figure}[H]
+	\centering
+	\includegraphics{Bilder/heap.png}
+	\caption{Arrayrepräsentation eines Heaps}
+	\end{figure}
+	Das wird erreicht mittels Heap (Halde im Deutschen). Grundlegend zu dieser Datenstruktur ist die Haldenbedingung. Diese besagt, dass $A[i]\geq max \{A[2i], A[2i+1]\}$ oder ausgeschrieben, dass jedes Element an der Position i, größer sein muss als das Element an der Position $2i$ und $2i+1$. Das bedeutet wiederum, dass das größte Element des Heaps an erster Stelle stehen muss. Da jeweils der doppelte Index und dessen Inkrement abhängig von einem früheren Element sind, ist es in einer Binärbraumrepräsentation stets gegeben, dass der oberste Knoten (Das erste Element) der höchste Wert ist und jedes Kind jedes Knotens einen niedrigeren Wert hat als dessen Parent. Wenn diese Vorraussetzung gegeben ist, kann man sicher sein, dass man das höchste Element des Arrays an dessen erstem Index findet. Zusätzlich sind gewisse Suchvorgänge in konstanter Zeit möglich:
+	\begin{itemize}
+		\item{Parent eines Elements finden:}
+		\begin{itemize}
+			\item{$A[floor(Child\ Index\/2)]$}
+		\end{itemize}
+		\item{Linkes Kind finden:}
+		\begin{itemize}
+			\item{$A[Parent\ Index*2]$}
+		\end{itemize}
+		\item{Rechtes Kind finden:}
+		\begin{itemize}
+			\item{$A[Parent\ Index*2+1]$}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Heapify}
+	Wenn ein Array die Haldenbedingung nicht erfüllt, kann man die Funktion Heapify verwenden um dieses in einen Heap zu verwandeln. Vorraussetzung dafür ist, dass alle darunterliegenden Teilbäume die Haldenbedingung erfüllen (Jedes Kind ist kleiner oder gleich des Parents). Dabei wird für jedes Teilelement der Parent und dessen Kinder verglichen und diese vertauscht, falls der Parent nicht das größte Element ist. Dadurch kann zwar die Haldenbedingung verletzt werden, das getauschte Element sickert jedoch weiter, wodurch die Vorraussetzung wieder erfüllt wird.
+	\subsection{\texorpdfstring{Build\_Heap}{Build Heap}}
+	Zusätzlich zu Heapify existiert auch die Build\_Heap Funktion, welche aus einem unsortierten Array einen Heap erstellt. Dabei arbeitet es von unten nach oben um jeden Teilbaum des Heaps in einen Heap zu verwandeln. Da ein Knoten ohne Kinder ein Heap ist, erfüllen alle Blätter des Baumes bereits die Haldenbedingung, wodurch man von dort beginnen kann.
+	\subsection{Heap Sort}
+	Der Heap Sort bedient sich der Eigenschaft eines Heaps, dass das größte Element stets an erster Stelle steht. Das passiert nach einem festen Schema:
+	\begin{enumerate}
+		\item{Ein unsortiertes Array wird verhaldet}
+		\item{Das erste Element wird mit der letzten Stelle vertauscht}
+		\item{Die Länge des Arrays wird um 1 verringert}
+		\item{Falls das getauschte Element die Haldenbedingung verletzt, muss Heapify aufgerufen werden}
+	\end{enumerate}
+	\section{Radix Sort}
+	Bis jetzt verwendeten Sortierverfahren stets nur algorithmische Operatoren um Elemente miteinander zu vergleichen. Radix Sort ist jedoch ein nicht-vergleichender Sortieralgorithmus bei welcher jedem Element anhand seines Inhalts ein Fach zugewiesen wird (Ähnlich zu einem Hashingalgorithmus). Dabei wird für jede Stelle des Ergebnisses dieses in sich sortiert. Radix arbeitet dabei stets in zwei Phasen: Der Streu- und der Sammelphase. In der Streuphase werden alle Elemente anhand des Kriteriums in die Fäche gelegt. Bei der Sammelphase werden danach diese Fäche in umgekehrter Reihenfolge wieder angeordnet. Elemente werden also von der kleinsten zur größten Zahl vom ersten Element im Fach zum letzten Element angeordnet. Das führt dazu, dass die Sortireung innerhalb eines Faches zwischen Phasen erhalten bleibt. \\
+	Die Laufzeit des Radix Sort hängt von der Menge an Elementen sowie der Menge an Stellen im längsten Element ab, da die Landau Notation jedoch Konstanten ignoriert, ist die Laufzeit stets O(n), was diesen Sortieralgorithmus zu einem der effizientesten macht.
+	\section{Suche}
+	Nachdem ein Array sortiert wurde, kann man es durchsuchen. Eine Suche hat dabei ein spezifisches Ziel, welches gefunden werden will. Anders als die Sortierung kann eine Suche fehlschlagen, wodurch der worst case eintritt (Das gesamte Array muss durchsucht werden, es wurde jedoch kein Ergebnis gefunden.).
+	\subsection{Sequentielle Suche}
+	Eine Liste kann natürlich auch durchsucht werden, wenn sie nicht sortiert ist, man muss dabei jedoch auf die primitivste Methode des Suchens zurückgreifen: Der Sequentiellen Suche in der jedes Element von vorne nach hinten angesehen wird, um das gesuchte zu finden. Im besten Fall ist das gesuchte Element an der ersten Stelle, wodurch die Komplexität O(1) beträgt. Im schlechtesten Fall ist das Element an letzter Stelle oder nicht vorhanden, wodurch das gesamte Array durchsucht werden muss.
+	\subsection{Binärsuche}
+	Die Binärsuche ist der erste 'nicht-triviale' Suchalgorithmus und kann nur auf vorsortierte Arrays angewandt werden. Dabei wird jeweils der Wert in der Hälfte des Index' des Arrays angesehen und anhand dessen in der rechten oder linken Seite weitergesucht. Wenn der Wert geringer ist, sucht man links und wenn der Wert rechts ist sucht man rechts. Da man so bei jedem Schritt die Länge des noch zu durchsuchenden Arrays halbiert, hat man maximal log n Schritte (Da es als Binärbaum gespannt werden kann), was auch den worst case darstellt. Im Best Case ist das Element wiederum genau in der Hälfte des Arrays und wird sofort angetroffen.
+	\subsection{Interpolationssuche}
+	Die Interpolationssuche versucht eine Schätzung anhand der Werte des Arrays zu machen um anhand dessen im Array nachzusehen. Dabei wird die Menge der Elemente sowie die Werte am Anfang und Ende des Arrays in Betracht gezogen. Das passiert anhand dieser Formel: $t=from+\lfloor(to-from)*\frac{x-A[from]}{A[to]-A[from]}\rfloor$. Die Effizienz dieses Suchalgorithmus' hängt von der Verteilung der Werte ab. Falls die Werte perfekt gleichverteilt sind, findet die Interpolationssuche einen Wert im ersten Schritt. Falls die Werte jedoch einen exponentiellen Anstieg haben, muss das gesamte Array wie in der sequentiellen Suche durchsucht werden.
+	\subsection{Quadratische Binärsuche}
+	Bei der quadratischen Binärsuche wird der gleiche Vorgang wie in der Interpolationssuche mit einer verkürzten Folgesuche kombiniert. Der erste Wert wird mittels Interpolationssuche gefunden und anhand dessen entschieden ob links oder rechts des Werts weitergesucht werden soll. Danach wird jedoch nicht eine weitere Interpolationssuche ausgeführt und stattdessen in Schritten welche der Wurzel der Länge des zu durchsuchenden Arrays entsprechen. Falls das Array also 10 Werte hat, würde ein Sprung 3 Zeilen groß sein, da $\lfloor\sqrt{10}\rfloor=3$. Nach jedem Sprung wird danach überprüft ob der Wert jetzt größer oder kleiner ist und nimmt diese Sprunggröße als das neue Array. Da das Array mit $\sqrt{n}$ Sprüngen durchlaufen werden kann, hat es im worst case auch eine Laufzeit von O($\sqrt{n}$) (Was jedoch schlechter ist als O(log n)) \\ \\
+	\begin{tabular}{| l | l | l | l | l |}
+		\toprule
+		Algorithmus & Best Case & Worst Case \\ \midrule
+		Sequentielle Suche & O(1) & O(n) \\ \hline
+		Binärsuche & O(1) & O(log n) \\ \hline
+		Interpolationssuche & O(1) & O(n) \\ \hline
+		Quadratische Binärsuche & O(1) & O$\sqrt{n}$ \\
+		\bottomrule
+	\end{tabular}
+	\section{Hashing}
+	Hashing ist der Prozess ein Element mithilfe einer verlustbehafteten Kodierung zu einem anderen Wert zu konvertieren. Dieser Vorgang löst das sogenannte Wörterbuchproblem, welches das Einfügen, Löschen und Lesen von Key-Value Paaren gespeicherten effizient lösen soll. \\
+	Ein Hash verwendet eine Hashing Funktion um den Speicherplatz des Elements zuzuweisen. Durch Anwenden der Funktion kann ein Element danach effizient wiedergefunden werden. 
+	\subsection{Kollision}
+	Hashingfunktionen sind nicht injektiv, weshalb unterschiedliche Werte zum gleichen Hashwert führen kann. In diesem Fall führt das zu einer Kollision und muss entsprechend gehandhabt werden. Im Idealfall hat eine Hash Table eine Komplexität von O(1) für alle Operationen. Das wird jedoch verlangsamt, wenn Kollisionen in der Hash Tabelle dazu führen, dass das Ziel erneut durchsucht werden muss. Die Wahrscheinlichkeit einer Kollision ist abhängig vom Load Factor $\alpha$, welcher die Menge der Elemente n geteilt durch die Menge der Plätze in der Tabelle m ist: $\alpha=\frac{n}{m}$.
+	\subsection{Operationen}
+	Eine Hash Table hat vier elementare Operationen: \textit{put, get, contains} und \textit{remove}:
+	\begin{itemize}
+		\item{put}
+		\begin{itemize}
+			\item{Fügt ein Element der Tabelle hinzu}
+		\end{itemize}
+		\item{get}
+		\begin{itemize}
+			\item{Sucht ein Element in der Tabelle}
+		\end{itemize}
+		\item{contains}
+		\begin{itemize}
+			\item{Überprüft ob ein Element in der Tabelle existiert}
+		\end{itemize}
+		\item{remove}
+		\begin{itemize}
+			\item{Entfernt ein Element aus der Tabelle, falls vorhanden}
+		\end{itemize}
+	\end{itemize}
+	Jede dieser Operationen benötigt die Hash Funktion, weshalb sie so effizient wie möglich sein sollte.
+	\subsection{Hashfunktion}
+	Die Hashfunktion ist das Herz der Hashtable, da sie die Werte Elemente in die finalen Werte überträgt. Eine Hashfunktion sollte idealerweise zu gleichverteilten Werten führen um so Kollisionen zu vermeiden und alle möglichen Indizes ansprechen können, da man sonst Speicherplatz und Effizienz verschwenden würde. Ähnliche Werte sollten auch möglichst gut getrennt sein, damit die Daten nicht auf den Hashwert zurückführbar sind. Es sollte auch unabhängig von Mustern in den Daten sein um weiter Kollisionen zu vermeiden.
+	\subsubsection{Divisionsmethode}
+	Ein einfacher Weg eine Hashfunktion zu implementieren, ist den Wert durch eine Zahl zu teilen und den Rest als Wert zu verwenden. Diese Werte sind sehr schnell berechenbar, können jedoch leicht zu Kollisionen führen, da abhängig von dem gewählten Wert nahe beieinander liegende Werte auch zum selben Hashwert führen würden.
+	\subsubsection{Multiplikationsmethode}
+	Eine Alternative ist es den Wert mit einem bestimmten Wert zu multiplizieren und diesen danach zu dividieren um den Rest zu nehmen, zum Beispiel nach der Formel: $h(k)=\lfloor m\times(k\times A mod 1)$, wobei A der zufällige Wert ist. Ein guter Wert zur Wahl von A kann $\frac{\sqrt{5}-1}{2}=0.6180339887$, was der Goldene Schnitt ist.
+	\subsubsection{Horner's Methode}
+	Zum Hashing von Strings kann man Horner's Methode anwenden, bei der Strings jeweils als große Zahlen anhand ihres numerischen Werts behandelt werden. Diese werden jeweils mit einem fixen Wert multipliziert (Am besten eine relativ kleine Primzahl wie 31) und zum Endergebnis addiert. Dieses Ergebnis wird dann auf die gleiche Weise dividiert.
+	\subsection{Kollisionen}
+	Bei Kollisionen gibt es zwei gängige Methoden diese zu behandeln: Mit Überlauflisten oder per offener Adressierung.
+	\subsubsection{Überlaufliste}
+	Überlauflisten sind Listen, welche an den Destinationen der Hashtabelle stehen. Wenn es zu einer Kollision kommen würde, wird der Wert stattdessen zu einer Liste ausgelagert. Sobald wieder nach diesem Wert gesucht wird, werden danach alle Listen dieses Buckets durchsucht. \\
+	Man muss dabei die Operationen der Hashtabelle verändern. Für \textit{put} muss man, falls das Ziel voll ist, eine neue Liste erzeugen und diese zwischen der ersten Liste und dem Ursprung setzen (Also ganz vorne einfügen und alles 1 nach hinten schieben.) \\
+	Für \textit{remove} muss man nach Entfernen eines Wertes überprüfen ob die Liste noch Werte enthält und die vorangehende und folgende Liste miteinander verbinden. \\
+	Vorteil dieser Strategie ist, dass theoretisch unendlich viele Werte pro Tabelle gespeichert werden können, es macht jedoch die Speicherverwaltung komplexer und benötigt mehr Speicherplatz, da man auch die Pointer speichern muss.
+	\subsubsection{Offene Liste}
+	Bei der offenen Liste wird stattdessen, falls eine Kollision geschehen würde, die nächste Zelle der Tabelle gewählt, bis eine freie angetroffen wird. Bei Verwendung einer offenen Liste wird zusätzlich zum Zielindex der Funktion noch die Probingnummer hinzugefügt, welche den Offset vom Index anhand der Versuche darstellt. Dieser Offset kann eine Maximalgröße von $m-1$ haben, da dann das gesamte Array durchlaufen wurde und es damit voll ist. Das ist auch einer der Nachteile der offenen Liste, da es trotzdem durch die Größe des Arrays limitiert ist. Dafür ist es jedoch bedeutend einfacher zu implementieren, da man einfach den nächsten freien Wert im Array nimmt.
 
 
 
