@@ -365,11 +365,11 @@
 	\begin{itemize}
 		\item{Spaltensummennorm}
 		\begin{itemize}
-			\item{$\begin{Vmatrix} A \end{Vmatrix}_1=max\begin{bmatrix}\sum_{i=1}^{2}|a_{ij}|:j=1,2\end{bmatrix}=max(|3|+|1|, |4|+|2|)=max(4,6)=6$}
+			\item{$\begin{Vmatrix} A \end{Vmatrix}_1=max\begin{bmatrix}\sum_{i=1}^{2}|a_{ij}|:j=1,2\end{bmatrix}$}
 		\end{itemize}
 		\item{Zeilensummennorm}
 		\begin{itemize}
-			\item{$\begin{Vmatrix} A \end{Vmatrix}_{\infty}=max \begin{bmatrix} \sum_{j=1}^{2} |a_{ij}|:i=1,2 \end{bmatrix}=max(|3|+|4|, |1|+|2|)=max(7,3)=7	$}
+			\item{$\begin{Vmatrix} A \end{Vmatrix}_{\infty}=max \begin{bmatrix} \sum_{j=1}^{2} |a_{ij}|:i=1,2 \end{bmatrix}$}
 		\end{itemize}
 		\item{Schurnorm}
 		\begin{itemize}
@@ -402,6 +402,15 @@
 			\item{Wenn $rang(A)=rang(A|\vec{b})<nx$}
 		\end{itemize}
 	\end{itemize}
+	\subsection{Gauß-Jordan-Algorithmus}
+	Mit dem Gauß-Jordan Algorithmus kann man Gleichungssysteme der Form $A \vec{x}=\vec{b}$ lösen. Er ist eine Erweiterung des Gaußschen Eliminationsverfahrens und verwendet wieder die erweiterte Koeffizientenmatrix. Ziel ist es die Koeffizientenmatrix so umzuformen, dass eine Einheitsmatrix entsteht: $(A|\vec{b})$\texttt{----->}$(I|\vec{x})$. Dadurch wird der Ergebnisvektor durch den Lösungsvektor ersetzt. Das funktioniert, da eine Einheitsmatrix nur eine 1 in einer Zeile aht und sonst Nullen, wodurch jedem x genau ein Wert zugeordnet wird. \\
+	Man kann mit diesem Verfahren auch die Inverse berechnen: $(A|I)$\texttt{----->}$(I|A^{-1})$
+	\subsection{Cramer'sche Regel}
+	Die Cramer'schen Regel, auch Determinantenmethode, ist ein weiteres Verfahren um lineare Gleichungssysteme zu lösen. Der Rechenaufwand ist ähnlich hoch zu dem Gauß-Jordan-Verfahren, da man einige Determinanten berechnen muss. Es kann jedoch abgekürzt werden, wenn man mittels Sarrus einige Determinanten ignorieren kann. \\
+	Die Matrix muss für dieses Verfahren quadratisch und regulär/invertierbar sein. (Also darf die Determinante nicht 0 sein.) \\
+	Konkret muss für eine unbekannte $x_i$ gelöst werden indem man berechnet: $x_i=\frac{det(A_i)}{det(A)}$. Die Matrix $A_i$ ist eine neue Matrix in die an der i-ten Stelle der Ergebnisvektor eingesetzt wird. So kann für ein x das Ergebnis ermittelt werden. Dabei muss man für jede Komponente von x den Vektor in einen Teil der Matrix einsetzen um so die $x_i$ zu ermitteln. Diese muss danach durch die Determinante der Originalmatrix teilen um so jeweils die Lösungswerte zu erfahren. \\
+	Man kann mit der Cramer'schen Regel auch die Inverse der Matrix berechnen. Dafür muss man jedoch alle Spalten und alle Zeilen der Einheitsmatrix einsetzen, was einen beträchtlichen Rechenaufwand bedeutet.
+	
 
 
 
