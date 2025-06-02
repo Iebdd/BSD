@@ -582,6 +582,90 @@
 				\item{Da die unterste Spalte 0 ist, ist der Rang 2.}
 			\end{itemize}
 		\end{itemize}
+		\item[35]{Berechnen Sie die Eigenwerte und Eigenvektoren folgender Matrizen:}
+		\begin{itemize}
+			\item[a]{$A=\begin{pmatrix} 1 & -2 \\ 1 & 4 \end{pmatrix}$}
+			\begin{itemize}
+				\item{Die Eigenschaft $det(A-\lambda I)=0$ wird verwendet, da diese immer singulär ist.}
+				\item{$det(A-\lambda I)=\begin{matrix} 1-\lambda & -2 \\ 1 & 4-\lambda \end{matrix}=(1-\lambda)*(4-\lambda)-1*(-2)=4-4\lambda-\lambda+\lambda^2+2=\lambda^2-5\lambda+6=0$}
+				\item{Jetzt kann man die große Formel anwenden um die Gleichung zu lösen: $\lambda_{1,2}=\frac{5\pm\sqrt{25-24}}{2}=\frac{5\pm1}{2}$\texttt{ -> } $\lambda_1=3, \lambda_2=2$}
+				\item{Da die Spur der Matrix immer die Summe der Eigenwerte sind, kann man in schwacher Weise kontrollieren, ob der Wert richtig sein kann. Man muss jedoch beachten, dass die Summe auch stimmen kann (Zum Beispiel wenn man 4 und 1 herausbekommen hätte)}
+				\item{Jetzt muss man noch den Eigenvektor berechnen:}
+				\item{Die Formel die verwendet wird ist: $(A-\lambda I)\vec{x}=\vec{0}$}
+				\item{Das Gleichungssystem sieht dadurch so aus: $\begin{pmatrix} 1-\lambda & -2 \\ 1 & 4-\lambda \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \end{pmatrix}=\begin{pmatrix} 0 \\ 0 \end{pmatrix}$}
+				\item[$\lambda_1=3$]{$\begin{pmatrix} 1-3 & -2 \\ 1 & 4-3 \end{pmatrix}=\begin{pmatrix} -2 & -2 \\ 1 & 1 \end{pmatrix}$}
+				\item[2*II+I]{$\begin{pmatrix} -2 & -2 \\ 0 & 0 \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \end{pmatrix}=\begin{pmatrix} 0 \\ 0 \end{pmatrix}$}
+				\item{$\begin{matrix} I: & -2x_1-2x_2=0 \\ II: & 0x_1+0x_2= \end{matrix}$}
+				\item{Also gilt: $x_1=-x_2$ \texttt{ -> }$\vec{x}=k \begin{pmatrix} 1 \\ -1 \end{pmatrix}$für k$\in\R\\\{0\}$}
+				\item[$\lambda_2=2$]{$\begin{pmatrix} 1-2 & -2 \\ 1 & 4-2 \end{pmatrix}=\begin{pmatrix} -1 & -2 \\ 1 & 2 \end{pmatrix}$}
+				\item[II+I]{$\begin{pmatrix} -1 & -2 \\ 0 & 0 \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \end{pmatrix}=\begin{pmatrix} 0 \\ 0 \end{pmatrix}$}
+				\item{$\begin{matrix} I: & -x_1-2x_2=0 \\ II: 0 \end{matrix}$}
+				\item{$x_1=-2x_2$\texttt{ -> }$\vec{x}=k \begin{pmatrix} -2 \\ 1 \end{pmatrix}$für k$\in\R\backslash\{0\}$}
+			\end{itemize}
+			\item[b?]{$\begin{matrix} 3-\lambda & 0 \\ -9 & 6-\lambda \end{matrix}=(3-\lambda)(6-\lambda)-0+(-9)=-18-6\lambda-3\lambda+\lambda^2$}
+			\begin{itemize}
+				\item{$\lambda_{1,2}=\frac{9\pm\sqrt{81-72}}{2}=\frac{9\pm3}{2}$\texttt{ -> }$\lambda_1=6, \lambda_2=3$}
+				\item{$\begin{pmatrix} 3-\lambda & 0 \\ -9 & 6-\lambda \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \end{pmatrix}=\begin{pmatrix} 0 \\ 0 \end{pmatrix}$}
+				\item[$\lambda_1=6$]{$\begin{pmatrix} 3-6 & 0 \\ -9 & 6-6 \end{pmatrix}=\begin{pmatrix} -3 & 0 \\ -9 & 0 \end{pmatrix}$}
+				\item{}
+				\item{$\begin{matrix} I: & -3x_1+0x_2=0 \end{matrix}$ \texttt{ -> }$x_1=0$}
+				\item{\texttt{ -> }$\vec{x}=k \begin{pmatrix} 0 \\ 1 \end{pmatrix}$für$k\in\R\backslash\{0\}$}
+			\end{itemize}
+			\item[b]{$A=\begin{pmatrix} 3 & 0 \\ -9 & 6 \end{pmatrix}$}
+			\begin{itemize}
+				\item[$\lambda_2=3$]{$\begin{pmatrix} 3-3 & 0 \\ -9 & 6-3 \end{pmatrix}=\begin{pmatrix} 0 & 0 \\ -9 & 3 \end{pmatrix}$}
+				\item{$\begin{matrix} II: & -9x_1+3x_2= \end{matrix}$}
+				\item{$\vec{x}=k \begin{pmatrix} 1 \\ 3 \end{pmatrix}$ für $k\in\R\backslash\{0\}$}
+				\item{Alternativ kann man das auch als $\begin{pmatrix} k \\ 3k \end{pmatrix}$ anschreiben.}
+			\end{itemize}
+			\item[c]{$\begin{pmatrix} 2 & 0 & 1 \\ 0 & 3 & 1 \\ 0 & 6 & 2 \end{pmatrix}$}
+			\begin{itemize}
+				\item{$\begin{vmatrix} 2-\lambda & 0 & 10 & 3-\lambda & 1 \\ 0 & 6 & 2-\lambda \end{vmatrix}\begin{matrix} 2-\lambda & 0 \\ 0 & 3-\lambda \\ 0 & 6 \end{matrix}=(2-\lambda)(3-\lambda)(2-\lambda)-6*1*(2-\lambda)=(3-\lambda)(\lambda^2-4\lambda+4)-12+6\lambda$}
+				\item{$=3\lambda^2-12\lambda+12-\lambda^2+4\lambda^2-4\lambda-12+6\lambda=-\lambda^3+7\lambda^2-10\lambda=0$}
+				\item{Da es sich jetzt um ein polynom dritten Grades handelt kann man die große Formel nicht anwenden, man kann lambda jedoch herausheben.}
+				\item{$\lambda(-\lambda^2+7\lambda-10)=0$ \texttt{ -> } $\lambda_1=0$}
+				\item{$-\lambda^2+7\lambda-10=0$\texttt{ -> } $y_{1,2}=\frac{-7\pm\sqrt{49-40}}{-2}=\frac{-7\pm3}{-2}$\texttt{ -> }$\lambda_2=5, \lambda_3=2$}
+				\item{Eigenvektoren:}
+				\item{$\begin{pmatrix} 2-\lambda & 0 & 1 \\ 0 & 3-\lambda & 1 \\ 0 & 6 & 2-\lambda \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix}=\begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$}
+				\item[$\lambda_1=0$]{$\begin{pmatrix} 2 & 0 & 1 \\ 0 & 3 & 1 \\ 0 & 6 & 2 \end{pmatrix}$}
+				\item[III-2*II]{$\begin{pmatrix} 2 & 0 & 1 \\ 0 & 3 & 1 \\ 0 & 0 & 0 \end{pmatrix}$}
+				\item{$\begin{matrix} I: & 2x_1+x_3=0 \\ II: & 3x_2+x_3=0 \end{matrix}\begin{matrix} x_1=-\nicefrac{1}{2}x_3 \\ x_2=-\nicefrac{1}{3}x_3\end{matrix}$}
+				\item{$\vec{x}=k \begin{pmatrix}  \\ -\nicefrac{1}{3} \\ 1 \end{pmatrix}$für $k\in\R\backslash\{0\}$}
+				\item[$\lambda_2=5$]{$\begin{pmatrix} 2-5 & 0 & 1 \\ 0 & 3-5 & 1 \\ 0 & 6 &2-5 \end{pmatrix}=\begin{pmatrix} -3 & 0 & 1 \\ 0 & -2 & 1 \\ 0 & 6 & -3 \end{pmatrix}$}
+				\item[III+3II]{[TODO]}
+				\item{$\begin{matrix} I: & -3x_1+x_3=0 \\ II: & -2x_2+x_3=0\end{matrix}\begin{matrix} x_1=\nicefrac{1}{3}x_3 \\ x_2=\nicefrac{1}{2}x_3 \end{matrix}$}
+				\item{$\vec{x}=k \begin{pmatrix} \nicefrac{1}{3} \\ \nicefrac{1}{2} \\ 1 \end{pmatrix}$für$k\in\R\\\{0\}$}
+				\item[$\lambda_3=2$]{$\begin{pmatrix} 2-2 & 0 & 1 \\ - & 3-2 1 \\ 0 & 6 & 2-2 \end{pmatrix}=\begin{pmatrix} 0 & 0 & 1 \\ 0 & 1 & 1 \\ 0 & 6 & 0 \end{pmatrix}$}
+				\item[II-I]{$\begin{pmatrix} 0 & 0 & 1 \\ 0 & 1 & 0 \\ 0 & 6 & 0 \end{pmatrix}$}
+				\item[III-6II]{$\begin{pmatrix} 0 & 0 & 1 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}$}
+				\item{$\begin{matrix} I: & x_3=0 \\ II: & x_2=0 \end{matrix}$}
+				\item{$\vec{x}=k \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}$f+r$k\in\R\backslash\{0\}$}
+			\end{itemize}
+			\item[d]{$A=\begin{pmatrix} 3 & -1 & 0 \\ 2 & 0 & 0 \\ -2 & 2 & -1 \end{pmatrix}$}
+			\begin{itemize}
+				\item{$\begin{vmatrix} 3-\lambda & -1 & 0 \\ 2 -\lambda & 0 \\ -2 & 2 -1-\lambda \end{vmatrix}\begin{matrix} 3-\lambda & -1 \\ 2 & -\lambda \\ -2 & 2 \end{matrix}=(3-\lambda)(-\lambda)(-1-\lambda)-(-1-\lambda)2(-1)$}
+				\item{$-\lambda(-3-3\lambda+\lambda+\lambda^2)-(2+2\lambda)$}
+				\item{$-\lambda^3+2\lambda^2+3\lambda-2\lambda-2$}
+				\item{$-\lambda^3+2\lambda^2+\lambda-2=0$}
+				\item{Da es nichts zum herausheben gibt, muss man eine Polynomdivision verwendet werden. Da wir jedoch keine Nullstelle wissen, muss man raten. Bei ganzzahligen Koeffizienten ist die Nullstelle in der Regel zwischen -3 und 3. In diesem Fall ist eine der Nullstellen 1 (Weil $-1^3+2*1^2+^-2$)}
+				\item{$(-\lambda^3+2\lambda^2+\lambda-2):(\lambda-1)=-\lambda^2+\lambda+2$}
+				\item{$(-\lambda^3+\lambda^2)$}
+				\item{$( - \lambda^2+\lambda)$}
+				\item{$-(\lambda^2-\lambda)$}
+				\item{$( - 2\lambda-2)$}
+				\item{$-()$}
+				\item{Das neue Polynom ist also $-\lambda^2+\lambda+2=0$}
+				\item{$\lambda_{2,3}=\frac{-1\pm\sqrt{1+8}}{-2}=\frac{-1\pm3}{-2}$\texttt{ -> }$\lambda_2=-1, \lambda_3=2$}
+				\item{Eigenvektoren:}
+				\item{$\begin{pmatrix} 3-\lambda & -1 & 0 \\ 2 & -\lambda & 0 \\ -2 & 2 & -1-\lambda \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix}=\begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$}
+				\item[$\lambda_1=1$]{$\begin{pmatrix} 3-1 & -1 & 0 \\ 2 & -1 & 0 \\ -2 & 2 & -1-1 \end{pmatrix}=\begin{pmatrix} 2 & -1 & 0 \\ 2 & -1 & 0 \\ -2 &.2 & -2 \end{pmatrix}$}
+				\item[II-I/III+I]{$\begin{pmatrix} 2 & -1 & 0 \\ 0 & 0 & 0 \\ 0 & 1 & -2 \end{pmatrix}$}
+				\item{$\begin{matrix} I: & 2x_1-x_2=0 \\ II: & x_2-2x_3=0 \end{matrix}\begin{matrix} -> & x_1=\nicefrac{1}{2}x_2 \\ x_2=2x_3 \end{matrix}$}
+				\item{$\vec{x}=k \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}$für$k\in\R\\\{0\}$}
+				\item[$\lambda_2=-1$]{$\vec{x}=k \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}$für$k\in\R\backslash\{0\}$}
+				\item[$\lambda_3=2$]{$\vec{x}=k \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}$für $k\in\R\backslash\{0\}$}
+			\end{itemize}
+		\end{itemize}
 	\end{itemize}
 
 
