@@ -11,6 +11,7 @@
 \usepackage{amsmath}
 \usepackage{cancel}
 \usepackage{stmaryrd}
+\usepackage{polynom}
 \usepackage{booktabs}
 \usepackage[explicit]{titlesec}
 \usepackage{hyperref}
@@ -767,22 +768,37 @@
 				\item{$-\lambda^3+2\lambda^2+3\lambda-2\lambda-2$}
 				\item{$-\lambda^3+2\lambda^2+\lambda-2=0$}
 				\item{Da es nichts zum herausheben gibt, muss man eine Polynomdivision verwendet werden. Da wir jedoch keine Nullstelle wissen, muss man raten. Bei ganzzahligen Koeffizienten ist die Nullstelle in der Regel zwischen -3 und 3. In diesem Fall ist eine der Nullstellen 1 (Weil $-1^3+2*1^2+^-2$)}
-				\item{$(-\lambda^3+2\lambda^2+\lambda-2):(\lambda-1)=-\lambda^2+\lambda+2$}
-				\item{$(-\lambda^3+\lambda^2)$}
-				\item{$( - \lambda^2+\lambda)$}
-				\item{$-(\lambda^2-\lambda)$}
-				\item{$( - 2\lambda-2)$}
-				\item{$-()$}
+				\item{\mathcode`x=\lambda \polylongdiv[style=C]{-x^3+2x^2+x-2}{x-1}}
 				\item{Das neue Polynom ist also $-\lambda^2+\lambda+2=0$}
 				\item{$\lambda_{2,3}=\frac{-1\pm\sqrt{1+8}}{-2}=\frac{-1\pm3}{-2}$\texttt{ -> }$\lambda_2=-1, \lambda_3=2$}
 				\item{Eigenvektoren:}
 				\item{$\begin{pmatrix} 3-\lambda & -1 & 0 \\ 2 & -\lambda & 0 \\ -2 & 2 & -1-\lambda \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix}=\begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$}
 				\item[$\lambda_1=1$]{$\begin{pmatrix} 3-1 & -1 & 0 \\ 2 & -1 & 0 \\ -2 & 2 & -1-1 \end{pmatrix}=\begin{pmatrix} 2 & -1 & 0 \\ 2 & -1 & 0 \\ -2 &.2 & -2 \end{pmatrix}$}
-				\item[II-I/III+I]{$\begin{pmatrix} 2 & -1 & 0 \\ 0 & 0 & 0 \\ 0 & 1 & -2 \end{pmatrix}$}
+				\item[II-I/III+I:]{$\begin{pmatrix} 2 & -1 & 0 \\ 0 & 0 & 0 \\ 0 & 1 & -2 \end{pmatrix}$}
 				\item{$\begin{matrix} I: & 2x_1-x_2=0 \\ II: & x_2-2x_3=0 \end{matrix}\begin{matrix} -> & x_1=\nicefrac{1}{2}x_2 \\ x_2=2x_3 \end{matrix}$}
-				\item{$\vec{x}=k \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}$für$k\in\R\\\{0\}$}
-				\item[$\lambda_2=-1$]{$\vec{x}=k \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}$für$k\in\R\backslash\{0\}$}
-				\item[$\lambda_3=2$]{$\vec{x}=k \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}$für $k\in\R\backslash\{0\}$}
+				\item{$\vec{x}=k \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}$für$k\in\R\backslash\{0\}$}
+				\item[$\lambda_2=-1$:]{$\vec{x}=k \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}$für$k\in\R\backslash\{0\}$}
+				\item[$\lambda_3=2$:]{$\vec{x}=k \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}$für $k\in\R\backslash\{0\}$}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item[1]{Wenden Sie auf folgenden Graphen den Algorithmus von Kruskal an um einen minimalen Spannbaum zu ermitteln.}
+		\item{\includegraphics{Bilder/graph_1.png}
+		\begin{itemize}
+			\item{Der Algorithmus von Kruskal durchsucht global, also muss jede Kante immer beachtet werden.}
+			\item{Man kann als erstes eine der beiden Kanten mit Gewicht 1 verwenden. Da diese in beiden Konstellationen keinen Kreis bilden müssen immer beide ausgewählt werden.}
+			\item{Es gibt drei Möglichkeiten um die Kante mit Gewicht 2 zu wählen, da eine Möglichkeit einen Kreis bilden würde. Von den drei kann zufällig einer gewählt werden.}
+			\item{Unabhängig des Erstgewählten kann ein zweiter ausgewählt werden ohne einen Kreis zu bilden. Der dritte kann jedoch nicht mehr hinzugefügt werden.}
+			\item{Die nächste Option ist 4, welche durch die 2 vorherigen Kanten stets gewählt werden mussten. Dieser vollendet den Graphen und es muss nichts mehr hinzugefügt werden.}
+		\end{itemize}
+		\item[2]{Wenden Sie auf folgenden Graphen den Algorithmus von Prim an um einen minimalen Spannbaum zu ermitteln.}
+		\item{\includegraphics{Bilder/graph_1.png}}
+		\begin{itemize}
+			\item{Der Algorithmus von Prim durchsucht stattdessen lokal, die Varianz des Spannbaums ist jedoch größer da bei einem zufälligen Knoten begonnen werden kann}
+			\item{Wenn mit dem Knoten innerhalb des Dreiecks begonnen wird, kann man nur die Kante mite Gewicht 4 nehmen}
+		\end{itemize}
+
 	\end{itemize}
 
 
