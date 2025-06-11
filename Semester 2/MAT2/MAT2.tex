@@ -464,6 +464,34 @@
 	Im Falle eines gewichteten, ungerichteten Graphen, werden die 1 und 0 durch das Gewicht der Verbindung ersetzt.
 	\subsection{Minimaler Spannbaum}
 	\subsection{Kürzester Wegealgorithmus}
+	\subsection{Maximales Flussproblem}
+	Das maximale Flussproblem dient zur Ermittlung des maximalen Flusses über ein verteiltes Netzwerk. Dazu wird ein gerichteter Graph mit folgenden Eigenschaften modelliert:
+	\begin{itemize}
+		\item{Es gibt stets eine Quelle s}
+		\item{Es gibt stets eine Senke t}
+		\item{Jede Kante hat ein Gewicht, was die Kapazität der jeweiligen Kante repräsentiert.}
+	\end{itemize}
+	Also hat der Graph einen Anfang und ein Ende sowie Angaben für den Durchsatz pro Kante. Eine Kante kann das Gewicht pro Leitung dabei nicht überschreiten. \\
+	Es gilt auch die Flusserhaltungsgleichung oder das Kirchhoffsche Gesetz, dass jegliche Kapazität die einen Knoten betritt, diesen auch wieder verlassen muss. \\
+	Bei jedem Flussgraph existieren equivalente Inkrementgraphen. Diese Inkrementgraphen geben die Vorwärts- sowie Rückwärtskante, was die Restkapazität und anliegenden Fluss angibt. Eine Vorwärtskante gibt somit die freie Kapazität durch die Kapazität der Kante minus dem anliegenden Fluss und eine Ruckwärtskante den momentan anliegenden Fluss auf der Kante an. Das Optimalitätskriterium gibt an, dass ein Graph einen maximalen Fluss aufweist, wenn keine weiteren Wege vom Ursprung zum Ziel möglich sind. \\
+	Die Maximal zu verschickende Anzahl an Flusseinheiten wird mit $\delta$ angegeben. Das $\delta$ entspricht dabei stets der minimalen Kapazität eines Teilweges auf dem Weg vom Ursprung zum Ziel. (Wenn man also zwei Leitungen mit Kapazität 10 und 5 hat, wäre das $\delta$ 5, da man nur 5 über die gesamte Leitung schicken kann)
+	\subsubsection{Augmentierender Wegealgorithmus von Ford und Fulkerson}
+	Mit dem Wegealgorithmus von Ford und Fulkerson kann man das maximale Flussproblem lösen:
+	\begin{enumerate}
+		\item{Man zuerst den Graphen mit den Gewichtungen aufbauen.}
+		\item{Man einen zufälligen Weg durch den Graphen vom Start zum Ende.}
+		\item{Die geringste Kapazität auf dem Weg wird als $\delta$ angegeben.}
+		\item{Die Vorwärts- und Rückwärtskanten werden für den Weg erstellt, wodurch die Rrestkapazität des Weges angegeben wird.}
+		\item{Jetzt werden für einen Weg mit Restkapazität (Also Rückwärtskante größer als 0) weitere Wege konstruiert}
+		\item{Sobald kein weiterer Weg mit Restkapazität konstruiert werden kann, summiert man die Kapazität der Weg vom Ursprung oder zum Ende um zum maximalen Fluss zu kommen.}
+	\end{enumerate}
+	\subsection{s-t-Schnitt}
+	Der s-t-Schnitt kann verwendet werden um Schwachstellen in Netzwerken zu finden. Das kann relevant werden, wenn man zum Beispiel die Verbindung zu einem Netzwerk trennen will, dabei jedoch nicht jede Verbindung einzeln trennen will. Das nennt man dann einen minimalen s-t-Schnitt. \\
+	Ein s-t-Schnitt partitioniert einen Graphen auf die Knotenmenge V, welche danach in zwei disjunkte Teilmengen S und T geteilt werden könne, zwischen welchen der Schnitt passiert. \\
+	Vorraussetzung ist, dass S und T in verschiedenen Mengen liegen, ihre Vereinigung alle Knoten des Graphen enthalen und S und T keine gemeinsamen Knoten haben. Die Kapazität eines s-t-Schnitts ist die Summe der Kapazitäten jener Kanten die zwischen S und T verlaufen. Für diesen Schnitt sind nur die Kanten die zwischen den beiden Knotenmengen verlaufen relevant. \\
+	Zur Ermittlung des minimalen s-t-Schnitts, muss man den maximalen Fluss betrachten, da der Wert eines maximalen Flusses gleich der Kapazität des minimalen Schnitts ist. \\
+	Zur Ermittlung der Menge S muss man alle Knoten finden, welche über einen gerichteten Weg von der Quelle erreichbar sind. Die Menge T inkludiert danach alle Knoten die nicht in der Menge S enthalten sind. Der minimale Schnitt stellt dann die Kapazität aller gerichteten Graphen zwischen S und T dar.
+	
 	
 
 	
