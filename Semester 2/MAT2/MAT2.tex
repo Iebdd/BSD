@@ -354,10 +354,6 @@
 			\item{So kann man das Vielfache einer Zeiler einer anderen Zeile hinzufügen oder subtrahieren.}
 			\item{$\begin{vmatrix} 1 & 2 & 3 \\ 0 & 5 & 6 \\ 2 & 4 & 15 \end{vmatrix}=\begin{vmatrix} 1 & 2 & 3 \\ 0 & 5 & 6 \\ 0 & 0 & 9 \end{vmatrix}=1*5*9=45$}
 		\end{itemize}
-		\item{Man kann eine Zeile oder Spalte mit einer Zahl multiplizieren, wobei die Determinante mit der gleichen Zahl multipliziert wird.}
-		\begin{itemize}
-			\item{$\begin{vmatrix} \nicefrac{1}{2} & 2 & 3 \\ 0 & 5 & 6 \\  [TODO] & & \end{vmatrix}$}
-		\end{itemize}
 	\end{itemize}
 	Ziel dieser Regeln ist es, Regeln 2 bis 4 anzuwenden um die Matrix in eine Dreiecksmatrix überzuführen, was die Determinante einfach bestimmbar macht.
 	\subsection{Matrixnormen}
@@ -427,43 +423,223 @@
 	$\begin{pmatrix} 3-\lambda & -1 & 0 \\ 2 & 0-\lambda & 0 \\ -2 & 2 & -1-\lambda \end{pmatrix}$ Dies ist der Ausgangspunkt für die Berechnung wobei man lambda für einen Eigenwert einsetzt. Da die Matrizen singulär sind, wird dabei immer eine der drei Reihen null sein und domit unendlich viele Lösungen vorhanden sein. Das ist jedoch gewollt, da ein Eigenvektor immer unendlich viele Lösungen besitzt. Das resultierende unterbestimmte Gleichungssystem kann man dann lösen um so auf die Verhältnisse der Unbekannten zu kommen. Das Ergebnis schreibt man an wie: $\vec{x}=k \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}$ für $k \in\R\\\{0\}$
 	\section{Graphentheorie}
 	Ein Graph (Oft G genannt) besteht aus einer endlichen Menge an Knoten V (für Vertices) und Kanten E (für Edges). \\
-	Man unterscheidet zwischen gerichteten und ungerichteten Graphen. Gerichtete Graphen haben eine Richtung, also hat jede Verbindung zwischen zwei Knoten jeweils einen Start- und einen Endknoten. Man schreibt bei gerichteten Kanten (a,b), wobei man jeweils nur von a nach b gelangen kann. \\
-	Ungerichtete Graphen haben keine Richtung, wodurch man in beide Richtung ungehindert passieren kann. \\
-	Ein Graph wird jeweils durch seine Knoten, die Menge an Knoten, seine Kanten und die Menge an Knoten beschrieben. Aus diesen 4 Angaben kann man einen Graphen graphisch konstruieren. \\
-	Zwei Knoten sind adjazent oder benachbart, wenn er direkt mit einem anderen Knoten durch eine Kante verbunden ist. \\
-	Die Nachbarschaftsmenge ist dabei die Menge der zu einem Knoten benachbarten Knoten. \\
-	Zwei Knoten sind inzident, wenn sie jeweils mit einem Knoten mit einer Kante verbunden sind. \\
-	Ein Graph hat Mehrfachkanten, wenn mehrere Kanten zwei Knoten miteinander verbinden. Im Falle eines gerichteten Graphen müssen diese jeweils die gleiche Richtung haben. \\
-	Ein Graph gilt als schlicht, wenn er keine Mehrfachkanten oder Schlingen besitzt. \\
-	Eine Kantenfolge ist eine Folge an adjazenten Kanten. Diese Knoten oder Kanten können sich auch wiederholen. Wenn eine Kantenfolge am selben Knoten beginnt und endet, ist diese eine geschlossene Kantenfolge, ansosten ist sie offen. \\
-	Die Spezialform einer Kantenfolge ist der Kantenzug, welcher eine Kantenfolge ist, welche sich nicht wiederholen. Dabei ist es nur wichtig, dass sich die Kanten und nicht die Knoten nicht wiederholen. Ein Kantenzug darf also eine Kante von einem Knoten zu einem anderen Knoten nicht wiederholen, aber schon auf eine andere Weise auf oder von dem Knoten kommen. \\
-	Ein Weg oder Pfad ist das Gegenstück zum Kantenzug, bei welchem es um die Knoten und nicht die Kanten geht. Aus diesem Grund ist jeder Weg offen. Ein Weg, welcher eine Länge von 0 hat, nennt man leerer Pfad.\\
-	Ein Zyklus ist eine geschlossene Kantenfolge, bei welcher der Anfangs- und Endknoten der selbe ist. \\
-	Der Kreis ist wiederum ein spezieller Zyklus, bei welchem alle Knoten unterschiedlich sein müssen. Also müssen der Start und Endknoten gleich sein, und alle anderen müssen unterschiedlich sein. Ein Kreis kann gerade oder ungerade sein, abhängig davon, ob die Menge an Kanten gerade oder ungerade ist. \\
-	Eine Tour ist ein spezieller Zyklus, welcher vorraussetzt, dass alle Kanten des Graphen mindestens ein Mal durchlaufen werden müssen. \\
-	Ein ungerichteter Graph gilt als zusammenhängend, wenn ein Weg zwischen allen Knotenpaaren vorhanden ist, also alle Knoten von jedem anderen Knoten erreichbar sind. \\
-	Bei gerichteten Graphen unterscheidet man zusätzlich zwischen stark und schwach zusammenhängenden Graphen. Ein stark zusammenhängender Graph lässt, unter Beachtung der Richtung, jeden Knoten von jedem anderen Knoten besuchen. Ein schwach zusammenhängender Graph hingegen, ist nur zusammenhängend, wenn dieser als ungerichteter Graph gesehen wird (Also eine Richtung nur von einem Knoten weggeht, aber nie dort hin führt).
-	Bei gerichteten Graphen gibt es auch Vorgänger und Nachfolger, welche von einem Knoten aus gesehen, der nächste und vorherige Knoten ist, anhand der Richtung der Kante. \\
-	Wenn ein gerichteter Graph zwei Kanten hat, welche jeweils von und zu einem Knoten gehen, nennt man das Invers. \\
-	Ein Teilgraph ist eine Teilmenge der Knotenmenge eines Graphen.  \\
-	Die Zusammenhangskomponente ist die [TODO]
-	Eine Brücke ist ein Knoten eines Graphen, welche bei einer Entfernung den Graphen in zwei Komponenten teilt. \\
-	Der Grad eines Knotens ist bei ungerichteten Graphen die Anzahl an Kanten die mit diesem Knoten verbunden sind. Dabei zählt man Schlingen doppelt. \\
-	Bei gerichteten Graphen unterscheidet man zwischen ausgehenden und eingehenden Kanten. Der Grad eines Knotens bei gerichteten Graphen ist die Summe der ausgehenden und eingehenden Kanten. \\
-	Das Handschlaglemma besagt, dass die Summe der Grade aller Knoten gleich zwei Mal der Anzahl an Kanten ist: $\sum_{v\in V}d(v)=d(v_^)+d(v_2)+...+d(v_n)=e*|E|$. \\
+	Man unterscheidet zwischen gerichteten und ungerichteten Graphen.
+	\begin{itemize}
+		\item{Ungerichteter Graph}
+		\begin{itemize}
+			\item{Ungerichtete Graphen haben keine Richtung, wodurch man in beide Richtung ungehindert passieren kann.}
+		\end{itemize}
+		\item{Gerichteter Graph}
+		\begin{itemize}
+			\item{Gerichtete Graphen haben eine Richtung, also hat jede Verbindung zwischen zwei Knoten jeweils einen Start- und einen Endknoten.}
+			\item{Man schreibt bei gerichteten Kanten (a,b), wobei man jeweils nur von a nach b gelangen kann.}
+		\end{itemize}
+	\end{itemize}
+	Ein Graph wird jeweils durch seine Knoten, die Menge an Knoten, seine Kanten und die Menge an Knoten beschrieben. Aus diesen 4 Angaben kann man einen Graphen graphisch konstruieren.
+	\begin{itemize}
+		\item{Adjazenz}
+		\begin{itemize}
+			\item{Zwei Knoten sind adjazent oder benachbart, wenn er direkt mit einem anderen Knoten durch eine Kante verbunden ist.}
+			\item{Die Nachbarschaftsmenge ist dabei die Menge der zu einem Knoten benachbarten Knoten.}
+		\end{itemize}
+		\item{Inzidenz}
+		\begin{itemize}
+			\item{Zwei Knoten sind inzident, wenn sie jeweils mit einem Knoten mit einer Kante verbunden sind.}
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item{Mehrfachkante}
+		\begin{itemize}
+			\item{Ein Graph hat Mehrfachkanten, wenn mehrere Kanten zwei Knoten miteinander verbinden. Im Falle eines gerichteten Graphen müssen diese jeweils die gleiche Richtung haben.}
+		\end{itemize}
+		\item{Schlinge}
+		\begin{itemize}
+			\item{Eine Schlinge verbindet einen Knoten mit sich selbst.}
+		\end{itemize}
+	\end{itemize}
+	Ein Graph gilt als schlicht, wenn er keine Mehrfachkanten oder Schlingen besitzt. Ein Graph mit Schlingen und/oder Mehrfachkanten wird als Multigraph bezeichnet.
+	\begin{itemize}
+		\item{Kantenfolge}
+		\begin{itemize}
+			\item{Eine Kantenfolge ist eine Folge an adjazenten Kanten. Diese Knoten oder Kanten können sich auch wiederholen. Wenn eine Kantenfolge am selben Knoten beginnt und endet, ist diese eine geschlossene Kantenfolge, ansosten ist sie offen.}
+		\end{itemize}
+		\item{Kantenzug}
+		\begin{itemize}
+			\item{Die Spezialform einer Kantenfolge ist der Kantenzug, welcher eine Kantenfolge ist, welche sich nicht wiederholen. Dabei ist es nur wichtig, dass sich die Kanten und nicht die Knoten nicht wiederholen. Ein Kantenzug darf also eine Kante von einem Knoten zu einem anderen Knoten nicht wiederholen, aber schon auf eine andere Weise auf oder von dem Knoten kommen.}
+		\end{itemize}
+		\item{Weg/Pfad}
+		\begin{itemize}
+			\item{Ein Weg oder Pfad ist das Gegenstück zum Kantenzug, bei welchem es um die Knoten und nicht die Kanten geht. Aus diesem Grund ist jeder Weg offen. Ein Weg, welcher eine Länge von 0 hat, nennt man leerer Pfad.}
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item{Zyklus}
+		\begin{itemize}
+			\item{Ein Zyklus ist eine geschlossene Kantenfolge, bei welcher der Anfangs- und Endknoten der selbe ist.}
+		\end{itemize}
+		\item{Kreis}
+		\begin{itemize}
+			\item{Der Kreis ist wiederum ein spezieller Zyklus, bei welchem alle Knoten unterschiedlich sein müssen. Also müssen der Start und Endknoten gleich sein, und alle anderen müssen unterschiedlich sein. Ein Kreis kann gerade oder ungerade sein, abhängig davon, ob die Menge an Kanten gerade oder ungerade ist.}
+		\end{itemize}
+		\item{Tour}
+		\begin{itemize}
+			\item{Eine Tour ist ein spezieller Zyklus, welcher vorraussetzt, dass alle Kanten des Graphen mindestens ein Mal durchlaufen werden müssen.}
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item{Bei ungerichteten Graphen:}
+		\begin{itemize}
+			\item{Zusammenhängend}
+			\begin{itemize}
+				\item{Ein ungerichteter Graph gilt als zusammenhängend, wenn ein Weg zwischen allen Knotenpaaren vorhanden ist, also alle Knoten von jedem anderen Knoten erreichbar sind.}
+			\end{itemize}
+		\end{itemize}
+		\item{Bei gerichteten Graphen:}
+		\begin{itemize}
+			\item{Bei gerichteten Graphen unterscheidet man zusätzlich zwischen stark und schwach zusammenhängenden Graphen.}
+			\item{Stark zusammenhängend}
+			\begin{itemize}
+				\item{Ein stark zusammenhängender Graph lässt, unter Beachtung der Richtung, jeden Knoten von jedem anderen Knoten besuchen.}
+			\end{itemize}
+			\item{Schwach zusammenhängend}
+			\begin{itemize}
+				\item{Ein schwach zusammenhängender Graph hingegen, ist nur zusammenhängend, wenn dieser als ungerichteter Graph gesehen wird (Also eine Richtung nur von einem Knoten weggeht, aber nie dort hin führt).}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item{Vorgänger/Nachfolger}
+		\begin{itemize}
+			\item{Bei gerichteten Graphen gibt es auch Vorgänger und Nachfolger, welche von einem Knoten aus gesehen, der nächste und vorherige Knoten ist, anhand der Richtung der Kante.}
+		\end{itemize}
+		\item{Invers}
+		\begin{itemize}
+			\item{Wenn ein gerichteter Graph zwei Kanten hat, welche jeweils von und zu einem Knoten gehen, nennt man das Invers.}
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item{Teilgraph}
+		\begin{itemize}
+			\item{Ein Teilgraph ist eine Teilmenge der Knotenmenge eines Graphen.}
+		\end{itemize}
+		\item{Zusammenhangskomponente}
+		\begin{itemize}
+			\item{Die Zusammenhangskomponente ist der maximal zusammenhängende Teilgraph eines Graphen. Bei einem nicht zusammenhängenden Graphen kann ein Graph mehrere Zusammenhangskomponenten geben.}
+		\end{itemize}
+		\item{Brücke}
+		\begin{itemize}
+			\item{Eine Brücke ist ein Knoten eines Graphen, welche bei einer Entfernung den Graphen in zwei Komponenten teilt.}
+		\end{itemize}
+		\item{Grad}
+		\begin{itemize}
+			\item{Der Grad eines Knotens ist bei ungerichteten Graphen die Anzahl an Kanten die mit diesem Knoten verbunden sind. Dabei zählt man Schlingen doppelt.}
+			\item{Bei gerichteten Graphen unterscheidet man zwischen ausgehenden und eingehenden Kanten. Der Grad eines Knotens bei gerichteten Graphen ist die Summe der ausgehenden und eingehenden Kanten.}
+		\end{itemize}
+	\end{itemize}
+	Das Handschlaglemma besagt, dass die Summe der Grade aller Knoten gleich zwei Mal der Anzahl an Kanten ist: $\sum_{v\in V}d(v)=d(v_1)+d(v_2)+...+d(v_n)=e*|E|$. \\
 	Die Folgerung aus diesem Lemma ist, dass die Anzahl der Knoten mit einer ungeraden Anzahl an Knoten immer gerade sein muss. Das ist der Grund weshalb Schlingen zwei Mal gezählt werden, da sonst eine der Kanten ins leere laufen würde. 
 	\subsection{Spezielle Graphen}
-	Der vollständige Graph ist ein Graph wo es zwischen jedem Knotenpaar eine Kante gibt. Also ist jeder Knoten mit jedem anderen Knoten direkt verbunden.\\
-	Ein Planarer Graph ist ein Graph für den die graphische Darstellung ohne Überkreuzung von Kanten möglich ist. Bei vollständigen Graphen sind nur Graphen mit einem n kleiner als 5 planar. \\
-	Ein Bipartiter Graph oder 2-partiter Graph ist ein Graph, welcher in zwei disjunkte Knotenmenge geteilt werden kann, und dessen Kanten nur zwischen den Knotenmengen verlaufen. \\
-	Ein kantengewichteter Graph oder nur gewichteter Graph ist ein Graph bei dem jeder Kante ein reelle Zahl zugeordnet wird. Anwendungsmöglichkeiten ist die Berechnung der Länge eines Straßennetztes oder den Kosten bei einem wirtschaftlichen Graphen. \\
-	Ein Baum ist ein Graph, welcher zusammenhängend ist und keinen Kreis erstellt. Das bedeutet, dass ein Baum mit n Knoten immer nur n-1 Knoten haben kann. Wird in einem Baum eine beliebige Kante entfernt, ist dieser nicht merh zusammenhängend. Zusätzlich gibt es bei Bäumen genau einen Weg um zu einem Knoten zu gelangen.  \\
+	\subsubsection{Vollständiger Graph}
+	Der vollständige Graph ist ein Graph wo es zwischen jedem Knotenpaar eine Kante gibt. Also ist jeder Knoten mit jedem anderen Knoten direkt verbunden.
+	\subsubsection{Planarer Graph}
+	Ein Planarer Graph ist ein Graph für den die graphische Darstellung ohne Überkreuzung von Kanten möglich ist. Bei vollständigen Graphen sind nur Graphen mit einem n kleiner als 5 planar.
+	\subsubsection{Bipartiter Graph}
+	Ein Bipartiter Graph oder 2-partiter Graph ist ein Graph, welcher in zwei disjunkte Knotenmenge geteilt werden kann, und dessen Kanten nur zwischen den Knotenmengen verlaufen.
+	\subsubsection{Kantengewichteter Graph}
+	Ein kantengewichteter Graph oder nur gewichteter Graph ist ein Graph bei dem jeder Kante ein reelle Zahl zugeordnet wird. Anwendungsmöglichkeiten ist die Berechnung der Länge eines Straßennetztes oder den Kosten bei einem wirtschaftlichen Graphen.
+	\subsubsection{Baum}
+	Ein Baum ist ein Graph, welcher zusammenhängend ist und keinen Kreis erstellt. Das bedeutet, dass ein Baum mit n Knoten immer nur n-1 Knoten haben kann. Wird in einem Baum eine beliebige Kante entfernt, ist dieser nicht merh zusammenhängend. Zusätzlich gibt es bei Bäumen genau einen Weg um zu einem Knoten zu gelangen.
+	\paragraphlb{Spannbaum}
 	Ein Spannbaum ist ein Baum, welcher auf einen existierenden Graphen, welcher kein Baum ist aufgespannt wird.
 	\subsection{Darstellung am PC}
 	Ein Graph kann auf einem Computer mithilfe einer Adjazenzmatrix dargestellt werden. Dabei werden die Knoten durchnummeriert und die Zeilen und Spalten entsprechend den Knoten angeordnet (Um eine nxn Adjazenzmatrix zu erzeugen). Danach wird für die Adjazenz zweier Kanten entweder ein 1 oder 0 eingetragen. Bei einer 1 sind diese Knoten verbunden und bei 0 nicht. Bei ungerichteten Graphen ist diese Matrix stets quadratisch und symmetrisch. Im Falle einer Schlinge muss auf der Höhe und Breite des Knotens eine 2 eingezeichnet werden damit das Handschlaglemma wieder passt. \\
 	Im Falle eines gewichteten, ungerichteten Graphen, werden die 1 und 0 durch das Gewicht der Verbindung ersetzt.
 	\subsection{Minimaler Spannbaum}
+	Das Problem eines minimalen Spannbaums ist, dass Dörfer mittels Rohrleitungen verbunden werden sollen. Dabei sind die Knoten die Dörfer und die Kanten die Leitungen. Diese Dörfer sollen mit der geringsten Menge an Leitungen verbunden werden, wobei jede Verbindung eine bestimmte Menge an Baukosten besitzt.
+	\subsubsection{Algorithmus von Kruskal}
+	Mit dem Algorithmus von Kruskal kann man diesen minimalen Spannbaum berechnen, wobei einige Vorraussetzungen gegeben sein müssen:
+	\begin{itemize}
+		\item{Er muss ungerichtet sein}
+		\item{Er muss zusammenhängend sein}
+		\item{Er muss gewichtet sein}
+	\end{itemize}
+	Um den Algorithmus anzuwenden muss man unter den noch nicht ausgewählten Kanten die kürzeste Kante bilden, welche mit den bereits gewählten keinen Kreis bildet.
+	\subsubsection{Algorithmus von Prim}
+	Der Algorithmus von Prim hat die gleichen Vorraussetzungen wie der Algorithmus von Kruskal, jedoch einen anderen Vorgang. \\
+	Im Algorithmus wird:
+	\begin{enumerate}
+		\item{Ein belibiger Knoten des Graphen ausgewählt}
+		\item{Solange noch nicht alle Knoten verbunden sind:}
+		\begin{itemize}
+			\item{Es wird}
+		\end{itemize}
+	\end{enumerate}
 	\subsection{Kürzester Wegealgorithmus}
+	Ein kürzester Wegealgorithmus will den kürzesten Weg zwischen zwei Punkten finden.
+	\subsubsection{Algorithmus von Dijkstra}
+	Der Algorithmus von Dijkstra ist ein greedy Algorithmus, welche stets nur den Folgezustand in Betracht zieht. Um den Algorithmus durchzuführen benötigt man eine Warteschlange also wird oben hinzugefügt und unten entnommen. Die Schritte sind:
+	\begin{enumerate}
+		\item{Wähle den Startknoten und füge in zur Warteschlange hinzu.}
+		\item{Setze Distanz im Startknoten zu 0 und alle anderen zu $\infty$}
+		\item{Nimm den Knoten mit der geringsten Distanz aus der Warteschlange}
+		\item{Update die Distanz aller Knoten welche direkt zum momentan gewählten Knoten führen und füge sie zur Warteschlange hinzu.}
+		\item{Wenn die Warteschalnge leer ist, brich ab, sonst beginne erneut mit 3.}
+	\end{enumerate}
+	Es kann mühsam sein den Vorgang des Algorithmus' darzustellen, weshalb es eine gute Idee ist, eine Tabelle anzugeben:
+	\begin{tabular}{| l | l | l | l | l | l | l | l | l | l |}
+		\toprule
+		Iteration & Aktuell & a & b & c & d & e & f & Warteschlange & Erledigt \\ \midrule
+		0 & - & 0 & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & a & - \\ \hline
+		1 & a & 0 & 10(a) & 20(a) & $\infty$ & $\infty$ & $\infty$ & b,c & a \\ \hline
+		2 & b & 0 & \textcolor{red}{10(a)} & 20(a) & 60(b) & 20(b) & $\infty$ & c,d,e & a,b \\ \hline
+		3 & c & 0 & 10(a) & 20(a) & 40(c) & 20(b) & $\infty$ & d,e & a,b,c \\ \hline
+		4 & e & 0 & 10(a) & 20(a) & 40(c) & 20(b) & 21(e) & d,f & a,b,c,e \\ \hline
+		5 & f & 0 & 10(a) & 20(a) & 40(c) & 20(b) & 21(e) & d & a,b,c,e,d \\ \hline
+		6 & d & 0 & 10(a) & 20(a) & 40(c) & 20(b) & 21(e) & - & a,b,c,d,e,f \\ \midrule
+		& & 0 & 10(a) & 20(a) & 40(c) & 20(b) & 21(e) & & \\
+		\bottomrule
+	\end{tabular}
+	\subsection{Weitere spezielle Graphen}
+	\subsubsection{Eulerpfad/Eulerweg/Offener Eulerzug}
+	Diese drei Graphen haben verschiedene Namen, beschreiben jedoch das gleiche. Ein Eulerpfad hat folgende Eigenschaften
+	\begin{itemize}
+		\item{Hat eine offene Kantenfolge, muss also einen anderen Start- als Endknoten haben.}
+		\item{Jede Kante von einem zusammenhängenden, ungerichteten Graphen G ist genau ein Mal enthalten.}
+		\item{G hat nur dann einen offenen Eulerzug von an ach b, wenn a und b die einzigen Knoten mit ungeradem Grad sind.}
+	\end{itemize}
+	\subsubsection{Eulerkreis/Eulertour/geschlossener Eulerzug}
+	Das Gegenstück zum Eulerpfad. Hierbei muss:
+	\begin{itemize}
+		\item{Eine geschlossene Kantenfolge haben, also am gleichen Knoten beginnen und enden.}
+		\item{Jede Kante genau ein Mal enthalten sein muss.}
+		\item{}
+	\end{itemize}
+	\subsubsection{Eulergraph}
+	Ein Eulergraph ist ein spezieller Eulerkreis, bei dem alle Knoten einen geraden Knotengrad besitzen. Das führt dazu, dass ein Eulergraph einen Eulerkreis bildet
+	\paragraphlb{Algorithmus von Fleury}
+	Ein Algorithmus zum Finden eines Eulerkreises ist der Algorithmus von Fleury. Vorraussetzung dafür ist, dass alle Knoten einen geraden Grad haben. Danach muss man:
+	\begin{enumerate}
+		\item{Mit einer leeren Kantenfolge starten}
+		\item{Einen beliebigen Knoten als aktuellen Knoten wählen}
+		\item{Unter den unmarkierten (unbesuchten) Kanten des aktuellen Knoten eine auswählen die \textbf{keine Brücke} für noch unmarkierte Kanten ist}
+		\item{[TODO]}
+	\end{enumerate}
+	\subsubsection{Hamiltonpfad/Hamiltonweg}
+	Anders als bei Euler, ist der Fokus beim Hamiltonpfad auf die Knoten. Dabei muss jeder Knoten genau ein Mal besucht werden (Jedoch können Kanten unbesucht bleiben.)
+	\subsection{Chinese Postman Problem}
+	Bei dem Chinese Postmna Problem soll ein Briefträger in einem Viertel Post ausliefern. Dabei soll die Gesamtlänge der Tour so kurz wie möglich sein. Die Route des Postträgers kann als Graph modelliert werden, wobei man einen ungerichteten Graphen verwenden kann. Also wird die Tour mit der minimalen Gesamtlänge, welche wieder am Ursprungsort beginnt, gesucht. \\
+	Die Lösung dieses Problems hängt von dem gegebenen Graphen ab. Falls alle Kanten des Graphen einen geraden Grad haben, kann man es mittels Eulergraph lösen (nennt man die minimale Chinese Postman Tour). Falls manche Kanten mehrmals durchschritten werden müssen, hat man keinen Eulergraph. Jedoch kann man zusätzliche Kanten einfügen um so jeden beliebigen Graphen in einen Eulergraphen umzuwandeln und es so wieder lösen zu können.
+	\subsubsection{Algorithmus zum Finden von Zusatzkanten}
+	Man kann strategisch weitere Kanten einfügen, was wiederum nach einem Algorithmus geschieht:
+	\begin{enumerate}
+		\item{Zuerst müssen alle Knoten mit ungeradem Grad aufgelistet werden}
+		\item{Dann müssen alle möglichen Knotenpaare mit Knoten mit ungeradem Grad aufgelistet werden}
+		\item{Dann muss für jedes der Knotenpaare alle verbindenden Knotenkombinationen mit minimalen Gewicht gefunden werden.}
+		\item{Danach muss für jede Paarkombination (Kombination von Knotenkombinationen) das minimale Gesamtgewicht gefunden werden.}
+		\item{Füge jeweils zusätzliche Kanten jeweils entlang des minimalen Gesamtgewichts ein.}
+	\end{enumerate}
+	\subsection{Travelling Salesman Problem}
+	Während das Chinese Postman Problem den Besuch aller Kanten suchte, sucht das Travelling Salesman Problem den Besuch aller Knoten. Während das Chinese Postman Problem jedoch relativ schnell lösbar ist, ist das Travelling Salesman Problem ein NP-Hartes Problem, was nicht geschlossen lösbar ist. Aus diesem Grund wird es nur erwähnt, aber nicht weiter behandelt.
 	\subsection{Maximales Flussproblem}
 	Das maximale Flussproblem dient zur Ermittlung des maximalen Flusses über ein verteiltes Netzwerk. Dazu wird ein gerichteter Graph mit folgenden Eigenschaften modelliert:
 	\begin{itemize}
@@ -491,8 +667,6 @@
 	Vorraussetzung ist, dass S und T in verschiedenen Mengen liegen, ihre Vereinigung alle Knoten des Graphen enthalen und S und T keine gemeinsamen Knoten haben. Die Kapazität eines s-t-Schnitts ist die Summe der Kapazitäten jener Kanten die zwischen S und T verlaufen. Für diesen Schnitt sind nur die Kanten die zwischen den beiden Knotenmengen verlaufen relevant. \\
 	Zur Ermittlung des minimalen s-t-Schnitts, muss man den maximalen Fluss betrachten, da der Wert eines maximalen Flusses gleich der Kapazität des minimalen Schnitts ist. \\
 	Zur Ermittlung der Menge S muss man alle Knoten finden, welche über einen gerichteten Weg von der Quelle erreichbar sind. Die Menge T inkludiert danach alle Knoten die nicht in der Menge S enthalten sind. Der minimale Schnitt stellt dann die Kapazität aller gerichteten Graphen zwischen S und T dar.
-	
-	
 
 	
 
