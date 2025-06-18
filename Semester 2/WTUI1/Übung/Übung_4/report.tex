@@ -1,0 +1,151 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+
+
+\geometry{top=12mm, left=1cm, right=2cm}
+
+\begin{document}
+	\begin{titlepage}
+		\centering
+		{\scshape\LARGE FH Campus 02 \par}
+		\vspace{1cm}
+		{\scshape\Large Web Technologien und Usability \\ Gruppenabgabe\par}
+		\vspace{1.5cm}
+		{\huge\bfseries Heuristische Evaluierung\par}
+		\vspace{2cm}
+		{\Large\itshape B1-Kronehit \\ Andreas Hofer \\ Hannah Posch \\ Samuel Ulz\par}
+		\vfill
+		{\large \today\par}
+	\end{titlepage}
+	\tableofcontents
+	\newpage
+	\section{Grundinformation}
+	Ziel dieser heuristischen Evaluierung war die Websites des Privatradiosenders Kronehit \href{https://kronehit.at}{kronehit.at}. Als Basis für die Analyse wurden die Heuristiken von Keith Andrews verwendet. Teilnehmer an dieser Evaluation waren: \textit{Andreas Hofer}, \textit{Hannah Posch} und \textit{Samuel Ulz}.
+	\section{Zusammenfassung}
+	Dieser Bericht befasst sich mit der heuristischen Evaluation von \href{https://kronehit.at}{kronehit.at}. Aus Sicht des Evaluationsteams war der schwerwiegendste Fehler die nicht-triviale Menge an toten Links innerhalb der Website. In mindestens zwei Fällen führte ein vermeintlicher Link zu einer Ressource welche nicht mehr verfügbar war. In einem Fall wurde sogar der Standardfehler des Servers (Mit einem endlosen Ladebildschirm) angezeigt, anstatt auf die 404-Seite zu verweisen (welche in dem zweiten gefundenen Fall aufgerufen wird). Manche Elemente scheinen in iOS-basierten Browsern auch unverändert aus Vorlagen übernommen und bieten so Funktionen an, welche die Website nicht anbietet. KIm Allgemeinen weißt die Website von Kronehit einige grobe Mängel auf, welche oft nicht durch durch fehlerhaftes Design ausgelöst werden sondern mehr von technische Natur sind. Kronehit.at scheint auch an manchen Stellen nur mangelhaft für mobile Browser ausgelegt zu sein, was durch einige schwerwiegende iOS-spezifische Probleme ersichtlich wird.
+	\section{Website}
+	Die Website des Senders hat mehrere große Themengebiete, welche fließend ineinander übergehen. Elemente sind stets in Kacheln angeordnet mit einer Angabe zu welchem der Themengebiete sie gehören:
+	\begin{itemize}
+		\item{Webradio}
+		\begin{itemize}
+			\item{Der wichtigste Teil des Auftritts und von allen Unterseiten aufrufbar. Zusätzlich zu den regulären, mittels UKW empfangbaren Sender, bietet die Website auch einige Sender nur auf der Website an}
+		\end{itemize}
+		\item{Nachrichten}
+		\begin{itemize}
+			\item{Kronehit.at bietet auch Kurznachrichten in einem eigenen Reiter an}
+		\end{itemize}
+		\item{Gewinnspiele}
+		\begin{itemize}
+			\item{Es finden oft Gewinnspiele statt, welche in der Regel von Unternehmen gesponsert werden.}
+		\end{itemize}
+		\item{Services}
+		\begin{itemize}
+			\item{Zusätzlich bietet die Website einige Services an:}
+			\begin{itemize}
+				\item{Wetter - Nur für große Städte und nur pro Tag}
+				\item{Verkehr - Verlinkt auf die Website des ÖAMTC}
+				\item{Frequenzfinder - Gibt die Frequenz des Senders anhand der Postleitzahl an}
+				\item{Hitsuche - Zeigt gespielte Hits zu einer bestimmten Zeit an}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\section{Benutzerprofile}
+	Anhand der Funktionen der Website haben wir drei Benutzergruppen erstellt:
+	\begin{itemize}
+		\item{Buchhalterin}
+		\begin{itemize}
+			\item{Helga, 40, arbeitet in einem Büro und hört nebenbei auf der Website von kronehit Radio. Sie ist besonders an den Online-only Radios interessiert.}
+		\end{itemize}
+		\item{Eventgänger}
+		\begin{itemize}
+			\item{Max, 25, geht gerne auf Konzerte und andere Events und verwendet den Eventkalender der Website um Events in ihrer Nähe zu finden.}
+		\end{itemize}
+		\item{Kurznachrichten}
+		\begin{itemize}
+			\item{Franz, 55, verwendet den Onlineauftritt von Kronehit um über die neuesten Nachrichten informiert zu werden.}
+		\end{itemize}
+	\end{itemize}
+	\section{Evaluierungsumgebung}
+	Um reale Nutzungsbedigungen widerzuspiegeln, wurden Mobile- sowie Desktopbrowser mit und ohne Ad Blocker verwendet. Konkret sahen die Testumgebungen wie folgt aus:
+	\begin{enumerate}
+		\item{Samuel Ulz:}
+		\begin{itemize}
+			\item{iPhone 11 Pro Max mit iOS 18.5}
+			\item{Safari 18.5 mit Werbeblocker Ghostery v10.4.35}
+		\end{itemize}
+		\item{Hannah Posch:}
+		\begin{itemize}
+			\item{Lenovo Thinkpad mit Windows 11}
+			\item{Mozilla Firefox 139.0.4 mit Ghostery}
+		\end{itemize}
+		\item{Andreas Hofer:}
+		\begin{itemize}
+			\item{MacBook Pro 2016 mit MacOS 12.7.6}
+			\item{Safari 17.6 ohne AdBlocker}
+		\end{itemize}
+	\end{enumerate}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}
