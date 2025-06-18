@@ -1,0 +1,64 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Progress Report - Recommender}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\section*{Bereits umgesetztes}
+		Ich bin leider noch nicht sehr weit und arbeite immer noch an dem Einlesen der ratings. Konkret stehen jedoch die Pläne der Umsetzung.
+	\section*{Noch umzusetzen}
+		\subsection*{Ratings}
+			Mir fehlt noch der konkrete Algorithmus zum Einlesen der Ratings. Mein Plan war es, ein Zweidimensionales Array zu verwenden um die Ratings pro User als Art Adjazenzmatrix zu speichern. Das sollte (glaube ich) der effizienteste Weg sein, da es immer konstante Zeit benötigt um ein spezifisches Rating zu finden und auch etwas Speicherplatz spart, da der Index der Benutzer und Filme nicht explizit gespeichert werden muss. \\
+			Konkret wollte ich eine ArrayList an ArrayLists verwenden, wodurch (für mich) einfach neue Filme und Benutzer hinzugefügt werden können.
+		\subsection*{Recommender}
+			Ich würde gerne die dritte Stufe implementieren, da sie interessant klingt. Mein Plan hierfür war auf die gleiche Weise ein zweidimensionales Array zu verwenden, und es zu implementieren wie sie es in der Übung bereits erwähnt hatten. \\
+			Mein Plan war es für die Gleichheit einen normalisierten Wert anhand des maximal möglichen Werts zu verwenden. Da diese Matrix einen Benutzer auch mit sich selbst kombiniert speichert die Verwendung des gleichen Index den maximal möglichen Wert dieses Benutzers ab. Diesen kann ich dann mit jedem der Benutzer vergleichen um so die nötige Gleichheit pro Punkt zu finden und so eine Gleichheit zwischen 1 und 100 zuzweisen. (Ich glaube es wäre falsch diesen Wert als Prozent zu bezeichnen, auch wenn er von 1 bis 100 geht, da die Skala nicht linear verläuft.)
+	\section*{Schwierigkeiten}
+		Momentan tüftle ich daran wie ich konkret die Werte aus dem CSV in DataModel speichere. Die anderen beiden Implementationen übergeben den Pointer an die HashMap selbst, aber ich bin mir nicht sicher ob ich das machen sollte. Mein Plan ist es den Setter eher abstrakt zu halten, wodurch nur eine User und Movie ID übergeben wird, und die interne Logik von DataModel übernimmt den Rest wie das zuweisen neuer ArrayLists falls es der erste Wert für diesen User ist. Diese Methode könnte dann auch gleichzeitig das erstellen neuer Ratings für User oder Movies übernehmen, da es einfach neue User oder Movies hinzufügt, falls der gesuchte Index nicht existiert.
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}

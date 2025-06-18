@@ -359,7 +359,7 @@
 		\begin{itemize}
 			\item[a)]{Berechnen Sie A + B}
 			\begin{itemize}
-				\item{$\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & \end{pmatrix}+\begin{pmatrix} 6 & -2 & 10 \\ -2 & 0 & 2 \end{pmatrix}=\begin{pmatrix} 7 & 0 & 13 \\ 2 & 5 & 8 \end{pmatrix}$}
+				\item{$\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}+\begin{pmatrix} 6 & -2 & 10 \\ -2 & 0 & 2 \end{pmatrix}=\begin{pmatrix} 7 & 0 & 13 \\ 2 & 5 & 8 \end{pmatrix}$}
 			\end{itemize}
 			\item[c)]{Berechnen Sie: $3 \cdot A$}
 			\begin{itemize}
@@ -740,8 +740,9 @@
 			\end{itemize}
 			\item[c]{$\begin{pmatrix} 2 & 0 & 1 \\ 0 & 3 & 1 \\ 0 & 6 & 2 \end{pmatrix}$}
 			\begin{itemize}
-				\item{$\begin{vmatrix} 2-\lambda & 0 & 10 & 3-\lambda & 1 \\ 0 & 6 & 2-\lambda \end{vmatrix}\begin{matrix} 2-\lambda & 0 \\ 0 & 3-\lambda \\ 0 & 6 \end{matrix}=(2-\lambda)(3-\lambda)(2-\lambda)-6*1*(2-\lambda)=(3-\lambda)(\lambda^2-4\lambda+4)-12+6\lambda$}
-				\item{$=3\lambda^2-12\lambda+12-\lambda^2+4\lambda^2-4\lambda-12+6\lambda=-\lambda^3+7\lambda^2-10\lambda=0$}
+				\item{$\begin{vmatrix} 2-\lambda & 0 & 1 &  \\ 0 & 3-\lambda & 1 \\ 0 & 6 & 2-\lambda \end{vmatrix}\begin{matrix} 2-\lambda & 0 \\ 0 & 3-\lambda \\ 0 & 6 \end{matrix}$}
+				\item[$=$]{$(2-\lambda)(3-\lambda)(2-\lambda)-6*1*(2-\lambda)=(3-\lambda)(\lambda^2-4\lambda+4)-12+6\lambda$}
+				\item[$=$]{$3\lambda^2-12\lambda+12-\lambda^2+4\lambda^2-4\lambda-12+6\lambda=-\lambda^3+7\lambda^2-10\lambda=0$}
 				\item{Da es sich jetzt um ein polynom dritten Grades handelt kann man die große Formel nicht anwenden, man kann lambda jedoch herausheben.}
 				\item{$\lambda(-\lambda^2+7\lambda-10)=0$ \texttt{ -> } $\lambda_1=0$}
 				\item{$-\lambda^2+7\lambda-10=0$\texttt{ -> } $y_{1,2}=\frac{-7\pm\sqrt{49-40}}{-2}=\frac{-7\pm3}{-2}$\texttt{ -> }$\lambda_2=5, \lambda_3=2$}
@@ -784,7 +785,7 @@
 	\end{itemize}
 	\begin{itemize}
 		\item[1]{Wenden Sie auf folgenden Graphen den Algorithmus von Kruskal an um einen minimalen Spannbaum zu ermitteln.}
-		\item{\includegraphics{Bilder/graph_1.png}
+		%\item{\includegraphics{Bilder/graph_1.png}
 		\begin{itemize}
 			\item{Der Algorithmus von Kruskal durchsucht global, also muss jede Kante immer beachtet werden.}
 			\item{Man kann als erstes eine der beiden Kanten mit Gewicht 1 verwenden. Da diese in beiden Konstellationen keinen Kreis bilden müssen immer beide ausgewählt werden.}
@@ -793,10 +794,10 @@
 			\item{Die nächste Option ist 4, welche durch die 2 vorherigen Kanten stets gewählt werden mussten. Dieser vollendet den Graphen und es muss nichts mehr hinzugefügt werden.}
 		\end{itemize}
 		\item[2]{Wenden Sie auf folgenden Graphen den Algorithmus von Prim an um einen minimalen Spannbaum zu ermitteln.}
-		\item{\includegraphics{Bilder/graph_1.png}}
+		%\item{\includegraphics{Bilder/graph_1.png}}
 		\begin{itemize}
 			\item{Der Algorithmus von Prim durchsucht stattdessen lokal, die Varianz des Spannbaums ist jedoch größer da bei einem zufälligen Knoten begonnen werden kann}
-			\item{Wenn mit dem Knoten innerhalb des Dreiecks begonnen wird, kann man nur die Kante mite Gewicht 4 nehmen}
+			\item{Wenn mit dem Knoten innerhalb des Dreiecks begonnen wird, kann man nur die Kante mit Gewicht 4 nehmen}
 		\end{itemize}
 
 	\end{itemize}

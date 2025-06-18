@@ -46,8 +46,24 @@ public class DataLoader {
         // Load Users data
         loadUsers(usersFilePath);
 
-        //TODO: Load Ratings data
+        //Load Ratings data
+        loadRatings(ratingsFilePath);
 
+    }
+
+    private void loadRatings(String filePath) {
+        BufferedReader ratingsReader = null;
+        try {
+            ratingsReader = new BufferedReader(new FileReader(filePath));
+            //Skip column header
+            String line = ratingsReader.readLine();
+            String[] columns = line.split(",");
+            this.dataModel.addRating(Integer.parseInt(columns[0]), Integer.parseInt(columns[1]), Rating.fromInt(Integer.parseInt(columns[2])));
+        } catch(IOException e) {
+            
+        } catch(NumberFormatException e) {
+
+        }
     }
 
     /**

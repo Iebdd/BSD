@@ -667,6 +667,18 @@
 	Vorraussetzung ist, dass S und T in verschiedenen Mengen liegen, ihre Vereinigung alle Knoten des Graphen enthalen und S und T keine gemeinsamen Knoten haben. Die Kapazität eines s-t-Schnitts ist die Summe der Kapazitäten jener Kanten die zwischen S und T verlaufen. Für diesen Schnitt sind nur die Kanten die zwischen den beiden Knotenmengen verlaufen relevant. \\
 	Zur Ermittlung des minimalen s-t-Schnitts, muss man den maximalen Fluss betrachten, da der Wert eines maximalen Flusses gleich der Kapazität des minimalen Schnitts ist. \\
 	Zur Ermittlung der Menge S muss man alle Knoten finden, welche über einen gerichteten Weg von der Quelle erreichbar sind. Die Menge T inkludiert danach alle Knoten die nicht in der Menge S enthalten sind. Der minimale Schnitt stellt dann die Kapazität aller gerichteten Graphen zwischen S und T dar.
+	\subsection{Minimales Kostenflussproblem}
+	Bei dem minimalen Kostenflussproblem werden zusätzlich zu dem Fluss wie bei dem maximalen Flussproblem die Kosten angegeben. Eine weitere Eigenschaft ist der negative Kreis, was ein Kreis in einem Graphen ist, für den die Kosten negativ sind. (Also ein Pfad mit gleichem Start- und Endpunkt wobei die Kosten negativ sind). Der Ablauf ist folgender:
+	\begin{enumerate}
+		\item{Ein Fluss sollte gegeben sein (Dieser kann ein Fluss oder ein maximaler Fluss sein)}
+		\item{Man muss den Inkrementgraphen bilden}
+		\item{Solange der Graph negative Kreise enthält:}
+		\begin{itemize}
+			\item{}
+		\end{itemize}
+	\end{enumerate}
+	\section{Matchingproblem}
+	Bei dem Matchingproblem verbindet man die Knoten eines Bipartiten Graphen. Dabei werden alle Knoten nur mit Knoten auf der anderen Seite verbunden. Am Ende sollen möglichst viele Knoten verbunden werden, wobei ein Knoten jeweils nur eine Verbindung haben darf. Ein Beispiel dafür ist die Jobsuche. Dabei modelliert man Jobsuchende mit Jobs, wobei die Kanten die Bewerbungen sind.
 
 	
 

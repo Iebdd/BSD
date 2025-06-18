@@ -1,6 +1,8 @@
 package com.da.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,6 +13,7 @@ import java.util.Map;
 public class DataModel {
     private Map<Integer, Movie> movies; // Map of movie ID to Movie objects
     private Map<Integer, User> users;  // Map of user ID to User objects
+    private List<List<Integer>> user_movie; // Maps a user review to each movie
 
     /**
      * Constructor to initialize the DataModel with empty data structures.
@@ -18,6 +21,7 @@ public class DataModel {
     public DataModel() {
         this.movies = new HashMap<>();
         this.users = new HashMap<>();
+        this.user_movie = new ArrayList<>();
     }
 
     /**
@@ -36,6 +40,18 @@ public class DataModel {
      */
     public Map<Integer, User> getUsers() {
         return users;
+    }
+
+    public int getRatingByUserAndMovie(int user_id, int movie_id) {
+        try {
+            return this.user_movie.get(user_id).get(movie_id);  // Returns the rating for a given user and a given movie
+        } catch (IndexOutOfBoundsException e) {                 // (Accesses the user array at the first index and the movie at the second)
+            return 0;
+        }
+    }
+
+    public void addRating(int user_id, int movie_id, Rating rating) {
+        System.out.println(this.user_movie.get(user_id));
     }
 
     /**
