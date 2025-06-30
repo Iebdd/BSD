@@ -1,0 +1,87 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+\setcounter{tocdepth}{5}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Dokumentation - Recommender}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\section{Struktur und Implementierung Suchalgorithmus}
+	Ich habe eine Kombination aus Hash Maps und ArrayLists verwendet. Hash Maps jeweils, wenn eine arbiträre Verbindung zwischen zwei Variablen gesucht wird und ArrayLists wenn Information anhand der IDs entweder der Benutzer oder der Filme gespeichert wird.
+	\subsection{Laufzeiteffizenz}
+	Meine Programm ist definitiv sehr frontLoaded. Ein Großteil der Rechenarbeit geschieht beim ersten Ausführen des Programms. So wird sofort ein 2D Array mit allen Ähnlichkeitswerten der Benutzer angelegt und jeweils eine Hash Map für die Filme und Benutzer hinzugefügt. Danach sollte das Programm jedoch bedeutend effizienter laufen als wenn es diese Berechnungen jedes Mal durchführen müsste. Das Finden eines Benutzers oder Films sollte in konstanter Zeit geschehen, da der Name der Schlüssel der zweiten Hash Map ist, welche die ID zurückgibt. So kann man schnell das Objekt finden indem man beide Hash Maps in Folge durchsucht. Es sollte auch sehr effizient beim entfernen und hinzufügen von Benutzern sein, da beim Löschen nur der Verweis in der Hash Map entfernt wird und alle anderen Daten bestehen bleiben (Jedoch vom Programm nicht mehr wahrgenommen werden). Wenn danach ein neuer Benutzer angelegt wird, wird dieser in die gleiche ID gespeichert und verwendet die gleichen Speicherstellen erneut wodurch die ArrayLists nur neu verteilt werden müssen, wenn ein komplett neuer Nutzer am Ende der IDs angelegt wird. Einzig wenn man ein Rating löscht oder ändert, ist es etwas ineffizient da durch das vorgefertigte Array dieses neu berechnet werden muss.
+	\subsection{Speichereffizienz}
+	Da ich relativ viel Information abspeichere um so bessere Zugriffszeiten zu erhalten, ist es wahrscheinlich nicht sehr Speichereffizient. Jedoch sollten in den Arrays kein Speicher verschwendet werden da gelöschte IDs wiederverwendet werden und so auch die 2D Arrays nicht unbedingt neu angelegt werden müssen.
+	\section{Empfehlungsalgorithmus}
+	Ich habe die dritte Variante implementiert. Dabei wird jeweils für jeden Film alle Benutzer abgerufen, welche diesen Film bewertet haben und danach verbunden. Hierbei ist es etwas ineffizient da ich mir nicht sicher war wie ich die Information behalten kann. So wird es zuerst in einem Array mit den Indizes als Film ID gespeichert und danach in eine Hash Map übertragen welche von der Bewertung auf die Film ID geht. Da ich so die Film ID nur über einen Umweg zur Verfügung habe, musste ich bei der Ausgabe stets auf die Hash Map zugreifen.
+	\subsection{Andere Strategien}
+	Beide der Strategien sind relativ einfach umzusetzen. Für die zweite Variante speziell gibt es alle Similarities schon und man kann sie in konstanter Zeit abrufen. Für die Erste müsste man den Mittelwert ermitteln, aber da man das Modell verwenden kann um alle Bewertungen eines Filmes zu erhalten sollte das auch nicht zu schwer sein.
+	\section{Fazit}
+	Ich musste etwas grübeln wie ich den dritten Algorithmus umsetzen könnte, aber als ich es dann verstand machte es sehr viel Sinn, da man die allgemeine Ähnlichkeit eines Benutzers mit der Ähnlichkeit eines spezifischen Filmes gegenüberstellt. Ich habe auch sher viel über Hash Maps gelernt und, dass man relativ einfach auf sowohl die Keys als die Values zugreifen kann.
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}

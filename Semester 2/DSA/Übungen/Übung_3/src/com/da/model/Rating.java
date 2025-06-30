@@ -30,20 +30,14 @@ public enum Rating {
      * @return The corresponding Rating enumeration, or DID_NOT_READ if no match is found.
      */
     public static Rating fromInt(int i) {
-        switch (i) {
-            case -5:
-                return HATED_IT;
-            case -3:
-                return DIDNT_LIKE_IT;
-            case 1:
-                return OK;
-            case 3:
-                return LIKED_IT;
-            case 5:
-                return REALLY_LIKED_IT;
-            default:
-                return DID_NOT_READ;
-        }
+        return switch (i) {
+            case -5 -> HATED_IT;
+            case -3 -> DIDNT_LIKE_IT;
+            case 1 -> OK;
+            case 3 -> LIKED_IT;
+            case 5 -> REALLY_LIKED_IT;
+            default -> DID_NOT_READ;
+        };
     }
 
     /**

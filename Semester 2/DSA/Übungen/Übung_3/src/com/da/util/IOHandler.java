@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class IOHandler {
     /**
-     * Reads the input file and parses it line by line. Each line then represents on element of the
+     * Reads the input file and parses it line by line. Each line then represents one element of the
      * returned list.
      *
      * @param filePath the path to the input file.

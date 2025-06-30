@@ -2,10 +2,15 @@ package com.da.engine;
 
 import com.da.model.DataModel;
 import com.da.model.Movie;
+import com.da.model.Rating;
 import com.da.model.User;
 import com.da.util.DataLoader;
 import com.da.util.RecommenderAppTest;
 
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -17,9 +22,9 @@ import java.util.Scanner;
 public class RecommenderApp {
 
     // File paths for data files
-    public static final String FILE_PATH_MOVIES = "../data/movies.csv";
-    public static final String FILE_PATH_USERS = "../data/users.csv";
-    public static final String FILE_PATH_RATINGS = "../data/ratings.csv";
+    public static final String FILE_PATH_MOVIES = "./data/movies.csv";
+    public static final String FILE_PATH_USERS = "./data/users.csv";
+    public static final String FILE_PATH_RATINGS = "./data/ratings.csv";
 
     private final DataLoader dataLoader;
     private final RecommendationEngine recommendationEngine;
@@ -145,7 +150,7 @@ public class RecommenderApp {
     public void addMovie() {
         Scanner scanner = new Scanner(System.in);
         Movie movie = handleMovieInput(scanner);
-        //TODO finish method
+        System.out.println(this.dataModel.addMovie(movie));
     }
 
     /**
@@ -170,11 +175,15 @@ public class RecommenderApp {
                 String input = scanner.nextLine();
                 String[] parts = parseInput(input, 3, "Invalid format. Provide title, " +
                         "year, and genre.");
-                String title = parts[0];
+                String title = parts[0].toLowerCase();
                 int year = Integer.parseInt(parts[1]);
                 String genre = parts[2];
-
-                return new Movie(dataModel.getMovies().size() + 1, title, year, genre);
+                Movie movie = this.dataModel.findMovie(title, year, genre);
+                if(movie != null) {
+                    return movie;
+                } else {
+                    return new Movie(dataModel.getMovies().size() + 1, title, year, genre);
+                }
             } catch (NumberFormatException e) {
                 System.out.println("The year must be an integer value. Add the following information about the movie: " +
                         "title, year, and genre (separated by a comma) ");
@@ -217,7 +226,7 @@ public class RecommenderApp {
         System.out.println("Add the following information about the user: user name");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine().trim();
-        // TODO finish method
+        System.out.println(this.dataModel.addUser(name));
     }
 
     /**
@@ -227,58 +236,111 @@ public class RecommenderApp {
         System.out.println("Add the following information about the user: user name");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine().trim();
-        //TODO finish method
+        System.out.println(this.dataModel.deleteUser(name));
     }
 
     /**
      * Adds a rating for a movie by a user.
      */
     public void addRating() {
-        //TODO implement method
         System.out.println("Add the following information about the user: user name");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine().trim();
+        if(this.dataModel.getUserId(name) == -1) {
+            System.out.printf("User %s does not exist.", name);
+            return;
+        }
 
         Movie movie = handleMovieInput(scanner);
+        if(movie.getId() == this.dataModel.getN0Movies()) {
+            System.out.printf(
+                "Movie %s (%d) - %s does not exist in library.", 
+                movie.getTitle(),
+                movie.getYear(),
+                movie.getGenre());
+            return;
+        }
 
-        System.out.println("Add the rating for user " + name + " for movie " + movie + " as an integer value:");
-        System.out.println("\t-5: HATED_IT;\n" +
-                "\t-3: DIDNT_LIKE_IT;\n" +
-                "\t 1: OK;\n" +
-                "\t 3: LIKED_IT;\n" +
-                "\t 5: REALLY_LIKED_IT");
-        
+        while (true) { 
+            System.out.println("Add the rating for user " + name + " for movie " + movie + " as an integer value:");
+            System.out.println("\t-5: HATED_IT;\n" +
+                    "\t-3: DIDNT_LIKE_IT;\n" +
+                    "\t 1: OK;\n" +
+                    "\t 3: LIKED_IT;\n" +
+                    "\t 5: REALLY_LIKED_IT");
+            try {
+                Rating rating = Rating.fromInt(Integer.parseInt(scanner.nextLine()));
+                this.dataModel.addRating(this.dataModel.getUserId(name), movie.getId(), rating, false);
+                return;
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter an integer value between -5 and 5.");
+            }
+        }
     }
 
     /**
      * Changes an existing rating for a movie by a user.
      */
     public void changeRating() {
-        //TODO implement method
         System.out.println("Add the following information about the user: user name");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine().trim();
 
-        Movie movie = handleMovieInput(scanner);
+        if(this.dataModel.getUserId(name) == -1) {
+            System.out.printf("User %s does not exist.", name);
+            return;
+        }
 
-        System.out.println("Add the rating for user " + name + " for movie " + movie + " as an integer value:");
-        System.out.println("\t-5: HATED_IT;\n" +
-                "\t-3: DIDNT_LIKE_IT;\n" +
-                "\t 1: OK;\n" +
-                "\t 3: LIKED_IT;\n" +
-                "\t 5: REALLY_LIKED_IT");
+        Movie movie = handleMovieInput(scanner);
+        if(movie.getId() == this.dataModel.getN0Movies()) {
+            System.out.printf(
+                "Movie %s (%d) - %s does not exist in library.", 
+                movie.getTitle(),
+                movie.getYear(),
+                movie.getGenre());
+            return;
+        }
+
+        while (true) { 
+            System.out.println("Add the rating for user " + name + " for movie " + movie + " as an integer value:");
+            System.out.println("\t-5: HATED_IT;\n" +
+                    "\t-3: DIDNT_LIKE_IT;\n" +
+                    "\t 1: OK;\n" +
+                    "\t 3: LIKED_IT;\n" +
+                    "\t 5: REALLY_LIKED_IT");
+            try {
+                Rating rating = Rating.fromInt(Integer.parseInt(scanner.nextLine()));
+                this.dataModel.addRating(this.dataModel.getUserId(name), movie.getId(), rating, false);
+                return;
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter an integer value between -5 and 5.");
+            }
+        }
     }
 
     /**
      * Deletes an existing rating for a movie by a user.
      */
     public void deleteRating() {
-        //TODO implement method
         System.out.println("Add the following information about the user: user name");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine().trim();
 
+        if(this.dataModel.getUserId(name) == -1) {
+            System.out.printf("User %s does not exist.", name);
+            return;
+        }
+
         Movie movie = handleMovieInput(scanner);
+        if(movie.getId() == this.dataModel.getN0Movies()) {
+            System.out.printf(
+                "Movie %s (%d) - %s does not exist in library.", 
+                movie.getTitle(),
+                movie.getYear(),
+                movie.getGenre());
+            return;
+        }
+        this.dataModel.deleteRating(this.dataModel.getUserId(name), movie.getId());
     }
 
     /**
@@ -291,22 +353,32 @@ public class RecommenderApp {
         System.out.println("Add the following information about the user: user name");
         StringBuilder resultStringBuilder = new StringBuilder();
         Scanner scanner = new Scanner(System.in);
-        String userName = scanner.nextLine();
-
+        String name = scanner.nextLine();
         User user;
         while (true) {
-            user = dataModel.returnUserByName(userName);
+            user = dataModel.returnUserByName(name);
             if (user == null) {
-                System.out.println(" User " + userName + " does not exist in library.");
-                userName = scanner.nextLine();
+                System.out.println(" User " + name + " does not exist in library.");
+                name = scanner.nextLine();
             } else {
                 break;
             }
         }
 
 
-        Object recommendations = this.recommendationEngine.recommendMovie(user);
-        // TODO finish method
+        Map<Integer, Integer> recommendations = this.recommendationEngine.recommendMovie(user);
+        List<Integer> ratings = new ArrayList<>(recommendations.keySet());
+        Collections.sort(ratings, Collections.reverseOrder());
+        for(int index = 0; index < ratings.size(); index++) {
+            resultStringBuilder.append(String.format(
+                "%d:%s [%d, %d, %s]->%s%n",
+                index,
+                this.dataModel.getMovieById(recommendations.get(ratings.get(index))).getTitle(),
+                this.dataModel.getMovieById(recommendations.get(ratings.get(index))).getId(),
+                this.dataModel.getMovieById(recommendations.get(ratings.get(index))).getYear(),
+                this.dataModel.getMovieById(recommendations.get(ratings.get(index))).getGenre(),
+                ratings.get(index)));
+        }
 
         return resultStringBuilder.toString();
     }
@@ -351,8 +423,7 @@ public class RecommenderApp {
     public String showAllRatings() {
         StringBuilder result = new StringBuilder();
         result.append("All Ratings:").append("\n");
-
-        //TODO finish method
+        result.append(this.dataModel.printAllRatings());
         return result.toString();
     }
 
@@ -364,10 +435,10 @@ public class RecommenderApp {
     public String showUserRatings() {
         System.out.println("Add the following information about the user: user name");
         Scanner scanner = new Scanner(System.in);
-        String name = scanner.nextLine().trim();
+        String name = scanner.nextLine().trim().toLowerCase();
         StringBuilder result = new StringBuilder();
 
-        //TODO finish method
+        result.append(this.dataModel.printUserRatings(name));
         return result.toString();
     }
 
@@ -381,7 +452,7 @@ public class RecommenderApp {
         StringBuilder result = new StringBuilder();
         Movie movie = handleMovieInput(scanner);
 
-        //TODO finish method
+        result.append(this.dataModel.printMovieRatings(movie));
         return result.toString();
     }
 }
