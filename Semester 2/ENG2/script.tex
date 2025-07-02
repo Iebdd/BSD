@@ -1,0 +1,58 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Stuxnet - Script}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	In June 2010 two Belarusian developers working at an anti-virus company found an as of yet unknown virus on a customer's system and it was the first report of a virus which later became known as stuxnet, a portmanteau of two files found within its data.
+	This virus seemed more sophisticated than anything that had been seen before using four extremely valuable undiscovered software exploits in order to gain access. But while it was very adept at gaining access, it only targeted very, very specific systems. It only started working if it was using the Siemens Step-7 industrial control software and was controlling frequency converters from two specific vendors only if they were operating between 807 and 1210 Hz. So the likelihood of being affected by it was very slim. But the question is, who would spend this much time to create a virus which almost never did anything. Well as it turns out the Iranian government used this exact configuration in their uranium enrichment plants to control their centrifuges.
+
+	Most of the following information is taken from Kim Zetter's book Countdown to Zero Day which was published following a two year investigation of the matter though since none of it was ever confirmed explicitly it is mostly based on speculation and educated guesswork.
+	According to her, Iran in 2005 bought the technology to build their own Atomic Bomb which was concerning to Israel and the USA. But after the wildly unpopular invasions of both Iraq and Afghanistan, they couldn't attack yet another country in the Middle East. So they came up with an alternative plan, which was supposed to stall Iran's progress until a more diplomatic solution could be found.
+	Supposedly there were multiple versions to the virus, the first one of which did not spread by itself but it proved to be less effective than anticipated because it couldn't reach the right systems. To solve that, the second version spread by itself, infecting systems in the same network and was now looking to slowly destroy the centrifuges by rapidly slowing down and accelerating the centrifuges in 15 minute intervalls spread over several weeks. This was so the centrifuges would break down while working normally to make it seem like a natural defect instead of direct sabotage. And it worked, as the facility was reported to have replaced over a quarter of their 4000 centrifuges in a matter of months. But the virus had one fatal flaw, as it was too aggressive in how it spread. A pc infected by the virus was connected to an outside network and spread first in Iran and then the world, alerting people to its existence. Following this leak the Iranian government realised what was happening and wiped their entire facility, eradicating the virus and stopping the project. Reportedly, the operation was considered a failure since its relatively high costs of about 50 million dollars caused less damage than anticipated and deteriorated relations with the Iran. But it shows how computer viruses can be used to sabotage entire countries and there are likely many more such examples currently operating in the dark.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}
