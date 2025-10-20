@@ -1,0 +1,118 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Controlling}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{Kostenrechnung}
+	\subsection{Betriebsüberleitung}
+	Die Betriebsüberleitung ist der Übergang von Gewinn- und Verlustrechnungen aus dem externen Rechnungswesen in das interne Rechnungswesen. Dabei werden Aufwendungen zu Kosten und Erträge zu Leistungen übergeleitet. Diese Überleitung ist ein relativ intensiver Prozess, weshalb sie von kleineren Unternehmen oft ausgelassen wird. Eine Umfrage ergab, dass 65\% aller Unternehmen diese Überleitung durchführen, anstatt sie direkt zu übernehmen. \\
+	Einige Erträge und Aufwendungen, welche im externen Rechnungswesen relevant sind, sind intern nicht relevant. Diese nennt man neutrale Erträge. Allgemein sind die drei Kriterien, ob sie Betriebsfremd, Außerordentlich oder Periodenfremd sind. \\
+	Der Übergang erfolgt in 4 Schritten:
+	\begin{enumerate}
+		\item{Zuerst werden neutrale Aufwände verworfen}
+		\item{Danach wird}
+	\end{enumerate}
+	\subsubsection{Kostenartenrechnung}
+	Die Kostenartenrechnung spaltet Kosten in ihre Träger auf. Alles was in einer Weise Kosten erzeugt, wird dabei klassifiziert. Die klassischen Gruppen der Kostenarten sind:
+	\begin{itemize}
+		\item{Material}
+		\item{Personal}
+		\item{Energie}
+		\item{Steuern, Beiträge und Versicherungen}
+		\item{Kalkulatorische Kosten}
+	\end{itemize}
+	\paragraphlb{Kalkulatorische Kosten}
+	Kalkulatorische Kosten sind Kosten die keinem Aufwand gegenüberstehen.
+	\subparagraphlb{Abschreibung}
+	Die Abschreibung dient um den Wertverlust von Geräten entgegenzurechnen. Dabei unterscheidet man zwischen der Bilanziellen und der Kalkulatorischen Abschreibung. Während die bilanzielle Abschreibung
+	\subparagraphlb{Wagnis}
+	Ein Wagnis ist eine Abschätzung der Gefahr des Misslingens. Das können allgemeine Unternehmerwagnisse wie eine Veränderung der Gesamtwirtschaft oder einem speziellen Einzelwagnis, welches
+	Durch Aufschlüsselung der Kosten kann man die Struktur der Kosten- und Leistungsarten analysieren oder innerhalb des Unternehmens vergleichen. Zusätzlich kann es sein, dass man für ein anderes Unternehmen eine Leistung vollbringt welche dadurch abgerechnet werden kann. Idealerweise sollten die Arten dabei erfassen, ob:
+	\begin{itemize}
+		\item{Eindeutigkeit}
+		\begin{itemize}
+			\item{Kosten sollten so eindeutig wie möglich zugeordnet werden.}
+		\end{itemize}
+		\item{Einheitlichkeit}
+		\begin{itemize}
+			\item{Kosten sollten wenn möglich stets der gleichen Art zugeordnet werden}
+		\end{itemize}
+		\item{Vollständigkeit}
+		\item{Wirtschaftlichkeit}
+	\end{itemize}
+	Der Kostenartenplan wird verwendet um Kosten zu einer Kategorie vereinheitlicht zuzordnen
+	\section{Controlling}
+	Controlling ist die Managementunterstützung für Kostenrechnung. So ist Controlling für Zielsetzung, Planung, Steuerung und Kontrolle verantwortlich. Zielsetzung ist dabei jedoch nicht die Zielplanung sondern nur die Unterstützung der Prozesse. Der Controller hat keine direkte Kontrolle, ein Controller steuert und überwacht, die Entscheidung wird jedoch von jemand anderes getroffen.
+	\subsection{Management und Führung}
+	Der Unterschied zwischen Management und Führung ist, dass die Führung die Richtung des Unternehmens entscheidet, und das Management den Ablauf dieser Richtung. In der Regel sind Managementfehler auch bedeutend schneller ersichtlich, da Probleme in einem Prozess besser erkennbar sind als in der Strategie. So können Führungsfehler zumal erst nach 5 Jahren ersichtlich werden. In der Regel wird Management und Führung jedoch Synonym verwendet. \\
+	Controlling dient der Unterstützung des Managements. Während Entscheidungsträger das Unternehmen führen und Mitarbeiter motivieren sollen, sollen Controller das Unternehmen objektiver darstellen und diesen Sachverhalt dem Management vorzulegen.
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}

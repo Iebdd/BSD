@@ -362,7 +362,7 @@
 	\subsection{Haldenbedingung}
 	\begin{figure}[H]
 	\centering
-	\includegraphics{Bilder/heap.png}
+	\includegraphics[scale=0.5]{Bilder/heap.png}
 	\caption{Arrayrepräsentation eines Heaps}
 	\end{figure}
 	Das wird erreicht mittels Heap (Halde im Deutschen). Grundlegend zu dieser Datenstruktur ist die Haldenbedingung. Diese besagt, dass $A[i]\geq max \{A[2i], A[2i+1]\}$ oder ausgeschrieben, dass jedes Element an der Position i, größer sein muss als das Element an der Position $2i$ und $2i+1$. Das bedeutet wiederum, dass das größte Element des Heaps an erster Stelle stehen muss. Da jeweils der doppelte Index und dessen Inkrement abhängig von einem früheren Element sind, ist es in einer Binärbraumrepräsentation stets gegeben, dass der oberste Knoten (Das erste Element) der höchste Wert ist und jedes Kind jedes Knotens einen niedrigeren Wert hat als dessen Parent. Wenn diese Vorraussetzung gegeben ist, kann man sicher sein, dass man das höchste Element des Arrays an dessen erstem Index findet. Zusätzlich sind gewisse Suchvorgänge in konstanter Zeit möglich:

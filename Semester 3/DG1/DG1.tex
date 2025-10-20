@@ -1,0 +1,89 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Digitale Geschäftsmodelle 1}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{Impulsvortrag}
+	Dieser Teil bietet einen allgemeinen Einblick in die zwei Teilthemen
+	\subsection{Digitale Netzökonomie}
+	Die digitale Netzökonomie wurde sowohl technisch als auch sozial geprägt.
+	\subsubsection{Lock-In Effekt}
+	Der Lock-In Effekt führt durch gewisse Ursachen dazu, dass man in einem Ökosystem oder einem Produkt 'gefangen' ist und nicht wechseln will oder kann. Das beste Beispiel dafür ist der Netzeffekt.
+	\paragraphlb{Netzeffekt}
+	In einem sozialen Netzwerk sind das wertvollste Gut die Personen, welche zu einer Vernetzung dieser führen. Ein Beispiel dafür ist Facebook, welches nach eigenen Angaben mehr als 1 Milliarde Benutzer hat. Die große Menge an Benutzern auf dieser Plattform führt dazu, dass dieses an Wert steigt, was wiederum neue Benutzer anzieht. Das nennt man einen \textbf{direkten positiven Netzeffekt}, da es so durch seinen Wert aktiv weiter an Wert gewinnt, indem neue Benutzer angezogen werden. Dazu steht der \textbf{indirekte positive Netzeffekt}, wobei der Wert der Plattform nicht direkt durch dessen Marktmacht entsteht sondern indirekt von Diensten die dort verfügbar sind. Ein Beispiel dafür sind App Stores von Mobiltelefonen. Da der Aufwand für eine Plattform eine App zu entwickeln in etwa immer der selbe ist, werden App-Entwickler anhand der Marktposition eines App Stores agieren und so eventuell nur für die populärsten ihre App veröffentlichen.
+	\paragraphlb{Wechselkosten}
+	Eine weitere Ursache können Wechselkosten sein. Diese können technologisch, da man sich ein neues Produkt oder eine ganze Produktsparte kaufen muss um das neue System zu verwenden. Es kann jedoch auch wissensbezogen sein, da man beim Wechseln eventuell wieder eine Lernkurve hätte.
+	\paragraphlb{Vertrauen}
+	Der letzt
+	\subsubsection{Digitalisierung}
+	Die Digitalisierung wird oft als Übertragung von analogen zu digitalen Medien verstanden. Digitalisierung sollte jedoch eine digitale Transformation eines analogen Prozesses sein. Wenn man zum Beispiel Netflix mit traditionellen Videoverleihen vergleicht, bieten diese zwar theoretisch den gleichen Service an. Ein Videoverleih ist jedoch physikalisch begrenzt: Es kann nur eine begrenzte Menge an Videos verfügbar sein, wodurch Videos eventuell durch neuere gewechselt werden. Ein digitales Geschäftsmodell ist jedoch inherent skalierbar. Jeder Nutzer auf Netflix kann ein Video gleichzeitig 'ausleihen' und es könnennn theoretisch alle Videos gleichzeitig zur Verfügung stehen.
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}

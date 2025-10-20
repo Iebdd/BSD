@@ -1,0 +1,110 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Netzwerktechnik Advanced}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{LAN - Design und Architektur}
+	\subsection{Switches}
+	Ein Baublock eines Netzes ist der Switch. Ein Switch befindet sich in der Netzwerktopographie relativ weit unten und soll viele Geräte in einem Netzwerk miteinander verbinden. Das Grundproblem, das ein Switch lösen soll, ist, dass in einem Netzwerk in dem jeder Benutzer mit jedem anderen verbunden ist, nur einer gleichzeitig senden kann, da es ansonsten zu einer Kollision kommt. Ein Vorgänger des Switches war dabei der Hub, welcher jedoch eingehende Pakete an alle weitersendet, da er nicht weiß wo es hingehört.
+	Ein Switch ist dabei bedeutend intelligenter und speichert ab an welchem Port welcher Benutzer zu finden ist. Dazu werden MAC-Adressen verwendet.
+	\subsubsection{MAC-Adressen}
+	MAC-Adressen sind theoretisch weltweit eindeutige Nummern um ein Gerät genau zu identifizieren. Das ist zwar nicht sicher, da die MAC-Adresse leicht geändert werden können.
+	\subsubsection{Aufgaben}
+	Ein Switch hat fünf grundlegende Aufgaben:
+	\begin{itemize}
+		\item{Learning}
+		\item{Aging}
+		\item{Forwarding}
+		\item{Flooding}
+		\item{Filtering}
+	\end{itemize}
+	\paragraphlb{Learning}
+	Beim Learning versucht ein Switch so gut wie möglich vorauszusagen, zu welchem Port ein Paket weitergeleitet werden soll. Dabei speichert er die MAC-Adresse und den dazugehörigen Port in einer Tabelle ab um später auf diese wieder zurückzugreifen. Abhängig ob eine MAC-Adresse gefunden wird oder nicht, verwendet der Switch die Forwarding oder Flood Funktion um ein Paket weiterzuleiten.
+	\paragraphlb{Aging}
+	Beim Aging werden MAC-Adressen, welche länger kein update erhalten haben, aus der Tabelle gelöscht. In der Regel wird eine Adresse nur für relativ kurze Zeit gespeichert, da es normal ist, dass ein Gerät sich regelmäßig meldet, wodurch es wahrscheinlich ist, dass ein Benutzer nicht mehr verfügbar ist.
+	\paragraphlb{Forwarding}
+	Wenn eine MAC-Adresse in der Tabelle gefunden wird, wird ein Paket an den relevanten Port weitergeleitet.
+	\paragraphlb{Flooding}
+	Wird eine MAC-Adresse nicht gefunden, schickt ein Switch ein Paket an alle Ports, da er keine Information besitzt.
+	\paragraphlb{Filtering}
+	Abhängig von festgelegten Regeln, werden gewisse MAC-Adressen nicht weitergeleitet, wodurch man Zugriffskontrollen aufbauen kann. Hierfür werden VLAN's gebraucht.
+	\subsection{Zusätzliche Begriffe}
+	Einige zusätzliche Begriffe zum Verständnis sind:
+	\subsubsection{Collision Domain}
+	Eine Kollisionsdomäne ist ein Netzwerk, in welchem verschiedene Teilnehmer sich untereinander stören können, falls diese gleichzeitig eine Anfrage abschicken. Ein Switch teilt dabei die Collision Domain, während ein Hub sie erweitert.
+	\subsubsection{Broadcast Domain}
+	Die Broadcast Domain ist das Netzwerk welches durch einen Broadcast erreichbar ist. Da Broadcasts immer das gesamte Netzwerk beinhalten, teilt ein Router die Broadcast Domain.
+	\section{Virtuelle LANs}
+	\section{WLAN}
+	\section{Weiterverkehrsvernetzung (WAN)}
+	\section{Netzwerksicherheit}
+	\section{NT in der Softwaresicherheit}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}
