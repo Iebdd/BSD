@@ -14,10 +14,12 @@
 \usepackage{float}
 \newcolumntype{?}{!{\vrule width 1pt}}
 \newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
 \renewcommand{\contentsname}{Inhaltsverzeichnis:}
 \renewcommand\theadalign{tl}
 \setstretch{1.10}
 \setlength{\parindent}{0pt}
+\setcounter{tocdepth}{5}
 
 \titleformat{\section}
   {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
@@ -40,13 +42,103 @@
 }
 
 \geometry{top=12mm, left=1cm, right=2cm}
-\title{\vspace{-1cm}Controlling}
+\title{\vspace{-1cm}Controlling 1}
 \author{Andreas Hofer}
 
 \begin{document}
 	\maketitle
 	\tableofcontents
 	\section{Kostenrechnung}
+	Es gibt vier Ebenen des betrieblichen Rechnungswesens. Drei davon gehören zum externen Rechnungswesen, also der Finanzbuchhaltung. Dabei wird die Auszahlung der Einzahlung gegenübergestellt
+	\subsection{Kostenrechnungssysteme}
+	Ein Kostenrechnungssystem ist ein System zur Auswertung der Kosten innerhalb des Unternehmens. Dabei unterliegt dessen Einführung keine rechtliche Vorgabe, weshalb sie im Ermessen des Unternehmens liegt. Formale Kriterien sind: Wirtschaftlichkeit, Relevanz, besser Schnell als Genau, Häufigkeit, Flexibilität, Zeitliche und sprachliche Entsprechung. \\
+	Generell soll die Kostenrechnung folgende Fragen beantworten:
+	\begin{itemize}
+		\item{Welchen Rechnungsobjekte sollen die Kosten ermittelt werden?}
+		\item{Nach welchem Grundprinzip soll die Kostenverrechnung erfolgen?}
+		\item{Soll es der Teil- oder der Vollkostenrechnung folgen?}
+		\item{Wie groß soll der Zeitbezug und Verrechnungsumfang sein.}
+	\end{itemize}
+	\paragraphlb{Externe Sicht}
+	Eine effektive Kostenrechnung ist aus externer und interner Sicht relevant. Durch Wettbewerb sind Unternehmen ständig angehalten ihre Kosten zureduzieren um wettbewerbsfähig zu bleiben. Es ist auch nötig zur Auswertung einer möglichen ANgebotserweiterung, da man so herausfinden kann, ob es sich lohnt.
+	\paragraphlb{Interne Sicht}
+	Aus interner Sicht ist die Genauigkeit und Schnelligkeit der Kalkulationen relevant, welche dadurch verbessert werden können. Wenn man ein "Profit Center" einführen will, muss man auch wissen wo diese liegen.
+	\subsubsection{Verursacherprinzip}
+	Die dominierende Regel in der Kostenrechnung ist das Verursacherprinzip und besagt, dass einem einzelnen Kostenträger nur jene Kostne zugerechnet werden sollten, welcher sie auch verursacht. Das ist idealerweise die beste Lösung, oft jedoch nicht einwandfrei möglich, da man nicht immer sagen kann wer genau welche Kosten verursacht hat.
+	\paragraphlb{Durchschnittsprinzip}
+	Als realitätsnähere Variante besteht das Durchschnittsprinzip, bei welchem Kosten im Durschnitt auf ihre zugehörigen Träger.
+	\subsubsection{Tragfähigkeitsprinzip}
+	Als Gegenstück dazu besteht das Tragfähigkeitsprinzip, nach dem Kosten dem Träger anhand ihrer Möglichkeit diese zu tragen zuzordnen. Also wurden einige "High-Performer" im Unternehmen mehr Kosten tragen als sie wirklich verursachen.
+	\subsubsection{Kostenwürfel}
+	Der Kostenwürfel von DEHYLE beschreibt die Dimensionen von Kosten anhand eines Würfels. Laut des Würfels gibt es drei Dimensionen von Kosten:
+	\begin{itemize}
+		\item{Struktur}
+		\begin{itemize}
+			\item{Variable Kosten - Kosten pro erzeugtem Produkt}
+			\item{Fixkosten - Kosten für die Infrastruktur etc}
+		\end{itemize}
+		\item{Beeinflussbarkeit}
+		\begin{itemize}
+			\item{Kurzfristige Kosten - Kosten welche innerhalb eines Monats verändert werden können}
+			\item{Langfristige Kosten - Kosten welche länger als einen Monat benötigen um verändert zu werden.}
+		\end{itemize}
+		\item{Zurechenbarkeit}
+		\begin{itemize}
+			\item{Einzelkosten - Kosten welche einem spezifischen Produkt zugeordnet werden}
+			\item{Gemeinkosten - Kosten welche nicht direkt zugeordnet werden können und deshalb auf die einzelnen Positionen umgelegt werden müssen}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Kostenverläufe}
+	Die Kostenverläufe sind verschiedene Kurvenmodellierungen der Kostenfunktion. 
+	\begin{itemize}
+		\item{Proportionale Kosten}
+		\begin{itemize}
+			\item{Für jede Stückzahl steigt der gleiche Wert an}
+		\end{itemize}
+		\item{Degressive Kosten}
+		\begin{itemize}
+			\item{Die Kosten pro Stück sinken mit steigender Anzahl}
+		\end{itemize}
+		\item{Progressive Kosten}
+		\begin{itemize}
+			\item{Die Kosten pro Stück steigen mit steigender Anzahl}
+		\end{itemize}
+		\item{Regressive Kosten}
+		\begin{itemize}
+			\item{Die Gesamtkosten sinken bei steigender Stückzahl}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Gliederung von Kostenrechngungssystemen}
+	KRS kann man anhand einer Zeit- oder Strukturkomponente kategorisieren:
+	\begin{itemize}
+		\item{Zeitkomponente}
+		\begin{itemize}
+			\item{Istkostenrechnung}
+			\begin{itemize}
+				\item{Kosten für den tatsächlichen Verbrauch und sonstigem Einsatz}
+			\end{itemize}
+			\item{Normalkostenrechnung}
+			\begin{itemize}
+				\item{Der Durchschnitt der Istkosten mehrerer Abrechnungsperioden}
+			\end{itemize}
+			\item{Planostenrechnung}
+			\begin{itemize}
+				\item{Kosten bei geplanter Auslastung und Beschäftigung abhängig von der momentanen wirtschaftlichen Leistung}
+			\end{itemize}
+		\end{itemize}
+		\item{Umfangskomponente}
+		\begin{itemize}
+			\item{Vollkostenrechnung}
+			\begin{itemize}
+				\item{Verrechnet variable und fixe Kosten}
+			\end{itemize}
+			\item{Teilkostenrechnung}
+			\begin{itemize}
+				\item{}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+		\section{Kostenrechnung}
 	\subsection{Betriebsüberleitung}
 	Die Betriebsüberleitung ist der Übergang von Gewinn- und Verlustrechnungen aus dem externen Rechnungswesen in das interne Rechnungswesen. Dabei werden Aufwendungen zu Kosten und Erträge zu Leistungen übergeleitet. Diese Überleitung ist ein relativ intensiver Prozess, weshalb sie von kleineren Unternehmen oft ausgelassen wird. Eine Umfrage ergab, dass 65\% aller Unternehmen diese Überleitung durchführen, anstatt sie direkt zu übernehmen. \\
 	Einige Erträge und Aufwendungen, welche im externen Rechnungswesen relevant sind, sind intern nicht relevant. Diese nennt man neutrale Erträge. Allgemein sind die drei Kriterien, ob sie Betriebsfremd, Außerordentlich oder Periodenfremd sind. \\
@@ -89,6 +181,8 @@
 	\subsection{Management und Führung}
 	Der Unterschied zwischen Management und Führung ist, dass die Führung die Richtung des Unternehmens entscheidet, und das Management den Ablauf dieser Richtung. In der Regel sind Managementfehler auch bedeutend schneller ersichtlich, da Probleme in einem Prozess besser erkennbar sind als in der Strategie. So können Führungsfehler zumal erst nach 5 Jahren ersichtlich werden. In der Regel wird Management und Führung jedoch Synonym verwendet. \\
 	Controlling dient der Unterstützung des Managements. Während Entscheidungsträger das Unternehmen führen und Mitarbeiter motivieren sollen, sollen Controller das Unternehmen objektiver darstellen und diesen Sachverhalt dem Management vorzulegen.
+	
+
 
 	
 
