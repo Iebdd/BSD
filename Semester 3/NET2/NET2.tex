@@ -54,13 +54,6 @@
 	MAC-Adressen sind theoretisch weltweit eindeutige Nummern um ein Gerät genau zu identifizieren. Das ist zwar nicht sicher, da die MAC-Adresse leicht geändert werden können.
 	\subsubsection{Aufgaben}
 	Ein Switch hat fünf grundlegende Aufgaben:
-	\begin{itemize}
-		\item{Learning}
-		\item{Aging}
-		\item{Forwarding}
-		\item{Flooding}
-		\item{Filtering}
-	\end{itemize}
 	\paragraphlb{Learning}
 	Beim Learning versucht ein Switch so gut wie möglich vorauszusagen, zu welchem Port ein Paket weitergeleitet werden soll. Dabei speichert er die MAC-Adresse und den dazugehörigen Port in einer Tabelle ab um später auf diese wieder zurückzugreifen. Abhängig ob eine MAC-Adresse gefunden wird oder nicht, verwendet der Switch die Forwarding oder Flood Funktion um ein Paket weiterzuleiten.
 	\paragraphlb{Aging}
@@ -77,7 +70,78 @@
 	Eine Kollisionsdomäne ist ein Netzwerk, in welchem verschiedene Teilnehmer sich untereinander stören können, falls diese gleichzeitig eine Anfrage abschicken. Ein Switch teilt dabei die Collision Domain, während ein Hub sie erweitert.
 	\subsubsection{Broadcast Domain}
 	Die Broadcast Domain ist das Netzwerk welches durch einen Broadcast erreichbar ist. Da Broadcasts immer das gesamte Netzwerk beinhalten, teilt ein Router die Broadcast Domain.
+	\subsection{Hierarchisches Netzwerkmodell}
+	Das hierarchische Netzwerkmodell teilt das Netzwerk in drei Teile. Es ist hierarchisch weil es repräsentiert wie sich der Netzwerkverkehr im Netzwerk bewegt. Die drei Schichten sind:
+	\begin{itemize}
+		\item{Access Layer}
+		\begin{itemize}
+			\item{Bietet Endnutzern direkten Zugriff auf das Netzwerk}
+		\end{itemize}
+		\item{Distribution Layer}
+		\begin{itemize}
+			\item{Verbindet viele Access Layer und verbindet die beiden anderen Schichten}
+		\end{itemize}
+		\item{Core Layer}
+		\begin{itemize}
+			\item{Dient als Backbone des Netzwerks und verbindet zu weiteren Netzwerken}
+		\end{itemize}
+	\end{itemize}
+	\paragraphlb{Access Layer}
+	Der Access Layer hat die meisten Ports im Netzwerk. Dabei wird das Netzwerk in viele Teile segmentiert, meist anhand von physischer Vorraussetzungen. Im Access Layer wird auch Port Security gehandhabt um sicherzustellen, dass nur die richtigen Personen Zugriff erhalten. \\
+	Switches and Access Points werden meist nicht redundant aufgebaut, da die Menge an Nutzern die beeinträchtigt werden überschaubar ist. Power over Ethernet (PoE) wird auch hier gehandhabt, damit man nicht immer ein eigenes Stromkabel für Komponenten braucht.
+	\paragraphlb{Distribution Layer}
+	Viele Access Layer Geräte laufen auf ein paar Distribution Layer Geräte zurück. Merkmale des Distribution Layer sind ein schnelles Forwarding und eine hohe Bandbreite. Diese Switches sind sehr wohl redundant, da sonst ein gesamtes Access Layer Netzwerk ausfallen würde. Hier wird auch Quality of Service (QoS) übernommen, um sicherzustellen, dass wichtige Infrastrukturelemente stets guten Zugriff haben.
+	\paragraphlb{Core Layer}
+	Im Core Layer laufen alle Distribution Layer Geräte zusammen. Diese sind wiederum redundant aufgebaut. Anders als die beiden anderen Schichten, übernimmt der Core Layer auch das Switching, da er sich auch mit anderen Netzwerken verbinden muss.
+	\subsection{Anforderungen eines Netzwerks}
+	\subsubsection{Office}
+	In einem Office LAN Netzwerk sollten idealerweise:
+	\begin{itemize}
+		\item{Viele Ports}
+		\item{Schnelle Zugriffszeiten}
+		\item{Spanning Tree Aktiv}
+	\end{itemize}
+	sein. In kleineren Netzwerken wird Distribution und Core oft miteinander verbunden, da es nicht nötig ist. In diesem Fall sind dann Access LAyer Geräte direkt mit dem Core verbunden.
+	\paragraphlb{Mindestanforderungen}
+	In der Regel sollte man Managed Switches verwenden, da unmanaged Switches die Anforderungen oft nicht erfüllen. Es sollten auch VLANs unterstützt werden. Idealerweise sollte man 48 Port Switches verwenden, es können bei kleineren Systemen jedoch auch 24 verwendet werden. Im Access Layer sollten Kupferkabel verwendet werden da die Geschwindigkeiten in der Regel ausreichen. Für externen Zugriff sollte man Glasfaser verwenden.
+	\subsubsection{Datencenter}
+	In einem Datencenter benötigt man andere Anforderungen. So braucht man viele Ports und kurze Verbindungen zwischen den Servern. Das 3-Schichten Modell wird heutzutage in Datenzentren nicht mehr verwendet, da es eine schnelle Verbindung zum Core ermöglicht. Stattdessen verwendet man eher die Spine Leaf Architektur, welche Zugriff auf die Server untereinander ermöglicht, wobei es die Redundanz behält. \\
+	Große Probleme in Datenzentren sind oft:
+	\begin{itemize}
+		\item{Schlechte Verkabelung}
+		\item{Fehlende Redundanzen}
+		\item{Fehlende Bandbreiten}
+		\item{Unzureichende Segmentierung}
+		\begin{itemize}
+			\item{Idealerweise sollte ein Angreifer der Zugriff zu einem System erhält, nicht auch Zugriff zu allen anderen bekommen.}
+		\end{itemize}
+	\end{itemize}
+	Auch hier ist das Spanning-Tree Protokol relevant, wobei es mit VLANs Segmentiert wird. Es sollte auch eine Monitoringlösung geben um Probleme schnell erkennen zu können.
 	\section{Virtuelle LANs}
+	Virtuelle LANs (VLAN) sind LANs, welche nicht physisch sondern virtuell getrennt sind. Normalerweise trennt man Netzwerke mit einem Router um zum Beispiel zwei Stockwerke zu teilen. Wenn man dann jedoch ein weiteres Stockwerk hinzufügt, müsste man auch einen weiteren Router hinzufügen. Ein VLAN ist hingegen nicht durch physische Gegebenheiten begrenzt und kann beliebig gespalten werden. \\
+	Die Spaltung eines Netzwerks ist oft sicherheitsrelevant, da so ein Angreifer nicht sofort Zugriff auf das gesamte Netzwerk bekommt.
+	\subsection{Segmentierung}
+	Bei der Frage, wie ein Netzwerk segmentiert werden sollte, muss man sich einige Überlegungen machen:
+	\begin{itemize}
+		\item{Wie ist das Netzwerk aufgebaut?}
+		\item{Welche Geräte gibt es im Netzwerk?}
+		\begin{itemize}
+			\item{Geräte die sich aktiv mit der Außenwelt verbinden, aber keine PCs sind, wie Telefone oder Drucker sollten im System abgeschottet sein, da diese sehr einfache Einfallspunkte für Angreifer sein können.}
+			\item{IoT Geräte sollten \textit{nie} mit anderen Geräten in einem Netzwerk sein, da diese oft eine sehr schwache Sicherheit besitzen.}
+		\end{itemize}
+		\item{Existiert ein WLAN?}
+		\item{Gibt es Gäste im Unternehmen?}
+		\item{Gibt es Server in dem Netzwerk?}
+		\item{Gibt es öffentlich erreichbare Systeme im Netzwerk?}
+	\end{itemize}
+	\subsection{Managed Switches}
+	Mit Managed Switches kann man ein softwarebasiertes LAN aufbauen. Dabei wird jedem der Netzwerke eine ID zugewiesen und nur Geräte mit der gleichen ID können andere Geräte erkennen. Ein VLAN hat in der Regel nicht nur eine eigene ID sondern auch eine eigene Subnetzmaske. Da ein solcher Managed Switch ein Netzwerk teilt, muss er zusätzlich zu MAC-Adressen auch IP Pakete auslesen können und ist so L3 fähig.
+	\subsection{Vorteile}
+	Durch die Verwendung von VLANs kann man einfach unterbinden, dass Broadcasts das gesamte Netzwerk erreichen. Es fügt ebenfalls eine weitere Sicherheitsebene hinzu. Ein weiterer Vorteil ist, dass man Geräte nicht nach physischem Standort, sondern ihrer Funktion gruppieren kann.
+	\subsection{Inter VLAN Routing}
+	Auch wenn die Netze virtuell getrennt sind, will man trotzdem manchmal zwischen den Netzwerken kommunizieren. Um das zu ermöglichen braucht man Inter VLAN Routing. Wenn man jedoch nur 1 Interface ori VLAN hat ist das bei größeren VLAN Netzwerken schwer umzusetzen.
+	\subsubsection{Subinterface}
+	Dieses Problem kann man durch Subinterfaces lösen. Dabei werden auf 1 Interface viele VLANs generiert. Dabei kann das VLAN jedoch nicht mehr nur durch die IP-Adresse erkannt werden, weshalb im 802.1Q Standard im IP Paket ein VID Segment die Virtuelle ID festsetzt, damit anhand dieser das Netzwerk zugeordnet werden kann.
 	\section{WLAN}
 	\section{Weiterverkehrsvernetzung (WAN)}
 	\section{Netzwerksicherheit}

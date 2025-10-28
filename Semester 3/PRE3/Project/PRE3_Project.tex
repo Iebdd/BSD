@@ -1,0 +1,165 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Table of Contents:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+\setcounter{tocdepth}{5}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Project: Building a Data-Driven Professional Profile}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\newpage
+	\section{Targeted CV}
+	
+	\newpage
+	\section{LinkedIn Profile}
+	\subsection{Profile Photo and Banner}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{assets/Photo_Banner.png}
+	\caption{The profile picture and banner of the profile}
+	\end{figure}
+	\subsubsection{Profile Picture}
+	I combined these sections since they do meld into each other on the profile view. I already had an image with a quite neutral background but I still removed it and used a blur tool on the original image, overlaying the background-less one. 
+	\subsubsection{Banner}
+	I used a banner from the canva templates, focusing on 'Technology' and 'Modern'. The original one had a name and an email address in the middle but I thought it looked strange so I removed it. It does leave a conspicuously empty space but I didn't want to put my name there, considering it says it again right next to it.
+	\subsection{Headline}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{assets/Headline.png}
+	\caption{The headline of the profile}
+	\end{figure}
+	Truth be told, I haven't done too many great things at my work place yet so I was grasping at straws. I am currently working on a new automated PDF print system and it is \textit{signficiantly} faster than the old one so I added that (and a little cheek).
+	\subsection{Summary}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{assets/About.png}
+	\caption{The summary of the profile}
+	\end{figure}
+	It is short, I know, and doesn't include three quantifiable examples of achievements but I'd rather lose these points than lie about it. I did ask ChatGPT but everything it gave me felt extremely canned. Besides, I wrote this myself and I feel like adding something AI generated would sully it.
+	\subsection{Skills}
+	\subsection{Keywords}
+	I focused on the keywords: 'Software', 'PDF', and 'Language':
+	\begin{itemize}
+		\item{Software}
+		\begin{itemize}
+			\item{Since I'm a Software Developer}
+		\end{itemize}
+		\item{PDF}
+		\begin{itemize}
+			\item{Since this is currently the only real professional piece of experience I have}
+		\end{itemize}
+		\item{Language}
+		\begin{itemize}
+			\item{I feel like it could be a good USP, combining Language and Software}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Custom URL}
+	\begin{figure}[H]
+	\centering
+	\includegraphics{assets/CustomURL.png}
+	\caption{The custom URL of the profile}
+	\end{figure}
+	I would have loved to get andreas-hofer but that was (as usual) already taken, so \texttt{andreas-hofer-graz} will have to do.
+	\section{Use of AI}
+	In the creation of my LinkedIn profile, AI only played a very minor role. I just didn't feel like I really needed it (though maybe I did and didn't know). The only part where I used it was in my summary, which was too short so I asked it to expand it, using this prompt: 
+	\begin{verbatim}
+	You are currently working on your LinkedIn profile and would like to write a summary about yourself
+	in the 'About' section.
+	You already have some of it: [Summary I wrote] but would like to expand it some more. What would you add?\end{verbatim}
+	And the answer it gave me was the following: 
+	\begin{verbatim}
+	That’s already a lovely and authentic start — it feels personal, reflective, and shows your journey 
+	clearly. To make it more complete and impactful for LinkedIn, you can:
+	- Add a bridge between your story and your current professional identity (what kind of developer you 
+	  are, what you value in your work, and what problems you like to solve).
+	- Include a touch of personality (your approach to learning, teamwork, or creativity).
+	- Optionally, end with a forward-looking note — what you’re excited about next, or what kind of projects
+	  /roles motivate you.
+	Here’s how your current text could be expanded smoothly while keeping your original tone and voice:
+	Revised version: [Summary I wrote, except it replaced a comma with an em-dash. Typical]
+
+	What I enjoy most about development is the mix of logic and creativity — breaking down complex problems 
+	into elegant, maintainable solutions while still leaving space for experimentation and clean design. 
+	I’m especially drawn to projects where I can see the impact of my work, whether it’s improving a process, 
+	enhancing user experience, or simply making something run more smoothly behind the scenes.
+
+	I love learning new technologies, collaborating with people who care about quality and craftsmanship, 
+	and continuously refining how I think about code. Right now, I’m particularly interested in clean 
+	architecture, automation, and performance optimization — and I’m always open to exploring new ways to make
+	code more expressive and efficient.\end{verbatim}
+	It added the last two paragraphs, and despite it talking about 'keeping my original tone and voice', I feel like it sounded extremely canned and didn't feel like something I would write at all. So I didn't include it and now the Summary is only 700 characters long.
+	\section{Reflection}
+	Frankly, none at all. I didn't even attempt it for the most part and where I did try, it did not live up to expectations. Personally, I'd need a good reason to use any AI-Generated content as it prevents me from being able to respond with a resounding 'No' should I ever get asked about it, instead of a 'Yes, but ...'. But since all I gave me to work with was subpar I chose not to include any of it.
+	\subsection{Risks}
+	I remember reading about the use of AI in translation, where it over time decreased the variety of words used since it was unable to understand the slight differences in meaning and thus always opted for the 'safe' choice. I could imagine something similar happen with AI-generated About pages or keyword-optimised content. If AI has a slight bias for certain words or keywords it could in turn increase the use of these words or decrease the use of others for no discernible reason.
+	\subsection{Authenticity vs self-marketing}
+	I went full into authenticity. I could have probably embellished some here and there but I chose not to. It might come to bite me later, but I'll deal with it then.
+		
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}
