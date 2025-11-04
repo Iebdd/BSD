@@ -1,0 +1,253 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=2.5cm, right=3.5cm}
+\title{\vspace{-1cm}Netzwerktechnologien Advanced - Übung}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{Heimnetzwerk}
+	\section{OSI Referenzmodel}
+	\section{Netzwerktechnik Grundbegriffe \& Tools}
+	\section{Packet Tracer erste Übung}
+	\section{Verschiedene Server im lokalen Netz}
+	\section{Netzwerksniff mit Wireshark}
+	\section{Abschlussübung Transport Layer}
+	\section{Verkabelung}
+	\section{Switch Einführung}
+	Bei dieser Übung solltest du eine Basiskonfiguration eines Switches durchführen.
+	Du solltest verstehen, wie du mit Cisco Konfigurationen umgehst diese abspeichern kannst und neue Geräte schnell wieder Konfigurieren kannst.
+	\subsection{Switch Grundlagen Recherche}
+	Recherchiere folgende Begriffe im Internet und beantworte alle Fragen kurz und bündig. Dies ist keine „copy \& paste“ Übung. Jede Frage sollte mit zwei oder drei Sätzen bzw. mit einer Grafik erklärt werden können.
+	\begin{enumerate}
+		\item{Was versteht man unter dem Begriff „Congestion“?}
+		\begin{itemize}
+			\item{Wenn ein Netzwerkpunkt eine größere Datenmenge erhält, als er übertragen oder verarbeiten kann. Das kann zu einem Verlust von Paketen oder dem kompletten Zusammenbruch des Systems mit eingeschränkter Bandbreite führen (Dem „Congestion collapse“)}
+		\end{itemize}
+		\item{Was ist „Congestion collapse avoidance”?}
+		\begin{itemize}
+			\item{Manche Netzwerkprotokolle können als Reaktion auf einen Paketverlust dieses erneut aussenden, was bei einer Überladung des Systems die Situation verlängern oder gar verschlimmern kann. Aus diesem Grund besitzen gängige Protokolle heutzutage die Fähigkeit eine Kollision zu erkennen und entsprechend zu reagieren. (Zum Beispiel das Fair Queueing bei Switches und Routern)}
+		\end{itemize}
+		\item{Recherchiere die benötigte Bandbreite für:}
+		\begin{itemize}
+			\item[a]{Ein Youtube-Video in 4k Qualität}
+			\begin{itemize}
+				\item{Laut Google eine durchschnittliche Geschwindigkeit von 20 Mbps (2,5 MB/s)}
+			\end{itemize}
+			\item[b]{Einen E-Mail-Versand}
+			\begin{itemize}
+				\item{Da E-Mails in der Regel relativ klein sind, kommt man mit den meisten Bandbreiten aus, aber von einer QoL Perspektive wären wahrscheinlich 5 Mbps (625 KB/s) ratsam}
+			\end{itemize}
+			\item[c]{Einen Teams Anruf (Mit und ohne Screenshare)}
+			\begin{itemize}
+				\item{Laut Microsoft kommt man nur mit Audio bereits mit 10 Kbps (1,25 KB/s) aus, rät aber zu mindestens 58 bis 76 Kbps (7,25 - 9,5 KB/s). Mit Video steigt das bereits auf empfohlene 1500 Kbps (187,5 KB/s). (Up- und Down)}
+				\item{Interessanterweise sind die empfohlenen Anforderungen mit oder ohne Screenshare gleich bei 1500 Kbps. Nur die Mindestanforderungen steigen von 150 Kbps (18,75 KB/s) auf 200 Kbps (25 KB/s)}
+			\end{itemize}
+			\item[d]{Einen Dateidownload}
+			\begin{itemize}
+				\item{Das hängt von der Größe der Datei ab. Bei einer 2 MB großen Datei reichen 200 KB/s aus, während man z.B. bei 5 GB da relativ lange warten muss. Die Bandbreite bei der man sich nicht mehr über Wartezeiten bei Downloads Sorgen machen muss, liegt wahrscheinlich bei 100 Mbps (Persönliche Einschätzung, ich konnte keine Information darüber finden.)}
+			\end{itemize}
+		\end{itemize}
+		\item{Was versteht man unter dem Begriff „Network latency“?}
+		\begin{itemize}
+			\item{Die Verzögerung mit der ein Paket nach dem Senden beim Empfänger ankommt. Dazu kann die rein physische Distanz beitragen, da die Daten sich 'nur' mit Lichtgeschwindigkeit bewegen und so zum Beispiel von Europa nach Australien 16000 km zurücklegen, muss die Latenz immer mindestens 5 ms betragen. Dazu kommt jedoch die bedeutend höhere Latenz jedes einzelnen Knotenpunkts auf dem Weg dorthin und zurück. Zusätzlich kann ein Server gerade überlastet sein und so die Anfrage erst mit sehr hoher Verzögerung abarbeiten und beantworten. All diese Variablen tragen zur Netzwerklatenz bei.}
+		\end{itemize}
+		\item{Wie schnell arbeitet ein Switch bzw. Router?}
+		\begin{itemize}
+			\item{Laut dem Internet fügt ein Switch (oder Router) abhängig von seiner Bandbreite zwischen 125 und 5 Mikrosekunden zur Latenz hinzu. Gigabit Switches zwischen 50 und 125 und 10 Gigabit Switches zwischen 5 und 50.}
+		\end{itemize}
+		\item{Was kostet ein Switch der Marke Cisco Catalyst 9200 und wodurch unterscheidet sich dieser zu einem 30-50€ Switch? Stelle einige Vergleiche an.}
+		Laut Geizhals 1321,90€. Im Gegensatz zu einem Switch mit Grundausstattung kann dieser zusätzlich: \\
+		\begin{tabular}{| l | c | c |}
+			\toprule
+			Feature & 30€ Switch & 1300€ Switch \\ \midrule
+			Plug and Play & \checkmark & \checkmark \\ \hline
+			Layer 2 Aware & \checkmark & \checkmark \\ \hline
+			Layer 3 Aware & x & \checkmark \\ \hline
+			PoE (48 Ports) & x & \checkmark \\ \hline
+			Redundante Komponenten & x & \checkmark \\ \hline
+			\makecell[l]{Gleich- oder \\ Wechselstromanschluss} & x & \checkmark \\ \hline
+			\makecell[l]{Kombination mehrerer Einheiten \\ zu einer (Backplane Stacking)} & x & \checkmark \\ \hline
+			AES-128 Verschlüsselt & x & \checkmark \\ \hline
+			VLAN Support & x & \checkmark \\
+			\bottomrule
+		\end{tabular}
+		\item{Ich möchte mir einen Switch für meine 5 PCs zu Hause zulegen, welchen würdest du mir empfehlen und warum?}
+		\begin{itemize}
+			\item{Für einen Switch zu Hause sind diese ganzen Features wahrscheinlich nicht nötig, aber es ist nie eine schlechte Idee ein paar mehr Ports zur Verfügung zu haben und nicht nur einen 6-Port Switch zu kaufen. Die Verwendung eines Gigabit Switches kann auch einen kleinen Unterschied bei der Latenz haben. 8 oder 12 Port Gigabit Switches bekommt man schon ab 20€ - 50€}
+		\end{itemize}
+		\item{Ein Unternehmen mit 5 Unterabteilungen und jeweils ca. 100 Hosts pro Abteilung plant eine Neustrukturierung ihres Netzwerkes. Du als Netzwerkadministrator wirst beauftragt, dies in die Hand zu nehmen. Wie viele Switches und welche würdest du anschaffen? Was würde das kosten? Begründe deine Antwort. Werden zusätzlich noch andere Komponenten für die Kommunikation zwischen den Abteilungen und in das Internet benötigt? Welche zusätzlichen Komponenten würdest du anschaffen und warum?}
+		\begin{itemize}
+			\item{Um die 100 Hosts pro Abteilung abzudecken, braucht man mindestens 3 48 Port Switches und hat noch etwas Raum zum erweitern. Der Catalyst ist da wahrscheinlich kein schlechter Anfangspunkt um sich zu informieren. Man braucht zumindest Layer 3 für VLANs und eine gewisse Redundanz bei den Komponenten damit nicht alles steht wenn der Switch den Geist aufgibt. Also bräuchte man zumindest 15 Switches um alle Abteilungen abzudecken. Zusätzlich braucht man jedoch auch Switches um diese Abteilungen miteinander zu verbinden, idealerweise in doppelter Ausführung, sowie zwei Core Router um Zugang zum Internet zu ermöglichen. Dazu muss man auch sicherstellen, dass man die richtigen Kabel besorgt, damit man nicht 10 Gigabit Switches besitzt aber nur 1 Gigabit Kabel um die Abteilungen miteinander zu verbinden.}
+		\end{itemize}
+	\end{enumerate}
+	\subsection{Switch Grundlagen}
+	{\color{red} \textbf{Baue nachfolgende Netzwerke auf und dokumentiere dein Vorgehen und die Analysen unter anderem auch mit Screenshots. Verwende für das X eine beliebige Zahl zwischen 10 und 20.}} \\ \\
+	{\color{red} \textbf{Deine Zahl: 15}}
+	\subsubsection{Default Switch Konfiguration überprüfen}
+	
+	\section{VLANs am Switch}
+	\section{Router Grundkonfiguration}
+	\section{Subnetting und Routing Vertiefung}
+	\textbf{Bei dieser Übung solltest du ein Subnet aufbauen und ein etwas größeres Netzwerk im Packet Tracer aufbauen.}
+	\subsection{Subnetting}
+	Wähle zuerst ein beliebiges /24 Netzwerk aus dem RFC1918 Bereichen. \\
+	\textbf{Schreibe hier dein Netzwerk hin: 192.168.1.0/24} \\
+	Teile dieses Netzwerk nun in \textbf{4 gleiche große Teile} auf: \\
+	\begin{itemize}
+		\item{Subnetz 1 \\ 
+					Netzwerkadresse: 192.168.1.0/26 \\ 
+					Subnetzmaske: 255.255.192.0 \\ 
+					Broadcast Adresse: 192.168.1.63 \\
+					Range der Hosts: 192.168.1.1 - 192.168.1.62}
+		\item{Subnetz 2 \\ 
+					Netzwerkadresse: 192.168.1.64/26 \\ 
+					Subnetzmaske: 255.255.192.0 \\ 
+					Broadcast Adresse: 192.168.1.127 \\
+					Range der Hosts: 192.168.1.65 - 192.168.1.126}
+		\item{Subnetz 3 \\ 
+					Netzwerkadresse: 192.168.1.128/26 \\ 
+					Subnetzmaske: 255.255.192.0 \\ 
+					Broadcast Adresse: 192.168.1.191 \\
+					Range der Hosts: 192.168.1.129 - 192.168.1.190}
+		\item{Subnetz 4 \\ 
+					Netzwerkadresse: 192.168.1.192/26 \\ 
+					Subnetzmaske: 255.255.192.0 \\ 
+					Broadcast Adresse: 192.168.1.255 \\
+					Range der Hosts: 192.168.1.193 - 192.168.1.254}
+	\end{itemize}
+	\subsection{Größeres Netzwerk}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{assets/rArB.png}
+	\caption{Ping von Router A zu Router B}
+	\end{figure}
+	Ping von Router A zu Router B ist möglich
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{assets/rBrA.png}
+	\caption{Ping von Router B zu Router A}
+	\end{figure}
+	Ping von Router B zu Router A ist möglich.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{assets/rBrC.png}
+	\caption{Ping von Router B zu Router C}
+	\end{figure}
+	Ping von Router B zu Router C ist möglich.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{assets/rCrB.png}
+	\caption{Ping von Router C zu Router B}
+	\end{figure}
+	Ping von Router C zu Router B ist möglich.
+	\subsubsection{Statisches Routing}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{assets/PC0PC1.png}
+	\caption{Ping von PC 0 zu PC 1}
+	\end{figure}
+	Das erste Packet hat zwar einen timeout aber die restlichen kommen zurück.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{assets/RouteA.png}
+	\caption{Routingtabelle von Router A}
+	\end{figure}
+	Router A hat nur ein weiteres Netzwerk, weshalb alle unbekannten Pakete an 5.5.5.2 weitergesendet werden sollen.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{assets/RouteB.png}
+	\caption{Routingtabelle von Router B}
+	\end{figure}
+	Da Router B keines der beiden Endnetzwerke kennt, muss für jedes der beiden Netzwerke ein eigener Eintrag hinzugefügt werden.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{assets/RouteC.png}
+	\caption{Routingtabelle von Router C}
+	\end{figure}
+	Da Router C wiederum nur ein weiteres Netzwerk kennen muss, kann man wieder die Standardroute nach 8.8.8.1 verweisen lassen.
+	\section{Routing Vertiefung}
+	\section{ARP \& ICMP Übungen}
+	\section{DHCP}
+	\section{Router}
+	\section{DHCP Konfiguration}
+	\section{Inter VLAN Routing}
+	\section{Routing}
+	\section{Umbau auf Inter VLAN Routing mit Trunk}
+	\section{Wiederholung der Grundlagen}
+	\section{Layer 2 PDU}
+	\section{ARP}
+	\section{Switches und VLANs}
+	\section{VTP \& STP}
+	\section{Router Konfiguration \& IPv6}
+	\section{Statisches Routing in einem größeren Netzwerk}
+	\section{Dynmaic Routing}
+	\section{BPG - Border Gateway Protocol}
+	\section{Access Control Lists Introduction}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}
