@@ -1,0 +1,198 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Prozessmanagement 1}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{Grundlagen}
+  Zuallererst muss man drei Begriffe definieren: Strategie, Taktik und Operatives Handeln.
+  \begin{itemize}
+    \item{Strategie}
+    \begin{itemize}
+      \item{Langfristige Planung}
+    \end{itemize}
+    \item{Taktik}
+    \begin{itemize}
+      \item{Mittelfristige Planung}
+    \end{itemize}
+    \item{Operatives Handeln}
+    \begin{itemize}
+      \item{Kurzfristige Planung}
+    \end{itemize}
+  \end{itemize}
+  Als Beispiel eines Unternehmens würde man bei der Strategie den langfristigen Plan fassen, ein AI-first Unternehmen zu werden. Die Taktik dafür beinhaltet, dass man AI verwendet um einen Kunden automatisiert zur richtigen Region zuzweisen. Das Operative Handeln wäre danach das konkrete Handeln zum Aufbauen und Aufrechterhalten dieses Systems.
+  \subsection{Strategie}
+  Die Strategie ist das generelle Handeln, welches zu einem Wettbewerbsvorteil führt. Dabei existiert ein Vorteil zwischen entweder der Konkurrenz oder dem Kunden. Für einen Vorteil gegenüber der Kunden, ist oft der Preis relevant, da diese dann eher das eigene Produkt wählen. \\
+  \subsubsection{Effektivität vs. Effizienz}
+  Hierbei sind auch die Effektivitiät und Effizienz relevant. Effektivität ist der Maßstab wie gut eine Sache vollbracht wird, während die Effizienz betrachtet, wie es mit den geringsten Kosten vollbracht wird. \\
+  Effektivitäts- und Effizienzvorteile sind sind die Zeile eine Strategieentwicklung.
+  \subsubsection{Vision und Mission}
+  Die Strategie benötigt auch eine Vision und eine Mission. Diese Unterscheiden sich darin, für wen sie bestimmt sind. Die Vision ist ein idealerweise kurzes Statement, welches für Mitarbeiter ihre Richtung vorgehen soll und bestimmen, was im allgemeinsten Sinne erreicht werden soll. Walt Disney hat zum Beispiel die Vision 'To make people happy.'. \\
+  Die Mission hingegen ist an die Kunden gerichtet und soll kurz mitteilen, was einen erwartet, falls man ihr Produkt ersteht.
+  \subsubsection{SMART}
+  Um gute Ziele zu entwickeln sollte man diese SMART definieren. Dieses Akronym steht für:
+  \begin{itemize}
+    \item{Spezifisch}
+    \item{Messbar}
+    \item{Erreichbar/Attraktiv (Achievable)}
+    \item{Angemessen (Reasonable)}
+    \item{Terminiert}
+  \end{itemize}
+  \subsection{Entwicklung}
+  Zur Entwicklung der Unternehmensstrategie sollte man diese Maßstäbe verwenden um so seine strategischen Ziele zu definieren und im Endeffekt die Unternehmensstrategie zu definieren. Dabei muss man bei der Umsetzung auch beachten, ob diese Ziele realistisch sind und anhand dessen anpassen. Natürlich können hierbei auch Risiken sichtbar werden, welche man in die Strategie miteinbeziehen muss,
+  \subsubsection{Situationsanalyse}
+  Zur Entwicklung dieser Unternehmensstrategie sollte man zuerst die Situation analysieren. Dabei sollte man:
+  \begin{itemize}
+    \item{Zukunftsfaktoren}
+    \begin{itemize}
+      \item{Wie sieht die momentane und erwartete zukünftige Lage aus?}
+    \end{itemize}
+    \item{Persönliche Vorteile}
+    \begin{itemize}
+      \item{Welche Vorteile habe ich als Firma, welche verwendet werden können?}
+    \end{itemize}
+    \item{[[TODO THIRD ONE]]}
+  \end{itemize}
+  \subsubsection{Strategieentwicklung}
+  Danach sollte man diese Analyse verwenden um seine Strategie konkret zu entwickeln und ein Strategiestatement zu erarbeiten. Dabei muss man beachten, wie man von seine Analyse zu einer Strategie kommt und was benötigt wird um es zu vollbringen.
+  \subsubsection{Strategiestatement}
+  Ein Strategiestatement hat oft ein festes Schema, um seine Ziele überschaubar weitergeben zu können. \\
+  Ein Statement besteht meist aus diesen Teilen:
+  \begin{itemize}
+    \item{Kern}
+    \begin{itemize}
+      \item{Wie sieht die momentane Lage aus?}
+    \end{itemize}
+    \item{Ziele}
+    \begin{itemize}
+      \item{Wo wollen wir hin?}
+    \end{itemize}
+    \item{Wirkungsbereich}
+    \begin{itemize}
+      \item{Was muss geschehen um dort hin zu kommen?}
+    \end{itemize}
+    \item{Kundennutzen}
+    \begin{itemize}
+      \item{Was ist der Nutzen gegenüber der Kunden, wenn es erreicht wird?}
+    \end{itemize}
+    \item{Unser Vorteil}
+    \begin{itemize}
+      \item{Was ist der Vorteil den das Unternehmen aus der Strategie gewinnen soll?}
+    \end{itemize}
+  \end{itemize}
+  \subsubsection{Strategieumsetzung}
+  Wenn man die Strategie erarbeitet hat, mus man diese nun umsetzen. Dazu benötigt man eine Strategy Map welches die Zusammenhänge der verschiedenen Ziele definieren soll. Danach muss man die Messgrößen festlegen um Messen zu können, wie der Erfolg definiert wird. Als letztes müssen die Zielwerte bestimmt werden um definieren zu können, wann man sein Ziel erreicht hat. Aus diesen Überlegungen sollen dann Projekte entstehen, welche die Strategie umsetzen. Die Umsetzung geschieht jedoch selten genau so wie erwartet weshalb man immer dafür planen muss, dass es Abweichungen gibt und diese Ausgleichen.
+  \subsection{Grundstrategien nach Porter}
+  Die Grundstrategien nach Porter gelten in der Regel für jedes Geschäftsfeld und unterteilen Unternehmen in spezifische Kategorien. Dabei kombiniert man jeweils den Strategischen Vorteil und die Ausrichtung des Unternehmens. Bei dem Strategischen Vorteil unterscheidet man zwischen dem Kundennutzen oder dem Kostenvorteil. Bei der Ausrichtung unterscheidet man zwischen einer Ausrichtung der gesamten Branche oder nur einem einzelnen Segment.
+  \begin{tabular}{| l | l | l | l | l |}
+    \toprule
+    \multicolumn{4}{Strategischer Vorteil} \\ \hline
+    &&Hervorragender Kundennutzen & Kostenvorteile \\ \hline
+    
+    
+    \bottomrule
+  \end{tabular}
+  Bei Fokus auf die gesamte Branche und dem Vorteil eines Kundennutzens spricht man einer Differenzierung. Bei Fokus auf den Kostenvorteil spricht man von einer Kostenführerschaft. Wenn man stattdessen auf ein einzelnes Segment ausgerichtet ist, spricht man von einer Schwerpunktbildung unabhängig ob man Kundennutzen oder Kostenvorteile bildet. In der Regel ist es eine schlechte Idee alle dieser vier Segmente gleichzeitig behandeln zu wollen.
+  \subsubsection{Differenzierung}
+  Bei der Differenzierung versucht das Unternehmen sich gegenüber Kunden so zu differenzieren, dass dieses gewählt wird. Das kann durch eine überdurchschnittliche Qualität, Kundenservice, Markenimage oder anderes gegeben werden. Dabei dürfen Kosten jedoch nicht ignoriert werden, sind jedoch nicht das Hauptziel. In der Regel haben Unternehmen in diesem Segment hohe Forschungs- und Entwicklungskosten, da sie ihre Marktstellung bewahren wollen, oder qualifiziertes Personal bzw. hohe Rohstoffqualität.
+  \subsubsection{Kostenführerschaft}
+  Die Kehrseite davon ist die Kostenführerschaft, wo man einen Wettbewerbsvorteil durch einen Kostenvorteil erreichen will. Dabei muss man nicht auch gleichzeitig die Preisführerschaft innehaben, diese ist jedoch meist Vorraussetzung. Viele der Kosten sind meist relativ statisch, weshalb es schwierig sein kann Kosten zu senken. Eine Strategie kann es sein durch großes Volumen die Anschaffungskosten zu verringern.
+  \subsubsection{Schwerpunktsbildung}
+  Bei der Schwerpunktsbildung fokussiert man sich auf bestimmte Käufergruppen, Produktsegmente, oder geografische Märkte. Als Unternehmen sollte man dadurch sich auf das eigene Marktsegment fokussieren um diesen Marktvorteil zu erhalten.
+  \subsubsection{Stuck in the Middle}
+  Wenn man keine der anderen Strategien abdeckt, ist man in der Regel \textit{Stuck in the Middle}. Dies ist der schlechteste Ort zu sein, da man oft hohe Kosten durch ein breites Angebot hat, ohne aber dessen Kostenvorteile zu genießen. Ein Unternehmen sollte stets dessen Strategie überprüfen, ob man sich nicht durch einen veränderten Markt sich nun in der Mitte befindet.
+
+  \subsection{Five Forces nach Porter}
+  Nach Porter gibt es fünf Kräfte, welche eine Situation auf dem Markt beeinflussen. Diese sind:
+  \begin{itemize}
+    \item{Vorhandener Wettbewerb}
+    \item{Lieferanten}
+    \item{Kunden}
+    \item{Potentielle Wettbewerber}
+    \item{Substitution der Produkte}
+  \end{itemize}
+  \subsubsection{Vorhandener Wettbewerb}
+  Wenn man der einzige Hersteller eines spezifischen Produkts ist, erfährt man keine Rivalität. Da das jedoch selten der Fall ist hat man oft Mitbewerber. Je mehr es davon gibt, umso größer ist die Rivalität.
+  \subsubsection{Verhandlungsposition des Kunden}
+  Kunden können gegenüber eines Unternehmens auch eine Verhandlungsposition besitzen. Das ist gegeben wenn:
+  \begin{itemize}
+    \item{Kunden über die Marktusituation informiert sind}
+    \item{Diese einen großen Teil des Umsatzes des Händlers haben}
+    \item{Der Kunde das Produkt selbst herstellt (Backward Integration)}
+  \end{itemize}
+  \subsubsection{Verhandlungsposition des Lieferanten}
+  Lieferanten können auch Druck auf ein Unternehmen aufbauen wenn:
+  \begin{itemize}
+    \item{Geringe Anzahl an Lieferanten für ein spezielles Produkt}
+    \item{Das Unternehmen unbedeutend ist}
+    \item{Der Lieferant das Produkt selbst herstellt (Forward Integration)}
+  \end{itemize}
+  \subsubsection{Ersatzprodukte}
+  Wenn ein Produkt durch eine alternative Methode einfacher, günstiger oder besser bereitgestellt werden kann, kann eine Substitution entstehen. Ein Beispiel dafür ist der Videoverleih, welcher durch das Aufkommen von Online Streamingdiensten nahezu komplett verdrängt wurde, da diese das praktisch gleiche Produkt schneller und meist günstiger zur Verfügung stellen konnten.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}

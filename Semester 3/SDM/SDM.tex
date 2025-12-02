@@ -1,0 +1,186 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Statistics und Data Mining}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\newpage
+	\section{Introduction}
+	The first question is: What even is artificial intelligence? Ideally, artificial intelligence should act and react like a human. One of the ways to build such an AI model is to use statistics so it can learn from our behaviour and act in a similar fashion. Deep Learning is a subset of machine learning where the structure of the model is inspired by the structure of the brain. It uses so called perceptrons to emulate a neuron. Often deep learning AI is used synonymously with machine learning in general. \\
+	Data Mining is a subset of Data Science which aims to create predictive models based on hidden patterns within large amounts of data. Most Business Intelligence systems use Data Science to figure out trends and react accordingly. The reason why data mining has become so important is because massive amounts of data are produced every single day which has to be processed and analysed.
+	\section{Data Mining}
+	Data Mining works in three phases: Information, Data Aggregation and Data Modelling.
+	One example, especially relevant in Styria, are CNC-Milling machines. By using large data sets of specific information you can generally predict whether a piece meets standards or not only based on its internal temperature and its vibration. This works because a company has hundreds of thousands of pieces of information which need to be aggregated and evaluated. By then plotting this data on a chart humans can often intuitively figure out trends within them. In order to create model which reflects the real-life situation, you can use four different kinds of constraints: Threshold, Polynomial Functions, A decision tree and a neural network. \\
+	In order to figure out which models are performing best in a given context you can give it data it hasn't seen before and measure the accuracy rate. You then choose the model with the highest accuracy.
+	\section{Types of Machine Learning}
+	There are three subsets of machine learning: Supervised and Unsupervised learning and reinforcement learning. In this lecture reinforcement learning will not be talked about.
+	\subsection{Supervised Learning}
+	In supervised learning the person is aware of which information is good and which is bad and the model is created based on this knowledge to model the data.
+	\subsection{Unsupervised Learning}
+	In unsupervised learning the person is not able to immediately tell the quality of the data and the model is asked to categorise based on certain requirements. Since you don't know whether data is good or bad it can be hard to figure out the quality of the result itself.
+	\subsection{Reinforcement Learning}
+	Reinforcement Learning is, as the name implies, certain predefined behaviours. It requires an agent that can interact with the world, and the algorithm learns based on its actions and its consequences. By defining good and bad behaviours which award or deduct points the model will learn over time which behaviour leads to the best result.
+	\section{Tools}
+	\subsection{Python}
+	Python is the most popular programming language for both data mining and artificial intelligence. It is also used in certain web applications (Like Instagram used to). Due to its popularity in Data Science, Python provides a copious amount of libraries which are optimised for performance because they are precompiled C++ code.
+	\subsection{Pandas}
+	Pandas is among the most popular data processing libraries, optimised for small datasets (Less than 20GB). Pandas uses Numpy, which employs C++ code, making it very efficient at data operations. Pandas uses Data Frames to segment data into tables, which can then be analysed, by for example computing the minimum or maximum of a column.
+	\subsection{How do you Data Mine?}
+	Data Mining is a relatively chaotic process as there is not a unified system for it.
+	\subsubsection{CRISP-DM}
+	The CRISP-DM model is a model by the European Union since there are so many pieces of data from different countries. But despite it being a model it is not a linear process but resembles a state machine since you don't know the quality of the data you are given. The CRISP-DM model roughly constists of these steps:
+	\paragraphlb{Business Understanding}
+	First you need to understand what you want to achieve and how you can achieve that. Often the focus is more on what you'd like to use (Like AI) and later try to find a use case for it.
+	\subparagraphlb{Example}
+	Say you have a 3D-Printing company but your printing head can start vibrating which will decrease the quality of the product or in the worst-case, destroy the head. Because of that you need to analyse the printing process and based on that figure out when and where the vibrations start happening so you can avoid it.
+	\paragraphlb{Data Understanding}
+	Understand what the data you are working with looks like and figuring out what the markers you are looking for.
+	\subparagraphlb{Example}
+	To figure out the vibrations you need to read the accelerometer on the machine and at what amplitude it becomes critical.
+	\paragraphlb{Data Preparation}
+	The data you have afterwards analysed now needs to be brought into a format that the algorithm can understand.
+	\subparagraphlb{Example}
+	The accelerometer values need to be normalised so they are easier to process and understand by human eyes. To do that they are brought to always stay between 1 and -1.
+	\paragraphlb{Modeling}
+	\begin{itemize}
+		\item{Hypothesis Led}
+		\begin{itemize}
+			\item{Model the data according to your expectations}
+		\end{itemize}
+		\item{}
+	\end{itemize}
+	\section{Descriptive Statistics}
+	Descriptive Statistics is a way to summarise and describe a set of data so it is easier to understand. It consists of three sub-categories:
+	\begin{itemize}
+		\item{Measure of Central Tendency}
+		\begin{itemize}
+			\item{Understanding the normal behaviour of the data}
+		\end{itemize}
+		\item{Measure of Variability}
+		\begin{itemize}
+			\item{How does the data change from its default?}
+		\end{itemize}
+		\item{Measure of Frequency Distribution}
+		\begin{itemize}
+			\item{See how the data is distributed}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Averaging}
+	There are three functions to calculate the average: Mean, Median, and Mode.
+	\subsubsection{Mean}
+	The mean is the most commonly used average and is calculated by adding all values and dividing it by the amount of values used: $ø = \frac{a+b+c+d+e}{5}$.
+	The mean is easy to calculate and gives a representative number based on how close to a normal distribution the dataset is. This also means that when the data is very unevenly distributed it will skew the mean towards the uneven numbers.
+	\subsubsection{Median}
+	The Median is calculated by taking the centre value of all values. To do this, the set has to be ordered. The median is very useful when data is extremely skewed since it is mostly unaffected by extreme values. A disadvantage is, that the median does not make any statement about the rest of the data since all it does is take the physical middle.
+	\subsubsection{Mode}
+	The mode takes the value that is present the most within the data set. For continuous values you often work with ranges since it is unlikely to find a large amount of exact duplicate values. The mode too is unaffected by extreme values but also does not take into account other data.
+	\section{Supervised Learning}
+	In Supervised Learning the data is labelled, which means that you as the user already know the answer. And because you know which data is correct and incorrect, ideally, the algorithm should be capable of again labelling the data in the same manner.
+	There are two types of supervised learning:
+	\begin{itemize}
+		\item{Regression}
+		\begin{itemize}
+			\item{Attempts to predict a number based on previous numbers}
+		\end{itemize}
+		\item{Classification}
+		\begin{itemize}
+			\item{Tries classifying data according to specific requirements. It further distinguishes between binary and multi-classification}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Classification}
+	In Classification you want to classify new data based on old data. To do this you use negative or positive labels. Anything that is sought after is a positive label, while anything else is a negative label. Once the system has been trained, new data will then be labelled in the samer manner. This works the same way for multi-classification data but with N classes.
+	\subsection{Regression}
+	In regression you want to predict a number, for example a future price or a stock. This is the case for all data that is not linearly separable.
+	\subsubsection{Linear Classifies}
+	With linear classifiers you try to find a linear decision boundary. This is relatively easy to do but highly dimensional data is not linearly separable, making it hard to see the boundaries. Some linear decision boundary systems are Perceptrons, Naive Bayes among others.
+	\subsubsection{Non-Linear Classifiers}
+	Some non-linear systems are K-nearest neighbour, feed-forward neural networks, gradient tree boosting, and random forest. The choice of system can be very important. While gradient tree boosting and feed-forward neural network offer the best potential results, they are highly complex and rely on specific data to perform well. For a regular case a random forest system might be preferrable.
+	\subsection{Decision Tree}
+	A Decision Trees is a binary tree structure, where each question is answered based on the parameters and will come to a decision according to the path taken. The creation of a decision tree follows a set of steps:
+	\subsubsection{Identify}
+	First you must find the features which separate the data best. To start with that you create a tree with a level of 1 (So there is 1 decision). Then the data (Since it is pre-labelled) will be fed into the tree and based on that you will receive a result. Ideally you would like for one feature to separate the data perfectly (So each answer is only present in one path). This will likely never happen with real-world data and one should be skeptical if it ever happens. This will be repeated for every feature in the data set and then the 'impurity' of each feature will be measured.
+	\paragraphlb{GINI Impurity}
+	The GINI Impurity measures how the data is distributed and can range from 0 to 1. 0 means all data is on one side, while 1 means that all the data is evenly distributed. The GINI can be calculated by squaring the chance for both outcomes and subtracting them from 1: $1-<probability\. for\. A>^2-<probability\. for\. B>^2$.
+	\subparagraphlb{Handling numeric data}
+	This mode of separating can become an issue for numeric data since it cannot be segmented cleanly. To still segment numbers you need to first sort them ascending and then calculate the mean between every number. So if the numbers are 1000, 1500, 2000, and 2500 your mean will be 1250, 1750, and 2250. For each of these mean values the values are then segmented again and from that segmentation the GINI Impurity for each mean value is calculated. Then the GINI Value with the lowest score, so the one that segments the data the best is chosen.
+	\subsubsection{Random Forest}
+	Random Forest takes Decision Trees and attempts to find the best permutation of used data.
+	\subsection{k-Nearest Neighbors}
+	Another algorithm to classify is the k-nearest Neighbors algorithm. It assumes that things that are similar are also close to each other. In order to train the algorithm you must first feed the model labelled data and sketch the data on a graph. When you afterwards add another data point you add it to the graph and decide on the outcome of the prediction based on which k number of elements are closest to it. A good starting point to choosing the k is the square root of the number of items in the data set. What should be considered though, is to not take a k of 1, since this makes it susceptible to being influenced by outliers, and to not take even numbers since this could lead to an impasse in the decision process.
+	\subsection{Naive Bayes}
+	The Naive Bayes is an algorithm based on the Bayes Theorem: $P(c|x)=\frac{P(x|c)P(c)}{P(x)}$. It assumes that previous outcomes of the possibility can be used to assume future outcomes. To do that it calculates the chance for a positive and a negative outcome based on which feature was present. This is then normalised to calculate the probability of each outcome. This works extremely well for text classification since you can use each word as a feature. One drawback is that you need large amounts of data to create a starting set. It also does not work well for data that is not discrete (Like numbers)
+	\subsection{Normalising}
+	When data has values associated with it, they can often range into the millions. To make this data easier to use, you can either normalise or standardise it. Standardised data has the mean at 0, with data deviating from it being slightly higher or lower. Normalised data instead has the maximum and the minimum of data reach between 0 and 1, having all other points between those values. 
+	\subsection{Clipping}
+	If data has a few very high values and keeping them adds little to its use, you can choose to clip them. This works best if the very high values have an equal amount of the relevant outcomes
+	\subsection{Overfitting}
+	\subsection{Precision, Accuracy, and Recall}
+	In order to mesaure how well your model predicts the correct outcomes, you can use Precision, Accuracy, and Recall. These are relevant whenever different outcomes are more important.
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}
