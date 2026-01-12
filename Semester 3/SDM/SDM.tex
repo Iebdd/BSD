@@ -158,6 +158,40 @@
 	\subsection{Overfitting}
 	\subsection{Precision, Accuracy, and Recall}
 	In order to mesaure how well your model predicts the correct outcomes, you can use Precision, Accuracy, and Recall. These are relevant whenever different outcomes are more important.
+	\section{Unsupervised Learning}
+	While supervised learning tries to predict an often binary decision ('Is this a cat or not?'), unsupervised learning tries to answer a question with parameters that aren't perfectly known. It does that by taking data points from the set and attempts to group them based on their characteristics to figure out whether a combination of certain data points leads to a certain outcome. One such example is the search for planets which are similar to earth and could host carbon life. Since we don't specifically know which combination of factors leads to such an outcome, we have to use unsupervised learning.
+	\subsection{Similarity}
+	While many things are usually distinct of each other, often things look quite similar while still requiring to be separated. For example if trying to distinguish between ape species, they might have similar features but what you want to focus on are the differences. To do that you have to define a distance between data points and segment them based on those. Distance should have certain characteristics: The distance between A and B should be the same ($A->B = B->A$), A should always be the most similar to itself. A distance that meets all of the required criteria is called a metric. Using a set of metrics, one can define the possible distances between data points and based on how many are met the distance can b determined. To figure out the distance between a number of data points you can use the Euclidian Distance formula: $d_{euc}(x,y)=\sqrt{\sum_{i=1}^n(x_i-y_i)^2}$. This can also be generalised to not only work with the square root, which is called the Minkowski Distance: $dist=(\sum^n_{k=1}|p_k-q_k|^r)^{\frac{1}{r}}$. This formula is often used with an r of 1 to determine the distance of binary data points.
+	\subsection{Clustering}
+	Clustering is the process of segmenting data into distinct groups if presented on a graph. It can be quite difficult to understand such graphs without context since they are ultimately just data points. There are two types of clusters: Hierarchical and Partitional Clusters.
+	\subsubsection{Hierarchy vs Partition}
+	Sometimes data can be partitioned into distinct data sets without any relation between them. But if data can be segmented and this data can again be segmented, you can show it as a hierarchical cluster where a set is partitioned into subsets.
+	\subsubsection{Complete vs Partial}
+	Not all data can always be completely segmented. If all data can be neatly partitioned it is a complete set but if not all data can be used it is partial.
+	\subsection{k-means}
+	The k-means algorithm is a very simple unsupervised learning algorithm. The k in this case describes the amount of expected clusters. To start you need to have an idea of how many clusters there are likely to be and define k as such. Then based on the amount of expected clusters you define k random data points and calculate the distance between the data points. You then repeat these steps using the mean of the distance to the data points as the new position. If the difference between two iterations becomes low enough (or even 0) then you know you are done. The big advantage of this algorithm is that it is really simple and efficient. This can also be its downfall though, as the very simple approach can have it potentially lead to poor results. Since you must in advance guess the amount of clusters, it can be difficult to correctly define it from the start. It also ahs a very difficult time working with outliers so they should be removed in advance.
+	\subsection{DBSCAN}
+	DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is another algorithm that tries to find high density areas of data points. The process is:
+	\begin{enumerate}
+		\item{Define an unlabelled dataset}
+		\item{Define the eps radius you want to search through and the minimal amount of points to be defined as a cluster}
+		\item{Choose a random data point and find all neighbours within the defined eps radius}
+		\item{Find the neighbours of all the data points within the first data points}
+		\item{Repeat the previous step until no more neighbours can be found}
+		\item{Check if the amount of found neighbours is at least the minimal amount of neighbours}
+		\item{Continue with another unseen data point and repeat these steps until there are no more data points left}
+		\item{Any data points not meeting the minimal amount threshold will be classified as noise}
+	\end{enumerate}
+	DBSCAN can be used for clusters of arbitrary size and shape, while often filtering out noise automatically. But the input parameters (How many data points are a cluster and how big the neighbouring radius should be) can be hard to define correctly. If done poorly it can give wildy inaccurate data
+	\subsection{Dimensionality Reduction}
+	Sometimes data can be highly dimensional (more than 3). Since it is not possible to visualise datasets with more than three dimensions it can be useful to reduce dimensions.
+	\subsubsection{PCA}
+	Principality Component Reduction attempts to find the directions for the data which vary the most. Through that it can figure out the percentage of data which is still represented while reducing the dimensions of it. There are various online tools which allow you to quickly analyse the data with this algorithm.
+	\subsubsection{UMAP}
+	Uniform Manifold Approximation and Projection is a more complex alogorithm that spans a manifold plane on top of the data, thus trying analyse which data points intersect with one plane.
+	\section{Types of data}
+	Most data is saved as tabular data, so in columns and rows where one row describes one data point and the column the type of data. Another type of data are data series. This data is not independent of each other as the element of time is also saved with it
+
 	
 
 
