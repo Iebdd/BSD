@@ -1,0 +1,78 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Prozessmanagement Ausarbeitung}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{Einleitung}
+	Ich arbeite bei der GRAWE AG Versicherung in der Softwareabteilung des internen Tools für Vertreter (Der Grawe Berater). Ich habe noch nicht die tiefsten Einblicke in die Prozesse des Teams, da ich noch keine der Funktionen übernommen habe. Momentan arbeite ich stattdessen an Systemen die die Applikation selbst nur berühren, wie die Vorlagen für die Antragsformulare, welche auf ein neues System umgestellt werden sollten.
+	\section{Reifegrad}
+	Es ist wahrscheinlich relativ schwer den exakten Reifegrad zu bestimmen, da mit DORA nahezu alle Prozesse des Teams durcheinandergekommen sind. Vor DORA war der Gruppenleiter sowohl für Umsetzung als auch organisatorisch verantwortlich, was jedoch mit Anfang des Jahres aufgespalten wurde. Die neue organisatorisch verantwortliche Person hat jedoch keine Erfahrung mit den Abläufen im Team und es scheint, als ob keine Übergabe stattgefunden habe. Zusätzlich war es zuvor möglich, dass Entwickler auf alle drei Umgebungen (Entwicklung, Test und Produktion) zugreifen, was oft auch nötig war, seit DORA wird jedoch der Zugriff auf die Test und Produktionsumgebung eingeschränkt, weshalb es hier auch zu Veränderungen gekommen ist. Es kommt noch hinzu, dass in Graz zentral alle Versionen der Applikation für alle Tochergesellschaften verwaltet werden (In Summe mit Österreich auch Slowenien, Kroatien, Serbien, Montenegro und Rumänien) es jedoch in einigen auch lokale Teams gibt welche die Teile erledigen welche genauere Kenntnisse (Wie Umsetzung, rechtliche Vorraussetzungen und Übersetzungen) erfordern. Diese Teams werden entweder unzureichend über etwaige Änderungen informiert oder lehnen
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}

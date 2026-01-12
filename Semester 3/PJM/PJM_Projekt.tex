@@ -1,0 +1,106 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Projektmanagement - Projekt}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{System Design}
+	\subsection{Unternehmensbeschreibung}
+	Das Bauunternehmen Porr AG hat eine Vielzahl an Standorten und ist europaweit vertreten.
+	\subsubsection{Ausgangssituation}
+	Um klimaneutraler und umweltfreundlicher zu werden, sollen Kleintransport der Flotte zu E-Autos getauscht werden. Dabei sollen die Kosten des Betriebs möglichst gleich bleiben.
+	\subsubsection{Problemstellung}
+	Durch die Vielzahl an Angeboten am Markt ist es unklar, welches Modell die besten Ergebnisse liefert.
+	\subsubsection{Vorgehensziel}
+	Der Kleintransporter mit dem besten Kosten/Nutzen Verhältnis soll gewählt werden um die klimaneutrale Strategie des Unternehmens umzusetzen.
+	\subsection{Situationsanalyse}
+	\subsubsection{SWOT-Analyse}
+	\begin{tabular}{| l | c | c | c | c | c | c | c | c |}
+		\toprule
+		\multirow{2}*{\makecell{Umwelt\\entwicklung...}} & \multicolumn{4}{| c |}{\makecell{...trifft im System auf eine \\  Stärke oder Schwäche...}} & \multicolumn{3}{| c |}{\makecell{...das bedeutet \\ Chance oder Gefahr}} & ...daher streben wir an...\\ \cline{2-9}
+		& + & - & Stärke/Schwäche & Ursachen & + & - & Chance/Gefahr & Erste Ziele \\ \midrule
+		\makecell{Umweltförderungen werden \\ verringert/eingestellt} &  &\cellcolor{red!25} x & Weniger Geld als Mitbewerber & Geringerer Umsatz &  & \cellcolor{red!25} x & Weniger Budget & Förderungen schnell abrufen \\ \hline
+		
+		\bottomrule
+	\end{tabular}
+	\subsection{Zielformulierung}
+	\subsection{Synthese/Analyse}
+	\subsection{Bewertung}
+	\subsection{Entscheidung}
+	\section{Projektmanagement}
+	\subsection{Abgrenzung Projekt}
+	\subsection{Projektabgrenzung und Kontextanalyse}
+	\subsection{Leistungsplanung}
+	\subsection{Terminplanung}
+	\subsection{Ressourcen/Kostenplanung inkl. Risikoanalyse}
+	%ITEM 1 & + & - & Stärke/Schwäche & Ursache & + & - & Chance/Gefahr & Ziele \\ \hline
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}
