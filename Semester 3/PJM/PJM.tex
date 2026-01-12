@@ -1,0 +1,199 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{colorlinks,
+    		citecolor=black,
+    		filecolor=black,
+    		linkcolor=black,
+    		urlcolor=black}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Projektmanagement}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{System Design}
+	Systems Engineering ist eine Methode zur Projektplanung, welches heutzutage in einem Großteil der Welt angewandt wird. Dabei wird angenommen, dass das Problem ein System ist, welches in dessen Elemente gespalten und in Beziehung zueinander gebracht werden soll. Unter einem Problem versteht man allgemein die Differenz zwischen einem IST- und einem SOLLzustand, also einer Situation wie sie in diesem Moment besteht und man eine Idee hat wie der Idealzustand aussehen soll.
+	\subsection{Routine- und Pionierprobleme}
+	Probleme werden weiterhin in Routine- und Pionierprobleme geteilt. Routineprobleme sind bereits gelöst oder haben einen gut definierten Lösungsweg um zur Lösung zu finden. Pionierprobleme hingegen haben keinen genauen Lösungsweg oder er ist nur ungenau definiert. Da Pionierprobleme schwerer zu lösen sind, wird auch ein Großteil des Fokus von Systems Engineering darauf gesetzt.
+	\begin{itemize}
+		\item{Methodik}
+		\item{Psychologie und emotionale Intelligenz}
+		\item{Ethik und Moral}
+		\item{Fachwisen und Erfahrung}
+		\item{Situationskenntnisse}
+	\end{itemize}
+	Während jeder dieser Säulen wichtig ist, besteht in dieser Lehrveranstalung ein Fokus auf die Methodik. Diese ist die Wegleitung um den Lösungsweg definieren zu können. Systems Engineering ist ein Bauplan um die Methodik eines Problems definieren zu können.
+	\subsection{Systems Engineering}
+	Ein System hat stets definierte Komponenten:
+	\begin{itemize}
+		\item{Elemente}
+		\begin{itemize}
+			\item{Bausteine eines Systems}
+		\end{itemize}
+		\item{Beziehungen}
+		\begin{itemize}
+			\item{Die Abhängigkeiten der Elemente innerhalb des Systems}
+		\end{itemize}
+		\item{Umwelteinflüsse}
+		\begin{itemize}
+			\item{Einflüsse auf das System welche selbst nicht Teil des Systems sind}
+		\end{itemize}
+		\item{Systemgrenzen}
+		\begin{itemize}
+			\item{Was das System von der Umwelt trennt}
+		\end{itemize}
+		\item{Systemziel}
+		\begin{itemize}
+			\item{Das was man mit dem System erreichen will}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Vorgehensmodell}
+	Beim Vorgehensmodell wird definiert wie man überhaupt sein System definieren will. Dabei sind vier Grundgedanken relevant:
+	\paragraphlb{Vom Groben zum Detail}
+	Da man nicht sofort eine detaillierte Angabe des Problems und dessen Ziels angeben kann, sollte man zuerst eine grobe Vorstellung der Situation und des Ziels definieren. Anhand dieser Basis definiert man seine Vorstellungen dann feiner um so iterativ zum Endergebnis zu kommen.
+	\paragraphlb{Denken in Varianten}
+	Eventuell gibt es nicht sofort einen offensichtlichen Lösungsweg, sondern mehrere potenzielle Varianten. In der Regel sollte man drei verschiedene Varianten von Lösungsansätzen definieren.
+	\paragraphlb{Projektphasen}
+	Bei Projektphasen unterteilt man die Methodik in verschiedene Phasen, welche danach in Serie abgearbeitet werden kann:
+	\begin{enumerate}
+		\item{Vorstudie}
+		\begin{itemize}
+			\item{Es werden im Vorhinein mögliche Lösungswege definiert (idealerweise 3)}
+			\item{Es soll im Vorhinein das Problem verstanden werden}
+		\end{itemize}
+		\item{Hauptstudie}
+		\begin{itemize}
+			\item{Anhand der möglichen Lösungswege werden konkrete Aktionen (idealerweise wiederum 3) erkundet und der beste Weg gewählt}
+		\end{itemize}
+		\item{Detailstudie}
+		\begin{itemize}
+			\item{Der gewählte Weg wird detaillierter für verschiedene Wege überlegt}
+		\end{itemize}
+		\item{Implementation}
+		\begin{itemize}
+			\item{Der Detailplan wird in die Tat umgesetzt}
+		\end{itemize}
+	\end{enumerate}
+	\paragraphlb{Problemlösungszyklus}
+	Der Problemlösungszyklus (PLZ) beschreibt die Gliederung der Methodik in einzelne Projektphasen:
+	\begin{itemize}
+		\item{Zielsuche}
+		\begin{itemize}
+			\item{"Wo stehen wir?"}
+			\item{"Wo wollen wir hin?"}
+		\end{itemize}
+		\item{Lösungssuche}
+		\begin{itemize}
+			\item{"Welche Lösungen gibt es?"}
+			\item{"Welche Lösungen kommen in Frage?"}
+		\end{itemize}
+		\item{Auswahl}
+		\begin{itemize}
+			\item{"Welche Lösung ist die Beste?"}
+			\item{"Welche Lösung können wir empfehlen?"}
+			\item{"Für welche Lösung entscheidet sich der Auftraggeber?"}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Problemlösungsprozess}
+	\subsubsection{Situationsanalyse}
+	Der erste Schritt ist die Analyse der gegebenen Situation. Bei dieser Analyse durchläuft man vier Phasen:
+	\begin{enumerate}
+		\item{Problemfeldabgrenzung}
+		\item{Umwelt- und Systemanalyse}
+		\item{Ursachen ergründen}
+		\item{Ergebnis darstellen}
+	\end{enumerate}
+	\paragraphlb{Problemfeldabgrenzung}
+	Bei der Problemfeldabgrenzung definiert man welche Elemente im System eine Relevanz besitzen. Dabei kann man grob in drei Schritten vorgehen:
+	\begin{enumerate}
+		\item{Problemfeld definieren}
+		\begin{itemize}
+			\item{Alle Elemente welche für das System relevant sind, egal ob System- oder Umweltelemente, werden definiert.}
+		\end{itemize}
+		\item{Beziehungen definieren}
+		\begin{itemize}
+			\item{Die wichtigen Beziehungen der einzelnen Elemente zueinander aufbauen}
+		\end{itemize}
+		\item{Elemente kategorisieren}
+		\begin{itemize}
+			\item{Elemente in System- und Umweltelemente teilen. Die vorherrschende Frage ist dabei: "Habe ich Einfluss auf das Element oder beeinflusst das Element mich?"}
+		\end{itemize}
+		\item{Syst}
+	\end{enumerate}
+	\paragraphlb{Umwelt- und Systemanalyse}
+	Jetzt hat man zwar definiert, welche Elemente das System beeinflussen, muss jedoch nun herausfinden, was diese Faktoren wirklich sind. Wenn man zuvor zum Beispiel ein Budget als Element festgelegt hat, muss man nun bestimmen wie hoch dieses Budget eigentlich ist. Diese Informationen können auf mehrere Wege beschafft werden, unter anderem:
+	\begin{itemize}
+		\item{Literatur- und Internetrecherche}
+		\item{Interviews}
+		\item{Fragebögen}
+		\item{Beobachtungen}
+	\end{itemize}
+	Diese gesammelten Informationen müssen danach verarbeitet und aufbereitet werden. Eine Strategie hierfür ist die \textit{SWOT-Analyse}
+	\paragraphlb{SWOT-Analyse}
+	SWOT steht für:
+	\begin{itemize}
+		\item{Stärke (Strength)}
+		\item{Schwäche (Weakness)}
+		\item{Chance (Opportunity)}
+		\item{Gefahr (Threat)}
+	\end{itemize}
+	Womit die Gegebenheiten für jedes Element analysiert werden können.
+	\section{Projektmanagement}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}
