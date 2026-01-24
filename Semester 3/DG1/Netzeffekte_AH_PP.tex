@@ -1,0 +1,91 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Digitale Geschäftsmodelle 1 - Netzeffekte - Apple}
+\author{Andreas Hofer, Patrick Pramberger}
+
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item{App Store}
+		\begin{itemize}
+			\item{Der App Store hat einen indirekten Netzeffekt, da die Anzahl der Benutzer diesen für Entwickler attraktiver macht, was ihn wiederum für Benutzer attraktiver macht.}
+		\end{itemize}
+		\item{AirDrop, iMessage, FaceTime, iCloud}
+		\begin{itemize}
+			\item{Da man all diese Dienste nur verwenden kann, wenn beide Parteien ein Produkt von Apple besitzt, nimmt der Wert davon mit der Anzahl an Benutzern zu.}
+		\end{itemize}
+		\item{ApplePay}
+		\begin{itemize}
+			\item{ApplePay kann in vielen Webshops als Zahlungsmittel verwendet werden, wodurch ein indirekter Netzeffekt entsteht.}
+		\end{itemize}
+		\item{AirTag}
+		\begin{itemize}
+			\item{AirTags verwenden Applegeräte in der Umgebung um sich mit dem Server zu verbinden und so ihren Standort zu teilen, wodurch ein direkter Netzeffekt entsteht.}
+		\end{itemize}
+	\end{enumerate}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}
