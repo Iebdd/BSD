@@ -1,0 +1,63 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+\setcounter{tocdepth}{5}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}SOZ - ABC Analyse}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item{Haare schneiden gehen - B - Nicht wichtig aber dringend}
+    \item{Einkaufen gehen - C - Wichtig aber nicht dringend}
+    \item{Aufräumen - C - Nicht wichtig und nicht dringend}
+    \item{Mit dem Hund gassi gehen - C - Nicht wichtig aber dringend}
+    \item{Arbeiten - A - Wichtig und dringend}
+    \item{Uni gehen - A - Wichtig und dringend}
+    \item{Sport - B - Nicht wichtig und nicht dringend}
+    \item{Hobbies - B - Nicht wichtig aber nicht dringend}
+    \item{Essen - A - Wichtig und dringend}
+    \item{Schlafen - A - Wichtig und dringend}
+	\end{enumerate}
+  Es kommt mir vor, als ob es mehr in einem Arbeitskontext gedacht ist, da man die meisten dieser Aufgaben nicht wirklich delegieren kann.
+\end{document}
