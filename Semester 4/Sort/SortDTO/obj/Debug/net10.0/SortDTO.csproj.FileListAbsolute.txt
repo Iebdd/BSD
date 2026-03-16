@@ -1,0 +1,14 @@
+/Users/andreashofer/RiderProjects/Sort/SortDTO/bin/Debug/net10.0/SortDTO
+/Users/andreashofer/RiderProjects/Sort/SortDTO/bin/Debug/net10.0/SortDTO.deps.json
+/Users/andreashofer/RiderProjects/Sort/SortDTO/bin/Debug/net10.0/SortDTO.runtimeconfig.json
+/Users/andreashofer/RiderProjects/Sort/SortDTO/bin/Debug/net10.0/SortDTO.dll
+/Users/andreashofer/RiderProjects/Sort/SortDTO/bin/Debug/net10.0/SortDTO.pdb
+/Users/andreashofer/RiderProjects/Sort/SortDTO/obj/Debug/net10.0/SortDTO.GeneratedMSBuildEditorConfig.editorconfig
+/Users/andreashofer/RiderProjects/Sort/SortDTO/obj/Debug/net10.0/SortDTO.AssemblyInfoInputs.cache
+/Users/andreashofer/RiderProjects/Sort/SortDTO/obj/Debug/net10.0/SortDTO.AssemblyInfo.cs
+/Users/andreashofer/RiderProjects/Sort/SortDTO/obj/Debug/net10.0/SortDTO.csproj.CoreCompileInputs.cache
+/Users/andreashofer/RiderProjects/Sort/SortDTO/obj/Debug/net10.0/SortDTO.dll
+/Users/andreashofer/RiderProjects/Sort/SortDTO/obj/Debug/net10.0/refint/SortDTO.dll
+/Users/andreashofer/RiderProjects/Sort/SortDTO/obj/Debug/net10.0/SortDTO.pdb
+/Users/andreashofer/RiderProjects/Sort/SortDTO/obj/Debug/net10.0/SortDTO.genruntimeconfig.cache
+/Users/andreashofer/RiderProjects/Sort/SortDTO/obj/Debug/net10.0/ref/SortDTO.dll
