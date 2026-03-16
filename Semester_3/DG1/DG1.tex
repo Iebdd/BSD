@@ -1,0 +1,221 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Digitale Geschäftsmodelle 1}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{Impulsvortrag}
+	Dieser Teil bietet einen allgemeinen Einblick in die zwei Teilthemen
+	\subsection{Digitale Netzökonomie}
+	Die digitale Netzökonomie wurde sowohl technisch als auch sozial geprägt. Ein relevanter Begriff ist dabei das E-Business, welches die Verwendung von einem Geschäftsmodell bezeichnet und dabei Internettechnologien verwendet. Dabei wird auch die Beziehung zwischen den Geschäftspartnersn innerhalb der Kette von Wertschöpfungen miteinbezogen. Wichtig ist dabei, dass die Internettechnologien keine neuen Regeln definieren, sondern:
+	\begin{itemize}
+		\item{Regeln neu kombiniert}
+		\item{einzelne Regeln hervorgehoben}
+		\item{Erfolgsfaktoren und Perspektiven neu aufgestellt}
+	\end{itemize}
+	Die Digitale Netzökonomie überschneidet sich mit anderen, ähnlichen Begriffen und werden meist synonym verwendet. Einige dieser Begriffe sind:
+	\begin{itemize}
+		\item{Digitale Netzökonomie}
+		\begin{itemize}
+			\item{Die Mikroökonomischen Vorgänge beim Übergang von einer Industrie- zu einer Informationsgesellschaft}
+		\end{itemize}
+		\item{Neue Ökonomie}
+		\begin{itemize}
+			\item{Die Zeitspanne nach 1995, wobei niedrige Inflation einem großen Wirtschaftswachstum gegenüberstand}
+		\end{itemize}
+		\item{Digitale Ökonomie}
+		\begin{itemize}
+			\item{Globale Kooperation was zu kurzen Innovationszyklen führt}
+		\end{itemize}
+		\item{Internetökonomie}
+		\begin{itemize}
+			\item{Wandel in den 1990er Jahren aufgrund der Vernetzung der Welt und des Internets}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Prinzipien}
+	Einige Prinzipien der digitalen Netzökonomie sind:
+	\begin{itemize}
+		\item{Senkung der Kosten}
+		\begin{itemize}
+			\item{Aufgrund nicht-linearer Skalierbarkeit von digitalen Inhalten, kann man bei hohen Nutzerzahlen und nur geringfügig größeren Kosten, eine höhere Marge erzielen}
+		\end{itemize}
+		\item{Dematerialisierung durch Digitalisierung}
+		\begin{itemize}
+			\item{Prozesse die physisch geschehen passieren danach digital. Wenn man zum Beispiel Wohnungen kurzfristig vermietet, kann man digital Zugriff erteilen und muss nicht physisch einen Schlüssel überreichen.}			
+		\end{itemize}
+		\item{Economies of Scale and Scope}
+		\begin{itemize}
+			\item{Auf deutsch Skaleneffekt und Verbundeffekt}
+				\item{Der Skaleneffekt besagt, dass die Mehrkosten pro zusätzlichem Benutzer nicht linear steigen, wodurch bei höheren Nutzerzahlen ein größerer Gewinn erwirtschaftet werden kann.}
+				\item{Der Verbundeffekt besagt, dass durch die Produktion viele ähnlicher Produkte, Prozesse relativ einfach angepasst werden können wodurch bei Produktion vieler Variationen keine linear höheren Kosten entstehen.}
+		\end{itemize}
+		\item{Neue Preis- und Erlösmodelle}
+		\begin{itemize}
+			\item{Anstatt ein Produkt ein Mal zu kaufen, gibt es vermehrt Abomodelle, wobei man einen monatlichen Betrag bezahlt und dadurch zwar mehr zahlt aber auch stets die neueste Version erhält.}
+		\end{itemize}
+		\item{Neue Rolle des Kunden}
+		\begin{itemize}
+			\item{Der Kunde kann sich heute viel besser über Produkte informieren, da es hunderte Kanäle und Websites gibt die Produkte vergleichen.}
+			\item{Gleichzeitig können Kunden ihren Unmut über Produkte direkt mitteilen, welche auch von anderen eingesehen werden können. Dadurch können Kunden auch eine Marketingrolle einnehmen, da gute Produkte bessere Bewertungen haben.}
+		\end{itemize}
+		\subsubsection{Lock-In Effekt}
+		Der Lock-In Effekt führt durch gewisse Ursachen dazu, dass man in einem Ökosystem oder einem Produkt 'gefangen' ist und nicht wechseln will oder kann. Das beste Beispiel dafür ist der Netzeffekt.
+		\paragraphlb{Netzeffekt}
+		In einem sozialen Netzwerk sind das wertvollste Gut die Personen, welche zu einer Vernetzung dieser führen. Ein Beispiel dafür ist Facebook, welches nach eigenen Angaben mehr als 1 Milliarde Benutzer hat. Die große Menge an Benutzern auf dieser Plattform führt dazu, dass dieses an Wert steigt, was wiederum neue Benutzer anzieht. Das nennt man einen \textbf{direkten positiven Netzeffekt}, da es so durch seinen Wert aktiv weiter an Wert gewinnt, indem neue Benutzer angezogen werden. Dazu steht der \textbf{indirekte positive Netzeffekt}, wobei der Wert der Plattform nicht direkt durch dessen Marktmacht entsteht sondern indirekt von Diensten die dort verfügbar sind. Ein Beispiel dafür sind App Stores von Mobiltelefonen. Da der Aufwand für eine Plattform eine App zu entwickeln in etwa immer der selbe ist, werden App-Entwickler anhand der Marktposition eines App Stores agieren und so eventuell nur für die populärsten ihre App veröffentlichen.
+		\paragraphlb{Wechselkosten}
+		Eine weitere Ursache können Wechselkosten sein. Diese können technologisch, da man sich ein neues Produkt oder eine ganze Produktsparte kaufen muss um das neue System zu verwenden. Es kann jedoch auch wissensbezogen sein, da man beim Wechseln eventuell wieder eine Lernkurve hätte.
+		\subsubsection{Gesetze der IKT-Branche}
+		"Gesetze" im IKT sind keine niedergeschriebenen Gesetze, sondern Postulate, welche danach von der Industrie angenommen wurden.
+		\paragraphlb{Moor'sches Gesetz}
+		\paragraphlb{Metcalfes Gesetz}
+		Der Wert eines Netzes steigt exponentiell mit der Menge an Nutzern
+		\paragraphlb{Gilders Gesetz}
+		Alle 18 Monate verdreifacht sich die Übertragungsbandbreite. Dieses Gesetz hat sich nicht im gleichen Ausmaß bewahrheitet.
+		\paragraphlb{Huntleys Gesetz}
+		Die Investition in Infrastrukturanlagen ist 10 Mal so teuer als die Investition in Produktionsanlagen. Da Infrastruktur viel öfter ausgetauscht werden muss, sind die langfristigen Kosten bedeutend höher als die von Produktionsstätten.
+		\paragraphlb{Arthurs Gesetz}
+		Alle diese Gesetze können in Arthurs Gesetz, als positives Rückkopplungsgesetz, zusammengefasst werden.
+		\end{itemize}
+		\subsubsection{Digitalisierung}
+		Die Digitalisierung wird oft als Übertragung von analogen zu digitalen Medien verstanden. Digitalisierung sollte jedoch eine digitale Transformation eines analogen Prozesses sein. Wenn man zum Beispiel Netflix mit traditionellen Videoverleihen vergleicht, bieten diese zwar theoretisch den gleichen Service an. Ein Videoverleih ist jedoch physikalisch begrenzt: Es kann nur eine begrenzte Menge an Videos verfügbar sein, wodurch Videos eventuell durch neuere gewechselt werden. Ein digitales Geschäftsmodell ist jedoch inherent skalierbar. Jeder Nutzer auf Netflix kann ein Video gleichzeitig 'ausleihen' und es könnennn theoretisch alle Videos gleichzeitig zur Verfügung stehen. \\
+		Die größten Vorteile der Digitalisierung sind, dass Daten und Informationen viel effizienter in digitaler Form übertragen werden können. Das ist jedoch auch gleichzeitig ein großer Nachteil, da so nicht nur die Quantität, sondern auch die Qualität sinkt. So erfährt man viel mehr über die Welt, erhält jedoch auch die Illusion, dass viel mehr passiert als früher, während man es sonst einfach nicht erfahren hat. Gleichzeitig sinkt jedoch auch die Qualität der veröffentlichten Information, da sich die Eintrittsbarriere, wer Information veröffentlichen kann, sinkt. \\
+		\subsubsection{Globalisierung}
+		Die Globalisierung ist der Effekt, dass die Welt untereinander besser erreichbar wird. Dadurch erhält man besseren Zugriff zu mehr potentiellen Kunden, jedoch auch mehr Konkurrenz von anderen Firmen. 
+		\subsubsection{Vernetzung}
+		Die Vernetzung erlaubt Kommunikation zwischen verschiedenen Benutzern. Diese Benutzer können Menschen, aber auch Maschinen sein. Bei der Kommunikation zwischen einem Menschen und einer Maschine, muss der Kontext berücksichtigt werden, da die Information welche von der Maschine bereitgestellt wird, vielleicht nur zu einer bestimmten Zeit relevant ist. Ein Teil der Vernetzung ist das Microtasking, bei welchem
+		\subsubsection{Netzeffekt}
+		Der Netzeffekt ist, wie bereits erwähnt, der Effekt der bei einer großen Nutzeranzahl dazu führt, dass eine Plattform allgemein attraktiv wird. Ein Beispiel dafür ist das Internet. Je mehr Benutzer das Internet verwenden umso attraktiver wird es das Internet zu verwenden. Dieses Gesetz nennt man das Metcalfe Gesetz: "Der Wert des Netzes steigt mit der Anzahl der Benutzer".
+		\paragraphlb{Indirekter Netzeffekt}
+		Bei dem indirekten Netzeffekt haben die Benutzer keinen direkten Einflus auf die Attraktivität, sondern beeinflussen eine dritte Partei die Plattform attraktiver zu machen. Ein Beispiel ist der Google Play Store, da viele Benutzer für andere Benutzer inkonsequent sind, aber App-Entwickler eher auf der Plattform mit einer großen Nutzeranzahl ihre App veröffentlichen werden, was wiederum die Attraktivität für Benutzer erhöht. \\
+		\paragraphlb{Negativer Netzeffekt}
+		Das Gegenteil ist ebenfalls der Fall, sodass bei einer geringen Nutzeranzahl eine Plattform aktiv unattraktiver wird. Ein Beispiel dafür ist das Fax, welches sich zwar lange einer großen Beliebtheit erfreute, nun jedoch nur mehr in Ausnahmefällen als Medium in betracht gezogen wird.
+		\paragraphlb{Winner takes it All}
+		Der Netzeffekt besitzt oft eine kritische Masse, bei der ab einer gewissen Marktdominanz das unterlegene Produkt rapide an Benutzern verliert. Das passiert sowohl bei dem direkten als auch dem indirekten Netzeffekt. Ein Beispiel dafür ist die Rivalität zwischen den Kassettenformaten VHs und Betamax. Obwohl Betamax die eindeutig überlegene Technologie war, setzte sich die VHS durch, da sie einen höheren Marktanteil besaß. Durch die fehlende Kompatibilität der beiden Formate konnte man Kassetten untereinander nicht verwenden weshalb es viel praktischer war nur eine der Technologien zu verwenden, weshalb ein Großteil aller Benutzer die populärere wählen.
+		\subsection{Lock-In Effekt}
+		Bei dem Lock-In Effekt gibt es unterschiedliche Ursachen:
+		\begin{itemize}
+			\item{Netzeffekte}
+			\begin{itemize}
+				\item{Standards}
+				\begin{itemize}
+					\item{Bei einem Produkt das einen bestimmten Standard vorgibt kann es schwer werden eine andere Technologie zu verwenden}
+				\end{itemize}
+			\item{Kritische Masse}
+			\begin{itemize}
+				\item{Der reguläre Netzeffekt, durch den Nutzer die Attraktivität erhöhen}
+			\end{itemize}
+			\end{itemize}
+			\item{Wechselkosten}
+			\begin{itemize}
+				\item{Technologische}
+				\begin{itemize}
+					\item{Wenn ein Produkt eine spezifische Technologie bereitstellt, kann es schwer sein ein anderes zu verwenden}
+				\end{itemize}
+				\item{Wissensbezogen}
+				\begin{itemize}
+					\item{Wenn man eine Technologie bereits kennt, kann es schwer sein stattdessen eine andere zu verwenden und zu erlernen}
+				\end{itemize}
+			\end{itemize}
+			\item{Vertrauen}
+				\begin{itemize}
+					\item{Psycholgisch}
+					\begin{itemize}
+						\item{Wenn eine Produkt lange gut funktioniert oder einen guten Service bietet, kann man von einer psychologischen Perspektive nicht wechseln wollen}
+					\end{itemize}
+					\item{Marketingbezogen}
+					\begin{itemize}
+						\item{Dieses Vertrauen kann auch extern sein, indem Werbung und Marketing dieses Vertrauen aufbauen}
+					\end{itemize}
+				\end{itemize}
+		\end{itemize}
+		\paragraphlb{Offene Standards}
+		Ein Gegenpol zu dem Lock-In Effekt sind offene Standards, welche proprietären Standards gegenüberstehen. Viele der erfolgreichsten Technologien verdanken ihren Erfolg ihrer Position als offener Standard. Diese offenen Standards sind herstellerunabhängige Spezifikationen für Schnittstellen, Protokolle, Formate oder Dienste. Alle Protokolle auf welchen das Internet aufbaut sind offene Standards, was ihre Verbreitung unterstützte. \\
+		Offene Standards treiben also Netzeffekte, da dessen Verwendung dessen Attraktivität durch ihre Interoperabilität erhöht.
+		\paragraphlb{Standards als Bremse}
+		Wenn ein proprietärer Standard eine hohe Marktmacht oder gar Monpolstellung erhält, kann dies die Innovation negativ beeinflussen. Da das Unternehmen welches den Standard verwaltet seine Makrtposition verteidigen will, kann es passieren, dass dieses neue und eventuell bessere Standards unterdrückt. \\
+		\subsection{Digitale Geschäftsmodell}
+		Ein Geschäft ist: Eine auf Gewinn orientierte kaufmännische Unternehmung, während ein Modell ein Objekt oder Gebilde ist, welches die Beziehungen und Funktionen von etwas abbildet. Ein Geschäftsmodell ist daher ein Gebilde welches die Funktionen und Beziehungen abbilet um innerhalb einer Unternehmung einen Gewinn zu erwirtschaften. \\
+		Eine Beziehung welche innerhalb des Ablaufes in einem Wertschöpfungszyklus nicht gegeben ist, ist, dass eine Technologie nicht direkt Wert schafft. Vielmehr ermöglicht diese eine Geschäftsstrategie welches ein Geschäftsmodell definiert, was im Endeffekt Wert schafft. Das hängt damit zusammen, dass eine Technologie ohne einen Weg diese zu vermarkten keinen inherenten Wert besitzt. Gleichzeitig muss man auch bei einem fertigen Produkt bedenken, dass es keine inherente Kundenzufriedenheit schafft. Vielmehr löst dieses ein Kundenproblem und diese Lösung erhält dadurch einen Wert, was wiederum ein Geschäftsmodell definiert und so Kundenzufriedenheit schafft.
+		\subsubsection{Unternehmensstrategie}
+		Die Strategie innerhalb eines Unternehmens ist das Handeln, welches di
+		\subsubsection{Geschäftsmodell}
+		Ein Geschäftsmodell beschreibt:
+		\begin{itemize}
+			\item{Was wird gemacht?}
+			\item{Wer ist die Zielgruppe?}
+			\item{Welcher Nutzen wird für Kunden geschaffen?}
+			\item{Wie soll es umgesetzt werden?}
+		\end{itemize}
+		\subsubsection{Leistungserstellung}
+		\paragraphlb{Geschäftsprozessmodell}
+		Das Prozessgeschäftsmodell zeigt die Ketten, welche ineinandergreifen und dabei bei der Wertschöpfungstiefe tiefer gehen. So wird ein Kunde von der Bestellung bis zur Rechnungsstellung abgewickelt, gleichzeitig wird eine Stufe tiefer die Bestellung abgewickelt und ausgeliefert und wiederum eine Stufe tiefer wird weitere Produktion des Gegenstands in Auftrag gegeben.
+		\subsubsection{Ertragsmodell}
+		Bei dem Ertragsmodell muss man sich überlegen wie eine Unternehmung einen Erlös erwirtschaftet. Dabei muss man über die Erlösarten und das Preismodell nachdenken, wobei es direkte und indirekte Erlösarten gibt und 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}

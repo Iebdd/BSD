@@ -1,0 +1,774 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{changepage}
+\usepackage[ngerman]{babel}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}{}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=2.5cm, right=3.5cm}
+
+
+\begin{document}
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+            
+        \Huge
+        \textbf{Netzwerktechnik Advanced \\ Übung}
+            
+				\vfill
+
+        \LARGE
+        \textbf{Andreas Hofer \\Benjamin Sheikh \\Samuel Ulz}
+            
+        \vspace{0.8cm}
+            
+        \includegraphics{assets/campus02.jpg} \\
+        \Large
+        Fachhochschule Campus 02 \\
+        Graz \\
+        \today \\
+            
+    \end{center}
+\end{titlepage}
+	\tableofcontents
+	\newpage
+	\section{Cisco Packet Tracer Übungen}
+	\setcounter{subsection}{8}
+	\subsection{Switch Einführung}
+	Bei dieser Übung solltest du eine Basiskonfiguration eines Switches durchführen.
+	Du solltest verstehen, wie du mit Cisco Konfigurationen umgehst diese abspeichern kannst und neue Geräte schnell wieder Konfigurieren kannst.
+	\subsubsection{Switch Grundlagen Recherche}
+	Recherchiere folgende Begriffe im Internet und beantworte alle Fragen kurz und bündig. Dies ist keine „copy \& paste“ Übung. Jede Frage sollte mit zwei oder drei Sätzen bzw. mit einer Grafik erklärt werden können.
+	\begin{enumerate}
+		\item{Was versteht man unter dem Begriff „Congestion“?}
+		\begin{itemize}
+			\item{Wenn ein Netzwerkpunkt eine größere Datenmenge erhält, als er übertragen oder verarbeiten kann. Das kann zu einem Verlust von Paketen oder dem kompletten Zusammenbruch des Systems mit eingeschränkter Bandbreite führen (Dem „Congestion collapse“)}
+		\end{itemize}
+		\item{Was ist „Congestion collapse avoidance”?}
+		\begin{itemize}
+			\item{Manche Netzwerkprotokolle können als Reaktion auf einen Paketverlust dieses erneut aussenden, was bei einer Überladung des Systems die Situation verlängern oder gar verschlimmern kann. Aus diesem Grund besitzen gängige Protokolle heutzutage die Fähigkeit eine Kollision zu erkennen und entsprechend zu reagieren. (Zum Beispiel das Fair Queueing bei Switches und Routern)}
+		\end{itemize}
+		\item{Recherchiere die benötigte Bandbreite für:}
+		\begin{itemize}
+			\item[a]{Ein Youtube-Video in 4k Qualität}
+			\begin{itemize}
+				\item{Laut Google eine durchschnittliche Geschwindigkeit von 20 Mbps (2,5 MB/s)}
+			\end{itemize}
+			\item[b]{Einen E-Mail-Versand}
+			\begin{itemize}
+				\item{Da E-Mails in der Regel relativ klein sind, kommt man mit den meisten Bandbreiten aus, aber von einer QoL Perspektive wären wahrscheinlich 5 Mbps (625 KB/s) ratsam}
+			\end{itemize}
+			\item[c]{Einen Teams Anruf (Mit und ohne Screenshare)}
+			\begin{itemize}
+				\item{Laut Microsoft kommt man nur mit Audio bereits mit 10 Kbps (1,25 KB/s) aus, rät aber zu mindestens 58 bis 76 Kbps (7,25 - 9,5 KB/s). Mit Video steigt das bereits auf empfohlene 1500 Kbps (187,5 KB/s). (Up- und Down)}
+				\item{Interessanterweise sind die empfohlenen Anforderungen mit oder ohne Screenshare gleich bei 1500 Kbps. Nur die Mindestanforderungen steigen von 150 Kbps (18,75 KB/s) auf 200 Kbps (25 KB/s)}
+			\end{itemize}
+			\item[d]{Einen Dateidownload}
+			\begin{itemize}
+				\item{Das hängt von der Größe der Datei ab. Bei einer 2 MB großen Datei reichen 200 KB/s aus, während man z.B. bei 5 GB da relativ lange warten muss. Die Bandbreite bei der man sich nicht mehr über Wartezeiten bei Downloads Sorgen machen muss, liegt wahrscheinlich bei 100 Mbps (Persönliche Einschätzung)}
+			\end{itemize}
+		\end{itemize}
+		\item{Was versteht man unter dem Begriff „Network latency“?}
+		\begin{itemize}
+			\item{Die Verzögerung mit der ein Paket nach dem Senden beim Empfänger ankommt. Dazu kann die rein physische Distanz beitragen, da die Daten sich 'nur' mit Lichtgeschwindigkeit bewegen und so zum Beispiel von Europa nach Australien 16000 km zurücklegen, muss die Latenz immer mindestens 5 ms betragen. Dazu kommt jedoch die bedeutend höhere Latenz jedes einzelnen Knotenpunkts auf dem Weg dorthin und zurück. Zusätzlich kann ein Server gerade überlastet sein und so die Anfrage erst mit sehr hoher Verzögerung abarbeiten und beantworten. All diese Variablen tragen zur Netzwerklatenz bei.}
+		\end{itemize}
+		\item{Wie schnell arbeitet ein Switch bzw. Router?}
+		\begin{itemize}
+			\item{Laut dem Internet fügt ein Switch (oder Router) abhängig von seiner Bandbreite zwischen 5 und 125 Mikrosekunden zur Latenz hinzu. Gigabit Switches zwischen 50 und 125 und 10 Gigabit Switches zwischen 5 und 50.}
+		\end{itemize}
+		\item{Was kostet ein Switch der Marke Cisco Catalyst 9200 und wodurch unterscheidet sich dieser zu einem 30-50€ Switch? Stelle einige Vergleiche an.}
+		Laut Geizhals 1321,90€. Im Gegensatz zu einem Switch mit Grundausstattung kann dieser zusätzlich:
+		\begin{center}
+		\begin{tabular}{| l | c | c |}
+			\toprule
+			Feature 		  																																& 30€ Switch & 1300€ Switch \\ \midrule
+			Plug and Play 																																& \checkmark & \checkmark 	\\ \hline
+			Layer 2 Aware 																																& \checkmark & \checkmark 	\\ \hline
+			Layer 3 Aware 																																& x 				 & \checkmark 	\\ \hline
+			PoE (48 Ports) 																																& x 				 & \checkmark 	\\ \hline
+			Redundante Komponenten 																												& x 				 & \checkmark 	\\ \hline
+			\makecell[l]{Gleich- oder \\ Wechselstromanschluss} 													& x 				 & \checkmark 	\\ \hline
+			\makecell[l]{Kombination mehrerer Einheiten \\ zu einer (Backplane Stacking)} & x 				 & \checkmark 	\\ \hline
+			AES-128 Verschlüsselt 																												& x 				 & \checkmark 	\\ \hline
+			VLAN Support 																																	& x 				 & \checkmark 	\\ \bottomrule
+		\end{tabular}
+		\end{center}
+		\item{Ich möchte mir einen Switch für meine 5 PCs zu Hause zulegen, welchen würdest du mir empfehlen und warum?}
+		\begin{itemize}
+			\item{Für einen Switch zu Hause sind diese ganzen Features wahrscheinlich nicht nötig, aber es ist nie eine schlechte Idee ein paar mehr Ports zur Verfügung zu haben und nicht nur einen 6-Port Switch zu kaufen. Die Verwendung eines Gigabit Switches kann auch einen kleinen Unterschied bei der Latenz haben. 8 oder 12 Port Gigabit Switches bekommt man schon ab 20€ - 50€}
+		\end{itemize}
+		\item{Ein Unternehmen mit 5 Unterabteilungen und jeweils ca. 100 Hosts pro Abteilung plant eine Neustrukturierung ihres Netzwerkes. Du als Netzwerkadministrator wirst beauftragt, dies in die Hand zu nehmen. Wie viele Switches und welche würdest du anschaffen? Was würde das kosten? Begründe deine Antwort. Werden zusätzlich noch andere Komponenten für die Kommunikation zwischen den Abteilungen und in das Internet benötigt? Welche zusätzlichen Komponenten würdest du anschaffen und warum?}
+		\begin{itemize}
+			\item{Um die 100 Hosts pro Abteilung abzudecken, braucht man mindestens 3 48-Port Switches und hat noch etwas Raum zum erweitern. Der Catalyst ist da wahrscheinlich kein schlechter Anfangspunkt um sich zu informieren. Man braucht zumindest Layer 3 für VLANs und eine gewisse Redundanz bei den Komponenten damit nicht alles steht wenn der Switch den Geist aufgibt. Also bräuchte man zumindest 15 Switches um alle Abteilungen abzudecken. Zusätzlich braucht man jedoch auch Switches um diese Abteilungen miteinander zu verbinden, idealerweise in doppelter Ausführung, sowie zwei Core Router um Zugang zum Internet zu ermöglichen. Dazu muss man auch sicherstellen, dass man die richtigen Kabel besorgt, damit man nicht 10 Gigabit Switches besitzt aber nur 1 Gigabit Kabel um die Abteilungen miteinander zu verbinden.}
+		\end{itemize}
+	\end{enumerate}
+	\subsubsection{Switch Grundlagen}
+	{\color{red} \textbf{Baue nachfolgende Netzwerke auf und dokumentiere dein Vorgehen und die Analysen unter anderem auch mit Screenshots. Verwende für das X eine beliebige Zahl zwischen 10 und 20.}} \\ \\
+	{\color{red} \textbf{Deine Zahl: 15}} \\ \\
+	\hyperref[fig:switch_config]{(Für das Layout siehe \ref{fig:switch_config})}
+	\paragraphlb{Default Switch Konfiguration überprüfen}
+	\label{sub:switch_config}
+	\begin{enumerate}
+		\item{Zeige die laufende Konfiguration an}
+		\begin{itemize}
+			\item{Kann mit \texttt{show running-config} angezeigt werden }
+			\item{Zeigt die Definition aller verfügbaren interfaces sowie wie der Switch heißt und welche services konfiguriert sind}
+			\item[]{\hyperref[fig:running_config]{(Für die komplette Ausgabe siehe \ref{fig:running_config})}}
+		\end{itemize}
+		\item{Wie viele und welche Interfaces hat der Switch?}
+		\begin{itemize}
+			\item{Kann mit \texttt{show interfaces} angezeigt werden.}
+			\item{Zeigt alle interfaces sowie dessen Konfiguration. Dieser Switch scheint 24 FastEthernet, 2 GigabitEthernet und 1 VLAN Interface zu haben}
+			\item[]{\hyperref[fig:show_interfaces]{(Für eine beispielhafte Ausgabe siehe \ref{fig:show_interfaces})}}
+		\end{itemize}
+		\item{Besitzt der Switch eine IP-Adresse? Welche?}
+		\begin{itemize}
+			\item{Standardmäßig scheint er keine IP-Adresse zu haben}
+			\item{Man kann jedoch mittels \texttt{interface vlan 1} und \texttt{ip address 192.168.15.254 255.255.255.0} die IP-Adresse so setzen, dass es mit dem Infotext übereinstimmt}
+			\item[]{\hyperref[fig:vlan_interface]{(Für die beiden Ausgaben von \texttt{show interface vlan 1}, siehe \ref{fig:vlan_interface})}}
+		\end{itemize}
+		\item{Welche MAC Adresse hat das virtuelle Interface?}
+		\begin{itemize}
+			\item{Laut \texttt{show interface vlan 1} ist die MAC Adresse \texttt{0004.9AEB.A632}. Interessante Schreibweise}
+		\end{itemize}
+		\item{Wozu braucht man diese? Ist es funktionsfähig?}
+		\begin{itemize}
+			\item{Damit, auch wenn es physisch nicht existiert, andere Geräte es ansteuern können als wäre es das.}
+			\item{Es scheint \texttt{administratively down} zu sein. Also könnte man es wahrscheinlich mittels \texttt{no shutdown} einschalten}
+		\end{itemize}
+		\item{Welche IP-Eigenschaften besitzt es?}
+		\begin{itemize}
+			\item{Jetzt wo das Interface eine IP-Adresse hat, kann man auch die Eigenschaften mittels \texttt{show ip interface vlan 1} sehen. Zum Beispiel ist die MTU bei 1500 Byte}
+			\item[]{\hyperref[fig:vlan_ip]{(Für die Ausgabe siehe \ref{fig:vlan_ip})}}
+		\end{itemize}
+		\item{Welches Cisco IOS läuft auf dem Switch (Version, Imagefile)?}
+		\begin{itemize}
+			\item{Laut \texttt{show version} läuft auf dem Switch Version \texttt{15.0(2)SE4} geladen vom Image \texttt{C2960-LANBASEK9-M} und erstellt am 26.06.2013}
+			\item[]{\hyperref[fig:switch_version]{(Für die Ausgabe siehe \ref{fig:switch_version})}}
+		\end{itemize}
+		\item{Welche Eigenschaften hat das Interface, auf dem der PC1 verbunden ist?}
+		\begin{itemize}
+			\item[a.]{Ist es up?}
+			\begin{itemize}
+				\item{Ja, wahrscheinlich wurde es automatisch eingeschalten als das Kabel eingesteckt wurde}
+			\end{itemize}
+			\item[b.]{Welche MAC Adress hat es?}
+			\begin{itemize}
+				\item{Die MAC Adress ist: \texttt{0004.9A92.3901}}
+			\end{itemize}
+			\item[c.]{Speed?}
+			\begin{itemize}
+				\item{Da es Fast Ethernet ist 100.000 Kbit}
+			\end{itemize}
+			\item[d.]{Duplex?}
+			\begin{itemize}
+				\item{Full-duplex}
+			\end{itemize}
+			\item[]{\hyperref[fig:pc1_int]{(Für die Ausgabe siehe \ref{fig:pc1_int})}}
+		\end{itemize}
+	\end{enumerate}
+	\paragraphlb{Switch Grundkonfiguration}
+	\label{sub:grund_config}
+	Konfiguriere Folgendes auf deinem Switch
+	\begin{enumerate}
+		\item{Switchname = Switch\textbf{NACHNAME}}
+		\begin{itemize}
+			\item{Kann mittels \texttt{hostname SwitchHOFER} geändert werden.}
+			\item[]{\includegraphics[scale=0.8]{assets/switch_rename.png}}
+		\end{itemize}
+		\item{Layer 3 Adresse = 192.168.X.254 und Default Gateway = 192.168.X.1}
+		\begin{itemize}
+			\item{Da im Switch nur das VLAN Layer 3 fähig ist, sollte man das erreichen können indem man die Adresse im VLAN Interface mittels \texttt{ip address 192.168.15.254 255.255.255.0} ändert und danach das VLAN mittels \texttt{no shutdown} hochfährt}
+			\item{Das default gateway kann man im config mittels \texttt{ip default-gateway 192.168.15.1} ändern}
+			\item[]{\includegraphics[scale=0.8]{assets/switch_ip_dg.png}}
+		\end{itemize}
+		\item{Setze Passwörter gegen unerlaubten Zugriff (Enable Passwort \& VTY und Consolen Passwort}
+		\begin{itemize}
+			\item{Console und VTY Passwörter kann man jeweils mittels \texttt{line -} und \texttt{console <passwort>} und \texttt{vty <passwort>} einstellen}
+			\item[]{\includegraphics[scale=0.8]{assets/switch_vty_console.png}}
+			\item{Das enable Passwort setzt man mittels \texttt{enable <passwort>}}
+			\item[]{\includegraphics[scale=0.8]{assets/switch_enable.png}}
+		\end{itemize}
+		\item{Konfiguriere Port-Speed und Duplexeigenschaften für Interface FastEthernet0/1}
+		\begin{itemize}
+			\item{Setzt man in den interface settings jeweils mit \texttt{speed 10} und \texttt{duplex half}}
+			\item[]{\includegraphics[scale=0.8]{assets/speed_duplex.png}}
+			\item{Dass alle diese Einstellung auch angewandt wurden sieht man mit \texttt{show interface Fa0/1}}
+			\item{\hyperref[fig:new_config]{(Für die komplette Ausgabe siehe \ref{fig:new_config})}}
+		\end{itemize}
+		\item{Pinge den Switch vom PC aus. Welchen Sinn hat es, dass ein Switch eine IP-Adresse hat?}
+		\begin{itemize}
+			\item{Da VLANs in Layer 3 agieren, müssen diese auch zu einem Netzwerk gehören wodurch man sich auch remote dort hin verbinden kann.}
+			\item{Ping funktioniert:}
+			\item[]{\includegraphics[scale=0.8]{assets/ping_switch.png}}
+		\end{itemize}
+		\item{Speichere die Konfiguration im NV-RAM und am PC.}
+		\begin{itemize}
+			\item{Man speichert, indem man mit \texttt{copy running-config startup-config} die laufende Konfiguration zur Standardkonfiguration beim Hochfahren schreibt}
+			\item{Wenn man nun \texttt{show startup-config} ausführt, sieht man, dass die eingegebene Konfiguration gespeichert wurde}
+			\item[]{\hyperref[fig:startup_config]{(Für die Ausgabe siehe \ref{fig:startup_config})}}
+		\end{itemize}
+		\item{Wie kann man eine abgespeicherte Konfiguration wieder auf einem Cisco Gerät einspielen?}
+		\begin{itemize}
+			\item{Indem man wieder mit \texttt{copy} eine Konfiguration kopiert. Dieses Mal jedoch von \texttt{flash}, \texttt{ftp}, \texttt{scp} oder \texttt{tftp}.}
+			\item[]{\includegraphics[scale=0.8]{assets/load_config.png}}
+		\end{itemize}
+	\end{enumerate}
+	\textbf{Welche Passwörter hast du verwendet? (Schreibe sie hier auf um sie nicht zu vergessen)}
+	\begin{itemize}
+		\item{VTY}
+		\begin{itemize}
+			\item{Vty1}
+		\end{itemize}
+		\item{Console}
+		\begin{itemize}
+			\item{Console1}
+		\end{itemize}
+		\item{Enable}
+		\begin{itemize}
+			\item{Enable1}
+		\end{itemize}
+	\end{itemize}
+	\paragraphlb{Arbeiten mit der Mac-Adress-Tabelle}
+	\begin{enumerate}
+		\item{Pinge das VLAN 1 Management Interface von beiden PCs}
+		\begin{itemize}
+			\item{Funktioniert:}
+			\item[]{\includegraphics[scale=0.8]{assets/ping_PC1.png}\includegraphics[scale=0.76]{assets/ping_PC2.png}}
+		\end{itemize}
+		\item{Überprüfe die MAC-Adress-Table}
+		\begin{itemize}
+			\item[]{\includegraphics[scale=0.8]{assets/mac_address.png}}
+		\end{itemize}
+		\item{Wie viele Adressen sind vorhanden? Statisch/Dynamisch? Sind die Adressen von den PCs auch dabei?}
+		\begin{itemize}
+			\item{Genau die zwei PCs mit den Pings auf VLAN 1, Dynamisch gespeichert}
+		\end{itemize}
+		\item{Wozu sind die restlichen Adresseinträge?}
+		\begin{itemize}
+			\item{Ich weiß nicht ob ich etwas falsch gemacht habe, aber ich habe nur die zwei dynamischen. Wahrscheinlich könnte ich statische Routen in den IP Einstellungen festlegen}
+		\end{itemize}
+		\item{Welche und wie viele optionen gibt es beim Befehl \dq show mac-address-table ?\dq}
+		\begin{itemize}
+			\item{\texttt{dynamic}, \texttt{interfaces}, \texttt{static} oder gar nichts}
+			\item{Die Befehle filtern stets nach den Parametern, wobei man bei \texttt{interfaces} noch ein interface wie \texttt{fa0/1} angeben muss und dann nur die routen die über dieses Interface laufen angezeigt bekommt.}
+			\item[]{\includegraphics[scale=0.8]{assets/mac_table_options.png}}
+		\end{itemize}
+		\item{Zeige nur dynamisch gelernte Adressen an.}
+		\begin{itemize}
+			\item{Mittels \texttt{show mac-address-table dynamic}}
+			\item[]{\includegraphics[scale=0.8]{assets/mac_address_dynamic.png}}
+		\end{itemize}
+		\item{Lösche die MAC-Address-table. Wie lautet der Befehl? Welche Einträge sind jetzt vorhanden? Warum ist das so? Was musst du Machen damit die PCs wieder eingetragen sind?}
+		\begin{itemize}
+			\item{Mittels \texttt{clear mac-address-table}}
+			\item{Keine. Wenn ich eine der beiden Routen statisch mittels \texttt{mac address-table static 0002.4A94.265B vlan 1 interface fa0/1} hinzufüge, wäre diese natürlich wieder da}
+			\item{Damit die dynamischen wieder auftauchen, müsste ich erneut mit den beiden PCs über den Switch pingen}
+			\item[]{\includegraphics[scale=0.8]{assets/clear_mac.png}}
+		\end{itemize}
+		\item{Entferne das Ethernet Kabel zwischen einem der PCs und dem Switch. Wie lange musst du warten, bis die MAC Adresse des PCs aus der MAC-Address-table verschwindet? Kannst du diese Zeit auch verändern? Wie geht das?}
+		\begin{itemize}
+			\item{Laut dem Internet standardmäßig 300 Sekunden. Ich musste während dieser Nummern mehrmals den Switch erneut pingen weil die Einträge schon wieder gelöscht worden waren, also ist es vielleicht auch weniger.}
+			\item{Auch laut dem Internet sollte man mit \texttt{mac address-table aging-time} diese verändern können aber zumindest auf dem 2960 kann man nur eine statische Route einstellen}
+		\end{itemize}
+		\item{Trenne beide Ethernet Kabeln zum Switch. Verbinde die PCs neu auf den Ports FastEthernet0/10 \& 0/11. Führe einen Verbindungstest zwischen den PCs durch. Versichere dich das die MAC Adressen der PCs in der MAC-Address-table sind. Vertausche nun die Ports von PC1 \& PC2 also genau umgekehrt wie gerade eben. Versuche jetzt einen Ping vom Switch auf einen der PCs. Ist dieser erfolgreich? Warum/warum nicht?}
+		\begin{itemize}
+			\item{Vielleicht sind meine Einstellungen falsch aber bei mir wird die MAC-Tabelle gelöscht sobald ich die Kabel entferne. Ich nehme an, dass, wenn die MAC-Table bleibt, der Ping nicht funktioniert da der Switch auf die Tabelle zurückgreift weshalb das Paket deshalb an das gleiche Interface zurückgeschickt wird.}
+		\end{itemize}
+	\end{enumerate}
+	\setcounter{subsection}{11}
+	\subsection{Subnetting und Routing Vertiefung}
+	\textbf{Bei dieser Übung solltest du ein Subnet aufbauen und ein etwas größeres Netzwerk im Packet Tracer aufbauen.}
+	\subsubsection{Subnetting}
+	Wähle zuerst ein beliebiges /24 Netzwerk aus dem RFC1918 Bereichen. \\
+	\textbf{Schreibe hier dein Netzwerk hin: 192.168.1.0/24} \\
+	Teile dieses Netzwerk nun in \textbf{4 gleiche große Teile} auf: \\
+	\begin{itemize}
+		\item{Subnetz 1 \\ 
+					Netzwerkadresse: 192.168.1.0/26 \\ 
+					Subnetzmaske: 255.255.192.0 \\ 
+					Broadcast Adresse: 192.168.1.63 \\
+					Range der Hosts: 192.168.1.1 - 192.168.1.62}
+		\item{Subnetz 2 \\ 
+					Netzwerkadresse: 192.168.1.64/26 \\ 
+					Subnetzmaske: 255.255.192.0 \\ 
+					Broadcast Adresse: 192.168.1.127 \\
+					Range der Hosts: 192.168.1.65 - 192.168.1.126}
+		\item{Subnetz 3 \\ 
+					Netzwerkadresse: 192.168.1.128/26 \\ 
+					Subnetzmaske: 255.255.192.0 \\ 
+					Broadcast Adresse: 192.168.1.191 \\
+					Range der Hosts: 192.168.1.129 - 192.168.1.190}
+		\item{Subnetz 4 \\ 
+					Netzwerkadresse: 192.168.1.192/26 \\ 
+					Subnetzmaske: 255.255.192.0 \\ 
+					Broadcast Adresse: 192.168.1.255 \\
+					Range der Hosts: 192.168.1.193 - 192.168.1.254}
+	\end{itemize}
+	\subsubsection{Größeres Netzwerk}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{assets/rArB.png}
+	\caption{Ping von Router A zu Router B}
+	\end{figure}
+	Ping von Router A zu Router B ist möglich
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{assets/rBrA.png}
+	\caption{Ping von Router B zu Router A}
+	\end{figure}
+	Ping von Router B zu Router A ist möglich.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{assets/rBrC.png}
+	\caption{Ping von Router B zu Router C}
+	\end{figure}
+	Ping von Router B zu Router C ist möglich.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{assets/rCrB.png}
+	\caption{Ping von Router C zu Router B}
+	\end{figure}
+	Ping von Router C zu Router B ist möglich.
+	\paragraphlb{Statisches Routing}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{assets/PC0PC1.png}
+	\caption{Ping von PC 0 zu PC 1}
+	\end{figure}
+	Das erste Packet hat zwar einen timeout aber die restlichen kommen zurück.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{assets/RouteA.png}
+	\caption{Routingtabelle von Router A}
+	\end{figure}
+	Router A hat nur ein weiteres Netzwerk, weshalb alle unbekannten Pakete an 5.5.5.2 weitergesendet werden sollen.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{assets/RouteB.png}
+	\caption{Routingtabelle von Router B}
+	\end{figure}
+	Da Router B keines der beiden Endnetzwerke kennt, muss für jedes der beiden Netzwerke ein eigener Eintrag hinzugefügt werden.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{assets/RouteC.png}
+	\caption{Routingtabelle von Router C}
+	\end{figure}
+	Da Router C wiederum nur ein weiteres Netzwerk kennen muss, kann man wieder die Standardroute nach 8.8.8.1 verweisen lassen.
+	\setcounter{subsection}{23}
+	\subsection{Switches und VLANs}
+	\label{sub:basic_vlan}
+	In dieser Übung solltest du dein Theoriewissen noch einmal vertiefen und etwas vertrauter mit der Switch Konfiguration werden. \\ \\
+	{\color{red} Baue nachfolgende Netzwerke auf und dokumentiere dein Vorgehen und die Analysen unter anderem auch mit Screenshots. Verwende für das X eine beliebige Zahl zwischen 10 und 20.} \\ \\
+	{\color{red} Deine Zahl X: 15}
+	\subsubsection{Basiskonfiguration von VLANs}
+	\hyperref[fig:basic_vlan]{(Für das Layout siehe \ref{fig:basic_vlan})}
+	\begin{itemize}
+		\item{Zuerst müssen auf allen drei Switches die drei VLANs eingestellt werden.}
+		\item{Switch 1 und 2}
+		\begin{itemize}
+			\item{Die Verbindung zu den drei PCs lässt mit Access jeweils nur die zugehörige VLAN Adresse zu}
+			\item{Die Verbindung zum Switch 3 lässt unter Trunk alle drei VLANs zu}
+		\end{itemize}
+		\item{Switch 3}
+		\begin{itemize}
+			\item{Die Verbindung zu den beiden anderen Switches erfolgt über Trunk, was alle drei VLANs zulässt.}
+			\item{Die Verbindung zum Management wird mit Access auf Management beschränkt.}
+		\end{itemize}
+	\end{itemize}
+	Pings unter den Abteilungen sind möglich, während pings zwischen den Abteilungen auslaufen:
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.65]{assets/ping_finance.png}
+	\includegraphics[scale=0.65]{assets/ping_marketing.png}
+	\caption{Pings jeweils von \texttt{10.15.35.1} zu \texttt{10.15.35.3} und \texttt{10.15.25.2} zu \texttt{10.15.25.1}}
+	\end{figure}
+	Das pingen der Switches funktionierte nur auf den direkt angrenzenden, während die anderen beiden nie eine Antwort verschickten. Ich konnte nicht herausfinden wieso.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.65]{assets/ping_man.png}
+	\caption{Erfolgreicher Ping zu \texttt{10.15.10.200} jedoch keine Antwort von \texttt{10.15.10.100}}
+	\end{figure}
+	\subsubsection{Erweiterung um Inter VLAN Routing}
+	Für Inter VLAN Routing muss man auf dem neuen Router im interface erneut ein interface öffnen mittels \texttt{int gi0/0/0.25} und diesem dann die IP Addresse zuweisen. Während ich theoretisch verstand wie es funktionieren sollte, gelang es mir nicht wirklich. Ich dachte, dass ich das Hauptinterface als default gateway festlegen müsste, mir war aber nicht klar welche IP-Adresse sie haben würde. \\
+	\hyperref[fig:inter_vlan]{(Für das Layout des Versuchs siehe \ref{fig:inter_vlan})}
+	\subsection{VTP \& STP}
+	\begin{tabular}{| l l |}
+	\toprule
+		Gemeinsam & Layout erstellt \\ \hline
+		Andreas & Zusammengeschrieben \\
+	\bottomrule
+	\end{tabular}
+	\subsubsection{VTP}
+	\label{sub:vtp}
+	\hyperref[fig:vtp_layout]{(Für das Layout siehe \ref{fig:vtp_layout})}
+	\begin{enumerate}
+		\item{Zuerst muss ein Switch als Server konfiguriert werden. Dafür habe ich den Multilayer Switch 0 oben links gewählt.}
+		\item{Commands zum Konfigurieren des Servers:}
+		\begin{enumerate}
+			\item[a]{\texttt{vtp mode server} -> Teilt dem Switch mit, dass er nun der VTP Server ist}
+			\item[b]{\texttt{vtp domain Campus} -> Setzt die Domain in der er seine VLANs verbreitet zu Campus}
+			\item[c]{\texttt{vtp password Pass123} -> Setzt das Passwort mit dem sich Client Switches verbinden können zu Pass123}
+			\item[]{\includegraphics[scale=0.8]{assets/vtp_server_settings.png}}
+		\end{enumerate}
+		\item{Da der Server nun konfiguriert ist, muss man die einzelnen VLANs generieren. Das passiert mit \texttt{vlan <Nummer>} von 10 bis 100}
+		\item{Jetzt wo der Server und die VLANs existieren, muss man den Client konfigurieren. Dazu nehme ich zuerst den zweiten Multilayer Switch 1}
+		\item{Commands zum Konfigurieren des Servers:}
+		\begin{enumerate}
+			\item[a]{\texttt{vtp mode client} -> Teilt dem Switch mit, dass er nun ein VTP Client ist}
+			\item[b]{\texttt{vtp domain Campus} -> Setzt die Domain in der er VLANs erhält zu Campus}
+			\item[c]{\texttt{vtp password Pass123} -> Setzt das Passwort mit dem sich der Client verbinden kann zu Pass123}
+			\item[]{\includegraphics[scale=0.8]{assets/vtp_client_settings.png}}
+		\end{enumerate}
+		\item{Wenn man jetzt die Liste der VLANs mittels \texttt{show vlan} öffnet, sieht man, dass der Switch ohne manuelles Eingeben die VLANs des Servers erhalten hat.}
+		\item[]{\hyperref[fig:client_vlans]{(Für die Ausgabe siehe \ref{fig:client_vlans})}}
+		\item{Die Commands aus Nummer 5 muss man nun für jeden der Switches wiederholen, um diese gleich zu konfigurieren. Wenn man irgendwann Änderungen vornehmen will, muss man diese jedoch nur am Server machen und werden an alle eingestellten Clients weitergeleitet.}
+	\end{enumerate}
+	\subsubsection{STP}
+	\label{sub:stp}
+	\hyperref[fig:stp_layout]{(Für das Layout siehe \ref{fig:stp_layout})}
+	\begin{itemize}
+		\item{\textbf{Was geben die Link Lights im Packet Tracer (Grün, Orange, Rot) an?}}
+		\begin{itemize}
+			\item{Den Status der Verbindung auf diesem Kabel. Ein grünes Dreieck bedeutet, dass eine Verbindung besteht. Wenn es blinkt wird gerade etwas übertragen. Ein Oranger Punkt bedeutet, dass die Verbindung durch das STP unterbrochen wurde und ein rotes Dreieck bedeutet, dass die Verbindung ein Problem hat.}
+		\end{itemize}
+		\item{\textbf{Ist Spanning Tree nach dem Aufbau direkt auf den Switches aktiviert?}}
+		\item{\textbf{Wie kann man Spanning Tree aktivieren/deaktivieren?}}
+		\begin{itemize}
+			\item{STP scheint automatisch aktiviert zu werden, wenn man einen zweiten Switch verbindet. Man kann es jedoch manuell deaktivieren indem man \texttt{no spanning-tree vlan 1} eingibt (Falls es nur ein VLAN gibt), was man jedoch auf jedem Switch im Netzwerk wiederholen muss.}
+			\item{Um es wieder einzuschalten muss man den Befehl ohne \texttt{no} erneut auf jedem Switch eingeben.}
+		\end{itemize}
+		\item{Führe einen Ping zum Server durch und beobachte den Pfad den ein Paket wählt bei aktiven und bei nicht aktiven Spanning Tree (\textbf{Achtung die Datei davor unbedingt speichern es könnte bei nicht aktiven Spanning Tree der Packet Tracer in der Simulation abstürzen}) \textbf{Gibt es einen Unterschied?}}
+		\item{Bei aktiviertem STP hat das Paket nur einen einzigen Pfad den es durchlaufen kann, welcher auch verwendet wird. \hyperref[fig:ping_stp]{(Siehe \ref{fig:ping_stp})}}
+		\item{Bei fehlendem STP und einem Kreis leitet jeder Switch alle unbekannten Anfragen an jeden weiter, welcher wiederum alles an jeden weiterleitet, welcher wiederum alles an jeden weiterleitet bevor das System abstürzt. Wie meines.}
+		\item[]{\hyperref[fig:ping_no_stp]{(Für eine grafische Darstellung was wahrscheinlich passiert ist, siehe \ref{fig:ping_no_stp})}}
+		\item{\textbf{Wie kannst du die Root Bridge ändern?}}
+		\begin{itemize}
+			\item{Die Root Bridge kann auf zwei Weisen geändert werden:}
+			\begin{itemize}
+				\item{Durch die Root Bridge Election, welche mehrere Parameter wie Verbindungsgeschwindigkeit, der MAC-Adresse und vor allem die Bridge Priority verwendet um die beste Root Bridge zu küren. Die Bridge Priority kann mit \texttt{spanning-tree vlan 1 priority <priority>} geändert werden.}
+				\item{Indem ein Switch manuell als Root erklärt wird und zwar durch \texttt{spanning-tree vlan 1 root}}
+			\end{itemize}
+		\end{itemize}
+		\item{\textbf{Was passiert, wenn der Switch rechts unten zur Root Bridge wird? (Wählen die Pakete einen anderen Pfad beim ersten Ping?)}}
+		\item{Da die Root Bridge immer von allen Switches erreichbar sein muss, muss das Paket in dieser Konfiguration über den unteren rechten Switch laufen und so einen extra Sprung vollführen. Als Access Layer Switch hätte er wahrscheinlich auch nicht die Bandbreite um diese Rolle wirklich übernehmen zu können.}
+		\item{\textbf{Warum glaubst du ist in dieser Topologie der Spanning Tree erforderlich?}}
+		\begin{itemize}
+			\item{Weil die Switches jeweils im Kreis geschalten sind, wodurch ein Signal an den ursprünglichen Switch zurückfließen kann, welcher ihn dann wiederum weiterschickt und so das Netzwerk leicht überlastet.}
+		\end{itemize}
+		\item{\textbf{Hat Spanning Tree etwas mit redundanten Netzwerken zu tun? (Begründe bei ja oder bei nein)}}
+		\begin{itemize}
+			\item{Eindeutig. Bei einem redundanten Netzwerk sind Switches explizit so verbunden, dass sie ausfallfrei weiterfunktionieren selbst wenn einer nicht mehr erreichbar ist, weshalb sie immer im Kreis verbunden sind. Nur das STP ermöglicht die einwandfreie Funktion eines redundanten Systems.}
+		\end{itemize}
+		\item{\textbf{Hat ein Ether Channel etwas mit redundanten Netzwerken zu tun? (Begründe bei ja oder bei nein)}}
+		\begin{itemize}
+			\item{Höchstwahrscheinlich aber auch wahrscheinlich weniger als STP. Da ein Switch bei einem Ether Channel mehrere Ports zu einem bündelt und diese somit als Einheit betrachtet, kann man sie zum Load Balancen verwenden. Falls eine Komponente des Netzwerks ausfällt kann man so mit den gleichen Switches über eine Leitung eine höhere Bandbreite ermöglichen und den Ausfall ausgleichen.}
+		\end{itemize}
+	\end{itemize}
+	\section{LAN Design}
+	\begin{tabular}{| l l |}
+	\toprule
+	Benjamin & Topographische Karte erstellt \\ \hline
+	Samuel & Logische Karte erstellt \\ \hline
+	Andreas & Zusammengeschrieben \\
+	\bottomrule
+	\end{tabular}
+	\subsection{Logisch}
+	Die logische Ansicht des Netzwerks: Jedes Gebäude hat redundant zwei Distribution Switches, welche danach auf viele Access Switches (Hier nur beispielhaft dargestellt) verteilt werden.
+	\begin{figure}[H]
+	\centering
+	\includegraphics{assets/plan_logical.png}
+	\caption{Der logische Plan des Netzwerks}
+	\end{figure}
+	\subsection{Topografisch}
+	\begin{figure}[H]
+	\centering
+	\includegraphics{assets/plan_top1.png}
+	\caption{Die topografische Übersicht des Netzwerks}
+	\end{figure}
+	\begin{figure}[H]
+	\centering
+	\includegraphics{assets/plan_top2.png}
+	\includegraphics{assets/plan_top3.png}
+	\includegraphics{assets/plan_top4.png}
+	\caption{Die topografische Ansicht der Gebäude}
+	\end{figure}
+	\section{WLAN Research}
+	\begin{tabular}{| l l |}
+		\toprule
+		Benjamin/Samuel & WiFiMan für Survey erstellt \\ \hline
+		Gemeinsam & Fragen ausgebarbeitet \\
+		\bottomrule
+	\end{tabular}
+	\label{sub:wlan_research}
+	\begin{itemize}
+		\item{Was ist eine gute Signalstärke? → Was benötigt jeder Arbeitsplatz mindestens?}
+		\begin{itemize}
+			\item{Je nach Anwendung um die 60 und maximal 75 dBm.}
+		\end{itemize}
+		\item{Wie findet man diese heraus?}
+		\begin{itemize}
+			\item{Mit einer Signal-Mess-Software wie WiFiMan}
+		\end{itemize}
+		\item{Was ist eine Site-Survey? Könnt ihr so etwas testen?}
+		\begin{itemize}
+			\item{Der Prozess um ein Gebiet wie ein Büro anhand der individuellen Anforderungen drahtlos mit einem Internetzugang zu versorgen.}
+			\item{Die Stärke von Signalen kann man mit Software wie WiFiMan auf jedem Gerät testen:}
+			\item[]{\hyperref[fig:survey]{(Für eine Abbildung einer Auswertung, siehe \ref{fig:survey})}}
+			\item{So erfährt man welche WLAN-Access Points mit welcher Stärke und Verschlüsselung verfügbar sind und kann so besser festlegen wo man eine höhere Bandbreite, besser Verbindung, etc. braucht}
+		\end{itemize}
+		\item{Was ist ein Rogue Access Point?}
+		\begin{itemize}
+			\item{Ein Access Point welcher entweder mutwillig oder aus Unwissen in einem vermeintlich sicheren Netzwerk eingebracht wird. Dieser kann dann verwendet werden um Sicherheitsmaßnahmen des Netzwerks zu umgehen. Ein Beispiel dafür ist, einen günstigen Access Point für ein bestimmtes Areal zu verwenden, da dieses unwichtig ist. Wenn dieser dann nur veraltete Passwortverschlüsselungsmaßnahmen unterstützt, kann er verwendet werden um leicht in das Netzwerk zu gelangen. Das kann auch mit IoT-Geräten passieren, welche oft nur unzureichende Sicherheitsmaßnahmen besitzen.}
+		\end{itemize}
+		\item{Wie mann kan diesen identizifizieren?}
+		\begin{itemize}
+			\item{Bei einer Site Survey sieht man ob ein Access Point eine unzureichende oder sogar gar keine Verschlüsselung aufweist}
+		\end{itemize}
+		\item{Wie sollte ein WiFi im Unternehmen abgesichert werden?}
+		\begin{itemize}
+			\item{Einige Best Practices sind:}
+			\begin{enumerate}
+				\item{Jeglicher Zugriff von außen sollte nur über ein VPN gestattet sein.}
+				\item{Acess Points und Router sollten sicher in einem verschlossenen Kasten, idealerweise außer Reichweite, verwahrt werden.}
+				\item{Software auf Netzwerkgeräten sollte immer auf dem neuesten Stand sein}
+				\item{Man sollte ein dezidiertes und abgeschlossenes Netzwerk für Gäste haben, welches nicht verschlüsselt ist.}
+				\item{Es sollten starke Passwörter und eindeutige SSIDs verwendet werden}
+			\end{enumerate}
+		\end{itemize}
+		\item{Wie viele WiFis (VLANs für WiFi) sollte es in einem Unternehmen geben?}
+		\begin{itemize}
+			\item{Genug, dass eine sichere Umgebung entsteht, aber nicht so viele, dass es umständlich wird sich darin zu bewegen. Die spezifische Menge hängt meist von der Größe des Unternehmens, deren spezifischen Anforderungen und anderem ab. Es ist jedoch wahrscheinlich besser zu viele als zu wenige zu haben}
+		\end{itemize}
+		\item{Was sind Absicherungsmaßnahmen für jedes davon?}
+		\begin{enumerate}
+			\item{Die SSID nicht an jedes Gerät in Reichweite verschicken. Somit ist nicht sicher wie viele WiFis es gibt}
+			\item{Nur spezifischen MAC Adressen Zugang erlauben. Wenn man sich nicht verbinden kann, kann man das meiste MAC Spoofing verhindern}
+			\item{Sicherstellen, dass wenn möglich WPA3 verwendet wird}
+			\item{Jedes einzelne Standardpasswort zu einem starken, neuen Passwort ändern (Gerade jetzt mit dem Louvre wieder relevant)}
+		\end{enumerate}
+	\end{itemize}
+	\section{Firewall Übung}
+	\begin{tabular}{| l l |}
+	\toprule
+	Gemeinsam & VM erstellt \\ \hline
+	Andreas & Zusammengeschrieben \\
+	\bottomrule
+	\end{tabular}
+	\subsection{Stage 1} 
+	\subsubsection{Setup}
+	Installation hat einwandfrei funktioniert. Die IP-Adressen der Firewall sind: \textbf{192.168.44.128/24} für das WAN und \textbf{192.168.1.1/24} für das LAN:
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{assets/fire_pfsense.png}
+	\caption{Die CLI von PFSense}
+	\end{figure}
+	\subsubsection{Firewall Block}
+	Die Regeln im Interface funktionieren auch so wie sie sollten. Die zweite Reject Regel im LAN wurde von pfBlockerNG erstellt, wobei wir und nicht sicher waren zu welcher Komponente sie gehört, weshalb wir sie gelassen habe:
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{assets/fire_wan.png}
+	\caption{Die WAN Konfiguration}
+	\end{figure}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{assets/fire_lan.png}
+	\caption{Die LAN Konfiguration}
+	\end{figure}
+	Interessanterweise funktionierte das Blockieren von Webseiten für einige Zeit nur sehr sporadisch, sodass zum Beispiel facebook.com hin und wieder nicht, (und in nslookup einen SERVFAIL Error gab), aber bmf.gv.at jederzeit verfügbar war. Erst als das DNS Query Forwarding im PFSense DNS Resolver eingeschalten wurde, funktionierte es. \\
+	Man kann in den Logs sehen, dass der \texttt{nyan.cat} Aufruf blockiert wurde
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{assets/fire_block_log.png}
+	\caption{Der blockierte Nyan Cat Aufruf}
+	\end{figure}
+	\subsubsection{DNS Block}
+	DNS Blockierung mit pfBlockerNG funktioniert ebenfalls. Die drei Regeln sind: Kein Social Media, Kein Gaming und Kein Streaming:
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.55]{assets/fire_dnsbl_rules.png}
+	\caption{Die DNS Regeln in pfBlockerNG}
+	\end{figure}
+	In den Logs kann man auch sehen, dass die Anfragen der einzelnen Gruppen abgewiesen wurden:
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{assets/fire_dnsbl_log.png}
+	\caption{Die Logs für blockierte Zugriffe zu X, Facebook, GOG und TikTok}
+	\end{figure}
+	
+	
+	
+	
+	
+	\newpage
+	\section{Anhänge}
+	\subsection{Switch Config}
+	\label{fig:switch_config}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{assets/UE9.png}
+	\caption{\hyperref[sub:switch_config]{Switch Konfiguration Übung 9}}
+	\end{figure}
+	\subsection{Running Config}
+	\label{fig:running_config}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{assets/running_config1.png}
+	\includegraphics[scale=0.7]{assets/running_config2.png}
+	\caption{\hyperref[sub:switch_config]{Die komplette Ausgabe von \texttt{show running-config}}}
+	\end{figure}
+	\subsection{Show Interfaces}
+	\label{fig:show_interfaces}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{assets/show_interfaces.png}
+	\caption{\hyperref[sub:switch_config]{Eine der 27 Ausgaben von \texttt{show interfaces}}}
+	\end{figure}
+	\subsection{VLAN Interface}
+	\label{fig:vlan_interface}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{assets/vlan_interface1.png}
+	\caption{\hyperref[sub:switch_config]{VLAN Interface standardmäßiger config}}
+	\end{figure}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{assets/vlan_interface2.png}
+	\caption{\hyperref[sub:switch_config]{VLAN Interface mit konfigurierter IP-Adresse}}
+	\end{figure}
+	\subsection{VLAN Eigenschaften}
+	\label{fig:vlan_ip}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{assets/vlan_ip.png}
+	\caption{\hyperref[sub:switch_config]{VLAN IP-Eigenschaften}}
+	\end{figure}
+	\subsection{Switch Version}
+	\label{fig:switch_version}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{assets/switch_version.png}
+	\caption{\hyperref[sub:switch_config]{Die Versionsinformation des Switches}}
+	\end{figure}
+	\subsection{PC1 Interface Eigenschaften}
+	\label{fig:pc1_int}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{assets/Int01.png}
+	\caption{\hyperref[sub:switch_config]{Die Eigenschaften des Interface FA0/1 zu PC 1}}
+	\end{figure}
+	\subsection{Fa0/1 neue Einstellungen}
+	\label{fig:new_config}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{assets/new_config.png}
+	\caption{\hyperref[sub:grund_config]{Die neuen Eigenschaften des Interface FA0/1}}
+	\end{figure}
+	\subsection{Neue Startup Config}
+	\label{fig:startup_config}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{assets/startup_config1.png}
+	\includegraphics[scale=0.8]{assets/startup_config2.png}
+	\caption{\hyperref[sub:grund_config]{Die neue Startup Config}}
+	\end{figure}
+	\newpage
+	\subsection{VTP Layout}
+	\label{fig:vtp_layout}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.33]{assets/vtp.png}
+	\caption{\hyperref[sub:vtp]{Das fertige VTP Layout}}
+	\end{figure}
+	\subsection{VTP Client VLANs}
+	\label{fig:client_vlans}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{assets/vtp_client_vlans.png}
+	\caption{\hyperref[sub:vtp]{Der Client mit allen übertragenen VLANs}}
+	\end{figure}
+	\subsection{STP Layout}
+	\label{fig:stp_layout}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{assets/stp_layout.png}
+	\caption{\hyperref[sub:stp]{Das fertige STP Layout}}
+	\end{figure}
+	\subsection{Ping mit STP}
+	\label{fig:ping_stp}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{assets/ping_stp}
+	\caption{\hyperref[sub:stp]{Der Pfad eines Pings mit aktiviertem STP}}
+	\end{figure}
+	\subsection{Ping ohne STP}
+	\label{fig:ping_no_stp}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{assets/ping_no_stp}
+	\caption{\hyperref[sub:stp]{Der Pfad eines Pings ohne STP}}
+	\end{figure}
+	\subsection{VLAN Basiskonfiguration}
+	\label{fig:basic_vlan}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{assets/basic_vlan.png}
+	\caption{\hyperref[sub:basic_vlan]{Die VLAN Grundkonfiguration}}
+	\end{figure}
+	\subsection{Versuch Inter VLAN}
+	\label{fig:inter_vlan}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{assets/inter_vlan.png}
+	\caption{\hyperref[sub:basic_vlan]{Die Inter VLAN Konfiguration mit Subinterfaces}}
+	\end{figure}
+	\subsection{WLAN Site Survey}
+	\label{fig:survey}
+	\begin{figure}[H]
+	\includegraphics{assets/wifi_man.png}
+	\caption{\hyperref[sub:wlan_research]{Netzwerkanalyse am Campus02}}
+	\end{figure}
+	
+	
+	
+	
+	
+	
+\end{document}

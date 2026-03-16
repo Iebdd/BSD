@@ -1,0 +1,465 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{colorlinks,
+    		citecolor=black,
+    		filecolor=black,
+    		linkcolor=black,
+    		urlcolor=black}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}Projektmanagement}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{System Design}
+	Systems Engineering ist eine Methode zur Projektplanung, welches heutzutage in einem Großteil der Welt angewandt wird. Dabei wird angenommen, dass das Problem ein System ist, welches in dessen Elemente gespalten und in Beziehung zueinander gebracht werden soll. Unter einem Problem versteht man allgemein die Differenz zwischen einem IST- und einem SOLLzustand, also einer Situation wie sie in diesem Moment besteht und man eine Idee hat wie der Idealzustand aussehen soll.
+	\subsection{Routine- und Pionierprobleme}
+	Probleme werden weiterhin in Routine- und Pionierprobleme geteilt. Routineprobleme sind bereits gelöst oder haben einen gut definierten Lösungsweg um zur Lösung zu finden. Pionierprobleme hingegen haben keinen genauen Lösungsweg oder er ist nur ungenau definiert. Da Pionierprobleme schwerer zu lösen sind, wird auch ein Großteil des Fokus von Systems Engineering darauf gesetzt.
+	\begin{itemize}
+		\item{Methodik}
+		\item{Psychologie und emotionale Intelligenz}
+		\item{Ethik und Moral}
+		\item{Fachwisen und Erfahrung}
+		\item{Situationskenntnisse}
+	\end{itemize}
+	Während jeder dieser Säulen wichtig ist, besteht in dieser Lehrveranstalung ein Fokus auf die Methodik. Diese ist die Wegleitung um den Lösungsweg definieren zu können. Systems Engineering ist ein Bauplan um die Methodik eines Problems definieren zu können.
+	\subsection{Systems Engineering}
+	Ein System hat stets definierte Komponenten:
+	\begin{itemize}
+		\item{Elemente}
+		\begin{itemize}
+			\item{Bausteine eines Systems}
+		\end{itemize}
+		\item{Beziehungen}
+		\begin{itemize}
+			\item{Die Abhängigkeiten der Elemente innerhalb des Systems}
+		\end{itemize}
+		\item{Umwelteinflüsse}
+		\begin{itemize}
+			\item{Einflüsse auf das System welche selbst nicht Teil des Systems sind}
+		\end{itemize}
+		\item{Systemgrenzen}
+		\begin{itemize}
+			\item{Was das System von der Umwelt trennt}
+		\end{itemize}
+		\item{Systemziel}
+		\begin{itemize}
+			\item{Das was man mit dem System erreichen will}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Vorgehensmodell}
+	Beim Vorgehensmodell wird definiert wie man überhaupt sein System definieren will. Dabei sind vier Grundgedanken relevant:
+	\paragraphlb{Vom Groben zum Detail}
+	Da man nicht sofort eine detaillierte Angabe des Problems und dessen Ziels angeben kann, sollte man zuerst eine grobe Vorstellung der Situation und des Ziels definieren. Anhand dieser Basis definiert man seine Vorstellungen dann feiner um so iterativ zum Endergebnis zu kommen.
+	\paragraphlb{Denken in Varianten}
+	Eventuell gibt es nicht sofort einen offensichtlichen Lösungsweg, sondern mehrere potenzielle Varianten. In der Regel sollte man drei verschiedene Varianten von Lösungsansätzen definieren.
+	\paragraphlb{Projektphasen}
+	Bei Projektphasen unterteilt man die Methodik in verschiedene Phasen, welche danach in Serie abgearbeitet werden kann:
+	\begin{enumerate}
+		\item{Vorstudie}
+		\begin{itemize}
+			\item{Es werden im Vorhinein mögliche Lösungswege definiert (idealerweise 3)}
+			\item{Es soll im Vorhinein das Problem verstanden werden}
+		\end{itemize}
+		\item{Hauptstudie}
+		\begin{itemize}
+			\item{Anhand der möglichen Lösungswege werden konkrete Aktionen (idealerweise wiederum 3) erkundet und der beste Weg gewählt}
+		\end{itemize}
+		\item{Detailstudie}
+		\begin{itemize}
+			\item{Der gewählte Weg wird detaillierter für verschiedene Wege überlegt}
+		\end{itemize}
+		\item{Implementation}
+		\begin{itemize}
+			\item{Der Detailplan wird in die Tat umgesetzt}
+		\end{itemize}
+	\end{enumerate}
+	\paragraphlb{Problemlösungszyklus}
+	Der Problemlösungszyklus (PLZ) beschreibt die Gliederung der Methodik in einzelne Projektphasen:
+	\begin{itemize}
+		\item{Zielsuche}
+		\begin{itemize}
+			\item{"Wo stehen wir?"}
+			\item{"Wo wollen wir hin?"}
+		\end{itemize}
+		\item{Lösungssuche}
+		\begin{itemize}
+			\item{"Welche Lösungen gibt es?"}
+			\item{"Welche Lösungen kommen in Frage?"}
+		\end{itemize}
+		\item{Auswahl}
+		\begin{itemize}
+			\item{"Welche Lösung ist die Beste?"}
+			\item{"Welche Lösung können wir empfehlen?"}
+			\item{"Für welche Lösung entscheidet sich der Auftraggeber?"}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Problemlösungsprozess}
+	\subsubsection{Situationsanalyse}
+	Der erste Schritt ist die Analyse der gegebenen Situation. Bei dieser Analyse durchläuft man vier Phasen:
+	\begin{enumerate}
+		\item{Problemfeldabgrenzung}
+		\item{Umwelt- und Systemanalyse}
+		\item{Ursachen ergründen}
+		\item{Ergebnis darstellen}
+	\end{enumerate}
+	\paragraphlb{Problemfeldabgrenzung}
+	Bei der Problemfeldabgrenzung definiert man welche Elemente im System eine Relevanz besitzen. Dabei kann man grob in drei Schritten vorgehen:
+	\begin{enumerate}
+		\item{Problemfeld definieren}
+		\begin{itemize}
+			\item{Alle Elemente welche für das System relevant sind, egal ob System- oder Umweltelemente, werden definiert.}
+		\end{itemize}
+		\item{Beziehungen definieren}
+		\begin{itemize}
+			\item{Die wichtigen Beziehungen der einzelnen Elemente zueinander aufbauen}
+		\end{itemize}
+		\item{Elemente kategorisieren}
+		\begin{itemize}
+			\item{Elemente in System- und Umweltelemente teilen. Die vorherrschende Frage ist dabei: "Habe ich Einfluss auf das Element oder beeinflusst das Element mich?"}
+		\end{itemize}
+		\item{Syst}
+	\end{enumerate}
+	\paragraphlb{Umwelt- und Systemanalyse}
+	Jetzt hat man zwar definiert, welche Elemente das System beeinflussen, muss jedoch nun herausfinden, was diese Faktoren wirklich sind. Wenn man zuvor zum Beispiel ein Budget als Element festgelegt hat, muss man nun bestimmen wie hoch dieses Budget eigentlich ist. Diese Informationen können auf mehrere Wege beschafft werden, unter anderem:
+	\begin{itemize}
+		\item{Literatur- und Internetrecherche}
+		\item{Interviews}
+		\item{Fragebögen}
+		\item{Beobachtungen}
+	\end{itemize}
+	Diese gesammelten Informationen müssen danach verarbeitet und aufbereitet werden. Eine Strategie hierfür ist die \textit{SWOT-Analyse}
+	\paragraphlb{SWOT-Analyse}
+	SWOT steht für:
+	\begin{itemize}
+		\item{Stärke (Strength)}
+		\item{Schwäche (Weakness)}
+		\item{Chance (Opportunity)}
+		\item{Gefahr (Threat)}
+	\end{itemize}
+	Womit die Gegebenheiten für jedes Element analysiert werden können.
+	\paragraphlb{Zielformulierung}
+	Die SWOT-Analyse hilft dabei Ziele für das Projekt zu definieren. Diese Ziele sollten vier Dimensionen erfüllen:
+	\begin{enumerate}
+		\item{Zielinhalt}
+		\begin{itemize}
+			\item{Was soll passieren?}
+		\end{itemize}
+		\item{Zielausmaß}
+		\begin{itemize}
+			\item{In welchem Ausmaß soll etwas erreicht werden?}
+		\end{itemize}
+		\item{Zielregion}
+		\begin{itemize}
+			\item{Wo soll das Ziel erreicht werden?}
+		\end{itemize}
+		\item{Zielfristigkeit}
+		\begin{itemize}
+			\item{Bis wann soll das Ziel erreicht werden?}
+		\end{itemize}
+	\end{enumerate}
+	Doch nicht jedes Ziel ist gleich wichtig. Man unterscheidet stets zwischen Musszielen, Ziele die erreicht werden müssen, und Wunschzielen, Ziele die nützlich sind, wenn sie erreicht werden, jedoch nicht kritisch. \\
+	Man muss ebenfalls darüber nachdenken, wie diese Ziele miteinander interagieren. Ziele können einander komplementieren, also hilft die Erfüllung eines Ziels dabei ein anderes Ziel zu erreichen. Ziele können jedoch auch in Konflikt stehen, wodurch die Erfüllung eines Ziels die Erfüllung eines anderes Ziels erschweren. Ziele können jedoch auch neutral zueinander stehen, wenn sie nicht miteinander interagieren.
+	\paragraphlb{Synthese/Analyse}
+	Bei der Synthese und Analyse sollen nun anhand der Situationsanalyse und dessen Zielführung konkrete Lösungwege erarbeitet werden um das Ziel zu erreichen. Dabei stellt die Synthese ein Brainstorming dar, bei welchem mögliche Ideen ohne Überlegung ihrer Machbarkeit niedergeschrieben werden. \\
+	Erst bei der Analyse beobachtet man jeden Lösungsweg kritisch um zu eruieren, ob dieser realistisch ist. Im Endeffekt sollten drei konkrete und realistische Lösungswege vorgelegt werden.
+	\paragraphlb{Bewertung}
+	Bei der Bewertung sollen diese drei potentiellen Varianten nun verglichen werden um danach die Beste zu finden. Bei der Bewertung unterscheidet man zwischen qualitativen und quantitativen Bewertungsverfahren.
+	\subparagraphlb{Qualitativ}
+	Qualitative Bewertungsverfahren können nicht in Zahlen abgebildet werden. Bei qualitativen Verfahren zählt eine verbale Einschätzung oder eine Liste an Checklisten. Solche Bewertungen sind oft subjektive Einschätzungen oder binäre Kriterien, welche entweder existieren oder nicht.
+	\begin{enumerate}
+		\item{Verbale Enschätzung}
+		\begin{itemize}
+			\item{Bei der verbalen Einschätzung werden Pro/Contra Argumente gegenübergestellt und anhand dieser wird danach eine Entscheidung getroffen.}
+			\item{Sehr subjektiv, da die Wichtigkeit der einzelnen Kriterien nicht ersichtlich ist. Aus diesem Grund sollte eine verbale Einschätzung in der Praxis nicht verwendet werden.}
+		\end{itemize}
+		\item{Checkliste}
+		\begin{itemize}
+			\item{Die Checkliste ist eine Weiterentwicklung der verbalen Einschätzung. Hierbei werden Kriterien definiert und jede der Varianten danach anhand dieser Bewertet.}
+			\item{Die Checkliste lässt jedoch auch keine Abstufung der Wichtigkeit zu und benötigt oft schwammige Aussagen wie "Wenig", "Mittel" oder "Viel"}
+		\end{itemize}
+		Um diese Probleme zu vermeiden sollten Bewertungskriterien stets gewichtet werden. So kann man stets feststellen wie wichtig ein Kriterium im Vergleich der anderen ist. Ein Weg um diese Gewichtungen zu ermitteln ist ein Paarvergleich. Dabei werden jeweils zwei Kriterien gegenübergestellt, und eine als wichtiger und eine als unwichtiger gestuft.
+	\end{enumerate}
+	\subparagraphlb{Quantitativ}
+	Quantitative Bewertungsverfahren lassen sich in Zahlen abbilden und statistisch auswerten. So kann man mit arithmetischen Verfahren die beste Entscheidung abbilden.
+	\subparagraphlb{Kombination der Verfahren}
+	Diese beiden diskreten Verfahren kann man auch kombinieren um die Vorteile beider verwenden zu können. Zwei Verfahren zur Kombination sind die Nutzwertanalyse und Kosten-Wirksamkeits-Analyse. \\ \\
+	{\textbf \Large Nutzwertanalyse} \\
+	Die Nutzwertanalyse versucht den menschlichen Entscheidungsprozess abzubilden. Dabei werden Bewertungskriterien aufgelistet und die Einzelnen Varianten aufgelistet. \\
+	Danach wird für jede der Kriterien eine unabhängige Notenskala aufgestellt. Dabei orientiert man sich nicht an den verfügbaren Werten der Varianten sondern an den eigenen Erwartungen. Dabei erhält ein unakzeptabler Wert die Note 0 und der Idealwert die Note 10. Danach werden diese unabhängig definierten Werte den Werten der Varianten gegenübergestellt. Der einfachste Weg um den Werten eine Note zuzweisen, ist eine lineare Interpolation: Der gesuchte Wert $x_1/x_2/x_3$ geteilt durch die Basis der Skala ist gleich dem oberen Ende der Notenskala geteilt durch die Differenz der Wertskala: $\frac{x_1}{Basis}=\frac{M_{Note}}{M_{Werte}}$. Wenn die Werte also von 40 bis 130 gehen, und die Notenskala von 0 bis 10 geht, ist die Basis stets der Wert minus dem unteren Ende der Werte: $y_1-40$ und der Maximalwert 10 und $130-40$: $\frac{10}{90}$. Um also $x_1$ zu finden muss man vom Wert der Variante $y_1$ 40 abziehen und dem Quotienten von Note und Wert gegenüberstellen: $\frac{x_1}{y_1-40}=\frac{10}{90}$ \\ \\
+	{\textbf \Large Kosten-Wirksamkeits-Analyse} \\
+	Ein großese Problem der Nutzwertanalyse ist, dass jede der Kriterien gleich behandelt wird. Aus diesem Grund versucht die Kosten-Wirksamkeits-Analyse Kriterien in Wirksamkeits- und Kostenkriterien zu unterteilen. \\
+	Der Prozess um die Kosten-Wirksamkeits-Analyse durchzuführen ist zuerst die Nutzwertanalyse wie normal durchzuführen, dabei jedoch alle Kriterien mit Kosten zu entfernen (Dabei nicht vergessen die Kriterien neu zu gewichten). Danach werden alle Kosten aufsummiert und durch die Nutzwerte der Nicht-Kostenkriterien geteilt.
+	\section{Projektmanagement}
+	Projektmanagement beschreibt die weiterführende Planung eines Projekts nachdem es definiert wurde. Es folgt also nach einem fertigen Systems Engineering Prozesses. Projektmanagement liegt dabei ein systematischer Prozess zur Führung komplexer Vorhaben zugrunde. Da die Anforderungen für die meisten Vorhaben steigen und Lösungen stets eine größere Individualität benötigen, ist eine zentrale Instanz zur Überwachung des Prozesses in der Regel unabdingbar. Für einen Projektmanager sind drei Kernkompetenzen relevant:
+	\begin{itemize}
+		\item{Sozialkompetenz}
+		\begin{itemize}
+			\item{Da ein PM immer mit einer Vielzahl an Personen interagieren und zwischen diesen vermitteln muss, ist es unerlässlich gewisse soziale Kompetenzen zu besitzen}
+		\end{itemize}
+		\item{Fachkompetenz}
+		\begin{itemize}
+			\item{Obwohl ein PM nicht direkt in dem Prozess des Projekts involviert ist, ist es trotzdem ratsam sich fachlich auszukennen um eventuelle Probleme erkennen zu können.}
+		\end{itemize}
+		\item{PM-Kompetenz}
+		\begin{itemize}
+			\item{Es gibt auch Kompetenzen, welche für den Vorgang des Projektmanagements im allgemeinen relevant sind.}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Das Projekt}
+	Doch was ist eigentlich ein Projekt? Ein Projekt weist in der Regel folgende Merkmale auf:
+	\begin{itemize}
+		\item{Ein klares Projektziel}
+		\begin{itemize}
+			\item{Ein Projekt hat stets ein konkretes Ziel welches sich überlegt 'Was wollen wir erreichen?'}
+		\end{itemize}
+		\item{Messbare Projektziele und -Ergebnisse}
+		\item{Ein genauer Zeitrahmen mit vorgegebenem Start- und Enddatum}
+		\item{Eine gewisse Dynamik, um auf unvorhergesehene Probleme reagieren zu können}
+		\item{Einmalig und nicht wiederholt}
+		\item{Eine große Anzahl an Teilaufgaben}
+	\end{itemize}
+	Außerhalb von Projekten haben PM auch Tätigkeiten welche nicht direkt einem Projekt zuordenbar sind, wie zum Beispiel auf E-Mails antworten. Diese Tätigkeiten nennt man Linientätigkeiten, da sie stets ohne Enddatum zu erledigen sind. \\
+	In einem Projekt entsteht in der Regel eine temporäre Organisation, sodass trotz des betrieblichen Organigramms ein eigenes Rollenverständnis und Kommunikationskanäle geschaffen werden. So ist man in dieser temporären Organisation trotz einer anderen Position eventuell ein Projektleiter.
+	\subsection{Abgrenzung der Komplexität}
+	Im Projektmanagement gibt es Abgrenzungen wie komplex ein Ablauf im Projektmanagement ist.
+	\begin{enumerate}
+		\item{Linientätigkeiten}
+		\begin{itemize}
+			\item{Die geringste Komplexität sind die Linientätigkeiten welche man stets unabhängig von Projekten abarbeitet}
+		\end{itemize}
+		\item{Kleinprojekte}
+		\begin{itemize}
+			\item{Kleiner Projekte welche nur ein reduziertes Projektmanagement erfordern}
+		\end{itemize}
+		\item{Großprojekt}
+		\begin{itemize}
+			\item{Größere Projekte welche einen Großteil der Werkzeuge des Projektmanagements erfordern}
+		\end{itemize}
+		\item{Programm}
+		\begin{itemize}
+			\item{Komplexität welche über ein einzelnes Projekt hinausgeht. So werden zum gleichen Zeitpunkt viele Projekte erfasst, wodurch ein Schritt innerhalb dessen wieder ein eigenes Projekt darstellt. Bei Management eines solchen Projekts aus Projekten spricht man von einem Programmverantwortlichen.}
+		\end{itemize}
+	\end{enumerate}
+	\subsubsection{Kriterien}
+	Zur Unterscheidung zwischen einem Klein- und Großprojekt gibt es mehrere Kriterien zur Abgrenzung:
+	\begin{itemize}
+		\item{Anzahl an Abteilungen}
+		\begin{itemize}
+			\item{In der Regel spricht man ab 4 Abteilungen die in das Projekt involviert sind, von einem Großprojekt. Alles darunter ist ein Kleinprojekt}
+		\end{itemize}
+		\item{Inhaltliche Komplexität}
+		\begin{itemize}
+			\item{Wenn das Ergebnis des Projekts zu neuen Strukturen und Prozessen innerhalb der Organisation führt, ist es in der Regel ein Großprojekt.}
+		\end{itemize}
+		\item{Personaleinsatz}
+		\begin{itemize}
+			\item{Sehr abhängig von der Größe des Unternehmens. In der Regel spricht man von einem Großprojekt, wenn das Projekt mehr als 200 Personentage involviert (200 Tage an 8 Stundentagen p)}
+		\end{itemize}
+		\item{Risiko}
+		\begin{itemize}
+			\item{Wenn das Ergebnis des Projektes außerhalb des Unternehmens eine Wirkung hat, spricht man von einem Großprojekt}
+		\end{itemize}
+		\item{Dauer}
+		\begin{itemize}
+			\item{Wenn ein Projekt eine Dauer von mindestens 6 Monaten hat, spricht man von einem Großprojekt. Selbst Kleinprojekte dauern in der Regel mindestens zwei Monate.}
+		\end{itemize}
+		\item{Kosten}
+		\begin{itemize}
+			\item{Kosten sind wiederum von der Größe des Unternehmens abhängig, in der Regel ist jedoch ein Projekt mit einem Budget von mindestens 100.000€ ein Großprojekt}
+		\end{itemize}
+	\end{itemize}
+	\subsection{Projektphasen}
+	Ein Projekt ist in mehrere Phasen unterteilt:
+	\begin{itemize}
+		\item{Vorprojektphase}
+		\begin{itemize}
+			\item{Aufgaben für ein Projekt, welche vor Erstellung des Projekts selbst definiert werden müssen. Ein Beispiel dafür ist zu bestimmen wer Teil des Projekts sein soll.}
+		\end{itemize}
+		\item{Planungsphase}
+		\begin{itemize}
+			\item{Nötige Prozesse werden definiert um einen Projektauftrag zu erstellen. Der Projektauftrag entscheidet grob, was für die Fertigstellung des Projekts nötig ist. Prozesse werden nur grob definiert}
+		\end{itemize}
+		\item{Realisierungsphase(n)}
+		\begin{itemize}
+			\item{Die groben Prozesse des Auftrags werden detaillierter ausgearbeitet und realisiert.}
+		\end{itemize}
+		\item{Abschlussphase}
+		\begin{itemize}
+			\item{Beginnt sobald die Projektziele erreicht wurden und bereitet für die Abnahme des Projekts vor oder definiert nötige Prozesse zur Erhaltung des Projekts}
+		\end{itemize}
+		\item{Nachprojektphase}
+		\begin{itemize}
+			\item{Beginnt sobald das Projekt abgenommen wurde. Hierbei werden eventuelle noch nötige Prozesse definiert oder weitere Prozesse erforscht.}
+		\end{itemize}
+	\end{itemize}
+	\subsubsection{Planungsphase}
+	Bei der Grobphase der Planung beginnt man mit der Abgrenzungs- und Kontextanalyse. Dabei gibt es drei Dimensionen bei denen man die Abgrenzung und den Kontext definieren sollte: \\
+	\begin{tabular}{| c | c | c | c |}
+		\toprule
+		& Zeitlich & Sachlich & Sozial \\ \midrule
+		Abgrenzung & \makecell{Festlegung \\ Projektstart und -ende} & \makecell{Festlegung Ziele \\ Nicht-Ziele, Phasen, Budget} & \makecell{Festlegung \\ Projektorganisation} \\ \hline
+	Kontext & \makecell{Beschreibung Vor- \\ und \\ Nachprojektphase} & \makecell{Analyse \ Zusammenhänge zu \\ anderen Projekten, \\ Aufgaben, Strategien} & \makecell{Auflistung Projekt- \\ Stakeholder} \\
+		\bottomrule
+	\end{tabular}
+	\begin{itemize}
+		\item{Zeitlich}
+		\begin{itemize}
+			\item{Abgrenzung}
+			\begin{itemize}
+				\item{Wann beginnt das Projekt und wann soll es zu Ende sein?}
+			\end{itemize}
+			\item{Kontext}
+			\begin{itemize}
+				\item{Was ist vor dem Projekt bereits passiert und was wird nach dem Projekt passieren?}
+			\end{itemize}
+		\end{itemize}
+		\item{Sachlich}
+		\begin{itemize}
+			\item{Abgrenzung}
+			\begin{itemize}
+				\item{Was sind die Ziele die erreicht werden sollen? Was sind (falls relevant) Ziele die NICHT erreicht werden sollen? Was sind grob gesehen sie Phasen und was ist das Budget pro Phase?}
+				\item{Bei der Definierung des Budgets gibt es Interne und Externe Projektkosten:}
+				\item{Externe Projektkosten sind externe Beratungs-, Material-, Reise- oder Druckkosten oder eventuell externe Projektleiter. Gemessen in €}
+				\item{Interne Projektkosten sind interne Personalaufwände um das Projekt umzusetzen. Gemessen in Personentagen(PT)}
+			\end{itemize}
+			\item{Kontext}
+			\begin{itemize}
+				\item{Gibt es Abhängigkeiten zu anderen Projekten im Unternehmen mit denen man sich absprechen sollte?}
+			\end{itemize}
+		\end{itemize}
+		\item{Sozial}
+		\begin{itemize}
+			\item{Abgrenzung}
+			\begin{itemize}
+				\item{Wer ist für die Organisation des Projekts verantwortlich? Wer hat das Projekt in Auftrag gegeben?}
+			\end{itemize}
+			\item{Kontext}
+			\begin{itemize}
+				\item{Wer wird von dem Projektergebnis beeinflusst, obwohl sie nicht Teil des Projekts sind udn deshalb einen Einfluss haben könnten?}
+				\item{Hierbei kann man eine Stakeholderanalyse durchführen um alle Personen welche von dem Projekt beeinflusst werden zu definieren. Bei betroffenen Personen, welche dem Projekt negativ gegenübertsellen könnte man überlegen, wie man diese für sich gewinnen kann.}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize} \\
+	Das Ergebnis der Planungsphase ist schließlich der Projektauftrag, welcher die Rahmenbedingungen des Projekts festsetzt. Einige Punkte des Projektauftrags sind:
+	\begin{itemize}
+		\item{Wann soll begonnen werden?}
+		\item{Wann soll es abgeschlossen werden?}
+		\item{Was soll im Projekt passieren?}
+		\item{Was soll im Projekt NICHT passieren?}
+		\item{Was sind die Phasen und Aufgaben?}
+		\item{Welche Ressourcen und Kosten müssen zugeordnet werden?}
+		\item{Wer ist verantwortlich?}
+		\item{Wer will das Projekt?}
+		\item{Wer soll/darf/muss mitarbeiten?}
+		\item{Wie sieht der Projektlenkungsausschuss aus?}
+	\end{itemize}
+	\subsubsection{Detailplanung}
+	Bei der Detailplanung werden die geplanten groben Punkte im Detail ausgearbeitet. Dabei muss die Durchführung stets im Kontext des PM-Dreiecks geschehen. Die drei Ecken des Dreiecks sind: Leistungen, Kosten/Ressourcen und Termine. Diese drei Faktoren der Umsetzung stehen immer in Abhängigkeit zueinander und beeinflussen sich.
+	\paragraphlb{Projektleistungsplanung}
+	Das zentrale Element der Leistungsplanung ist der Projektstrukturplan, welcher eine strukturierte Darstellung sämtlicher Aufgaben und Tätigkeiten enthält. In dem Plan wird jedes Element mit einer Nummer versehen um eine genaue Zuordnung zu ermöglichen. In der Regel sollte ein Plan in 5-10 logische Projektphasen und 5-10 Arbeitspakete pro Phase beinhalten, bei größeren Projekten kann es diese Zahl jedoch oft überschreiten. Der Plan ist in drei Ebenene geteilt:
+	\begin{itemize}
+		\item{Projekttitel}
+		\begin{itemize}
+			\item{In der ersten Ebene steht der Titel des Projekts zusammen mit dem Namen des Projektleiters}
+		\end{itemize}
+		\item{Projektphasen}
+		\begin{itemize}
+			\item{Das Projekt wird eine Ebene darunter in dessen Phasen geteilt. Die erste Phase ist stets die Projektmanagementphase wonach die Phasen des Projekts aufgelistet sind}
+			\item{Die Projektmanagementphase beinhaltet den Aufbau des Projekts, der Koordination, des Controllings und dessen Abschluss}
+		\end{itemize}
+		\item{Arbeitspakete}
+		\begin{itemize}
+			\item{Einzelne Tätigkeiten je Phase. Der Title reflektiert diese Elemente als Tätigkeit wieder, z.B. "Tätigkeit erstellen"}
+		\end{itemize}
+	\end{itemize}
+	\paragraphlb{Terminplanung}
+	Bei der Terminplanung werden grobe Termine für das gesamte Projekt festgelegt. 
+	\subparagraphlb{Meilensteine}
+	Eine Möglichkeit ist es, diese mit Meilensteinen zu definieren, was "Ereignisse besonderer Bedeutung sind". Typische Meilensteine sind der Projekstart bzw. das Projektende oder der Launch. Meilensteine sind jedoch relativ unflexibel, weshalb sie nur bei kleinen Projekten angewendet werden können.
+	\subparagraphlb{Balkendiagramm}
+	Ein flexiblerer Weg um Termine zu planen ist die Erstellung eines Balkendiagramms (Auch Gantt-Chart genannt), welches die einzelnen Pakete zeitlich anhand einer Linie untereinander angibt. \\
+	Eine Erweiterung des Balkendiagramms ist das vernetzte Balkendiagramm. Dabei werden mit Pfeilen Balken die voneinander abhängen verbunden wodurch man weiß, dass die Verzögerung eines Punktes auch einen anderen Punkt verzögert.
+	\subsubsection{Projektkrise}
+	Eine Projektkrise entsteht, wenn ein unvorhergesehenes Problem auftaucht. Eventuell fällt ein Teammitglied aus oder ein Prozess dauert länger als erwartet
+	\subsubsection{Projektorganisation}
+	Für ein Projekt sollte die Organisation bzw. dessen Organigramm neu gebildet werden. Dieses ist temporär und löst sich nach Ende des Projekts wieder auf. Gleich wie eine permanente Organisation wird auch das des Projekts mit genau definierten Rollen und konkreten Personen besetzt.
+	\paragraphlb{Projektlenkungsausschuss}
+	Ein weiteres Element des Organigramms ist der Projektlenkungsausschuss (PLA) im Englischen auch oft Steering Committee genannt. Dieses besteht aus Mitgliedern welche außerhalb des Projekts für Teile des Projekts verantwortlich sind, wie zum Beispiel ein Vorsitzender der Firma. Wenn jetzt bekannt wird, dass das Budget nicht ausreicht, entscheidet der PLA über die weiteren Schritte.
+	\subsection{Projektkommunikation}
+	Die Kommunikation zwischen den Teammitgliedern ist für die effektive Abwicklung essenziell. Um die Prozesse aufeinander abstimmen zu könne gibt es eine Reihe an möglichen Kommunikationskanälen:
+	\begin{itemize}
+		\item{Jour Fixe}
+		\begin{itemize}
+			\item{Feste Wöchentliche Meetings um sich operativ zu koordinieren und eventuell anfallende Themen zu besprechen}
+		\end{itemize}
+		\item{Subteamsitzung}
+		\begin{itemize}
+			\item{Nach Bedarf abgehaltene Meetings kleinere Teams um spezifische Problemstellungen zu diskutieren}
+		\end{itemize}
+		\item{Projektcontrollingsitzung}
+		\begin{itemize}
+			\item{Monatlicher Termin um den Status des Projekts zu besprechen oder eventuelle Probleme zu evaluieren.}
+		\end{itemize}
+		\item{Projektauftraggebersitzung}
+		\begin{itemize}
+			\item{Findet stets nach der Projektcontrollersitzung statt und bespricht ausstehende Entscheidungen}
+		\end{itemize}
+	\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}

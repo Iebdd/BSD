@@ -1,0 +1,90 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[explicit]{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cprotect}
+\usepackage{float}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\newcommand{\paragraphlb}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\subparagraphlb}[1]{\subparagraph{#1}\mbox{}\\}
+\renewcommand{\contentsname}{Inhaltsverzeichnis:}
+\renewcommand\theadalign{tl}
+\setstretch{1.10}
+\setlength{\parindent}{0pt}
+\setcounter{tocdepth}{5}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\hyperlink{sec-\thesection}{#1}
+\addtocontents{toc}{\protect\hypertarget{sec-\thesection}{}}}
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0pt}{#1}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{\hyperlink{subsec-\thesubsection}{#1}
+\addtocontents{toc}{\protect\hypertarget{subsec-\thesubsection}{}}}
+\titleformat{name=\subsection,numberless}
+  {\normalfont\large\bfseries}{\thesubsection}{0pt}{#1}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\geometry{top=12mm, left=1cm, right=2cm}
+\title{\vspace{-1cm}SOZ - GDT Workflow}
+\author{Andreas Hofer}
+
+\begin{document}
+	\maketitle
+	Mein erarbeiteter Workflow verwendet die Erinnerungen App von iOS als Basis.
+	\section{Erarbeiten}
+	\subsection{Striktes aufschreiben}
+	Zuerst sollten die zu erledigenden Sachen nur in ein geschriebenes Format gebracht werden, änhlich wie ein Brainstorming um nichts zu vergessen. Sobald man damit fertig ist, überprüfen ob es Überlappungen oder Duplikate gibt udn diese gegebenenfalls entfernen.
+	\subsection{Kategorisieren}
+	Wenn man zu viele Tasks hat um diese in einer langen Liste zu halten, sollte man diese kategorisieren. Wenn man ähnliche Tasks bündelt und anhand dieser die Kategorien wählt, kommt man mit der Zeit auf logische Kategorien.
+	\section{Erhalt}
+	Sobald es existiert muss man es natürlich erhalten und pflegen
+	\subsection{Löschen}
+	Sachen die nicht mehr relevant sind müssen regelmäßig erkannt und gelöscht werden
+	\subsection{Neu erfassen}
+	Es sollten ebenfalls regelmäßig neue Tasks hinzugefügt werden. Diese kommen wiederum in die neue allgemeine Liste außer man weiß bereits, dass sie in ein andere gehört.
+	\subsection{Neu kategorisieren}
+	Wenn die Liste wieder zu lang wird, muss man erneut kategorisieren und bei Bedarf auch neue Kategorien anlegen.
+	\section{Zeitmanagement}
+	Sobald die Liste besteht kann man überlegen diese nach Wichtigkeit und Dringlichkeit zu ordnen. Dabei vergibt man ein Fälligkeitsdatum für jeden Task und eine Wichtigkeit auf einer Vordefinierten Skala.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+\end{document}
