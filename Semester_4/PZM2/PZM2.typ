@@ -193,7 +193,7 @@ Events können wiederum in verschiedene Arten unterteilt werden:
 Gateways sind Wege um den Fluss eines Prozesses zu kontrollieren. Dabei werden durch ein Gateway mehrere mögliche Wege beschrieben. Dabei muss ein Gateway immer zu einem Task führen. Nach dem Task kann dann entweder ein weiterer Task sein, oder ein schließendes Gateway. Wenn es mit einem Gateway geschlossen wird, muss es das gleiche gateway sein, und wird nicht beschriftet. Es gibt verschieden Arten von Gateways:
 - Oder Gateway
  - Ein Gateway mit genau zwei Ausgängen (Eines oder das andere) welche mit der Kondition beschriftet werden müssen
- - Genau zwei AUsgänge. Gateway muss beschriftet werden
+ - Genau zwei Ausgänge. Gateway muss beschriftet werden
 - Paralleles Gateway
  - Tasks die mehrere Tasks gleichzeitig abarbeitet. Hierbei müssen die Ausgänge nicht beschriftet werden müssen
  - 1 bis n Ausgänge die gleichzeitig durchschritten werden. Gateway wird nicht beschriftet
