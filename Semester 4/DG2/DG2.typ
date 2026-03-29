@@ -88,7 +88,7 @@ Laut Warren Buffet benötigt ein Business vier Eigenschaften um erfolgreich zu s
  - Eine Sache die teuer verkaufbar ist, macht natürlich mehr Geld.
 + Herstellung sollte günstig sein
  - Die Sache sollte so günstig wie möglich in der Herstellung sein.
-==== Herangehensweise
+=== Herangehensweise
 Wenn man ein neues Unternehmen gründet sollte man:
 - Mit einem kleinen Markt starten
  - Wenn man mit einem Geschäftsmodell beginnt, sollte man nicht sofort zu groß träumen. Wenn alles gut funktioniert kann man immer noch expandieren
@@ -102,6 +102,28 @@ Wenn man ein neues Unternehmen gründet sollte man:
  - Am Anfang weiß man noch nicht genau was funktioniert, weshalb man immer tüfteln sollte um erfolgreicher zu sein.
 ==== Der Wissenschaftliche Ansatz
 Man kann auch den wissenschaftlichen Ansatz verwenden um iterativ zu einer Lösung zu kommen. Man beginnt mit einer Hypothese und dem erwarteten Ausgang. Danach wird die Hypothese getestet
+= Marktfindung
+Die Marktfindung kann eine der wichtigsten Entscheidungen für ein Geschäftsmodell sein. Die in der Regel lukrativsten Märkte sind:
+- Gesundheit
+ - Marktsegmente auf jegliche Art von Gesundheit egal ob physisch oder psychisch. Beispielsweise Fitness Influencer, Health Influencer oder Nahrungsergänzungsmittel
+- Beziehungen
+ - Märkte die auf Interpersonelle Beziehungen wie Freundschaften, soziale Verbindung aber auch für die Suche nach Liebe abzielen. Beispiele sind diverse soziale Medien, Tinder, Bumble oder Instagram.
+- Reichtum
+ - Mit Abstand der profitabelste Markt, da nahezu jeder davon angesprochen wird (sprich reich zu werden) und es auch für sehr viele Leute relevant ist. Zusätzlich werden solche Ausgaben oft als 'Investment' angesehen und nicht als Ausgabe.
+Diese drei Märkte sind zwar sehr profitabel, man kann jedoch nie den gesamten Markt bedienen, weshalb man seine eigene Nische finden und befüllen sollte.
+Eine Nische, welche nur aus einer einzelnen Person besteht, nennt man category of one. Da man der einzige ist der diese Nische anbietet, kann man sich besser spezialisieren und so ein spezifisches Produkt anbieten. Dadurch kann man auch mehr dafür verlangen da man ein spezifisches, anstatt eines allgemeinen Problems löst.
+
+Ein guter Markt wird durch vier Kriterien charakterisiert:
++ Schmerzen
+ - Schmerzen sind Unannehmlichkeiten, welche durch ein Problem ausgelöst werden. Aus diesem Grund sollte man ein Marktsegment finden in welchem unaddressierte Schmerzen auftreten.
+ - Wenn man vor einem Stadium zum Beispiel der einzige Anbieter von etwas zu essen ist, bedient man spezifische Schmerzen welche wahrscheinlich existieren und von niemand anderen bedient werden können.
++ Kaufkraft
+ - Wenn das Publikum in einem Markt keine Kaufkraft besitzt
++ Einfach zu erreichen
+ - Ist das Zielpublikum einfach zu erreichen (Ist es einfach an sieEW verkaufen?)
++ Wachsend
+ - Wächst der Umsatz des Segments?
+
 
 
 

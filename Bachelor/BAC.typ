@@ -1,6 +1,6 @@
 #import "@preview/cetz:0.4.2"
 
-#let draw_grid(size, rect_size) = {
+#let draw_grid(size, rect_size, line_args, square_args) = {
  let x = size
  let y = size
  cetz.canvas({
@@ -14,6 +14,7 @@
   	x -= rect_size
   	y = size
   }
+  colour_line()
 })
 }
 
@@ -21,9 +22,10 @@
 	return (arg1.at(0) + arg2.at(0), arg1.at(1) + arg2.at(1))
 }
 
-#let colour_line(start, length, vertical) = {
+#let colour_line(start, length, unit, vertical) = {
+ let 
  return {
-
+ 	while()
  }
 }
 

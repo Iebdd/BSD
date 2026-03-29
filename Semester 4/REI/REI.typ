@@ -62,21 +62,10 @@ Im Anforderungsmanagement kann man eine Satzschablone verwenden um Anforderungen
 + Prozesswort
  - Identifizierung des Prozesses
  - In der Regel ein Verb das eine Tätigkeit beschreibt
-
- #diagram(
-node-fill: blue,
-(
-node((0,0.75), rect(text(white, [Warum?]))),
-edge((0,0.75), (1,0), "->"),
-edge((0,0.75), (1,0.5), "->"),
-edge((0,0.75), (1,1), "->"),
-edge((0,0.75), (1,1.5), "->"),
-node((1,0), [Muss]),
-node((1,0.5), [Soll]),
-node((1,1), [Kann]),
-node((1,1.5), [Wird]),
-)
-)
+== Prüfung von Anforderungen
+Zur Sicherstellung, dass die Anforderungen auch wirklich erfüllt werden, sollten diese nach Fertigstellung überprüft werden. So können Fehler vor der Implementierung noch korrigiert werden.
+=== Qualitätsaspekte
+Bei der Überprüfung
 
 
 
