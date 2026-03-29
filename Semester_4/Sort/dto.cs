@@ -1,0 +1,17 @@
+private bool Ahorn {get; set;}
+private bool Bhorn {get; set;}
+private bool BBasa {get; set;}
+private bool Xzrsd {get; set;}
+private bool Ah45q {get; set;}
+private bool Ah55q {get; set;}
+private bool Porbc {get; set;}
+private bool Bernd {get; set;}
+private bool Uhrzf {get; set;}
+private bool Uhtsz {get; set;}
+private bool Uitsd {get; set;}
+private bool Jarhd {get; set;}
+private bool Kurdt {get; set;}
+private bool Lidfr {get; set;}
+private bool Ersfe {get; set;}
+private bool Tersd {get; set;}
+private bool Zartd {get; set;}

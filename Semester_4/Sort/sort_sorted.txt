@@ -1,0 +1,16 @@
+private static bool A {get; set;}
+private static bool B {get; set;}
+private static bool C {get; set;}
+private static bool D {get; set;}
+private static bool E {get; set;}
+private static bool F {get; set;}
+private static bool G {get; set;}
+private static bool H {get; set;}
+private static bool HH {get; set;}
+private static bool Hi {get; set;}
+private static bool I {get; set;}
+private static bool JJ {get; set;}
+private static bool JK {get; set;}
+private static bool X {get; set;}
+private static bool Y {get; set;}
+private static bool Z {get; set;}
