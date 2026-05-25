@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+:Käufer:
+:Verkäufer:
+:Mitarbeiter:
+package EPay{
+(UC-01 Kauf abschließen) as (UC1)
+(UC-02 Empfang bestätigen) as (UC2)
+(UC-07 Trust Score einsehen) as (UC7)
+(UC-03 Zahlung empfangen) as (UC3)
+(UC-04 Inserat erstellen) as (UC4)
+(UC-06 Shadow Ban verhängen) as (UC6)
+(UC-05 Duplikat prüfen) as (UC5)
+}
+Käufer --> (UC1)
+Käufer --> (UC2)
+Käufer --> (UC7)
+Verkäufer --> (UC7)
+Verkäufer --> (UC3)
+Verkäufer --> (UC4)
+(UC6) <-- Mitarbeiter
+(UC5) <-- Mitarbeiter
+@enduml

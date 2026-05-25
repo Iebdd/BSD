@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alexander Rieger — IoT-Based Smart Beehive Monitoring</title>
+  <style>
+    :root {
+      --bg: #FFFBE6;
+      --fg: #2C1810;
+      --gold: #F5A623;
+      --gold-light: #FFD54F;
+      --honey: #FFF8E1;
+      --brown: #5D4037;
+      --green: #4CAF50;
+      --code-bg: #1E1E1E;
+      --code-fg: #D4D4D4;
+      --card: #FFFFFF;
+      --shadow: rgba(93, 64, 55, 0.12);
+      --bubble-bg: #E65100;
+      --bubble-text: #FFFFFF;
+      --bubble-bg-2: #BF360C;
+      --bubble-bg-3: #D84315;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--fg);
+      line-height: 1.65;
+    }
+
+    .site-header {
+      background: linear-gradient(135deg, var(--gold) 0%, #FF8F00 100%);
+      color: #fff;
+      padding: 3rem 1rem 2.5rem;
+      text-align: center;
+      border-bottom: 6px solid var(--brown);
+      position: relative;
+    }
+    .site-header::after {
+      content: "🐝";
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      background: var(--card);
+      border-radius: 50%;
+      width: 56px; height: 56px;
+      display: grid; place-items: center;
+      box-shadow: 0 4px 12px var(--shadow);
+      border: 3px solid var(--gold);
+    }
+    .author-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.95;
+      margin-bottom: 0.5rem;
+    }
+    .paper-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+      font-weight: 700;
+      line-height: 1.3;
+      max-width: 900px;
+      margin: 0 auto;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+
+    .hero {
+      max-width: 900px;
+      margin: 2.5rem auto 1.5rem;
+      padding: 0 1rem;
+    }
+    .abstract-card {
+      background: var(--card);
+      border-left: 5px solid var(--gold);
+      padding: 1.5rem;
+      border-radius: 0 12px 12px 0;
+      box-shadow: 0 4px 16px var(--shadow);
+    }
+    .abstract-card h2 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--brown);
+      margin-bottom: 0.6rem;
+    }
+    .abstract-text {
+      font-size: 1.05rem;
+      color: #3E2723;
+    }
+    .keywords {
+      margin-top: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .keyword {
+      background: var(--honey);
+      border: 1px solid var(--gold-light);
+      color: var(--brown);
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--gold-light);
+      padding: 0.6rem 1rem;
+    }
+    .nav-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+    }
+    .nav-btn {
+      background: transparent;
+      border: 2px solid transparent;
+      color: var(--brown);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: all .2s ease;
+    }
+    .nav-btn:hover, .nav-btn.active {
+      background: var(--honey);
+      border-color: var(--gold);
+      color: var(--fg);
+    }
+
+    .page {
+      display: none;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+      animation: fadeIn 0.4s ease;
+    }
+    .page.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    h3 {
+      font-family: Georgia, serif;
+      font-size: 1.6rem;
+      color: var(--brown);
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--gold-light);
+    }
+    h4 {
+      font-size: 1.15rem;
+      color: #4E342E;
+      margin: 1.5rem 0 0.6rem;
+    }
+    p { margin-bottom: 1rem; }
+    a { color: #E65100; text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--brown); }
+
+    .lead {
+      font-size: 1.15rem;
+      color: #4E342E;
+      margin-bottom: 1.2rem;
+    }
+
+    .info-box {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin: 1rem 0;
+      box-shadow: 0 4px 14px var(--shadow);
+      border-top: 4px solid var(--gold);
+    }
+    .info-box.green { border-top-color: var(--green); }
+    .info-box.red   { border-top-color: #E53935; }
+
+    ul { margin: 0.8rem 0 1rem 1.2rem; }
+    li { margin-bottom: 0.5rem; }
+
+    .chat-section {
+      margin-bottom: 2.5rem;
+    }
+    .chat-section h4 {
+      font-family: Georgia, serif;
+      font-size: 1.3rem;
+      color: var(--brown);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid var(--gold-light);
+    }
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .chat-bubble {
+      max-width: 75%;
+      padding: 0.9rem 1.2rem;
+      border-radius: 18px;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      position: relative;
+      word-wrap: break-word;
+    }
+    .chat-bubble.right {
+      align-self: flex-end;
+      background: var(--bubble-bg);
+      color: var(--bubble-text);
+      border-bottom-right-radius: 4px;
+    }
+    .chat-bubble.left {
+      align-self: flex-start;
+      background: var(--bubble-bg-2);
+      color: var(--bubble-text);
+      border-bottom-left-radius: 4px;
+    }
+    .chat-bubble.alt-right {
+      align-self: flex-end;
+      background: var(--bubble-bg-3);
+      color: var(--bubble-text);
+      border-bottom-right-radius: 4px;
+    }
+    .chat-bubble.alt-left {
+      align-self: flex-start;
+      background: var(--bubble-bg);
+      color: var(--bubble-text);
+      border-bottom-left-radius: 4px;
+    }
+
+    .collapsible {
+      background: var(--card);
+      border-radius: 12px;
+      margin: 1rem 0;
+      box-shadow: 0 4px 14px var(--shadow);
+      overflow: hidden;
+    }
+    .collapsible-header {
+      background: var(--honey);
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--brown);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-size: 1.05rem;
+    }
+    .collapsible-header:hover {
+      background: var(--gold-light);
+    }
+    .collapsible-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    .collapsible.open .collapsible-icon {
+      transform: rotate(180deg);
+    }
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 1.25rem;
+    }
+    .collapsible.open .collapsible-content {
+      max-height: 20000px;
+      padding: 1.25rem;
+    }
+
+    .img-placeholder {
+      width: 100%;
+      max-width: 1408px;
+      aspect-ratio: 1408 / 768;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brown);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin: 1rem 0;
+    }
+
+    .site-footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--brown);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--gold-light);
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .paper-title { font-size: 1.25rem; }
+      .nav-btn { font-size: 0.8rem; padding: 0.4rem 0.6rem; }
+      .chat-bubble { max-width: 85%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="author-name">Alexander Rieger</div>
+    <h1 class="paper-title">IoT-Based Smart Beehive Monitoring: Weight, Temperature, Humidity and GPS Tracking for Remote Precision Beekeeping</h1>
+  </header>
+
+  <section class="hero">
+    <div class="abstract-card">
+      <h2>Abstract</h2>
+      <p class="abstract-text">
+        This thesis presents an Internet of Things (IoT)-based smart beehive monitoring system that addresses declining honeybee populations, hive theft, and the inaccessibility of remote apiaries. By continuously measuring temperature, humidity, hive weight, and precise GPS coordinates, the low-power embedded system enables real-time remote monitoring and automated theft detection. By combining IoT sensors, embedded systems, and cloud computing, this work demonstrates a scalable framework for precision apiculture, smart beehive monitoring, and broader smart agriculture applications. The system offers beekeepers a reliable, cost-effective tool for protecting assets, optimizing hive health, and supporting sustainable pollination services.
+      </p>
+      <div class="keywords">
+        <span class="keyword">Internet of Things (IoT)</span>
+        <span class="keyword">smart beehive monitoring</span>
+        <span class="keyword">precision apiculture</span>
+        <span class="keyword">GPS tracking</span>
+        <span class="keyword">hive weight sensor</span>
+        <span class="keyword">remote beekeeping</span>
+        <span class="keyword">theft detection</span>
+      </div>
+    </div>
+  </section>
+
+  <nav class="sticky-nav">
+    <div class="nav-inner">
+      <button class="nav-btn active" onclick="showPage('problem')">Problem</button>
+      <button class="nav-btn" onclick="showPage('requirements')">Requirements</button>
+      <button class="nav-btn" onclick="showPage('connectivity')">Connectivity</button>
+      <button class="nav-btn" onclick="showPage('poc')">Proof-of-Concept</button>
+      <button class="nav-btn" onclick="showPage('social')">Social Media</button>
+      <button class="nav-btn" onclick="showPage('bts')">Behind the Scenes</button>
+      <button class="nav-btn" onclick="showPage('outlook')">Outlook</button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- PROBLEM -->
+    <section id="problem" class="page active">
+      <h3>The Problem</h3>
+      <p class="lead">
+        Bees are arguably the single-most important pollinator to agriculture, yet the honeybee stock has decreased by almost 50&nbsp;% in the last decade. At the same time, pollinator-dependent crops have grown by more than 300&nbsp;%. This widening gap threatens not only biodiversity but the stability of food systems that rely on honeybee pollination.
+      </p>
+      <p>
+        Commercial beekeepers face a compound crisis. Hives are placed in remote areas for months at a time to maximize honey yield and pollination contracts. These isolated locations make routine inspection costly and time-consuming, and they also make hives an easy target for theft. A healthy hive trades at around <strong>$200 USD</strong>, can be rented to farmers for pollination at a similar price, and produces between <strong>10–25 kg</strong> of honey per season—up to <strong>$250 per kg</strong> for premium varieties. Organized theft rings have recognized this value, and hive theft is becoming an industry-wide problem.
+      </p>
+      <p>
+        Beyond theft, colonies fail from queen failure, starvation, parasites, pesticides, and Colony Collapse Disorder (CCD). Without frequent on-site checks, early warning signs are missed. The challenge is therefore threefold: <em>protecting physical assets</em>, <em>monitoring hive health remotely</em>, and <em>optimizing harvest timing</em> without requiring daily visits to distant apiaries.
+      </p>
+      <div class="info-box">
+        <strong>Context from the field.</strong> Organizations such as the <a href="https://professionalbeekeepers.eu/" target="_blank">European Professional Beekeepers Association (EPBA)</a> document that Europe's professional beekeepers are disappearing under economic pressure. One major pressure is unfair competition from fraudulent, ultra-cheap imports—so-called "fake honey" produced by feeding bees sugar solution rather than floral nectar. Making domestic beekeeping less risky and more economically viable reduces reliance on these questionable imports and strengthens the market for genuine local honey.
+      </div>
+    </section>
+
+    <!-- REQUIREMENTS -->
+    <section id="requirements" class="page">
+      <h3>System Requirements</h3>
+      <p class="lead">
+        Designing a tracker that lives inside a beehive for months imposes strict constraints on power, cost, connectivity, and physical robustness.
+      </p>
+
+      <h4>Sensor & Functional Requirements</h4>
+      <ul>
+        <li><strong>Temperature:</strong> The brood nest must be kept between 32–35 °C. Deviations indicate queen loss, overheating, or winter preparation problems.</li>
+        <li><strong>Humidity:</strong> A strong colony maintains 50–60 % relative humidity during brood rearing. Weak colonies follow ambient humidity, making this a colony-strength proxy.</li>
+        <li><strong>Weight:</strong> Four load cells (50 kg each, 200 kg total) measure honey accumulation and enable precise harvest timing.</li>
+        <li><strong>GPS Position:</strong> Location is measured only when movement is detected, to save energy while enabling theft recovery.</li>
+        <li><strong>Theft Alarm:</strong> Automated alerts triggered by unexpected location changes or motion.</li>
+      </ul>
+
+      <h4>Operational Requirements</h4>
+      <ul>
+        <li><strong>Power Budget:</strong> The device must run for up to <strong>six months</strong> on battery alone, since hives are often far from any power grid.</li>
+        <li><strong>Low-Power States:</strong> A state machine with Idle, Collect, Transmit, and Alarm modes ensures micro-amp sleep currents and brief active bursts.</li>
+        <li><strong>Cellular Uplink:</strong> Remote areas lack Wi-Fi. A 2G/GPRS or NB-IoT modem with a low-cost M2M SIM is required.</li>
+        <li><strong>Cloud Integration:</strong> Data must land in a scalable cloud database with a web dashboard accessible from any browser.</li>
+        <li><strong>Cost:</strong> Hardware should stay below <strong>€30</strong> per unit to remain viable for commercial beekeepers managing hundreds of hives.</li>
+      </ul>
+
+      <div class="info-box green">
+        <strong>Target Power Budget (3-month cycle):</strong><br>
+        Idle state ≈ 45.6 mAh/day · Data collection ≈ 1.7 mAh/day · Daily transmission ≈ 13 mAh/day.<br>
+        Total ≈ 5.4 Ah for 90 days. Two 3.4 Ah 18650 Li-ion cells provide 6.8 Ah, leaving margin for self-discharge and alarm-state bursts.
+      </div>
+    </section>
+
+    <!-- CONNECTIVITY -->
+    <section id="connectivity" class="page">
+      <h3>Connectivity Schemes</h3>
+      <p class="lead">
+        Because the device sends small payloads infrequently over cellular networks, the choice of protocol stack has a direct impact on battery life and data-plan cost. The thesis examines four communication patterns, ranging from raw radio frames to full TLS encryption.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Scheme</th>
+            <th>Overhead</th>
+            <th>Upside</th>
+            <th>Downside</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>RAW Data via NIDD</strong></td>
+            <td>Minimal</td>
+            <td>No additional protocol overhead. Most efficient for tiny payloads. Ideal for billing-per-message IoT plans.</td>
+            <td>No routing, reliability, or interoperability guarantees; requires operator-specific integration.</td>
+          </tr>
+          <tr>
+            <td><strong>MQTTSN / CoAP via NIDD</strong></td>
+            <td>Low</td>
+            <td>Little protocol overhead. No IP/UDP addressing or stack needed on the device. Keeps firmware lean.</td>
+            <td>Slightly more complex encoding than raw bytes; gateway must translate to IP world.</td>
+          </tr>
+          <tr>
+            <td><strong>MQTTSN / CoAP via UDP/IP</strong></td>
+            <td>Moderate</td>
+            <td>Small protocol overhead. Standard UDP stack is widely supported and easy to debug.</td>
+            <td>Requires IP stack on the microcontroller, increasing RAM/flash usage and power slightly.</td>
+          </tr>
+          <tr>
+            <td><strong>MQTT over TLS via TCP/IP</strong></td>
+            <td>Very High</td>
+            <td>Strong end-to-end encryption and authentication.</td>
+            <td>TLS 1.2 handshake, certificates, and TCP overhead create a large data burst. High latency and significant data-limit impact make it <strong>unsuitable</strong> for low-bandwidth IoT on 2G/NB-IoT plans.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        For this prototype, the balance leans toward <strong>lightweight UDP-based messaging</strong> or <strong>NIDD</strong> where available, because every extra byte transmitted over GPRS directly translates to milliseconds of radio active time and milliamp-hours consumed. Full TLS is deferred to the cloud ingress point rather than the constrained edge device.
+      </p>
+    </section>
+    <!-- PROOF OF CONCEPT -->
+    <section id="poc" class="page">
+      <h3>Proof-of-Concept</h3>
+      <p class="lead">
+        The prototype unites off-the-shelf sensors, a custom PCB, and an Azure cloud pipeline into an end-to-end beehive tracker costing roughly €30 in hardware.
+      </p>
+
+      <h4>Hardware Architecture</h4>
+      <p>
+        The core of the device is an <strong>Espressif ESP32</strong> microcontroller, chosen for its robust 80 MHz processing capability and excellent power management with multiple sleep states. Environmental sensing is handled by a <strong>DHT11</strong> temperature and humidity sensor connected via a single-wire digital bus, drawing only ~1 mA during active readings and 100 µA in standby. For weight measurement, four 50 kg load cells are arranged in a Wheatstone bridge configuration, fed into an <strong>HX711</strong> 24-bit ADC that can power down to 0.5 µA when not sampling.
+      </p>
+      <p>
+        Location tracking and cellular uplink are combined in a single <strong>SIM808</strong> module, which integrates both GPS and GSM/GPRS functionality. This module sleeps at approximately 1 mA, acquires GPS position at 42 mA, and transmits data over GPRS at up to 445 mA. The entire assembly is mounted on a custom two-layer PCB that sits atop the SIM808 module, with an ESP32 dev board and HX711 daughterboard forming a compact stack.
+      </p>
+
+      <h4>Power System</h4>
+      <p>
+        Autonomy is achieved through 2–4 <strong>18650 Li-ion cells</strong> (3.4 Ah each) housed in a separate ABS case, providing up to 6.8 Ah total capacity. A battery management system monitors cell voltage and temperature, while a USB port allows field recharging without removing the tracker from the hive. The firmware implements four distinct power states—Idle, Collect, Transmit, and Alarm—to ensure that high-drain modules like GPS and GSM are only powered on for the minimum necessary duration.
+      </p>
+
+      <h4>Firmware & Cloud Pipeline</h4>
+      <p>
+        The firmware is developed in the Arduino environment for the ESP32, using serial AT commands to control the SIM808. Sensor data is packaged into JSON format and transmitted via HTTPS to <strong>Azure IoT Hub</strong>. A Stream Analytics job processes incoming messages and writes them to an <strong>Azure SQL Database</strong>. The web dashboard, built with Node.js and hosted on Azure App Service, queries this database to display live temperature, humidity, and weight charts alongside a Google Maps marker showing the hive's current location.
+      </p>
+
+      <h4>Connectivity Provider</h4>
+      <p>
+        For cellular service, the prototype uses <strong>1NCE</strong> IoT SIM cards, which offer 500 MB of data over 10 years for a one-time €10 fee—translating to roughly 8 cents per month. This ultra-low operating cost is essential for making the system viable for beekeepers managing dozens or hundreds of hives.
+      </p>
+
+      <div class="info-box green">
+        <strong>Key Achievement:</strong> Over long-term in-house tests, the tracker proved stable and reliable. Even with poor signal connectivity, data was successfully transferred to the cloud on a daily basis. The web application can be accessed from any device with a browser, eliminating the need for beekeepers to install dedicated apps.
+      </div>
+    </section>
+
+    <!-- SOCIAL MEDIA -->
+    <section id="social" class="page">
+      <h3>Social Media Strategy</h3>
+      <p class="lead">
+        Academic impact is no longer measured only by citations; it is also measured by reach. A deliberate social-media plan can translate a hardware thesis into policy discussions, startup interest, and beekeeper adoption.
+      </p>
+
+      <div class="collapsible open" id="twitter-collapsible">
+        <button class="collapsible-header" onclick="toggleCollapsible('twitter-collapsible')">
+          <span>Twitter</span>
+          <span class="collapsible-icon">▼</span>
+        </button>
+        <div class="collapsible-content">
+          <p>
+            Use a threaded format: open with the theft statistic (organized crime stealing hives at $200+ each), then reveal the tracker cost (€30), then show the live dashboard screenshot. Pin the thread during World Bee Day for maximum visibility. Hashtags: <strong>#PrecisionApiculture #SmartBeekeeping #IoT #SaveTheBees</strong>.
+          </p>
+          <div class="img-placeholder">
+            <img src="Fake_Twitter_Post.png" alt="An example Twitter post of what it could look like when a scientist starts using Social Media">
+          </div>
+        </div>
+      </div>
+
+      <div class="collapsible" id="insta-collapsible">
+        <button class="collapsible-header" onclick="toggleCollapsible('insta-collapsible')">
+          <span>Instagram / TikTok</span>
+          <span class="collapsible-icon">▼</span>
+        </button>
+        <div class="collapsible-content">
+          <div class="chat-container">
+            <div class="chat-bubble alt-right">Good Evening Gemini, I need a video. It should be less than 30 seconds long. There's two sections to it: First it shows a forest with a man in a beekeeper's suit standing next to a beehive with bees buzzing around it. At first the camera is a bit further away but approaches him soon after. The camera should have the appearance of being filmed by hand with a slight amount of shake to it as if someone was walking. Once the camera is close enough the man starts talking. He has a rather thick German accent but sounds friendly and enthusiastic about the topic. He says: "Hello, so we are here in the forests of Upper Styria with one of the beehives I'm tracking. As you can see the bees are pretty happy right now and with my device you can check on them from the comfort of your own home." With those words, the man starts walking towards the camera, walking off the picture to the right of the video. The video then pans to the right as if to follow him but there is a cut right then and we are in a room with the man no longer wearing the beesuit, instead sitting infront of a computer. The computer is turned on and shows a dashboard similar to the uploaded picture. The man then starts talking again "So here you can see that the tracker has already sent some data to us and the bees are indeed pretty happy. And even better, if someone were to try to steal it we could track it all across Europe to get it back." The man then looks at the camera and smiles saying "If you're curious how it works, read the paper linked in the description" Here the video ends</div>
+            <div class="chat-bubble alt-left">If you upgrade your subscription, I can create that video for you today.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- BEHIND THE SCENES -->
+    <section id="bts" class="page">
+      <h3>Behind the Scenes</h3>
+      <p style="margin-bottom: 1.5rem; font-style: italic; color: var(--brown);">
+        I used ChatGPT to start out with optimising the SEO of the Abstract. I initially also wanted to convert the pdf to Latex to make changes but this proved to be a disaster.
+      </p>
+
+      <div class="collapsible open" id="chatgpt-collapsible">
+        <button class="collapsible-header" onclick="toggleCollapsible('chatgpt-collapsible')">
+          <span>ChatGPT</span>
+          <span class="collapsible-icon">▼</span>
+        </button>
+        <div class="collapsible-content">
+          <div class="chat-container">
+            <div class="chat-bubble right">Could you take this pdf and convert it to a latex file? Take any pictures of code and convert them to a code segment as well https://opus.campus02.at/frontdoor/deliver/index/docId/475/file/AC15624834.pdf</div>
+            <div class="chat-bubble left">[Unfortunately the Latex file was terrible so I didn't end up using it]</div>
+            <div class="chat-bubble right">Could you also help me refine the abstract? I'm trying to make it more SEO friendly to appear higher when searching for this or a related topic on, say Google Scholar. I'm mainly looking at maximising keywords without making them seem cramped. Is there something I could do to improve on that front?</div>
+            <div class="chat-bubble left">Yes. For Google Scholar and academic indexing, the biggest gains usually come from semantic clarity and keyword placement rather than simply increasing keyword count. Scholar and academic search systems often weight terms appearing in the title, abstract, keywords section, headings, and repeated topic phrases that occur naturally across the paper.<br><br>For a thesis like yours, the topic already spans several search-heavy domains: IoT, beehive monitoring, embedded systems, cloud computing, GPS tracking, battery management, and smart agriculture. The goal is to make those concepts explicit and connected.<br><br>Some principles that tend to improve discoverability:<br><br>Put the primary topic in the first sentence.<br>Repeat major concepts naturally 2–4 times across the abstract.<br>Include synonyms people may search for.<br>Include application-domain terms.<br>Mention technologies and methods if they are central.<br>Mention measurable outcomes if available.<br><br>For example, instead of:<br><br>This thesis presents a system to monitor beehives and track their location.<br><br>something closer to:<br><br>This thesis presents an Internet of Things (IoT)-based smart beehive monitoring and tracking system designed for real-time monitoring of beehive health, environmental conditions, and location tracking.<br><br>That single sentence adds several searchable terms:<br>Internet of Things (IoT)<br>smart beehive<br>monitoring system<br>real-time monitoring<br>beehive health<br>environmental monitoring<br>location tracking<br><br>For your specific project, I would expect high-value terms to include:<br><br>Internet of Things (IoT)<br>Smart beehive monitoring<br>Beehive tracking system<br>Precision apiculture<br>Smart agriculture<br>Embedded systems<br>Microcontroller<br>Sensor network<br>GPS tracking<br>Temperature monitoring<br>Humidity monitoring<br>Weight monitoring<br>Battery management system (BMS)<br>Cloud computing<br>Azure IoT<br>MQTT<br>Remote monitoring<br>Real-time data analytics<br>Cellular communication<br>Edge computing<br><br>You do not want to dump these into a keyword list inside the abstract. Instead, weave them into the narrative:<br><br>Bad:<br><br>Keywords: IoT, GPS, Azure, MQTT, BMS, tracking, sensors, smart farming...<br><br>Better:<br><br>The proposed Internet of Things (IoT) architecture integrates embedded microcontroller systems, environmental sensors, GPS-based location tracking, cellular communication, battery management, and Azure cloud services to enable remote real-time monitoring and data collection for precision apiculture applications.<br><br>That reads naturally but contains many searchable phrases.<br><br>A structure that often works well for thesis abstracts is:<br><br>Problem<br>Proposed approach<br>Technical implementation<br>Results/contribution<br>Application significance<br><br>For example:<br><br>Declining bee populations and increasing demands for efficient hive management have created a need for intelligent monitoring solutions within modern apiculture. This thesis presents an Internet of Things (IoT)-based smart beehive monitoring and tracking system for real-time observation of environmental and operational hive parameters. The proposed system integrates embedded microcontroller technology, temperature and humidity sensors, weight measurement, GPS-based location tracking, battery management, and wireless cellular communication with a cloud-based infrastructure using Azure IoT services and MQTT communication protocols. Data collected from the beehive tracker are transmitted to a remote monitoring platform for storage, visualization, and analysis through an interactive user interface. The proposed architecture supports remote monitoring, improved beehive management, reduced maintenance effort, and potential applications in precision agriculture and smart farming environments.<br><br>Notice that the keywords are there, but it still reads like an abstract rather than metadata.<br><br>I can make this much more precise if you provide your current abstract. I can then produce:<br><br>an SEO-optimized academic version<br>a more publication-oriented version<br>a Google Scholar–friendly keyword strategy<br>a suggested keyword list for the thesis metadata section (usually 5–8 keywords)</div>
+            <div class="chat-bubble right">Thank you, the abstract I have at the moment is : "Bees are arguably the single-most important pollinator to agriculture, although the honeybee stock has decreased by almost 50% in the last decade. Most of the commercially operated beehives are placed in remote areas, where theft of those beehives is a huge issue for beekeepers. This thesis examines the optimal conditions a beehive needs to survive and to produce honey, as well as how to measure those conditions and how to keep track of a beehive. Therefore, a prototype device was built to be placed inside the beehive to measure temperature, humidity, weight, and the GPS position. A battery system was developed to keep the device powered for up to six months. To be able to monitor those devices remotely a mobile connection to a cloud server was established. This cloud server provides a graphical user interface for easy access to the uploaded data of the beehive, and raises alarms if theft is detected."</div>
+            <div class="chat-bubble left">Your current abstract already has a strong narrative and clear problem statement. The biggest opportunity is that some concepts central to the work are implied rather than explicitly named. Terms such as "Internet of Things (IoT)", "smart beehive monitoring", "remote monitoring", "cloud platform", "precision apiculture", "GPS tracking", and "real-time monitoring" are exactly the sort of phrases people often search for in Google Scholar.<br><br>I'd also make a few structural adjustments:<br><br>Move the core contribution closer to the beginning.<br>Replace generic phrases like "keep track of a beehive" with more searchable technical terms.<br>Mention the architecture (embedded system + cloud + remote monitoring).<br>Include the application domain ("precision apiculture" or "smart agriculture").<br>Keep the language academic rather than marketing-heavy.<br><br>Here is a revised version that aims to increase discoverability while still reading naturally:<br><br>Bees are among the most important pollinators in modern agriculture; however, honeybee populations have declined significantly in recent years, creating challenges for beekeeping and agricultural sustainability. In addition, commercially operated beehives are frequently placed in remote locations where hive theft and limited accessibility present major operational issues for beekeepers. This thesis presents the design and implementation of an Internet of Things (IoT)-based smart beehive monitoring and tracking system for remote real-time monitoring of beehive conditions and location. The proposed embedded monitoring device was developed to measure key environmental and operational parameters including temperature, humidity, weight, and GPS-based location data. A battery management system was designed to enable autonomous operation for up to six months. To support remote access and continuous monitoring, a mobile communication interface was integrated with a cloud-based server platform. The cloud infrastructure provides data storage, visualization, and a graphical user interface for monitoring beehive activity and generating automated alerts in the event of suspected theft. The proposed system demonstrates the potential of IoT technologies for precision apiculture, smart agriculture applications, and improved beehive management.<br><br>This version naturally introduces these high-value searchable phrases:<br><br>Internet of Things (IoT)<br>smart beehive monitoring<br>tracking system<br>remote real-time monitoring<br>embedded monitoring device<br>GPS-based location data<br>battery management system<br>cloud-based server platform<br>graphical user interface<br>precision apiculture<br>smart agriculture<br><br>I would also suggest adding a keyword section after the abstract if your thesis template permits it:<br><br>Keywords: Internet of Things (IoT), smart beehive monitoring, precision apiculture, GPS tracking, cloud computing, embedded systems, remote monitoring, smart agriculture<br><br>One additional thought: your opening sentence says honeybee stock has decreased by almost 50% in the last decade. If that number came from a source from several years ago, I would verify it before keeping it in the abstract. Numerical claims in abstracts can become dated and may reduce credibility if later readers find a different figure. A safer formulation is:<br><br>"...honeybee populations have experienced significant decline in recent years..."<br><br>unless you want to cite a specific dataset.<br><br>I can also tune this toward a more "published journal paper" style if you want something closer to what IEEE or Springer articles commonly use.</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-bottom: 1.5rem; font-style: italic; color: var(--brown);">
+        I used a local instance of Qwen 3.6 to check ChatGPTs response for the abstract. It also suggested to look at the title, which we did.
+      </p>
+      <div class="collapsible" id="qwen-collapsible">
+        <button class="collapsible-header" onclick="toggleCollapsible('qwen-collapsible')">
+          <span>Qwen</span>
+          <span class="collapsible-icon">▼</span>
+        </button>
+        <div class="collapsible-content">
+          <div class="chat-container">
+            <div class="chat-bubble right">Hi, can you analyse a pdf? I have this pdf here https://opus.campus02.at/frontdoor/deliver/index/docId/475/file/AC15624834.pdf and I'd like to know what it's about</div>
+            <div class="chat-bubble left">I can't directly access, download, or read files from external links, including PDFs. However, I can absolutely help you analyze it if you:<br>🔹 <strong>Paste the title, authors, abstract, or introduction</strong><br>🔹 <strong>Share specific sections, figures, or data tables</strong> you want explained<br>🔹 <strong>Tell me what specifically you'd like to know</strong> (e.g., methodology, main findings, context, limitations, relevance to a field)<br><br>Once you share the text or key details, I'll provide a clear summary, break down the core arguments, explain technical terms, or contextualize the work based on academic/research standards. Just drop the relevant content here!</div>
+            <div class="chat-bubble right">In that case, could you just look at the abstract and tell me what you think about it or if there are any possible improvements. I am mainly trying to look at it from an SEO perspective since my paper unfortunately doesn't show up in many search results even if my paper is relevant to them. The keywords I would like to emphasise are: Internet of Things, smart beehive monitoring, GPS tracking, cloud computing, embedded systems, remote monitoring, and smart agriculture. Could you read through it and tell me if there is anything I can do better? The abstract is : Bees are among the most important pollinators in modern agriculture; however, honeybee populations have declined significantly in recent years, creating challenges for beekeeping and agricultural sustainability. In addition, commercially operated beehives are frequently placed in remote locations where hive theft and limited accessibility present major operational issues for beekeepers. This thesis presents the design and implementation of an Internet of Things (IoT)-based smart beehive monitoring and tracking system for remote real-time monitoring of beehive conditions and location. The proposed embedded monitoring device was developed to measure key environmental and operational parameters including temperature, humidity, weight, and GPS-based location data. A battery management system was designed to enable autonomous operation for up to six months. To support remote access and continuous monitoring, a mobile communication interface was integrated with a cloud-based server platform. The cloud infrastructure provides data storage, visualization, and a graphical user interface for monitoring beehive activity and generating automated alerts in the event of suspected theft. The proposed system demonstrates the potential of IoT technologies for precision apiculture, smart agriculture applications, and improved beehive management.</div>
+            <div class="chat-bubble left">Your abstract is well-written, clear, and academically sound. However, from an <strong>SEO (Search Engine Optimization) perspective</strong>, especially for academic databases, Google Scholar, IEEE, ScienceDirect, or institutional repositories, keyword alignment and placement significantly impact discoverability.<br><br>Below is a breakdown of what works, what to improve, a revised version optimized for your target keywords, and additional SEO tips for academic papers.<br><br>---<br><br>### 🔍 <strong>Current Strengths</strong><br>- Clear problem → solution → impact structure<br>- Naturally covers your core technology stack<br>- Maintains academic tone and precision<br><br>---<br><br>### ⚠️ <strong>SEO-Gaps in the Original</strong><br>1. <strong>Keyword Mismatch</strong>: You requested exact phrases like `GPS tracking`, `cloud computing`, and `embedded systems`, but the abstract uses slightly different terms (`GPS-based location data`, `cloud-based server platform`, `embedded monitoring device`). Search algorithms prioritize <strong>exact phrase matches</strong>.<br>2. <strong>Front-loading</strong>: Primary keywords appear too late. Academic search engines weigh the first 2–3 sentences more heavily.<br>3. <strong>Redundancy/Spacing</strong>: `smart beehive monitoring` and `remote monitoring` are split across sentences. Grouping related keywords naturally improves signal strength.<br>4. <strong>Metadata Blind Spot</strong>: For papers, the abstract alone won't make you rank. Title, repository tags, subject categories, and ORCID/profile metadata matter just as much.<br><br>---<br><br>### ✅ <strong>Optimized Abstract (SEO-Aligned & Academic-Ready)</strong><br><br>> Honeybees are critical pollinators in modern agriculture, yet declining populations and the increasing vulnerability of commercial hives to theft and inaccessibility pose significant challenges for beekeepers and food security. To address these issues, this thesis presents an <strong>Internet of Things (IoT)</strong>-based <strong>smart beehive monitoring</strong> system that enables real-time <strong>remote monitoring</strong> and <strong>GPS tracking</strong> of hives deployed in remote locations. The solution integrates low-power <strong>embedded systems</strong> to continuously measure temperature, humidity, hive weight, and precise GPS coordinates. A custom battery management module ensures autonomous operation for up to six months, while a cellular connectivity interface transmits data to a secure <strong>cloud computing</strong> platform. The cloud infrastructure delivers centralized data storage, real-time visualization, and automated theft-detection alerts via a dedicated web dashboard. By combining IoT sensors, embedded systems, and <strong>cloud computing</strong>, this work demonstrates a scalable framework for precision apiculture, <strong>smart beehive monitoring</strong>, and broader <strong>smart agriculture</strong> applications. The system offers beekeepers a reliable, cost-effective tool for protecting assets, optimizing hive health, and supporting sustainable pollination services.<br><br><strong>Word count</strong>: ~158 (ideal for academic abstracts)<br><strong>All 7 keywords placed exactly as requested</strong>, naturally integrated, with primary terms front-loaded.<br><br>---<br><br>### 📈 <strong>Why This Works Better for SEO</strong><br><br>| Original | Optimized | SEO Impact |<br>|----------|-----------|------------|<br>| `GPS-based location data` | `GPS tracking` | Exact match for search queries |<br>| `cloud-based server platform` | `cloud computing platform` | Matches technical search terminology |<br>| `embedded monitoring device` | `embedded systems` | Aligns with CS/EE academic indexing |<br>| Keywords scattered | First 3 sentences contain 5 of 7 keywords | Front-loading boosts rank in Google Scholar & institutional DBs |<br>| `smart agriculture` at end | Paired with core framework statement | Strengthens topical relevance |<br><br>---<br><br>### 🛠️ <strong>Additional SEO Tips for Academic Papers</strong><br>1. <strong>Title Optimization</strong>: Ensure your title contains 2–3 of these keywords. Example: `An IoT-Based Smart Beehive Monitoring System with GPS Tracking and Cloud Computing for Remote Apiculture`<br>2. <strong>Repository Metadata</strong>: When uploading to OPUS, IEEE, arXiv, or your university's repo, manually tag: `Internet of Things`, `Smart Agriculture`, `Embedded Systems`, `Cloud Computing`, `Beehive Monitoring`, `GPS Tracking`, `Remote Sensing`<br>3. <strong>Google Scholar Strategy</strong>:<br>   - Use the exact title in your profile<br>   - Add keywords to your Google Scholar author profile<br>   - Cross-post to ResearchGate, Academia.edu, and institutional repositories with consistent metadata<br>4. <strong>Avoid Keyword Stuffing</strong>: Academic search engines penalize unnatural repetition. The revised abstract uses each keyword 1–2 times max, maintaining scholarly tone.<br>5. <strong>Check Indexing Terms</strong>: Run your paper title + keywords through Google Scholar. If they return 0–5 results, your keywords are likely too niche. Add broader terms like `precision apiculture`, `agricultural IoT`, or `asset tracking` in tags.<br><br>---<br><br>### 🔚 Final Recommendation<br>Use the revised abstract as-is for submission. If your repository allows, also adjust your <strong>title, keywords field, and subject classification</strong> to match. If you share your current title and repository platform, I can help you craft a fully SEO-optimized metadata set.<br><br>Would you like a title variation or a keyword-tag set tailored to OPUS/German academic search?</div>
+            <div class="chat-bubble right">The title is 'Beehive Tracker'; Is that too short? Could I add some of my highly-relevant keywords to it? I'm just concerned it will be too long</div>
+            <div class="chat-bubble left">Yes, <strong>"Beehive Tracker" is too short for academic SEO</strong>. While it's catchy and memorable, it reads more like a consumer app or startup product than a scholarly work. Academic search engines (Google Scholar, IEEE Xplore, OPUS, DBLP, etc.) heavily weight the <strong>title and first 3 sentences</strong> of the abstract for indexing. A 2-word title misses massive discoverability opportunities in engineering, agritech, and IoT research.<br><br>### ✅ Ideal Academic Title Structure<br>- <strong>Length</strong>: 10–15 words (optimal for indexing & readability)<br>- <strong>Format</strong>: `[Core Technology] + [Application/Problem] + [Key Features/Domain]`<br>- <strong>Keyword Load</strong>: 2–3 exact-match keywords max in the title. Let the abstract and metadata field carry the rest.<br><br>---<br><br>### 🔍 3 SEO-Optimized Title Options (All ≤14 words)<br><br>| Option | Title | SEO Strength |<br>|--------|-------|--------------|<br>| <strong>1</strong> | `IoT-Based Smart Beehive Monitoring with GPS Tracking and Cloud Computing for Remote Apiculture` | Hits 4 primary keywords naturally. Clear tech stack + domain. |<br>| <strong>2</strong> | `Remote Beehive Tracking Using IoT Sensors, GPS, and Cloud Computing for Smart Agriculture` | Front-loads "Remote" + "GPS" + "Cloud". Strong agritech/apiculture signal. |<br>| <strong>3</strong> | `An IoT-Enabled Smart Beehive Monitoring System with GPS Tracking and Cloud Infrastructure` | Highly standard academic phrasing. Excellent for thesis/repo indexing. |<br><br>💡 <strong>Recommendation</strong>: Option 1 or 3 best balance your exact keywords, academic tone, and SEO structure. If your institution prefers concise titles, <strong>Option 1</strong> is ideal.<br><br>---<br><br>### 📊 How to Distribute Your Keywords Strategically<br>You only have room for 2–3 keywords in a title. The rest should live in:<br><br>| Location | Best Place for |<br>|----------|----------------|<br>| <strong>Title</strong> | `IoT`, `GPS tracking`, `cloud computing` or `smart beehive monitoring` |<br>| <strong>Abstract</strong> | `embedded systems`, `remote monitoring`, `smart agriculture`, plus exact-match repeats of title keywords |<br>| <strong>Metadata/Tags</strong> | All 7 keywords + synonyms: `precision apiculture`, `agricultural IoT`, `asset tracking`, `IoT sensors` |<br>| <strong>Repository Fields</strong> | Subject categories: `Computer Engineering`, `Agricultural Technology`, `Embedded Systems`, `Cloud Computing` |<br><br>---<br><br>### ⚠️ Why "Beehive Tracker" Hurts Discoverability<br>- <strong>No technical signaling</strong>: Fails to trigger queries like `"IoT beehive"`, `"GPS hive tracking"`, or `"smart agriculture monitoring"`<br>- <strong>Confusable with commercial apps</strong>: Search results will drown in startup/product pages, not academic papers<br>- <strong>Low keyword density</strong>: Search algorithms assign near-zero relevance weight to 2-word titles for research queries<br><br>---<br><br>### ✅ Final Recommendation<br>1. <strong>Change the title</strong> to Option 1 or 3 above.<br>2. <strong>Keep your revised abstract</strong> (already keyword-optimized).<br>3. <strong>Fill the repository's "Keywords" field</strong> with your exact 7 phrases + 2–3 synonyms.<br>4. <strong>Verify indexing</strong>: After upload, search Google Scholar for: `"Beehive Tracker" IoT GPS cloud` → if your paper doesn't appear, tweak the title/metadata to match Option 1.<br><br>Would you like me to generate a ready-to-paste metadata block (title, keywords, subject categories, and repository tags) tailored to OPUS/German academic search?</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-bottom: 1.5rem; font-style: italic; color: var(--brown);">
+        I used Deepseek as the third LLM to read the abstract, feeding it the response of Qwen
+      </p>
+      <div class="collapsible" id="deepseek-collapsible">
+        <button class="collapsible-header" onclick="toggleCollapsible('deepseek-collapsible')">
+          <span>DeepSeek</span>
+          <span class="collapsible-icon">▼</span>
+        </button>
+        <div class="collapsible-content">
+          <div class="chat-container">
+            <div class="chat-bubble right">Hi, I'm currently writing a paper on a smart beehive tracker. The idea is, that you install a small device in the beehive and it measures its humidity, temperature and weight to figure out if the bees are healthy and when it's a good time to harvest the honey. It sends all of that information to a cloud repository where it processes the data and makes it accessible to the beekeeper. I would like to improve its SEO for it to be found more often in academic search results on services like Google Scholar. The title of the paper is 'IoT-Based Smart Beehive Monitoring with GPS Tracking for Remote Precision Apiculture' and the abstract is: Honeybees are critical pollinators in modern agriculture, yet declining populations and the increasing vulnerability of commercial hives to theft and inaccessibility pose significant challenges for beekeepers and food security. To address these issues, this thesis presents an Internet of Things (IoT)-based smart beehive monitoring system that enables real-time remote monitoring and GPS tracking of hives deployed in remote locations. The solution integrates low-power embedded systems to continuously measure temperature, humidity, hive weight, and precise GPS coordinates. A custom battery management module ensures autonomous operation for up to six months, while a cellular connectivity interface transmits data to a secure cloud computing platform. The cloud infrastructure delivers centralized data storage, real-time visualization, and automated theft-detection alerts via a dedicated web dashboard. By combining IoT sensors, embedded systems, and cloud computing, this work demonstrates a scalable framework for precision apiculture, smart beehive monitoring, and broader smart agriculture applications. The system offers beekeepers a reliable, cost-effective tool for protecting assets, optimizing hive health, and supporting sustainable pollination services.</div>
+            <div class="chat-bubble left"><strong>Title Optimization: Front-load the most searchable phrases</strong><br><br>Your current title is good, but it buries the most unique selling point ("GPS Tracking") and uses "Apiculture", which, while precise, is less frequently searched by interdisciplinary readers than "beekeeping" or "honey bee". Google Scholar weights the first few words heavily. Consider a title structure that leads with the core technology and the primary application, then adds context.<br><br>Option A (balanced, adds key sensor terms and beekeeping):<br><br>    IoT-Based Smart Beehive Monitoring: Weight, Temperature, Humidity and GPS Tracking for Remote Precision Beekeeping<br><br>Option B (compact, strong for interdisciplinary discovery):<br><br>    Real-Time IoT Beehive Monitoring with GPS Tracking and Cloud Analytics for Precision Apiculture<br><br>Option C (if you want to highlight the anti-theft angle):<br><br>    A Cloud-Connected Smart Beehive System with GPS Tracking and Weight Sensing for Theft Detection and Hive Health Monitoring<br><br>What makes these stronger for SEO?<br><br>    "Beehive monitoring" remains intact, a likely exact-match search.<br>    "Weight, Temperature, Humidity" are high-volume sensor terms that researchers in agriculture engineering will query.<br>    "Beekeeping" captures a broader audience than "apiculture" alone; using both is best. Your current title already uses "Apiculture", so if you can include "beekeeping" or "honey bee" naturally, do it.<br>    The colon structure lets you pack the first half with keywords while keeping the second half descriptive.<br><br><strong>2. Abstract: Make the first two sentences a "keyword elevator pitch"</strong><br><br>Google Scholar displays the first ~150–250 characters of your abstract in the search snippet. Those lines must clearly state what the system is, how it works, and why it matters—while repeating your core keywords in a natural, dense way.<br><br>Your current first sentence:<br><br>    "Honeybees are critical pollinators in modern agriculture, yet declining populations and the increasing vulnerability of commercial hives to theft and inaccessibility pose significant challenges for beekeepers and food security."<br><br>It's well-written, but from an SEO perspective the very first words should include your key technology (IoT, smart beehive, monitoring). I suggest a slight reordering:<br><br>Proposed opening:<br><br>    "This thesis presents an Internet of Things (IoT)-based smart beehive monitoring system that addresses declining honeybee populations, hive theft, and the inaccessibility of remote apiaries. By continuously measuring temperature, humidity, hive weight, and precise GPS coordinates, the low-power embedded system enables real-time remote monitoring and automated theft detection."<br><br>Why this works:<br><br>    Immediately establishes the document type, main technology, and application.<br>    Packs "IoT-based smart beehive monitoring", "temperature, humidity, hive weight, GPS coordinates", "real-time remote monitoring", and "theft detection" into the snippet that users see.<br>    Uses both "beehive" and "honeybee" naturally.<br><br>Then continue with the rest of your abstract as written—it already includes "cloud computing", "web dashboard", "precision apiculture", "smart agriculture", and "sustainable pollination". Just make sure those phrases appear exactly as you want them indexed.<br><br><strong>3. Add an explicit "Keywords" section</strong><br><br>Not all publication venues require keywords, but if your thesis format allows it (and even if you just include them in the PDF metadata), list 5–8 specific keyword phrases right after the abstract. This directly feeds Google Scholar's indexing and can act as a "tag cloud" for your paper.<br><br>Suggested keywords:<br><br>    Internet of Things (IoT)<br>    smart beehive monitoring<br>    precision apiculture<br>    GPS tracking<br>    hive weight sensor<br>    remote beekeeping<br>    theft detection<br>    cloud-based agriculture<br><br>Avoid single-word keywords like "bee" or "sensor". Use the exact multi-word phrases a researcher would type. Notice how "hive weight sensor" is included—your device measures weight, and people looking for weight-based hive monitoring will search that exact term.<br><br><strong>4. Metadata and document structure: what Google Scholar actually reads</strong><br><br>    PDF file properties: Before uploading to your institutional repository, set the document title, author, and subject in the PDF metadata (e.g., via Word or LaTeX). The Title field should mirror your paper's final title exactly.<br>    Headings: Use clear section headings that repeat important keywords, e.g., "2.3 GPS Tracking and Theft Detection Module", "3.1 Cloud Platform and Real-Time Dashboard", "4.2 Hive Weight and Temperature Data Analysis". Search engines extract these.<br>    First paragraph of each major section: Restate the relevant keywords naturally; don't just rely on the abstract.<br>    References: Cite established works that use the same terminology. Google Scholar's citation linking is partly phrase-based, so citing papers with titles like "Precision apiculture: an IoT approach to hive weight monitoring" reinforces your paper's topical network.<br><br><strong>5. File naming and repository upload</strong><br><br>Name your final PDF something descriptive, not thesis_final_v2.pdf. Use:<br><br>    IoT_Smart_Beehive_Monitoring_GPS_Tracking_Precision_Apiculture.pdf<br><br>When you upload to your university repository, enter the full abstract into the description field and add the keywords again if there is a separate keywords/tags field. Many repositories allow a "subject" classification—choose both "Internet of Things" and "Agriculture" if possible.<br><br><strong>6. External signals that boost academic SEO</strong><br><br>    Create a Google Scholar profile and add the paper manually if it doesn't appear automatically. Use the exact title and list the keywords in the "description" field.<br>    Share on ResearchGate and Academia.edu with the abstract and keywords.<br>    Write a short lay summary on a personal or lab website (blog post) that links to the PDF. Search engines love linking text; a post titled "Smart Beehive Tracker: How IoT and GPS Help Protect Hives and Optimise Honey Harvest" with a link to your repository entry will create an additional discovery path.<br>    Get cited. Even a self-citation in a follow-up paper or a colleague's work will help Google Scholar cluster your paper correctly. Make sure you cite other precision apiculture papers, and they may cite you back.<br><br><strong>Summary of SEO edits at a glance</strong><br>Element  Current  Suggested improvement<br>Title "IoT-Based Smart Beehive Monitoring with GPS Tracking for Remote Precision Apiculture" Add core sensors and/or "beekeeping"; consider colon format to front-load keywords.<br>Abstract opening  Starts with honeybee background  Start with thesis statement + key tech/sensors.<br>Keywords Not present Add a dedicated keyword list (IoT, smart beehive, GPS tracking, hive weight sensor, theft detection, etc.)<br>PDF metadata   Possibly blank Fill title, author, subject; name file descriptively.<br>Visibility  Repository only   Cross-post to academic networks, write a blog summary, link from Google Scholar profile.<br><br>If you'd like, I can rewrite the full abstract with these SEO tweaks while preserving your exact technical content, just say the word. Good luck with the paper—it's a timely and highly searchable topic, so a few small changes will go a long way.</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-bottom: 1.5rem; font-style: italic; color: var(--brown);">
+        I used Kimi to generate the html website itself
+      </p>
+      <div class="collapsible" id="kimi-collapsible">
+        <button class="collapsible-header" onclick="toggleCollapsible('kimi-collapsible')">
+          <span>Kimi</span>
+          <span class="collapsible-icon">▼</span>
+        </button>
+        <div class="collapsible-content">
+          <div class="chat-container">
+            <div class="chat-bubble right">Hi, I need a website, ideally just a couple of html and css files, to show off my research. I'd like to present my paper about a beehive tracker, which measures humidity, temperature and weight within the hive and sends that information to a web server where it makes that data accessible to the beekeeper. That way they can monitor for potential problems and determine the perfect moment to harvest the honey. My name is Alexander Rieger, please put that somewhere at the top as one of the first things people see. The title of the paper is 'IoT-Based Smart Beehive Monitoring: Weight, Temperature, Humidity and GPS Tracking for Remote Precision Beekeeping' (ignore the title in the linked pdf for this purpose) to be put at the top in the middle. The abstract which should also be used relatively early is 'This thesis presents an Internet of Things (IoT)-based smart beehive monitoring system that addresses declining honeybee populations, hive theft, and the inaccessibility of remote apiaries. By continuously measuring temperature, humidity, hive weight, and precise GPS coordinates, the low-power embedded system enables real-time remote monitoring and automated theft detection. By combining IoT sensors, embedded systems, and cloud computing, this work demonstrates a scalable framework for precision apiculture, smart beehive monitoring, and broader smart agriculture applications. The system offers beekeepers a reliable, cost-effective tool for protecting assets, optimizing hive health, and supporting sustainable pollination services.' (Ignore the abstract within the paper for this purpose)<br><br>There should also be a section of keywords used within the paper somewhere. The keywords are: Internet of Things (IoT), smart beehive monitoring, precision apiculture, GPS tracking, hive weight sensor, remote beekeeping, theft detection. Please design the website to kind of reflect the structure of the paper: First talk about the problem, then mention the requirements of a tracking device like that as outlined in the paper. Then talk about different connection schemes like NIDD, MQTTSN or UDP/IP and their up and downsides. When you get to the proof-of-concept, please take the pictures captioned with 'Code' and add them as code segments. In the outlook section at the very bottom link to the 'Erwerbsimkerbund Oesterreich' using the URL 'https://www.erwerbsimkerbund.at', which is a special interest group promoting professional beekeepers within Austria. This group is likely interested in a solution to stop beehive theft. Another organisation you should mention somewhere and link to is the EPBA, the 'European Professional Beekeepers Association' which is a pan-European special interest group promoting beekeepers. Their focus is on fake honey, which means the bees were fed with a sugar solution. Making it less risky to keep bees in Europe would make imports from countries where such practices are common less risky. Incorporate these links somewhere into the text but make it natural. I'd also like to have a few links to different html pages: One titled 'Social Media' which talks about the approach to promoting the paper on social media platforms. Also one titled 'Behind the Scenes' where the making of this document is outlined. Use as much CSS as you would like but keep it to a single html file</div>
+            <div class="chat-bubble left">[First draft of the website]</div>
+            <div class="chat-bubble right">Could you remove the content of the Behind the Scenes section and replace it with 6 sections titled in order: Chat GPT, Qwen, Deepseek, Kimi and Gemini. Each section should have the title on top and then chat bubbles as if it was a message conversation. The chat bubbles should have a slightly deeper orange hue than the background of the webpage. I will put the messages in quotation marks '' with commas separating the messages. The messages should alternate on the left and the right hand side of the page, starting with the right. The messages should be starting with ChatGPT: [The ChatGPT section of Behind the Scenes]</div>
+            <div class="chat-bubble left">I've updated the website with the ChatGPT conversation section in the "Behind the Scenes" page. The chat bubbles alternate right/left starting with the right side, using a deeper orange hue (#E65100) against the honey-colored background.<br><br>Here's what the ChatGPT section looks like:<br><br>    ChatGPT (title)<br>        → Right: "Could you take this pdf and convert it to a latex file?..."<br>        ← Left: "[Unfortunately the Latex file was terrible so I didn't end up using it]"<br>        → Right: "Could you also help me refine the abstract?..."<br>        ← Left: "Refer to the 'Yes, For Google Scho.txt' file"<br>        → Right: "Thank you, the abstract I have at the moment is..."<br>        ← Left: "Your current abstract already has a strong narrative..." (the full SEO advice response)<br><br>The other five sections (Qwen, DeepSeek, Kimi, Gemini) are already prepared as empty containers — just add your messages in the same format when you're ready.</div>
+            <div class="chat-bubble right">That looks marvellous! As a last set of changes could you replace the code in the Proof-of-Concept with a description of what was done to create the prototype? It doesn't have to be too long, refer to the paper I shared for details on how it was done. In addition, could you remove the content of the social media section and instead add two collapsible tabs, titled 'Twitter' and 'Instagram/TikTok' respectively. The Twitter section should have an image I will add after with dimensions of 1408x768, please add a placeholder image of that size where I only need to replace the link for it to fit. The Instagram/TikTok section should have another set of chat bubbles similar to the Behind the Scenes section with the following content, again starting from the right alternating between left and right: [The content of the social media section] <br> In addition please make the colour of the bubbles slightly less saturated and give them two different colours but still within the same palette. <br> For the Behind the Scenes section I would like to also have the different sections be collapsible. At the top right below 'Behind the Scenes' but above 'Chat GPT' and not within the ChatGPT collapsible tab please add the following text 'I used ChatGPT to start out with optimising the SEO of the Abstract. I initially also wanted to convert the pdf to Latex to make changes but this proved to be a disaster'. In the ChatGPT Section please replace the section reading "Refer to the 'Yes, For Google Scho.txt' file" with the following text [Text that the 'Yes For Google Scho.txt' contained but Kimi copied verbatim]. <br> In the Qwen section of the Behind the Scenes section please add in the same style of right left chat bubbles starting with right the following exchange: [The Qwen section of Behind The Scenes] <br> In that case, could you just look at the abstract and tell me what you think about it or if there are any possible improvements. I am mainly trying to look at it from an SEO perspective since my paper unfortunately doesn't show up in many search results even if my paper is relevant to them. The keywords I would like to emphasise are: Internet of Things, smart beehive monitoring, GPS tracking, cloud computing, embedded systems, remote monitoring, and smart agriculture. Could you read through it and tell me if there is anything I can do better? The abstract is : [The abstract ChatGPT proposed] <br> In the Deepseek section of Behind the Scenes I would like the following content, again following the chat bubble design starting with the right-hand-side alternating between left and right: 'Hi, I'm currently writing a paper on a smart beehive tracker. The idea is, that you install a small device in the beehive and it measures its humidity, temperature and weight to figure out if the bees are healthy and when it's a good time to harvest the honey. It sends all of that information to a cloud repository where it processes the data and makes it accessible to the beekeeper. I would like to improve its SEO for it to be found more often in academic search results on services like Google Scholar. The title of the paper is 'IoT-Based Smart Beehive Monitoring with GPS Tracking for Remote Precision Apiculture' and the abstract is: [The abstract Qwen gave me] <br> In the Kimi section I would like the following content, again following the same chat bubble design alternating between left and right, starting with the right-hand-side: [The exchange with Kimi, including this text. Talk about inception] <br> And finally the Gemini section should read, again with the chat bubble left and right alternation starting with right: [The content of the Gemini section]</div>
+            <div class="chat-bubble left">[The final draft of the website]</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-bottom: 1.5rem; font-style: italic; color: var(--brown);">
+        I wanted to use Gemini to generate the Social Media posts including an Instagram reel but I would have needed a subscription for that so I just pasted the prompt and am now asking you to use your personal video generator to imagine the video I was thinking of
+      </p>
+      <div class="collapsible" id="gemini-collapsible">
+        <button class="collapsible-header" onclick="toggleCollapsible('gemini-collapsible')">
+          <span>Gemini</span>
+          <span class="collapsible-icon">▼</span>
+        </button>
+        <div class="collapsible-content">
+          <div class="chat-container">
+            <div class="chat-bubble right">Good Evening Gemini, I need a video. It should be less than 30 seconds long. There's two sections to it: First it shows a forest with a man in a beekeeper's suit standing next to a beehive with bees buzzing around it. At first the camera is a bit further away but approaches him soon after. The camera should have the appearance of being filmed by hand with a slight amount of shake to it as if someone was walking. Once the camera is close enough the man starts talking. He has a rather thick German accent but sounds friendly and enthusiastic about the topic. He says: "Hello, so we are here in the forests of Upper Styria with one of the beehives I'm tracking. As you can see the bees are pretty happy right now and with my device you can check on them from the comfort of your own home.' With those words, the man starts walking towards the camera, walking off the picture to the right of the video. The video then pans to the right as if to follow him but there is a cut right then and we are in a room with the man no longer wearing the beesuit, instead sitting infront of a computer. The computer is turned on and shows a dashboard similar to the uploaded picture. The man then starts talking again 'So here you can see that the tracker has already sent some data to us and the bees are indeed pretty happy. And even better, if someone were to try to steal it we could track it all across Europe to get it back.' The man then looks at the camera and smiles saying 'If you're curious how it works, read the paper linked in the description' Here the video ends</div>
+            <div class="chat-bubble left">If you upgrade your subscription, I can create that video for you today.</div>
+            <div class="chat-bubble right">Well then, could you in that case generate me a fake Tweet that says 'Badgers stole your honey? No more with this new experimental hive tracker! [Link to the paper]' it is sent by an account names 'Msc. Alexander Rieger' with the handle '@ARieger'</div>
+            <div class="chat-bubble left">Here is a mockup of how that Tweet would look: <br>
+              Msc. Alexander Rieger @ARieger · 1m<br>
+              Badgers stole your honey? No more with this new experimental hive tracker! [Link to the paper]<br>
+              💬 0    🔁 0    ❤️ 1<br><br>
+              Alternative Markdown Layout (For Visual Reference)<br>
+              Msc. Alexander Rieger @ARieger<br><br>
+              Badgers stole your honey? No more with this new experimental hive tracker! [Link to the paper]<br><br>
+              10:25 PM · May 25, 2026 · 0 Views</div>
+              <div class="chat-bubble right">Could you turn it into an image with the visual style of Twitter?</div>
+              <div class="chat-bubble left">[The Twitter image found in the Social Media section]</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTLOOK -->
+    <section id="outlook" class="page">
+      <h3>Outlook</h3>
+      <p class="lead">
+        A working prototype is only the first frame of a longer movie. The next steps move the device from the lab bench into the field, and from a maker project into a product.
+      </p>
+
+      <h4>Immediate Engineering Roadmap</h4>
+      <ul>
+        <li><strong>Field Hardening:</strong> Extended outdoor tests in real apiaries across different elevations and climates in Austria.</li>
+        <li><strong>Packaging:</strong> A weatherproof, bee-safe enclosure that fits inside the hive roof without displacing honeycomb space.</li>
+        <li><strong>EMC &amp; Bee Health:</strong> Testing whether daily GSM/GPS bursts affect bee behavior or brood development.</li>
+        <li><strong>PCB Redesign:</strong> Moving from development boards to SMD ICs to cut size and cost by roughly 40 %.</li>
+        <li><strong>Gyro Wake-up:</strong> Adding an inertial sensor so the tracker can remain in deep sleep until physical movement wakes the GPS and GSM immediately—critical for theft response time.</li>
+      </ul>
+
+      <h4>Software &amp; Service Expansion</h4>
+      <ul>
+        <li>Multi-user web dashboard with authentication and per-apiary views.</li>
+        <li>SMS and push-notification alerts for theft, temperature excursions, and swarm preparation (rapid weight loss).</li>
+        <li>API access so third-party farm-management platforms can ingest hive data.</li>
+      </ul>
+
+      <div class="info-box">
+        <h4>Adoption in Austria</h4>
+        <p>
+          Professional beekeepers in Austria are represented by the <a href="https://www.erwerbsimkerbund.at" target="_blank">Erwerbsimkerbund Oesterreich</a>, a special-interest group that advocates for full-time apiarists. Hive theft is a growing concern among their members, and a low-cost, Austrian-developed tracking solution aligns directly with their mission to secure local pollination assets.
+        </p>
+      </div>
+
+      <div class="info-box green">
+        <h4>A European Perspective</h4>
+        <p>
+          Across the continent, the <a href="https://professionalbeekeepers.eu/" target="_blank">European Professional Beekeepers Association (EPBA)</a> is fighting to preserve European beekeeping against two threats: collapsing colony numbers and fraudulent honey imports. By making hive keeping less risky through remote monitoring and theft recovery, IoT systems like this one strengthen the economic case for domestic professional beekeeping. Healthier, more secure European apiaries reduce reliance on imports from regions where fake honey—produced by feeding sugar syrup rather than floral nectar—undercuts honest producers. In that sense, a beehive tracker is not merely a gadget; it is a small brick in the wall defending real honey and real pollinators.
+        </p>
+      </div>
+
+      <p style="margin-top:2rem; font-style:italic; color:var(--brown);">
+        "With a working prototype and a cloud solution ready to go, extended field tests are the next horizon. The system is proven; now it needs to be proven in the wild."
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Alexander Rieger · IoT-Based Smart Beehive Monitoring · Built for research dissemination.</p>
+  </footer>
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleCollapsible(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle('open');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#','');
+      if (hash && document.getElementById(hash)) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(hash).classList.add('active');
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        const btn = Array.from(document.querySelectorAll('.nav-btn'))
+                         .find(b => b.getAttribute('onclick').includes(hash));
+        if (btn) btn.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>
