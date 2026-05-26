@@ -14,23 +14,39 @@
   	x -= rect_size
   	y = size
   }
-  colour_line()
-})
+  if(line_args != none) {
+    for line in line_args {
+        let x = line_args.at("x")
+        let y = line_args.at("y")
+        let length = line_args.at("line")
+        let unit = line_args.at("unit")
+        let colour = line_args.at("colour")
+        let vertical = line_args.at("vertical")
+        while(length > 0) {
+            rect((x, y), (x - unit, y - unit), fill: colour)
+            if(vertical) {
+                
+            }
+        }
+    }
+  }
+    })
 }
 
 #let add_coords(arg1, arg2) = {
 	return (arg1.at(0) + arg2.at(0), arg1.at(1) + arg2.at(1))
 }
 
-#let colour_line(start, length, unit, vertical) = {
- let 
- return {
- 	while()
- }
-}
 
-#draw_grid(8, 0.8)
+#let line_dict = (
+    x: 8,
+    y: 1,
+    length: 7,
+    unit: 1,
+    colour: red,
+    vertical: false
+)
+#draw_grid(8, 1, none, ())
 #add_coords((0, 1), (1, 1))
-#colour_line((0, 0), 1, true)
 
 
