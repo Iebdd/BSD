@@ -16,6 +16,8 @@ Semester 2/KIB1/Übung
 **/.idea
 **/Datasets
 **/*.pdf
+**/Datasets
+**/*.keras
 **/*.zip
 **/framework
 **/NET1/Übung

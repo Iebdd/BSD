@@ -54,9 +54,6 @@ Konzept für Selbstbedienungsläden. Dieses Konzept sollte nicht nur auf eine ei
 == Marktkriterien
 + Schmerzen
  - Da Personal für Einzelhandelsläden immer schwerer zu finden und gleichzeitig teuer ist, könnte man diese Pains mit einem Selbstbedienungskonzept bedienen.
- - Diebstähle sind bei Selbstbedienungsläden ein großes Problem
- - Es muss nachgesehen werden ob alle Produkte ncóch verfügbar sind
- - Die Buchhaltung muss für den Laden manuell geführt werden
 + Kaufkraft
  - Da das Zielpublikum stets Händler sind welche mit ihrem Laden Profit erwirtschaften wollen, besitzen diese wahrscheinlich genug Kaufkraft um solch ein Konzept kaufen zu wollen.
 + Einfach zu erreichen
@@ -159,11 +156,11 @@ Klaus-Uwe Müller. Bauer der einen Selbstbedienungsladen betreibt, aber wenig Ze
 #table(
   columns: (auto, auto),
   inset: 5pt,
-  table.header([Kostenpunkt],[Anzahl], [Kosten])
-  [Treibstoff], [70l] [*100€*],
-  [Kilometergeld], [$700km * 0,40€$], [*280€*],
+  table.header([Kostenpunkt],[Anzahl], [Kosten]),
+  [Treibstoff], [70l], [*100€*],
+  [Kilometergeld], [$700"km" * 0,40€$], [*280€*],
   [Broschüren], [100 Stück], [*200€*],
-  [*Gesamt*], table.cell(columns: 2)[*580€*]
+  [*Gesamt*], table.cell(colspan: 2)[*580€*]
 )
 == Kundenbindung
 Bindung der Kunden der Ladenbetreiber durch ein Vorteilsprogramm.
@@ -180,15 +177,40 @@ Nachdem Ladenbetreiber den Laden eine Zeit verwendet haben, bieten wir als weite
 === Kosten
 *Kosten:* 
 #table(
-  columns: (auto, auto),
+  columns: (auto, auto, auto),
   inset: 5pt,
-  table.header([Kostenpunkt],[Anzahl], [Kosten])
-  [6 Monate an Lizenzgebühren], [1] [*539,94€*],
-  [Kilometergeld], [$700km * 0,40€$], [*280€*],
+  table.header([Kostenpunkt],[Anzahl], [Kosten]),
+  [6 Monate an Lizenzgebühren], [1], [*539,94€*],
+  [Kilometergeld], [$700"km" * 0,40€$], [*280€*],
   [Broschüren], [100 Stück], [*200€*],
-  [Werbegeschenke], [100 Stück\ Flaschenöffner und\ Feuerzeuge], [*100€*]
-  [*Gesamt*], table.cell(columns: 2)[*680€*]
+  [*Gesamt*], table.cell(colspan: 2)[*1020€*]
 )
+== Kundengewinnung
+Um den ersten Kunden zu gewinnen, könnte man anbieten die bereits existierenden Daten eines potentiellen Kunden zu analysieren um so den Schwund und die monatlichen Kosten etc. in Statistiken herauszufinden. Anhand dieser Daten könnte man dann Lösungsvorschläge für gewisse Probleme machen, wobei man jedoch keinen offensichtlichen pitch für das eigene Produkt machen sollte, da es sonst nicht vertrauenserweckend wirkt. Wenn der Kunde zum Beispiel das subjektive Gefühl hat, dass zu viele Waren gestohlen werden, kann man anhand der Daten zu einer Empfehlung kommen. Diese Empfehlung sollte so objektiv wie möglich sein, damit der Kunde nicht das Gefühl bekommt nur etwas verkauft zu bekommen. \
+Sobald man ein paar Kunden gewonnen hat, könnte man einen mehrstufigen Problem-Lösungs-Kreislauf aufbauen indem man die Analysesoftware zur Eigennutzung gratis anbietet
+Es gibt mehrere Stufen an Lösungen die geboten werden. Da diese für die Firma mit Kosten verbunden sind, wird nur die erste gratis angeboten, die weiteren Stufen sind jedoch relativ günstig und werden mit jeder Stufe teurer (bieten jedoch auch mehr).
++ Die Analyticssoftware die ein Betreiber eines Ladens automatisch erhält ist gratis verfügbar, da der Laden jedoch die Daten nicht sammeln kann, muss es per Hand eingegeben werden. Beim Verwenden der Software gibt es ein Banner, das darauf hinweist, dass diese Daten bei Verwenden eines Unternehmenseigenen Systems automatisch gesammelt werden und man sich so diese Arbeit sparen könnte.
++ Nur das Kassensystem wird angeboten, wodurch die Sammlung der Daten und Analyse automatisch geschieht, jedoch hat man keinen Schutz vor Diebstahl
++ Das Zugangssystem wird hinzugefügt, wodurch man kontrollieren kann, dass nur 'autorisierte' Personen den Laden betreten. Dadurch kann man den Schwund reduzieren.
++ 
+=== Kosten
+Kosten pro Analyse werden im Schnitt auf 1000€ geschätzt, da man die Arbeitszeit (etwa 10 Stunden), Fahrtzeit und Verschleiß miteinbeziehen muss. Wenn man annimmt, dass nur jede zehnte Analyse auch zu einem Kauf führt, bedeutet das, dass pro gewonnenen Kunden Kosten von 10.000€ entstehen.
+=== Gewinn
+Der Aufwand pro Analyse ist relativ hoch und er wird ohne Erwartung von Gegenleistung angeboten, wodurch die Berechnung des Gewinns schwierig ist. Wir nehmen an, dass wir mit keinem Gewinn aussteigen werden und Bestenfalls keinen Verlust machen. Die Gewinnung der Kunden führt jedoch zu einer langfristigen Einnahmequelle wodurch dieser Aufwand sich idealerweise rentiert.
+== Skalierung
+=== Kennzahlen
+==== Maximale Anzahl an Kunden
+Da unser Produkt eine langfristige Investition ist, wird der Churn pro Jahre berechnet: \
+$frac("Sales Velocity", "Churn")="max. Customers"$ \
+$frac(10, 0.04)=250$ -> Jährlich werden 10 Kunden gewonnen und 4\% der Kunden verloren. Dadurch ergibt sich ein Maximum an 250 Kunden.
+==== Lifetime-Gross-Profit
+Mit einem Churn von 4% pro Jahr bleibt ein Kunde im Durschnitt 25 Jahre. Bei Lizenzgebühren von 1.000€ im Jahr und einem Profit des Erstverkaufs von 7.000€ (20.000€ - 13.000€) ergibt das einen LTGP von 32.000€. \
+$"Sales Velocity"*"Lifetime Gross Profit"="max. Money"$ \
+$1*(25.000€+7.000€)=32.000€$\
+==== Total Addressable Market
+In Österreich gibt es 40.000 Haupterwerbstätige Bauern wovon jedoch realistisch nur 5\% einen automatisierten Bauernladen haben wollen.
+40.000*32.000*0.05=64.000.000
+
 
 
 

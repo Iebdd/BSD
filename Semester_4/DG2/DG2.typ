@@ -211,7 +211,54 @@ Es kann Anfangs schwer sein mit dem Vertrieb zu beginnen, weshalb man mit der Re
 + Ein Produkt oder Dienstleistung
 + Ein Kanal
 beginnen sollte. Wenn man noch gar kein Produkt hat, sollte man sich zuerst auf einen spezifischen Avatar mit einem spezifischen Problem fokussieren und diesem ein Produkt anbieten und diese über eine Vertriebsmethode zu bewerben. Das reduziert die anfängliche Komplexität und lässt einen auf einen einzelnen 
-
+== Kundenbindung
+Die Kundenbindung ist der Prozess Kunden an das Unternehmen zu binden, da das die günstigste Form ist Gewinn zu erwirtschaften (Im Gegensatz zur Gewinnung von neuen Kunden). Aus diesem Grund sollte die Kundenbindung auch vor der Kundengewinnung behandelt werden.
+=== Marketing
+In der Regel fokussiert sich Marketing auf vier Gruppen:
+- Potenzielle Kunden
+- Tatsächliche Kunden
+- Mitarbeiter
+- Potenzielle Mitarbeiter
+So will man einerseits bestehende Kunden halten, aber auch neue Kunden gewinnen und andererseits bestehende und neue Mitarbeiter gewinnen und halten.
+=== Fortschritt
+Man sollte immer im Kopf behalten, in welcher Phase ein Kunde gerade ist und was dieser benötigt. Man kann diesen Fortschritt verwenden um den Kunden länger zu binden. Zum Beispiel kann man am ersten Tag eine kurze Nachricht schicken, mit der Frage ob alles funktioniert hat. Nach einer gewissen Eingewöhnungsphase kann man diesen danach zu einem persönlichen Gespräch einladen oder dem Kunden Boni zuschicken.
+Der wichtigste Aspekt dieser Interaktion ist jedoch, dass es für den Kunden relevant und nützlich sein soll. Ein Aufruf, dass man nach dem ersten Verwenden eines Services diesen Bewerten soll, bringt dem Kunden nichts, wodurch dieser dieses wahrscheinlich ignoriert oder eventuell sogar negativ auffasst.
+=== Neue Probleme
+Ein Kunde will von einem Unternehmen stets ein Problem gelöst haben. So muss man, nachdem das Problem gelöst und das Ziel erreicht wurde, dem Kunden ein neues Problem präsentieren für das man eine Lösung anbietet. Zum Beispiel kann man, nachdem jemand im Fitnessstudio ein Paket zum Gewichtsverlust gekauft hat, ein Paket zum Museklaufbau verkaufen.
+== Kundengewinnung
+Um Kunden zu halten, muss man diese jedoch auch gewinnen. Um das zu erreichen gibt es sogenannte Lead Magnets.
+=== Gratis Content
+Ein Lead Magnet hilft dabei Kunden zu gewinnen indem zum Beispiel etwas zuerst gratis angeboten wird. Wenn man zum Beispiel mit Videocontent Geld erwirtschaften will, bietet man zuerst die Videos selbst gratis an um Kunden die an einem Angebot interessiert sind anzuziehen. Wenn dieser Gratiscontent dann überzeugt, kann man irgendwann eine zusätzliche Leistung anbieten die dann sehr wohl etwas kostet. Das wichtigste dabei ist jedoch, dass der gratis content auch wirklich einen Wert hat, da dieser als testimonial für den echten bezahlten Dienst fungiert.
+=== Gratis Content an wichtige Personen
+Ein weiterer Weg um mit gratis content Geld zu machen, ist diesen an Personen mit hoher publicity zu verschenken. Wenn der content wirklich gut ist, werben diese gratis dafür und dessen Zuschauer oder bekannte Personen kaufen es schließlich.
+=== Gratis Content an Leute ohne Geld
+Man kann seinen content an Leute von denen man keinen Umsatz erwartet verschenken damit diese es weiterempfehlen und so als brand ambassador agieren. Da Person A Person B kennt, ist dessen Empfehlung vertrauenserweckender.
+=== Problem-Lösung Kreislauf
+Eine weitere Lösung kann es sein, einen Teil seiner Lösungen gratis anzubieten um danach die Lösung für ein weiteres Problem verkaufen zu können. Es gibt zum Beispiel viele Softwarelösungen die eine gratisversion anbieten, welches trotzdem viele der Probleme der Kunden löst. Wenn man dann jedoch weitere Probleme hat, kann die Software diese gegen eine Gebühr auch lösen. Dabei ist die gratisversion ebenfalls ein vollwertiges System, die Premiumversion hat jedoch weitere Features für die man eventuell Geld ausgeben will.
+== Skalierung
+Eine Skalierung bedeutet die Menge an Kunden, Menge an Produkten oder den Wert an Kunden zu erhöhen. Wenn man am Anfang eines Unternehmens jedoch nur wenige Kunden hat, selbst wenn man einen hohen Wert, hohen Preis und eine schwierige Lieferbarkeit hat, sollte man noch nicht skalieren, da die geringe Menge an Kunden hier noch nicht förderlich ist. Erst wenn man viele Kunden gewonnen hat und dadurch den Wert, den Preis und die Schwierigkeit der Lieferung verringert hat, sollte man an eine Skalierung denken. Das rührt daher, dass man bei eine gewissen Menge an Verkäufen den Wert sowie den Preis verringern kann um das Produkt besser liefern zu können. \
+Man sollte bei einer Skalierung jedoch nicht mit der Einführung einer neuen Produktlinie beginnen, da man so die Erfahrung des bestehenden Produkts nicht volsltändig nutzen kann. Stattdessen sollte man das bestehende Produkt verbessern und dessen Verbesserung bewerben und so skalieren. Wenn man ein Produkt verbessert, bis es das Problem ideal löst, kann man so die Verkäufe einfacher erhöhen. \
+Eine weitere Grundregel ist, dass eine Skalierung stets zu einer höheren Komplexität des Ablaufs führt. Wenn man also ein Produkt hat, das bereits komplex in der Umsetzung ist, wird eine Skalierung dessen Komplexität weiter erhöhen und so den Ablauf eventuell unmöglich machen.\
+=== Kennzahlen
+Einige wichtige Kennzahlen in diesem Kontext sind:
+- _$frac("Sales Velocity", "Churn")= "max. Customers"$_
+ - Die maximale Anzahl an Kunden die ein Unternehmen bedient errechent sich aus der Menge an Neukunden (Sales Velocity) geteilt durch den monatlichen Verlust an Kunden. Da der Gewinn neuer Kunden in absoluten Zahlen ist, der Verlust jedoch in Prozent, gibt es eine maximale Menge an Kunden die in einem Monat bedient werden. In diesem Szenario kann man die Menge an Kunden erhöhen, indem man entweder mehr neue Kunden gewinnt oder prozentuell weniger Kunden pro Monat verliert.
+- _Sales Velocity x LTGP (Lifetime Gross Profit) = max. Money_
+ - Die maximale Anzahl an Umsatz die ein Kunde dem Unternehmen in einem einzelnen Monat bringt. Dabei multipliziert man die Menge an Neukundne (Sales Velocity) mit dem erwarteten Umsatz den ein einzelner Kunde in dessen gesamter Kundenlaufbahn einbringt. Hierbei kann man die gesamte Menge an Umsatz die der existierende Kundenstock erwirtschaften wird erhöhen, indem man die Menge an Neukunden pro Monat-, oder die Menge an Umsatz die ein Kunde einbringt erhöht.
+- _Zahl der potenziellen Kunden x LTGP x Wahrscheinlichkeit = max. Money total_
+ - Die maximale Anzahl an Umsatz die ein Unternehmen insgesamt erwirtschaften kann. Dabei berücksichtigt man die Gesamtmenge der Kunden die in der Theorie das Produkt kaufen würden, dessen Umsatz pro Kunde und das Verhältnis der potenziellen Kunden die wirklich das Produkt kaufen. Mit dieser Berechnung kann man überprüfen ob sich ein Geschäftsmodell überhaupt rentieren kann.
+=== Wege zur Skalierung
+Es gibt fünf Wege ein Unternehmen zu skalieren. Dabei wird angenommen, dass man bereits einen bestehenden Markt mit einem Produkt hat.
++ Up - Größere Kunden
+ - Man versucht größere Kunden zu bedienen, da diese wahrscheinlich entweder ein größeres Budget oder mehr Bedarf an dem Produkt hat. Zum Beispiel ist der Verkauf an ein KMU mit 100 Lizensen weniger profitabel als an eine großes Unternehmen mit 10000 Lizenzen. Man hat zwar trotzdem den gleichen, wenn nicht leicht höheren Aufwand das Produkt anzupassen, erhält dafür jedoch auch 100 Mal so viele Lizenzen.
++ Down - Kleinere Kunden
+ - Im Gegensatz dazu steht statt größeren, kleinere Kunden anzuzielen, dafür jedoch die Menge zu erhöhen. Dabei kann man in einer sichereren Umgebung eventuell neue Produkte einführen um diese so für die Großkunden zu 'testen'.
++ Side - Ähnliche Märkte
+ - Wenn man in einem Markt bereits etabliert ist, kann man zur Skalierung auch in einen ähnlichen Nebenmarkt wechseln und kann so das Produkt mit nur geringen Veränderungen verkaufen. Zum Beispiel kann man in eine anderes Land expandieren oder ein anderes Segment mit den gleichen Anforderungen expandieren.
++ Broader - Größere Produktpalette anbieten
+ - Wenn man ein spezifisches Produkt anbietet kann man expandieren indem man eine größere Palette des gleichen Markts anbietet. Wenn man zum Beispiel eine Software entwickelt die ein Feature für einen Anwendungsfall anbietet, kann man sich dazu entscheiden auch andere Features anzubieten und so die Breite der Produktpalette der Software anzubieten.
++ Deeper - Gezieltere Kunden
+ - Als ähnliches Beispiel kann man in einem bereits etablierten Segment eine Kundengruppe innerhalb der existierenden Kundengruppe auslösen und diese gezielt zu Bedienen um dadurch den Wert des Produkts zu erhöhen. Eventuell hat diese neue Kundengruppe höhere Mittel weshalb man Features teurer verkaufen kann oder man bietet dieser Gruppe ein spezialisiertes Produkt wodurch man wiederum mehr verlangen kann.
 
 
 

@@ -59,7 +59,7 @@ Markieren Sie die Stellen in folgenden XML-Datei, die den Anforderungen an well-
 #pagebreak()
 == Korrigierte Version
 #codly(languages: codly-languages)
-```py
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
  <channel>

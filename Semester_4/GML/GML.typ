@@ -123,7 +123,7 @@ Eine Kooperation aus mehreren KI-Agenten die etwas erreichen wollen und sich dab
 ===== Synthetische Daten
 Künstlich erzeugte Daten die reale ergänzen oder ersetzen
 ===== MCP
-Ein standardisiertes Protokoll mit dem Modelle, Agenten und externe Datenquellen strukturiert Kontext austauschen können
+Ein standardisiertes Protokoll mit dem Modelle, Agenten und externe Datenquellen strukturiert Kontext austauschen können. Da LLMs von Natur aus isoliert sind und sie nicht aus eigenen Mitteln auf die Außenwelt zugreifen können, muss man diesen eine Möglichkeit geben auf andere Services zuzugreifen. MCP funktioniert hierbei als Schnittstelle zu diesen Ressourcen, indem das Modell zuerst erfragt, welche Tools zur Verfügung stehen und welche Parameter diese erwarten. Danach wählt es das ihrer Meinung nach beste Tool und führt es aus.
 ===== Explainability
 Methoden mit denen KI Entscheidungen von KI-Modellen nachvollziehbar und interpretierbar gemacht werden.
 ===== Thinking Models

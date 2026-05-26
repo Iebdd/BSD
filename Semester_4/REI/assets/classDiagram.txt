@@ -1,0 +1,42 @@
+@startuml
+class Transaktion {
+ TransaktionID: UUID
+ Betrag: Double
+ Status: TStatus
+ ErstelltAm: DateTime
+ Freigegeben: Boolean
+ FreigegebenAm: DateTime
+}
+class EscrowKonto {
+ KontoID: UUID
+ Saldo: Double
+ Währung: String
+}
+class Nutzer {
+ NutzerID: UUID
+ Name: String
+ EMail: String
+ TrustScore: Float
+ HasShadowBan: Boolean
+}
+class Inserat {
+ InseratID: UUID
+ Titel: String
+ Preis: Float
+ Status: IStatus
+}
+class VerdachtsFall {
+ FallID: UUID
+ Entscheidung: EntscheidungEnum
+ ErstelltAm: DateTime
+}
+class Mitarbeiter {
+ MitarbeiterID: UUID
+ Rolle: String
+}
+EscrowKonto "1" -- "1" Transaktion
+Transaktion "n" -- "1" Nutzer
+Nutzer "1" -- "n" Inserat
+VerdachtsFall "0..1" -- "1" Nutzer
+Mitarbeiter "n" -- "1" VerdachtsFall
+@enduml
